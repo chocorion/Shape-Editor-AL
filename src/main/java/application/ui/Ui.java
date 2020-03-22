@@ -12,6 +12,11 @@ public class Ui {
         controller = new ControllerFX();
     }
 
+    public void tick() {
+        this.controller.tick();
+        this.view.tick();
+    }
+
     /**
      * TODO
      */
