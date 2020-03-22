@@ -1,6 +1,7 @@
-package application.ui;
+package application.ui.javafx;
 
 import application.model.Model;
+import application.ui.Ui;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,20 +12,27 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
-public class ViewFX extends Application implements View {
+public class UiFx extends Application implements Ui {
     private Model model;
 
     /**
      * Needed by javaFx for Application.launch.
      */
-    public ViewFX() {}
+    public UiFx() {}
 
-    public ViewFX(Model model) {
+    public UiFx(Model model) {
         this.model = model;
-
-        Application.launch(ViewFX.class, null);
     }
 
+    @Override
+    public void start() {
+        Application.launch(UiFx.class, (String[]) null);
+    }
+
+    @Override
+    public void drawRectangle() {
+
+    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -46,15 +54,4 @@ public class ViewFX extends Application implements View {
         primaryStage.show();
     }
 
-
-
-    @Override
-    public void tick() {
-
-    }
-
-    @Override
-    public void drawRectangle() {
-
-    }
 }

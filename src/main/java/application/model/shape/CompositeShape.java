@@ -1,6 +1,7 @@
 package application.model.shape;
 
-import application.ui.View;
+import application.ui.Ui;
+import javafx.beans.InvalidationListener;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,13 +24,6 @@ public class CompositeShape implements Shape, Cloneable {
     }
 
     @Override
-    public void draw(View view) {
-        for (Shape shape : this.shapeSet) {
-            shape.draw(view);
-        }
-    }
-
-    @Override
     public Object clone() {
         Object o = null;
         try {
@@ -40,4 +34,5 @@ public class CompositeShape implements Shape, Cloneable {
 
         return o;
     }
+
 }

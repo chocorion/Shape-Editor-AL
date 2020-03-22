@@ -1,9 +1,10 @@
 package application.model.shape;
 
+import application.model.utils.ObservableImp;
 import application.model.utils.Point;
 import application.exceptions.UnsupportedOperationException;
 
-public abstract class SingleShape implements Shape, Cloneable {
+public abstract class SingleShape extends ObservableImp implements Shape, Cloneable {
     private Point position;
 
     @Override
@@ -16,6 +17,7 @@ public abstract class SingleShape implements Shape, Cloneable {
         throw new UnsupportedOperationException("Can't call remove on single shape.");
     }
 
+    // Penser, lors du clone, à changer les observers !
     @Override
     public Object clone() {
         Object o = null;
