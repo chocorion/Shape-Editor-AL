@@ -1,5 +1,7 @@
 package application.model.shape;
 
+import application.ui.View;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,9 +23,9 @@ public class CompositeShape implements Shape, Cloneable {
     }
 
     @Override
-    public void draw() {
+    public void draw(View view) {
         for (Shape shape : this.shapeSet) {
-            shape.draw();
+            shape.draw(view);
         }
     }
 

@@ -1,22 +1,15 @@
 package application.ui;
 
+import application.model.Model;
+
 public class Ui {
-    private static Ui instance;
 
-    private static View view;
-    private static Controller controller;
+    private View view;
+    private Controller controller;
 
-    private Ui() {
-        view = new ViewFX();
+    public Ui(Model model) {
+        view = new ViewFX(model);
         controller = new ControllerFX();
-    }
-
-    public static Ui getInstance() {
-        if (instance == null) {
-            instance = new Ui();
-        }
-
-        return instance;
     }
 
     /**
