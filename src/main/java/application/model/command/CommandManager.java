@@ -20,16 +20,15 @@ public class CommandManager {
     public void execute(Command cmd) {
         cmd.execute();
 
-        this.push(cmd);
-    }
-
-    private void push(Command cmd) {
         this.commandAdded.push(cmd);
-
         this.isRemovedClean = false;
     }
 
     public void undo() {
+        if (this.commandAdded.empty()) {
+            return;
+        }
+
         Command cmd = this.commandAdded.pop();
         cmd.inverse();
 
@@ -38,7 +37,7 @@ public class CommandManager {
     }
 
     public void redo() {
-        if (this.isRemovedClean) {
+        if (this.isRemovedClean && !this.commandRemoved.empty()) {
             Command cmd = this.commandRemoved.pop();
             cmd.execute();
 
