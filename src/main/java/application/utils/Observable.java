@@ -1,4 +1,4 @@
-package application.model.utils;
+package application.utils;
 
 public interface Observable {
     void attachObserver(Observer obs);

@@ -1,6 +1,7 @@
 package application;
 
 import application.model.Model;
+import application.model.shape.Rectangle;
 import application.ui.StaticUi;
 import application.ui.Ui;
 import application.ui.javafx.UiFx;
@@ -14,5 +15,7 @@ public class Main {
         StaticUi.setInstance(ui);
 
         ui.start();
+
+        Rectangle r = new Rectangle();
     }
 }

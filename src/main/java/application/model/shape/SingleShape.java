@@ -1,8 +1,8 @@
 package application.model.shape;
 
-import application.model.utils.ObservableImp;
-import application.model.utils.Observer;
-import application.model.utils.Point;
+import application.utils.ObservableImp;
+import application.utils.Observer;
+import application.utils.Point;
 import application.exceptions.UnsupportedOperationException;
 
 public abstract class SingleShape extends ObservableImp implements Shape, Cloneable {

@@ -11,9 +11,10 @@ public class StaticUi {
         instance = ui;
     }
 
-    public static Ui getInstance() throws InvalidCallException {
-        if (instance ==null) {
-            throw new InvalidCallException("The object has not been initialized.");
+    public static Ui getInstance() {
+        if (instance == null) {
+            System.err.println("Fatal Error : Static Ui was not initialized !");
+            System.exit(1);
         }
 
         return instance;

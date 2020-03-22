@@ -1,4 +1,4 @@
-package application.model.utils;
+package application.utils;
 
 public class Point {
     private double x;
