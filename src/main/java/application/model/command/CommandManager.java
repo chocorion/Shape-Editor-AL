@@ -29,15 +29,20 @@ public class CommandManager {
         this.isRemovedClean = false;
     }
 
-    private Command pop() {
-        return this.commandAdded.pop();
-    }
-
     public void undo() {
-        // TODO
+        Command cmd = this.commandAdded.pop();
+        cmd.inverse();
+
+        this.commandRemoved.push(cmd);
+        this.isRemovedClean = true;
     }
 
     public void redo() {
-        // TODO
+        if (this.isRemovedClean) {
+            Command cmd = this.commandRemoved.pop();
+            cmd.execute();
+
+            this.commandAdded.push(cmd);
+        }
     }
 }
