@@ -1,6 +1,7 @@
 package application.ui.javafx;
 
 import application.model.Model;
+import application.model.shape.SingleShape;
 import application.ui.Ui;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -30,8 +31,10 @@ public class UiFx extends Application implements Ui {
     }
 
     @Override
-    public void drawRectangle() {
+    public void addRectangleRepresentation(SingleShape rectangle) {
+        RectangleFx rectangleFx = new RectangleFx();
 
+        rectangle.attachObserver(rectangleFx);
     }
 
     @Override

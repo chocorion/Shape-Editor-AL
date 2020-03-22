@@ -1,6 +1,7 @@
 package application.model.shape;
 
 import application.model.utils.ObservableImp;
+import application.model.utils.Observer;
 import application.model.utils.Point;
 import application.exceptions.UnsupportedOperationException;
 
@@ -28,5 +29,20 @@ public abstract class SingleShape extends ObservableImp implements Shape, Clonea
         }
 
         return o;
+    }
+
+    @Override
+    public void attachObserver(Observer obs) {
+        super.attachObserver(obs);
+    }
+
+    @Override
+    public void dettachObserver(Observer obs) {
+        super.dettachObserver(obs);
+    }
+
+    @Override
+    public void notifyObserver() {
+        super.notifyObserver();
     }
 }
