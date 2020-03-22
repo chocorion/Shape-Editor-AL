@@ -11,36 +11,41 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
-public class ViewFX implements View {
+public class ViewFX extends Application implements View {
     private Model model;
+
+    /**
+     * Needed by javaFx for Application.launch.
+     */
+    public ViewFX() {}
 
     public ViewFX(Model model) {
         this.model = model;
 
-        Application.launch(myApplication.class, null);
+        Application.launch(ViewFX.class, null);
     }
 
-    public static class myApplication extends Application {
-        @Override
-        public void start(Stage primaryStage) {
-            primaryStage.setTitle("Hello World");
-            Group root = new Group();
-            Scene scene = new Scene(root, 300, 250, Color.LIGHTGREEN);
-            Button btn = new Button();
-            btn.setLayoutX(100);
-            btn.setLayoutY(80);
-            btn.setText("Hello World");
-            btn.setOnAction(new EventHandler<ActionEvent>() {
 
-                public void handle(ActionEvent event) {
-                    System.out.println("Hello World");
-                }
-            });
-            root.getChildren().add(btn);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        }
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Hello World");
+        Group root = new Group();
+        Scene scene = new Scene(root, 300, 250, Color.LIGHTGREEN);
+        Button btn = new Button();
+        btn.setLayoutX(100);
+        btn.setLayoutY(80);
+        btn.setText("Hello World");
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+
+            public void handle(ActionEvent event) {
+                System.out.println("Hello World");
+            }
+        });
+        root.getChildren().add(btn);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
+
 
 
     @Override
