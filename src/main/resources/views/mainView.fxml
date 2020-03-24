@@ -12,5 +12,8 @@
         prefWidth="600.0"
         xmlns:fx="http://javafx.com/fxml"
         fx:controller="application.ui.javafx.controller.mainController">
+    <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="First  Button"/>
+    <Button layoutX="14.0" layoutY="46.0" mnemonicParsing="false" text="Second Button"/>
+    <Button layoutX="14.0" layoutY="77.0" mnemonicParsing="false" text="Third  Button"/>
 </AnchorPane>
 
