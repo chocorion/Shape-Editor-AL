@@ -1,8 +1,5 @@
 package application.model.shape;
 
-import application.ui.Ui;
-import javafx.beans.InvalidationListener;
-
 import java.util.HashSet;
 import java.util.Set;
 

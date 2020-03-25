@@ -2,14 +2,12 @@ package application.ui.javafx;
 
 import application.model.Model;
 import application.model.shape.SingleShape;
-import application.ui.Ui;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
