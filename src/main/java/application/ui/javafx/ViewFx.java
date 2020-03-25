@@ -15,8 +15,10 @@ import javafx.stage.Stage;
 public class ViewFx extends Application implements ConcreteViewItf {
     private GraphicsContext gc;
 
-    public ViewFx() {
-        Application.launch(UiFx.class, (String[]) null);
+    public ViewFx() {}
+
+    public void initViewFx () {
+        Application.launch(ViewFx.class, (String[]) null);
     }
 
 

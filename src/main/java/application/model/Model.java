@@ -18,4 +18,12 @@ public class Model {
         this.toolBar = new ToolBar();
         this.whiteBoard = new WhiteBoard();
     }
+
+    public ToolBar getToolBar() {
+        return toolBar;
+    }
+
+    public WhiteBoard getWhiteBoard() {
+        return whiteBoard;
+    }
 }
