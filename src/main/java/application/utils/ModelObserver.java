@@ -1,5 +1,5 @@
 package application.utils;
 
-public interface Observer {
+public interface ModelObserver {
     void update();
 }

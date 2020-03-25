@@ -1,6 +1,8 @@
 package application.view;
 
-public class ToolBar extends ViewDecorator {
+import application.utils.ModelObserver;
+
+public class ToolBar extends ViewDecorator implements ModelObserver {
     public ToolBar(View view) {
         super(view);
     }
@@ -10,5 +12,10 @@ public class ToolBar extends ViewDecorator {
         super.draw();
 
         // Draw toolbar
+    }
+
+    @Override
+    public void update() {
+        this.draw();
     }
 }

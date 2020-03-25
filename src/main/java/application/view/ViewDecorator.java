@@ -1,5 +1,8 @@
 package application.view;
 
+import application.model.shape.Polygon;
+import application.model.shape.Rectangle;
+
 public abstract class ViewDecorator implements View {
     private View view;
 
@@ -13,12 +16,12 @@ public abstract class ViewDecorator implements View {
     }
 
     @Override
-    public void drawRectangle() {
-        this.view.drawRectangle();
+    public void drawRectangle(Rectangle rectangle) {
+        this.view.drawRectangle(rectangle);
     }
 
     @Override
-    public void drawPolygon() {
-        this.view.drawPolygon();
+    public void drawPolygon(Polygon polygon) {
+        this.view.drawPolygon(polygon);
     }
 }

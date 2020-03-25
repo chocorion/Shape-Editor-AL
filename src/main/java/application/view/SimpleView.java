@@ -1,5 +1,8 @@
 package application.view;
 
+import application.model.shape.Polygon;
+import application.model.shape.Rectangle;
+
 public class SimpleView implements View {
     private ConcreteViewItf implementation;
 
@@ -13,12 +16,12 @@ public class SimpleView implements View {
     }
 
     @Override
-    public void drawRectangle() {
-        this.implementation.devDrawRectangle();
+    public void drawRectangle(Rectangle rectangle) {
+        this.implementation.devDrawRectangle(rectangle);
     }
 
     @Override
-    public void drawPolygon() {
-        this.implementation.devDrawPolygon();
+    public void drawPolygon(Polygon polygon) {
+        this.implementation.devDrawPolygon(polygon);
     }
 }

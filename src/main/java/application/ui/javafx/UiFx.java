@@ -1,7 +1,6 @@
 package application.ui.javafx;
 
 import application.model.Model;
-import application.model.shape.SingleShape;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,6 +10,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 
+/**
+ * Keep this file only for the javafx example code
+ */
 
 public class UiFx extends Application {
     private Model model;
