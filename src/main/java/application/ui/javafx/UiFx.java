@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 
 
-public class UiFx extends Application implements Ui {
+public class UiFx extends Application {
     private Model model;
 
     /**
@@ -24,17 +24,10 @@ public class UiFx extends Application implements Ui {
         this.model = model;
     }
 
-    @Override
     public void start() {
         Application.launch(UiFx.class, (String[]) null);
     }
 
-    @Override
-    public void addRectangleRepresentation(SingleShape rectangle) {
-        RectangleFx rectangleFx = new RectangleFx();
-
-        rectangle.attachObserver(rectangleFx);
-    }
 
     @Override
     public void start(final Stage primaryStage) {

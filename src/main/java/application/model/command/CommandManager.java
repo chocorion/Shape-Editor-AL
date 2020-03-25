@@ -1,6 +1,5 @@
 package application.model.command;
 
-import java.util.Queue;
 import java.util.Stack;
 
 public class CommandManager {
