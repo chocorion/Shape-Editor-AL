@@ -17,22 +17,23 @@ public class Main {
 
         model = new Model();
         buildView();
-
     }
 
 
     public static void buildView() {
         ViewFx viewFx = new ViewFx();
-        viewFx.initViewFx();
+        View simpleView = new SimpleView(viewFx);
 
-        View view = new SimpleView(viewFx);
-
-        WhiteBoard whiteBoard = new WhiteBoard(view);
+        WhiteBoard whiteBoard = new WhiteBoard(simpleView);
         ToolBar toolBar = new ToolBar(whiteBoard);
 
         model.getToolBar().attachObserver(toolBar);
         model.getWhiteBoard().attachObserver(whiteBoard);
 
         view = toolBar;
+
+        viewFx.initViewFx();
     }
+
+
 }

@@ -7,6 +7,9 @@ import application.model.command.CommandManager;
 public class Model {
     private CommandManager commands;
 
+    public static int WIDTH = 640;
+    public static int HEIGHT = 480;
+
     private ToolBar toolBar;
     private WhiteBoard whiteBoard;
 
@@ -15,7 +18,7 @@ public class Model {
 
         this.commands = new CommandManager();
 
-        this.toolBar = new ToolBar();
+        this.toolBar    = new ToolBar();
         this.whiteBoard = new WhiteBoard();
     }
 
@@ -26,4 +29,5 @@ public class Model {
     public WhiteBoard getWhiteBoard() {
         return whiteBoard;
     }
+
 }

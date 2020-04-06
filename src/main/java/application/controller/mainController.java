@@ -1,4 +1,4 @@
-package application.ui.javafx.controller;
+package application.controller;
 
 public class mainController {
 }

@@ -17,6 +17,7 @@ public class SimpleView implements View {
 
     @Override
     public void drawRectangle(Rectangle rectangle) {
+        System.out.println("DrawRect in SimpleView !");
         this.implementation.devDrawRectangle(rectangle);
     }
 
