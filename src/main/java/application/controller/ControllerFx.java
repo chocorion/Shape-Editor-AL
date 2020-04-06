@@ -2,6 +2,7 @@ package application.controller;
 
 import java.util.ArrayList;
 
+import application.model.Model;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
@@ -16,13 +17,19 @@ import javafx.scene.input.ScrollEvent;
 public class ControllerFx {
     ArrayList<String> input;
     Point2D mousePos;
+    private Model model;
 
     /**
      * Basic constructor. Init all user events.
      * @param scene			Javafx scene
      */
-    public ControllerFx(Scene scene) {
+    public ControllerFx(Model model, Scene scene) {
+        if (model == null) {
+            System.err.println("Error in controllerFx constructor : Model can't be null");
+            System.exit(1);
+        }
         this.input = new ArrayList<>();
+        this.model = model;
 
         scene.setOnKeyPressed(
                 new EventHandler<KeyEvent>()
@@ -167,5 +174,10 @@ public class ControllerFx {
                 //this.sceneManager.restoreGame();
             }
         }
+    }
+
+    public void onStart() {
+        System.out.println("CONTROLLER ON START");
+        this.model.update();
     }
 }

@@ -10,6 +10,8 @@ public class Model {
     public static int WIDTH = 640;
     public static int HEIGHT = 480;
 
+    public static Model currentModel;
+
     private ToolBar toolBar;
     private WhiteBoard whiteBoard;
 
@@ -20,6 +22,13 @@ public class Model {
 
         this.toolBar    = new ToolBar();
         this.whiteBoard = new WhiteBoard();
+
+        currentModel = this;
+    }
+
+    public void update() {
+        this.toolBar.update();
+        this.whiteBoard.update();
     }
 
     public ToolBar getToolBar() {

@@ -10,4 +10,8 @@ public class ToolBar extends ModelObservableImp {
     public ToolBar() {
         this.rootShape = new CompositeShape();
     }
+
+    public void update() {
+        super.notifyObserver();
+    }
 }

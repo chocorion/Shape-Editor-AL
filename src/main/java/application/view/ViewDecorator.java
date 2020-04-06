@@ -11,6 +11,16 @@ public abstract class ViewDecorator implements View {
     }
 
     @Override
+    public int getWidth() {
+        return this.view.getWidth();
+    }
+
+    @Override
+    public int getHeight() {
+        return this.view.getHeight();
+    }
+
+    @Override
     public void draw() {
         this.view.draw();
     }

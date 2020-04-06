@@ -10,4 +10,8 @@ public class WhiteBoard extends ModelObservableImp {
     public WhiteBoard() {
         this.rootShape = new CompositeShape();
     }
+
+    public void update() {
+        super.notifyObserver();
+    }
 }

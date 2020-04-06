@@ -16,6 +16,16 @@ public class SimpleView implements View {
     }
 
     @Override
+    public int getWidth() {
+        return this.implementation.getWidth();
+    }
+
+    @Override
+    public int getHeight() {
+        return this.implementation.getHeight();
+    }
+
+    @Override
     public void drawRectangle(Rectangle rectangle) {
         System.out.println("DrawRect in SimpleView !");
         this.implementation.devDrawRectangle(rectangle);

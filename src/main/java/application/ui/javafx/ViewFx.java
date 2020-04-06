@@ -12,16 +12,21 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
-
-import javax.naming.ldap.Control;
 
 
 public class ViewFx extends Application implements ConcreteViewItf {
-    private GraphicsContext gc;
+    private static GraphicsContext gc;
     private ControllerFx controller;
+    private static Model model;
 
     public ViewFx() {}
+
+    public ViewFx(Model model) {
+        model = model;
+        System.out.println("Model is " + model);
+    }
 
     public void initViewFx () {
         Application.launch(ViewFx.class, (String[]) null);
@@ -31,14 +36,16 @@ public class ViewFx extends Application implements ConcreteViewItf {
     @Override
     public void start(final Stage primaryStage) {
         primaryStage.setTitle("Shape Editor");
+        model = Model.currentModel;
+
 
         Group root = new Group();
 
         Canvas canvas = new Canvas(Model.WIDTH, Model.HEIGHT);
-        this.gc = canvas.getGraphicsContext2D();
+        ViewFx.gc = canvas.getGraphicsContext2D();
         root.getChildren().add(canvas);
         Scene rootScene = new Scene(root);
-        this.controller = new ControllerFx(rootScene);
+        this.controller = new ControllerFx(model, rootScene);
         primaryStage.setScene(rootScene);
 
 
@@ -55,12 +62,24 @@ public class ViewFx extends Application implements ConcreteViewItf {
         }.start();
 
         primaryStage.show();
+        controller.onStart();
+    }
+
+
+    @Override
+    public int getWidth() {
+        return (int) Screen.getPrimary().getVisualBounds().getWidth();
+    }
+
+    @Override
+    public int getHeight() {
+        return (int) Screen.getPrimary().getVisualBounds().getHeight();
     }
 
     @Override
     public void devDrawRectangle(Rectangle rectangle) {
-        System.out.println("Drawing rectangle !");
-        this.gc.fillRect(50, 50, 100, 150);
+        System.out.println("Drawing rectangle !" + ViewFx.gc + " " + rectangle);
+        ViewFx.gc.fillRect(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
     }
 
     @Override

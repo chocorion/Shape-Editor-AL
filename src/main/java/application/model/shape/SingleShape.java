@@ -4,8 +4,6 @@ import application.utils.Point;
 import application.exceptions.UnsupportedOperationException;
 
 public abstract class SingleShape implements Shape, Cloneable {
-    private Point position;
-
     @Override
     public void add(Shape shape) throws UnsupportedOperationException {
         throw new UnsupportedOperationException("Can't call add on single shape.");

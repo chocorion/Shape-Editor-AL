@@ -21,7 +21,7 @@ public class Main {
 
 
     public static void buildView() {
-        ViewFx viewFx = new ViewFx();
+        ViewFx viewFx = new ViewFx(model);
         View simpleView = new SimpleView(viewFx);
 
         WhiteBoard whiteBoard = new WhiteBoard(simpleView);
@@ -31,7 +31,6 @@ public class Main {
         model.getWhiteBoard().attachObserver(whiteBoard);
 
         view = toolBar;
-
         viewFx.initViewFx();
     }
 
