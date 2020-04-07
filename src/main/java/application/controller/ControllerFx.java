@@ -2,7 +2,10 @@ package application.controller;
 
 import java.util.ArrayList;
 
+import application.Main;
 import application.model.Model;
+import application.ui.javafx.ViewFx;
+import application.view.View;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
@@ -14,22 +17,20 @@ import javafx.scene.input.ScrollEvent;
 /**
  * This class get all the input from the user, and calls the associate fonction in scene manager.
  */
-public class ControllerFx {
+public class ControllerFx implements Controller {
     ArrayList<String> input;
     Point2D mousePos;
-    private Model model;
+
 
     /**
      * Basic constructor. Init all user events.
-     * @param scene			Javafx scene
      */
-    public ControllerFx(Model model, Scene scene) {
-        if (model == null) {
-            System.err.println("Error in controllerFx constructor : Model can't be null");
-            System.exit(1);
-        }
+    public ControllerFx(MainController mainController, ViewFx view) {
+        System.out.println("View in controllerFx -> " + view);
+
         this.input = new ArrayList<>();
-        this.model = model;
+
+        Scene scene = view.getScene();
 
         scene.setOnKeyPressed(
                 new EventHandler<KeyEvent>()
@@ -156,7 +157,7 @@ public class ControllerFx {
      * Main fonction of the class, called every step of game's main loop. It manage all the inputs it receives from
      * the user events.
      */
-    public void tick() {
+    public boolean tick() {
         if(this.input.contains("ESCAPE")){
             this.input.remove("ESCAPE");
             //this.sceneManager.inputEscape();
@@ -174,10 +175,11 @@ public class ControllerFx {
                 //this.sceneManager.restoreGame();
             }
         }
+
+        return true;
     }
 
     public void onStart() {
         System.out.println("CONTROLLER ON START");
-        this.model.update();
     }
 }

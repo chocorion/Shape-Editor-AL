@@ -1,6 +1,7 @@
 package application.ui.javafx;
 
 
+import application.controller.Controller;
 import application.controller.ControllerFx;
 import application.model.Model;
 import application.model.shape.Polygon;
@@ -17,38 +18,40 @@ import javafx.stage.Stage;
 
 
 public class ViewFx extends Application implements ConcreteViewItf {
-    private static GraphicsContext gc;
-    private ControllerFx controller;
     private static Model model;
+    private static Scene rootScene;
+    private static GraphicsContext gc;
 
     public ViewFx() {}
 
     public ViewFx(Model model) {
-        model = model;
-        System.out.println("Model is " + model);
-    }
-
-    public void initViewFx () {
-        Application.launch(ViewFx.class, (String[]) null);
-    }
-
-
-    @Override
-    public void start(final Stage primaryStage) {
-        primaryStage.setTitle("Shape Editor");
-        model = Model.currentModel;
-
+        ViewFx.model = model;
 
         Group root = new Group();
 
         Canvas canvas = new Canvas(Model.WIDTH, Model.HEIGHT);
         ViewFx.gc = canvas.getGraphicsContext2D();
         root.getChildren().add(canvas);
-        Scene rootScene = new Scene(root);
-        this.controller = new ControllerFx(model, rootScene);
-        primaryStage.setScene(rootScene);
+        ViewFx.rootScene = new Scene(root);
+    }
 
+    public void initViewFx () {
+        Application.launch(ViewFx.class, (String[]) null);
+    }
 
+    public Scene getScene() {
+        return ViewFx.rootScene;
+    }
+
+    @Override
+    public void start(final Stage primaryStage) {
+        primaryStage.setTitle("Shape Editor");
+        primaryStage.setScene(ViewFx.rootScene);
+        primaryStage.show();
+        model.update();
+    }
+
+    public void AddController(Controller controller) {
         new AnimationTimer(){
             long prevNanoTime = System.nanoTime();
             public void handle(long currentNanoTime){
@@ -60,9 +63,6 @@ public class ViewFx extends Application implements ConcreteViewItf {
                 // prevNanoTime = currentNanoTime;
             }
         }.start();
-
-        primaryStage.show();
-        controller.onStart();
     }
 
 
