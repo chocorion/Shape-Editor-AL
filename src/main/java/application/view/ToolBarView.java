@@ -19,7 +19,7 @@ public class ToolBarView extends ViewDecorator implements ModelObserver {
         super.draw();
         // Draw toolbar
 
-        super.drawRectangle(new Rectangle(0, 0, 30, super.getHeight()));
+        super.drawRectangle(new Rectangle(0, 0, toolBar.getWidth(), toolBar.getHeight()));
 
         for (Shape shape:this.toolBar.getInnerShapes()) {
             shape.draw(this);

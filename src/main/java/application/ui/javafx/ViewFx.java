@@ -29,7 +29,7 @@ public class ViewFx extends Application implements ConcreteViewItf {
 
         Group root = new Group();
 
-        Canvas canvas = new Canvas(Model.WIDTH, Model.HEIGHT);
+        Canvas canvas = new Canvas(model.getWidth(), model.getHeight());
         ViewFx.gc = canvas.getGraphicsContext2D();
         root.getChildren().add(canvas);
         ViewFx.rootScene = new Scene(root);
