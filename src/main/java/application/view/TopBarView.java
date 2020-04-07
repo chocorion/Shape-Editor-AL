@@ -1,7 +1,7 @@
 package application.view;
 
-public class TopBar extends ViewDecorator {
-    public TopBar(View view) {
+public class TopBarView extends ViewDecorator {
+    public TopBarView(View view) {
         super(view);
     }
 

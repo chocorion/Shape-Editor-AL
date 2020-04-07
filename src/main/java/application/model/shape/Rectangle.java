@@ -5,6 +5,7 @@ import application.view.View;
 public class Rectangle extends SingleShape {
     private int x, y;
     private int width, height;
+    private Color color;
 
     public Rectangle(int x, int y, int width, int height) {
         this.x = x;
@@ -12,6 +13,9 @@ public class Rectangle extends SingleShape {
 
         this.width = width;
         this.height = height;
+
+        // For test
+        this.color = Color.BLUE;
     }
 
 
@@ -35,5 +39,9 @@ public class Rectangle extends SingleShape {
 
     public int getHeight() {
         return height;
+    }
+
+    public Color getColor() {
+        return this.color;
     }
 }

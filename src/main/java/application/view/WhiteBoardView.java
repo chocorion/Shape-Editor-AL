@@ -1,10 +1,15 @@
 package application.view;
 
+import application.model.areas.WhiteBoard;
 import application.utils.ModelObserver;
 
-public class WhiteBoard extends ViewDecorator implements ModelObserver {
-    public WhiteBoard(View view) {
+public class WhiteBoardView extends ViewDecorator implements ModelObserver {
+    private WhiteBoard whiteBoard;
+
+    public WhiteBoardView(View view, WhiteBoard whiteBoard) {
         super(view);
+
+        this.whiteBoard = whiteBoard;
     }
 
     @Override

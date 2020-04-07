@@ -84,6 +84,6 @@ public class ViewFx extends Application implements ConcreteViewItf {
 
     @Override
     public void devDrawPolygon(Polygon polygon) {
-        this.gc.fillRect(50, 50, 100, 150);
+        ViewFx.gc.fillRect(50, 50, 100, 150);
     }
 }

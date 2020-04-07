@@ -3,9 +3,9 @@ package application;
 import application.model.Model;
 import application.ui.javafx.ViewFx;
 import application.view.SimpleView;
-import application.view.ToolBar;
+import application.view.ToolBarView;
 import application.view.View;
-import application.view.WhiteBoard;
+import application.view.WhiteBoardView;
 
 
 public class Main {
@@ -24,8 +24,8 @@ public class Main {
         ViewFx viewFx = new ViewFx(model);
         View simpleView = new SimpleView(viewFx);
 
-        WhiteBoard whiteBoard = new WhiteBoard(simpleView);
-        ToolBar toolBar = new ToolBar(whiteBoard);
+        WhiteBoardView whiteBoard = new WhiteBoardView(simpleView, model.getWhiteBoard());
+        ToolBarView toolBar = new ToolBarView(whiteBoard, model.getToolBar());
 
         model.getToolBar().attachObserver(toolBar);
         model.getWhiteBoard().attachObserver(whiteBoard);
