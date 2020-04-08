@@ -13,11 +13,20 @@ public class ToolBar extends ModelObservableImp implements ShapeContainer {
     private ArrayList<Shape> shapes;
     private Model model;
 
+    private int x, y;
+    private int width, height;
+
     public ToolBar(Model model) {
         this.shapes = new ArrayList<>();
         this.shapes.add(new Rectangle(6, model.getTopBar().getHeight() + 6, 33, 20, Color.BLUE));
 
         this.model = model;
+
+        // Margin of 1
+        this.x = 1;
+        this.y = model.getTopBar().getHeight() + model.getTopBar().getY() + 1;
+        this.width = 45;
+        this.height = model.getHeight() - model.getTopBar().getHeight() + model.getTopBar().getY() - 4;
     }
 
     public void update() {
@@ -41,21 +50,30 @@ public class ToolBar extends ModelObservableImp implements ShapeContainer {
     }
 
     public int getWidth() {
-        return Math.min(this.model.getWidth(), 45);
+        return this.width;
     }
 
     public int getHeight() {
-        return this.model.getHeight() - this.model.getTopBar().getHeight();
+        return this.height;
+    }
+
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
     }
 
     public boolean isIn(int x, int y) {
-        if (x >= 0 && x <= this.getWidth()) {
-            return y > this.model.getTopBar().getHeight() && y <= this.model.getHeight();
+        if (x >= this.x && x <= this.x + this.getWidth()) {
+            return y >= this.y && y <= this.y + this.getHeight();
         }
 
         return false;
     }
 
+    // TODO Refactor
     public Shape getShape(int x, int y) {
         if (!this.isIn(x, y) || (y - model.getTopBar().getHeight()) / this.getWidth() >= this.shapes.size()) {
             return null;

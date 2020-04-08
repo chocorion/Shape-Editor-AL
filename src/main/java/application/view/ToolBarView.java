@@ -8,40 +8,41 @@ import application.utils.Color;
 import application.utils.ModelObserver;
 
 public class ToolBarView extends ViewDecorator implements ModelObserver {
-    private Model model;
+    private ToolBar toolBar;
 
-    public ToolBarView(View view, Model model) {
+    public ToolBarView(View view, ToolBar toolBar) {
         super(view);
 
-        this.model = model;
+        this.toolBar = toolBar;
     }
 
     @Override
     public void draw() {
         super.draw();
         // Draw toolbar
+        int borderSize = 1;
 
         super.drawRectangle(
                 new Rectangle(
-                        1,
-                        model.getTopBar().getHeight() + 2,
-                        model.getToolBar().getWidth() - 2,
-                        model.getToolBar().getHeight() - 3,
+                        toolBar.getX(),
+                        toolBar.getY(),
+                        toolBar.getWidth(),
+                        toolBar.getHeight(),
                         Color.BLACK
                 )
         );
 
         super.drawRectangle(
                 new Rectangle(
-                        2,
-                        model.getTopBar().getHeight() + 3,
-                        model.getToolBar().getWidth() - 4,
-                        model.getToolBar().getHeight() - 5,
+                        toolBar.getX() + borderSize,
+                        toolBar.getY() + borderSize,
+                        toolBar.getWidth() - 2 * borderSize,
+                        toolBar.getHeight() - 2 * borderSize,
                         Color.WHITE
                 )
         );
 
-        for (Shape shape:model.getToolBar().getInnerShapes()) {
+        for (Shape shape:toolBar.getInnerShapes()) {
             shape.draw(this);
         }
     }

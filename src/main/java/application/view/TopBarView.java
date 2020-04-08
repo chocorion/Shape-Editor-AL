@@ -16,10 +16,10 @@ public class TopBarView extends ViewDecorator implements ModelObserver {
     @Override
     public void draw() {
         super.draw();
-
+        int borderSize = 1;
         // draw topBar
-        super.drawRectangle(new Rectangle(1, 1, topBar.getWidth() - 2, topBar.getHeight() - 2, Color.BLACK));
-        super.drawRectangle(new Rectangle(2, 2, topBar.getWidth() - 4, topBar.getHeight() - 4, Color.WHITE));
+        super.drawRectangle(new Rectangle(topBar.getX(), topBar.getY(), topBar.getWidth(), topBar.getHeight(), Color.BLACK));
+        super.drawRectangle(new Rectangle(topBar.getX() + borderSize, topBar.getY() + borderSize, topBar.getWidth() - 2 * borderSize, topBar.getHeight() - 2 * borderSize, Color.WHITE));
 
         super.drawRectangle(new Rectangle(4, 4, topBar.getButtonWidth(), topBar.getButtonWidth()));
         super.drawRectangle(new Rectangle(topBar.getButtonWidth() + 6, 4, topBar.getButtonWidth(), topBar.getButtonWidth()));

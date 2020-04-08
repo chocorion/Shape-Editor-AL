@@ -12,9 +12,18 @@ public class WhiteBoard extends ModelObservableImp implements ShapeContainer {
     private ArrayList<Shape> shapes;
     private Model model;
 
+    private int x, y;
+    private int width, height;
+
     public WhiteBoard(Model model) {
         this.shapes = new ArrayList<>();
         this.model = model;
+
+        this.x = model.getToolBar().getX() + model.getToolBar().getWidth() + 1;
+        this.y = model.getTopBar().getY() + model.getTopBar().getHeight() + 1;
+
+        this.width = model.getWidth() - (model.getToolBar().getX() + model.getToolBar().getWidth()) - 2;
+        this.height = model.getHeight() - (model.getTopBar().getY() + model.getTopBar().getHeight()) - 2;
     }
 
     public void update() {
@@ -40,11 +49,19 @@ public class WhiteBoard extends ModelObservableImp implements ShapeContainer {
 
     public int getWidth() {
         // remove toolbar width
-        return this.model.getWidth() - Math.min(this.model.getWidth(), 30);
+        return this.width;
     }
 
     public int getHeight() {
-        return this.model.getHeight();
+        return this.height;
+    }
+
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
     }
 
     public boolean isIn(int x, int y) {

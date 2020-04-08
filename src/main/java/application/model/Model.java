@@ -9,7 +9,7 @@ import application.model.command.CommandManager;
 public class Model {
     private CommandManager commands;
 
-    public int width, height;
+    private int width, height;
 
     public static Model currentModel;
 
@@ -21,16 +21,17 @@ public class Model {
         System.out.println("Model create");
 
         this.commands = new CommandManager();
+        currentModel = this;
+
+        width = 640;
+        height = 480;
 
         this.topBar     = new TopBar(this);
         this.toolBar    = new ToolBar(this);
         this.whiteBoard = new WhiteBoard(this);
 
 
-        currentModel = this;
 
-        width = 640;
-        height = 480;
     }
 
     public void update() {
