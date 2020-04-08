@@ -5,10 +5,11 @@ import application.model.shape.Color;
 import application.model.shape.Rectangle;
 import application.model.shape.Shape;
 import application.utils.ModelObservableImp;
+import application.utils.ShapeContainer;
 
 import java.util.ArrayList;
 
-public class ToolBar extends ModelObservableImp {
+public class ToolBar extends ModelObservableImp implements ShapeContainer {
     private ArrayList<Shape> shapes;
     private Model model;
 
@@ -23,8 +24,16 @@ public class ToolBar extends ModelObservableImp {
         super.notifyObserver();
     }
 
+    @Override
     public void addShape(Shape shape) {
         this.shapes.add(shape);
+        this.update();
+    }
+
+    @Override
+    public void removeShape(Shape shape) {
+        this.shapes.remove(shape);
+        this.update();
     }
 
     public ArrayList<Shape> getInnerShapes() {

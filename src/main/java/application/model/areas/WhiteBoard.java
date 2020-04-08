@@ -4,10 +4,11 @@ import application.model.Model;
 import application.model.shape.CompositeShape;
 import application.model.shape.Shape;
 import application.utils.ModelObservableImp;
+import application.utils.ShapeContainer;
 
 import java.util.ArrayList;
 
-public class WhiteBoard extends ModelObservableImp {
+public class WhiteBoard extends ModelObservableImp implements ShapeContainer {
     private ArrayList<Shape> shapes;
     private Model model;
 
@@ -20,9 +21,16 @@ public class WhiteBoard extends ModelObservableImp {
         super.notifyObserver();
     }
 
-
+    @Override
     public void addShape(Shape shape) {
         this.shapes.add(shape);
+        this.update();
+    }
+
+    @Override
+    public void removeShape(Shape shape) {
+        this.shapes.remove(shape);
+        this.update();
     }
 
     public ArrayList<Shape> getInnerShapes() {

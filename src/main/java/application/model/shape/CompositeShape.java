@@ -133,4 +133,12 @@ public class CompositeShape implements Shape, Cloneable {
         return false;
     }
 
+    @Override
+    public void moveTo(int x, int y) {
+        //TODO
+        for (Shape shape:this.shapeSet) {
+            shape.moveTo(x, y);
+        }
+    }
+
 }

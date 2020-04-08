@@ -18,6 +18,7 @@ public interface Shape {
     int getMaxY();
 
     boolean isIn(int x, int y);
+    void moveTo(int x, int y);
 
     Object clone();
 }

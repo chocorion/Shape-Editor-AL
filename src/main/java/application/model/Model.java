@@ -2,6 +2,7 @@ package application.model;
 
 import application.model.areas.ToolBar;
 import application.model.areas.WhiteBoard;
+import application.model.command.Command;
 import application.model.command.CommandManager;
 
 public class Model {
@@ -46,6 +47,18 @@ public class Model {
 
     public int getHeight() {
         return this.height;
+    }
+
+    public void execute(Command command) {
+        this.commands.execute(command);
+    }
+
+    public void undo() {
+        this.commands.undo();
+    }
+
+    public void redo() {
+        this.commands.redo();
     }
 
 }

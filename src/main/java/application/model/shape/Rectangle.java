@@ -82,6 +82,12 @@ public class Rectangle extends SingleShape {
         return false;
     }
 
+    @Override
+    public void moveTo(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
     public Color getColor() {
         return this.color;
     }

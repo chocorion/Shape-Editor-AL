@@ -47,5 +47,10 @@ public class Polygon extends SingleShape {
     public boolean isIn(int x, int y) {
         return false;
     }
+
+    @Override
+    public void moveTo(int x, int y) {
+        //TODO
+    }
 }
 
