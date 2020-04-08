@@ -9,15 +9,15 @@ public class SingleShapeTest {
 
     @Test(expected = UnsupportedOperationException.class)
     public void add() throws UnsupportedOperationException {
-        SingleShape shape = new Rectangle();
+        SingleShape shape = new Rectangle(0, 0, 1, 1);
 
-        shape.add(new Rectangle());
+        shape.add(new Rectangle(0, 0, 1, 1));
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void remove() throws UnsupportedOperationException {
-        SingleShape shape = new Rectangle();
+        SingleShape shape = new Rectangle(0, 0, 1, 1);
 
-        shape.remove(new Rectangle());
+        shape.remove(new Rectangle(0, 0, 1, 1));
     }
 }

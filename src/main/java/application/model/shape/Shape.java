@@ -9,5 +9,13 @@ public interface Shape {
 
     void draw(View view);
 
+    int getWidth();
+    int getHeight();
+
+    int getMinX();
+    int getMinY();
+    int getMaxX();
+    int getMaxY();
+
     Object clone();
 }

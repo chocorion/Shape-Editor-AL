@@ -1,6 +1,5 @@
 package application.model.shape;
 
-import application.utils.Point;
 import application.exceptions.UnsupportedOperationException;
 
 public abstract class SingleShape implements Shape, Cloneable {

@@ -30,6 +30,16 @@ public class CompositeShape implements Shape, Cloneable {
     }
 
     @Override
+    public int getWidth() {
+        return this.getMaxX() - this.getMinX();
+    }
+
+    @Override
+    public int getHeight() {
+        return this.getMaxY() - this.getMinY();
+    }
+
+    @Override
     public Object clone() {
         Object o = null;
         try {
@@ -39,6 +49,78 @@ public class CompositeShape implements Shape, Cloneable {
         }
 
         return o;
+    }
+
+    public int getMinX() {
+        if (this.shapeSet.size() == 0) {
+            return -1;
+        }
+
+        int minX = Integer.MAX_VALUE;
+
+        for (Shape shape: this.shapeSet) {
+            int shapeMinX = shape.getMinX();
+
+            if (minX > shapeMinX) {
+                minX = shapeMinX;
+            }
+        }
+
+        return minX;
+    }
+
+    public int getMaxX() {
+        if (this.shapeSet.size() == 0) {
+            return -1;
+        }
+
+        int maxX = Integer.MIN_VALUE;
+
+        for (Shape shape: this.shapeSet) {
+            int shapeMaxX = shape.getMaxX();
+
+            if (maxX < shapeMaxX) {
+                maxX = shapeMaxX;
+            }
+        }
+
+        return maxX;
+    }
+
+    public int getMinY() {
+        if (this.shapeSet.size() == 0) {
+            return -1;
+        }
+
+        int minY = Integer.MAX_VALUE;
+
+        for (Shape shape: this.shapeSet) {
+            int shapeMinY = shape.getMinY();
+
+            if (minY > shapeMinY) {
+                minY = shapeMinY;
+            }
+        }
+
+        return minY;
+    }
+
+    public int getMaxY() {
+        if (this.shapeSet.size() == 0) {
+            return -1;
+        }
+
+        int maxY = Integer.MIN_VALUE;
+
+        for (Shape shape: this.shapeSet) {
+            int shapeMaxY = shape.getMaxY();
+
+            if (maxY < shapeMaxY) {
+                maxY = shapeMaxY;
+            }
+        }
+
+        return maxY;
     }
 
 }

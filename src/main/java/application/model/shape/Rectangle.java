@@ -33,12 +33,34 @@ public class Rectangle extends SingleShape {
         return y;
     }
 
+    @Override
     public int getWidth() {
         return width;
     }
 
+    @Override
     public int getHeight() {
         return height;
+    }
+
+    @Override
+    public int getMinX() {
+        return this.x;
+    }
+
+    @Override
+    public int getMinY() {
+        return this.y;
+    }
+
+    @Override
+    public int getMaxX() {
+        return this.x + this.width;
+    }
+
+    @Override
+    public int getMaxY() {
+        return this.y + this.height;
     }
 
     public Color getColor() {
