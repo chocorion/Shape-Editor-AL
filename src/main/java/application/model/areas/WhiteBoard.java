@@ -30,10 +30,19 @@ public class WhiteBoard extends ModelObservableImp {
     }
 
     public int getWidth() {
-        return this.model.getWidth();
+        // remove toolbar width
+        return this.model.getWidth() - Math.min(this.model.getWidth(), 30);
     }
 
     public int getHeight() {
         return this.model.getHeight();
+    }
+
+    public boolean isIn(int x, int y) {
+        if (x > Math.min(this.model.getWidth(), 30) && x <= this.model.getWidth()) {
+            return y >= 0 && y <= this.model.getHeight();
+        }
+
+        return false;
     }
 }

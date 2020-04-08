@@ -18,4 +18,25 @@ public class MainController {
         ((ViewFx) viewImp).AddController(this.controllerImp);
     }
 
+    public void onLeftClickPressed(double x, double y) {
+        System.out.println("Left Click pressed on " + x + " " + y);
+    }
+
+    public void onRightClickPressed(double x, double y) {
+        System.out.println("Right Click pressed on " + x + " " + y);
+
+    }
+
+    public void onLeftClickReleased(double x, double y) {
+        System.out.println("Left Click released on " + x + " " + y);
+    }
+
+    public void onRightClickReleased(double x, double y) {
+        System.out.println("Right Click released on " + x + " " + y);
+    }
+
+    public void onMouseDragged(double x, double y) {
+        System.out.println("Mouse dragged on " + x + " " + y);
+    }
+
 }

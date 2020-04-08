@@ -21,13 +21,10 @@ public class ControllerFx implements Controller {
     ArrayList<String> input;
     Point2D mousePos;
 
-
     /**
      * Basic constructor. Init all user events.
      */
     public ControllerFx(MainController mainController, ViewFx view) {
-        System.out.println("View in controllerFx -> " + view);
-
         this.input = new ArrayList<>();
 
         Scene scene = view.getScene();
@@ -67,46 +64,28 @@ public class ControllerFx implements Controller {
                 });
 
         scene.setOnMousePressed(
-                new EventHandler<MouseEvent>()
-                {
-                    public void handle(MouseEvent e)
-                    {
-                        setMousePos(e.getX(), e.getY());
-                        String code;
-                        if(e.getButton() == MouseButton.PRIMARY) {
-                            code = "MOUSE_LEFT";
-                            if ( !input.contains(code) )
-                                input.add( code );
-                        }
-                        if(e.getButton() == MouseButton.SECONDARY){
-                            code = "MOUSE_RIGHT";
-                            if ( !input.contains(code) )
-                                input.add( code );
-                        }
+                e -> {
+                    if(e.getButton() == MouseButton.PRIMARY) {
+                        mainController.onLeftClickPressed(e.getX(), e.getY());
+                    }
 
+                    if(e.getButton() == MouseButton.SECONDARY){
+                        mainController.onRightClickPressed(e.getX(), e.getY());
                     }
                 });
 
         scene.setOnMouseReleased(
-                new EventHandler<MouseEvent>()
-                {
-                    public void handle(MouseEvent e)
-                    {
-                        if(e.getButton() == MouseButton.PRIMARY)
-                            releasedMouseLeft();
-                        if(e.getButton() == MouseButton.SECONDARY)
-                            input.remove("MOUSE_RIGHT");
+                e -> {
+                    if (e.getButton() == MouseButton.PRIMARY) {
+                        mainController.onLeftClickReleased(e.getX(), e.getY());
+                    }
+                    if (e.getButton() == MouseButton.SECONDARY) {
+                        mainController.onRightClickReleased(e.getX(), e.getY());
                     }
                 });
 
         scene.setOnMouseDragged(
-                new EventHandler<MouseEvent>()
-                {
-                    public void handle(MouseEvent e)
-                    {
-                        setMousePos(e.getX(), e.getY());
-                    }
-                });
+                e -> mainController.onMouseDragged(e.getX(), e.getY()));
 
         scene.setOnScroll(
                 new EventHandler<ScrollEvent>()
@@ -117,13 +96,7 @@ public class ControllerFx implements Controller {
                 });
     }
 
-    /**
-     * Calls the fonction associated in sceneManager when the mouse if released.
-     */
-    private void releasedMouseLeft() {
-        this.input.remove("MOUSE_LEFT");
-        //this.sceneManager.releasedMouseLeft(this.mousePos.getX(), this.mousePos.getY(), this.input);
-    }
+
 
     /**
      * Set the mouse's position.
