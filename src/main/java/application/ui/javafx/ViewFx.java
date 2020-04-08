@@ -83,7 +83,11 @@ public class ViewFx extends Application implements ConcreteViewItf {
 
         if (rectangle.getColor() == application.model.shape.Color.BLUE) {
             ViewFx.gc.setFill(Color.BLUE);
-        } else {
+        } else if (rectangle.getColor() == application.model.shape.Color.LIGHT_GREY) {
+            ViewFx.gc.setFill(Color.gray(0.8));
+        } else if (rectangle.getColor() == application.model.shape.Color.DARK_GREY) {
+            ViewFx.gc.setFill(Color.gray(0.2));
+        }else {
             ViewFx.gc.setFill(Color.BLACK);
         }
 
@@ -93,5 +97,15 @@ public class ViewFx extends Application implements ConcreteViewItf {
     @Override
     public void devDrawPolygon(Polygon polygon) {
         ViewFx.gc.fillRect(50, 50, 100, 150);
+    }
+
+    public void drawTopBar() {
+        //TEMPORARY
+        ViewFx.gc.setFill(Color.gray(190));
+        ViewFx.gc.fillRect(0, 0, this.getWidth(), 10);
+
+        ViewFx.gc.setFill(Color.gray(110));
+        ViewFx.gc.fillRect(2, 2, 6, 6);
+        ViewFx.gc.fillRect(12, 2, 6, 6);
     }
 }

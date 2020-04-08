@@ -5,10 +5,7 @@ import application.controller.ControllerFx;
 import application.controller.MainController;
 import application.model.Model;
 import application.ui.javafx.ViewFx;
-import application.view.SimpleView;
-import application.view.ToolBarView;
-import application.view.View;
-import application.view.WhiteBoardView;
+import application.view.*;
 
 
 public class Main {
@@ -31,9 +28,11 @@ public class Main {
 
         WhiteBoardView whiteBoard = new WhiteBoardView(simpleView, model.getWhiteBoard());
         ToolBarView toolBar = new ToolBarView(whiteBoard, model.getToolBar());
+        TopBarView topBar = new TopBarView(whiteBoard, model.getTopBar());
 
         model.getToolBar().attachObserver(toolBar);
         model.getWhiteBoard().attachObserver(whiteBoard);
+        model.getTopBar().attachObserver(topBar);
 
         view = toolBar;
         controller = new MainController(model, view, viewFx);

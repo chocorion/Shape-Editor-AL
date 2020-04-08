@@ -50,7 +50,7 @@ public class ToolBar extends ModelObservableImp implements ShapeContainer {
 
     public boolean isIn(int x, int y) {
         if (x >= 0 && x <= Math.min(this.model.getWidth(), 30)) {
-            return y >= 0 && y <= this.model.getHeight();
+            return y > this.model.getTopBar().getHeight() && y <= this.model.getHeight();
         }
 
         return false;

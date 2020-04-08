@@ -1,6 +1,7 @@
 package application.model;
 
 import application.model.areas.ToolBar;
+import application.model.areas.TopBar;
 import application.model.areas.WhiteBoard;
 import application.model.command.Command;
 import application.model.command.CommandManager;
@@ -14,6 +15,7 @@ public class Model {
 
     private ToolBar toolBar;
     private WhiteBoard whiteBoard;
+    private TopBar topBar;
 
     public Model() {
         System.out.println("Model create");
@@ -22,6 +24,7 @@ public class Model {
 
         this.toolBar    = new ToolBar(this);
         this.whiteBoard = new WhiteBoard(this);
+        this.topBar     = new TopBar(this);
 
         currentModel = this;
 
@@ -32,6 +35,7 @@ public class Model {
     public void update() {
         this.toolBar.update();
         this.whiteBoard.update();
+        this.topBar.update();
     }
 
     public ToolBar getToolBar() {
@@ -41,6 +45,11 @@ public class Model {
     public WhiteBoard getWhiteBoard() {
         return whiteBoard;
     }
+
+    public TopBar getTopBar() {
+        return this.topBar;
+    }
+
     public int getWidth() {
         return this.width;
     }

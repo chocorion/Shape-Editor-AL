@@ -43,6 +43,10 @@ public class MainController {
             this.model.getWhiteBoard().addShape(holdedShape);
 
             System.out.println("Adding shape in WHITEBOARD");
+        } else if (this.holdedShape == null) {
+            if (this.model.getTopBar().isIn((int) x, (int) y)) {
+                this.model.getTopBar().clickOnButton((int) x, (int) y);
+            }
         }
         this.holdedShape = null;
     }
