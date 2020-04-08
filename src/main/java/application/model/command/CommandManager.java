@@ -21,6 +21,10 @@ public class CommandManager {
 
         this.commandAdded.push(cmd);
         this.isRemovedClean = false;
+
+        while (!this.commandRemoved.empty()) {
+            this.commandRemoved.pop();
+        }
     }
 
     public void undo() {
