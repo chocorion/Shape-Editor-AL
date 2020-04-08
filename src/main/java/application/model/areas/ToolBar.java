@@ -45,4 +45,12 @@ public class ToolBar extends ModelObservableImp {
 
         return false;
     }
+
+    public Shape getShape(int x, int y) {
+        if (x > Math.min(this.model.getWidth(), 30) || y / Math.min(this.model.getWidth(), 30) >= this.shapes.size()) {
+            return null;
+        }
+
+        return (Shape) this.shapes.get(y / Math.min(this.model.getWidth(), 30)).clone();
+    }
 }

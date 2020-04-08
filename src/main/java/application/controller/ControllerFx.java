@@ -51,17 +51,6 @@ public class ControllerFx implements Controller {
                     }
                 });
 
-        scene.setOnMouseClicked(
-                new EventHandler<MouseEvent>()
-                {
-                    public void handle(MouseEvent e)
-                    {
-                        if(e.getButton() == MouseButton.PRIMARY)
-                            mouseClicked(0, e.getX(), e.getY());
-                        if(e.getButton() == MouseButton.SECONDARY)
-                            mouseClicked(1, e.getX(), e.getY());
-                    }
-                });
 
         scene.setOnMousePressed(
                 e -> {
