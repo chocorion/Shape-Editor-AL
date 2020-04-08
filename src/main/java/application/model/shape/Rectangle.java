@@ -15,9 +15,19 @@ public class Rectangle extends SingleShape {
         this.height = height;
 
         // For test
-        this.color = Color.BLUE;
+        this.color = Color.BLACK;
     }
 
+    public Rectangle(int x, int y, int width, int height, Color color) {
+        this.x = x;
+        this.y = y;
+
+        this.width = width;
+        this.height = height;
+
+        // For test
+        this.color = color;
+    }
 
 
     @Override

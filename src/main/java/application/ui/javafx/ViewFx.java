@@ -13,6 +13,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -79,6 +80,13 @@ public class ViewFx extends Application implements ConcreteViewItf {
     @Override
     public void devDrawRectangle(Rectangle rectangle) {
         System.out.println("Drawing rectangle !" + ViewFx.gc + " " + rectangle);
+
+        if (rectangle.getColor() == application.model.shape.Color.BLUE) {
+            ViewFx.gc.setFill(Color.BLUE);
+        } else {
+            ViewFx.gc.setFill(Color.BLACK);
+        }
+
         ViewFx.gc.fillRect(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
     }
 
