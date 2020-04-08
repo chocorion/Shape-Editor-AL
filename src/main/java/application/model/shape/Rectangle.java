@@ -63,6 +63,15 @@ public class Rectangle extends SingleShape {
         return this.y + this.height;
     }
 
+    @Override
+    public boolean isIn(int x, int y) {
+        if (x >= this.x && x <= this.x + this.width) {
+            return y >= this.y && y <= this.y + this.height;
+        }
+
+        return false;
+    }
+
     public Color getColor() {
         return this.color;
     }

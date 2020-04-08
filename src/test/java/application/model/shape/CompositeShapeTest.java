@@ -55,12 +55,27 @@ public class CompositeShapeTest {
     }
 
     @Test
-    public void getMaxY() {CompositeShape shape = new CompositeShape();
+    public void getMaxY() {
+        CompositeShape shape = new CompositeShape();
         shape.add(new Rectangle(0, 0, 1, 10));
         shape.add(new Rectangle(10, 10, 1, 10));
         shape.add(new Rectangle(142, 200, 1, 10));
 
         assert (shape.getMaxY() == 210);
 
+    }
+
+    @Test
+    public void isIn() {
+        CompositeShape shape = new CompositeShape();
+
+        shape.add(new Rectangle(0, 0, 5, 5));
+        shape.add(new Rectangle(3, 3, 8, 8));
+        shape.add(new Rectangle(9, 9, 2, 2));
+
+        assert (shape.isIn(0, 0));
+        assert (shape.isIn(4, 4));
+        assert (!shape.isIn(12, 12));
+        assert (shape.isIn(9, 9));
     }
 }

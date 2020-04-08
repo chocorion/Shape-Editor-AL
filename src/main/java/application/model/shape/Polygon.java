@@ -42,5 +42,10 @@ public class Polygon extends SingleShape {
     public int getMaxY() {
         return 0;
     }
+
+    @Override
+    public boolean isIn(int x, int y) {
+        return false;
+    }
 }
 

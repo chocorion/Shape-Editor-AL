@@ -123,4 +123,14 @@ public class CompositeShape implements Shape, Cloneable {
         return maxY;
     }
 
+    @Override
+    public boolean isIn(int x, int y) {
+        for (Shape shape:this.shapeSet) {
+            if (shape.isIn(x, y)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

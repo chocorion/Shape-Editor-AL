@@ -17,5 +17,7 @@ public interface Shape {
     int getMaxX();
     int getMaxY();
 
+    boolean isIn(int x, int y);
+
     Object clone();
 }
