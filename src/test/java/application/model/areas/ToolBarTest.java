@@ -21,13 +21,13 @@ public class ToolBarTest {
         toolBar.addShape(rect1);
         toolBar.addShape(rect2);
 
-        Rectangle rect = (Rectangle) toolBar.getShape(0, numberShape * 30 + 20);
+        Rectangle rect = (Rectangle) toolBar.getShape(0, numberShape * toolBar.getWidth() + model.getTopBar().getHeight() + 20);
 
         assert (rect != rect1 && rect != rect2 && rect != null);
         assert (rect.getX() == rect1.getX() && rect.getY() == rect1.getY());
 
         // 40 is in the second case
-        rect = (Rectangle) toolBar.getShape(0, (numberShape + 1) * 30 + 20);
+        rect = (Rectangle) toolBar.getShape(0, (numberShape + 1) * toolBar.getWidth() + model.getTopBar().getHeight() + 20);
 
         assert (rect != rect1 && rect != rect2 && rect != null);
         //System.err.println(rect);

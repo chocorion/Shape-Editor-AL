@@ -21,7 +21,9 @@ public class WhiteBoardView extends ViewDecorator implements ModelObserver {
 
         int margeX = model.getToolBar().getWidth() + 2;
         int margeY = model.getTopBar().getHeight() + 2;
-        super.drawRectangle(new Rectangle(margeX, margeY, model.getWidth() - margeX, model.getHeight() - margeY, Color.WHITE));
+
+        super.drawRectangle(new Rectangle(margeX, margeY, model.getWidth() - margeX - 1, model.getHeight() - margeY - 1, Color.BLACK));
+        super.drawRectangle(new Rectangle(margeX + 1, margeY + 1, model.getWidth() - margeX - 3, model.getHeight() - margeY - 3, Color.WHITE));
 
         // Draw big white rectangle
         for (Shape shape:this.model.getWhiteBoard().getInnerShapes()) {

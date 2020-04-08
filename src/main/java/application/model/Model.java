@@ -22,9 +22,10 @@ public class Model {
 
         this.commands = new CommandManager();
 
+        this.topBar     = new TopBar(this);
         this.toolBar    = new ToolBar(this);
         this.whiteBoard = new WhiteBoard(this);
-        this.topBar     = new TopBar(this);
+
 
         currentModel = this;
 

@@ -15,7 +15,7 @@ public class ToolBar extends ModelObservableImp implements ShapeContainer {
 
     public ToolBar(Model model) {
         this.shapes = new ArrayList<>();
-        this.shapes.add(new Rectangle(0, 0, 40, 30, Color.BLUE));
+        this.shapes.add(new Rectangle(6, model.getTopBar().getHeight() + 6, 33, 20, Color.BLUE));
 
         this.model = model;
     }
@@ -41,15 +41,15 @@ public class ToolBar extends ModelObservableImp implements ShapeContainer {
     }
 
     public int getWidth() {
-        return Math.min(this.model.getWidth(), 30);
+        return Math.min(this.model.getWidth(), 45);
     }
 
     public int getHeight() {
-        return this.model.getHeight();
+        return this.model.getHeight() - this.model.getTopBar().getHeight();
     }
 
     public boolean isIn(int x, int y) {
-        if (x >= 0 && x <= Math.min(this.model.getWidth(), 30)) {
+        if (x >= 0 && x <= this.getWidth()) {
             return y > this.model.getTopBar().getHeight() && y <= this.model.getHeight();
         }
 
@@ -57,10 +57,10 @@ public class ToolBar extends ModelObservableImp implements ShapeContainer {
     }
 
     public Shape getShape(int x, int y) {
-        if (!this.isIn(x, y) || y / Math.min(this.model.getWidth(), 30) >= this.shapes.size()) {
+        if (!this.isIn(x, y) || (y - model.getTopBar().getHeight()) / this.getWidth() >= this.shapes.size()) {
             return null;
         }
 
-        return (Shape) this.shapes.get(y / Math.min(this.model.getWidth(), 30)).clone();
+        return (Shape) this.shapes.get((y - model.getTopBar().getHeight()) / this.getWidth()).clone();
     }
 }

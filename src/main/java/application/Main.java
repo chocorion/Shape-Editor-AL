@@ -27,7 +27,7 @@ public class Main {
         View simpleView = new SimpleView(viewFx);
 
         WhiteBoardView whiteBoard = new WhiteBoardView(simpleView, model);
-        ToolBarView toolBar = new ToolBarView(whiteBoard, model.getToolBar());
+        ToolBarView toolBar = new ToolBarView(whiteBoard, model);
         TopBarView topBar = new TopBarView(whiteBoard, model.getTopBar());
 
         model.getToolBar().attachObserver(toolBar);

@@ -19,11 +19,11 @@ public class TopBar extends ModelObservableImp {
     }
 
     public int getHeight() {
-        return 15;
+        return 30;
     }
 
     public int getButtonWidth() {
-        return 11;
+        return 22;
     }
 
     public boolean isIn(int x, int y) {
@@ -35,10 +35,10 @@ public class TopBar extends ModelObservableImp {
             return;
         }
 
-        if (x >= 2 && x <= 2 + this.getButtonWidth()) {
+        if (x >= 4 && x <= 4 + this.getButtonWidth()) {
             System.out.println("UNDO");
             this.model.undo();
-        } else if (x >= this.getButtonWidth() + 4 && x <= this.getButtonWidth() + 4 + this.getButtonWidth()) {
+        } else if (x >= this.getButtonWidth() + 6 && x <= this.getButtonWidth() + 6 + this.getButtonWidth()) {
             System.out.println("REDO");
             this.model.redo();
         }
