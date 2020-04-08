@@ -81,17 +81,9 @@ public class ViewFx extends Application implements ConcreteViewItf {
     public void devDrawRectangle(Rectangle rectangle) {
         System.out.println("Drawing rectangle !" + ViewFx.gc + " " + rectangle);
 
-        if (rectangle.getColor() == application.model.shape.Color.BLUE) {
-            ViewFx.gc.setFill(Color.BLUE);
-        } else if (rectangle.getColor() == application.model.shape.Color.LIGHT_GREY) {
-            ViewFx.gc.setFill(Color.gray(0.8));
-        } else if (rectangle.getColor() == application.model.shape.Color.DARK_GREY) {
-            ViewFx.gc.setFill(Color.gray(0.2));
-        } else if (rectangle.getColor() == application.model.shape.Color.WHITE) {
-            ViewFx.gc.setFill(Color.WHITE);
-        }else {
-            ViewFx.gc.setFill(Color.BLACK);
-        }
+        application.utils.Color rectColor = rectangle.getColor();
+        ViewFx.gc.setFill(new Color(rectColor.getR(), rectColor.getG(), rectColor.getB(), rectColor.getA()));
+
 
         ViewFx.gc.fillRect(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
     }

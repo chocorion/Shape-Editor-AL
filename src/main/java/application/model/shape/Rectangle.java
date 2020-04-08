@@ -1,5 +1,6 @@
 package application.model.shape;
 
+import application.utils.Color;
 import application.view.View;
 
 public class Rectangle extends SingleShape {

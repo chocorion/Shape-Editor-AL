@@ -1,9 +1,8 @@
 package application.view;
 
-import application.model.areas.ToolBar;
 import application.model.areas.TopBar;
-import application.model.shape.Color;
 import application.model.shape.Rectangle;
+import application.utils.Color;
 import application.utils.ModelObserver;
 
 public class TopBarView extends ViewDecorator implements ModelObserver {

@@ -1,10 +1,10 @@
 package application.view;
 
 import application.model.Model;
-import application.model.shape.Color;
 import application.model.shape.Rectangle;
 import application.model.shape.Shape;
 import application.utils.ModelObserver;
+import application.utils.Color;
 
 public class WhiteBoardView extends ViewDecorator implements ModelObserver {
     private Model model;

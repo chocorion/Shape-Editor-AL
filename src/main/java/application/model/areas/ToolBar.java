@@ -1,11 +1,11 @@
 package application.model.areas;
 
 import application.model.Model;
-import application.model.shape.Color;
 import application.model.shape.Rectangle;
 import application.model.shape.Shape;
 import application.utils.ModelObservableImp;
 import application.utils.ShapeContainer;
+import application.utils.Color;
 
 import java.util.ArrayList;
 
