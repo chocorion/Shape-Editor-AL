@@ -24,11 +24,14 @@ public class CommandManager {
     }
 
     public void undo() {
+        System.out.println("In undo :");
         if (this.commandAdded.empty()) {
+            System.out.println("\tcommandAdded empty...");
             return;
         }
 
         Command cmd = this.commandAdded.pop();
+        System.out.println("\t command poped -> " + cmd);
         cmd.inverse();
 
         this.commandRemoved.push(cmd);

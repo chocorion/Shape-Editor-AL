@@ -87,6 +87,8 @@ public class ViewFx extends Application implements ConcreteViewItf {
             ViewFx.gc.setFill(Color.gray(0.8));
         } else if (rectangle.getColor() == application.model.shape.Color.DARK_GREY) {
             ViewFx.gc.setFill(Color.gray(0.2));
+        } else if (rectangle.getColor() == application.model.shape.Color.WHITE) {
+            ViewFx.gc.setFill(Color.WHITE);
         }else {
             ViewFx.gc.setFill(Color.BLACK);
         }

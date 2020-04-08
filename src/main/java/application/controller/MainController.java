@@ -1,6 +1,7 @@
 package application.controller;
 
 import application.model.Model;
+import application.model.command.concreteCommand.AddShape;
 import application.model.shape.Shape;
 import application.ui.javafx.ViewFx;
 import application.view.ConcreteViewItf;
@@ -40,7 +41,9 @@ public class MainController {
         System.out.println("Left Click released on " + x + " " + y);
         if (this.holdedShape != null && this.model.getWhiteBoard().isIn((int) x, (int) y)) {
             holdedShape.moveTo((int) x, (int) y);
-            this.model.getWhiteBoard().addShape(holdedShape);
+            this.model.execute(new AddShape(this.model.getWhiteBoard(), holdedShape));
+
+
 
             System.out.println("Adding shape in WHITEBOARD");
         } else if (this.holdedShape == null) {

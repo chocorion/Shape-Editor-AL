@@ -26,7 +26,7 @@ public class Main {
         ViewFx viewFx = new ViewFx(model);
         View simpleView = new SimpleView(viewFx);
 
-        WhiteBoardView whiteBoard = new WhiteBoardView(simpleView, model.getWhiteBoard());
+        WhiteBoardView whiteBoard = new WhiteBoardView(simpleView, model);
         ToolBarView toolBar = new ToolBarView(whiteBoard, model.getToolBar());
         TopBarView topBar = new TopBarView(whiteBoard, model.getTopBar());
 

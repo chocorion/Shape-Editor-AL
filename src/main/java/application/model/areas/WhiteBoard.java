@@ -29,6 +29,7 @@ public class WhiteBoard extends ModelObservableImp implements ShapeContainer {
 
     @Override
     public void removeShape(Shape shape) {
+        System.out.println("REMOVING SHAPE FROM WHITEBOARD");
         this.shapes.remove(shape);
         this.update();
     }
