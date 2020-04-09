@@ -4,8 +4,7 @@ import application.controller.areas.ToolBarController;
 import application.controller.areas.TopBarController;
 import application.controller.areas.WhiteBoardController;
 import application.model.Model;
-import application.model.command.concreteCommand.AddComposite;
-import application.model.command.concreteCommand.AddShape;
+import application.model.command.Command;
 import application.model.shape.Shape;
 import application.ui.javafx.ViewFx;
 import application.utils.ShapeContainer;
@@ -60,67 +59,20 @@ public class MainController {
     }
 
     public void onRightClickPressed(double x, double y) {
-        System.out.println("Right Click pressed on " + x + " " + y);
-        if( !menu){
+        if(!menu){
             view.getWhiteBoard().addPopUpMenu((int)x,(int)y);
             menu = true;
         }
-
     }
 
     public void onLeftClickReleased(double x, double y) {
-
-
-        if(this.model.getWhiteBoard().isIn((int)x, (int)y) && drag) {
-            System.out.println("SELECTION");
-
-            this.endX = (int) x;
-            this.endY = (int) y;
-            this.select = true;
-
-            this.view.getWhiteBoard().drawSelection(
-                    Math.min(endX, beginX),
-                    Math.min(endY, beginY),
-                    Math.abs(beginX - endX),
-                    Math.abs(beginY - endY)
-            );
-
+        if(this.model.getWhiteBoard().isIn((int)x, (int)y)) {
+            whiteBoardController.onLeftClickReleased((int) x, (int) y);
         }
 
-        else if(this.menu){
-            if(view.getWhiteBoard().clickOnGroup((int) x , (int) y) && select) {
-                view.getWhiteBoard().undrawSelect(Math.min(endX, beginX),
-                        Math.min(endY, beginY),
-                        Math.abs(beginX - endX),
-                        Math.abs(beginY - endY));
-                view.getWhiteBoard().undrawMenu();
-                this.model.execute(new AddComposite(this.model.getWhiteBoard(), beginX, beginY,endX,endY));
-                this.model.update();
-            }
-            else {
-                System.out.println("raté");
-            }
-            menu = false;
-            select = false;
-
-
-
-        }else if (this.holdedShape != null && this.model.getWhiteBoard().isIn((int) x, (int) y)) {
-            Shape clone = (Shape) holdedShape.clone();
-            clone.moveTo((int) x, (int) y);
-            this.model.execute(new AddShape(this.model.getWhiteBoard(), clone));
-
+        else if (model.getToolBar().isIn((int) x, (int) y)) {
+            toolBarController.onLeftClickReleased((int) x, (int) y);
         }
-        else if (this.holdedShape != null && this.holdedShapeOrigin != model.getToolBar() && model.getToolBar().isIn((int) x, (int) y)) {
-        this.model.execute(new AddShape(this.model.getToolBar(), (Shape) holdedShape.clone()));
-
-        }    else if (this.holdedShape == null) {
-            holdedShape.moveTo((int) x, (int) y);
-            this.model.execute(new AddShape(this.model.getWhiteBoard(), holdedShape));
-            System.out.println("Adding shape in WHITEBOARD");
-
-        }
-
 
         this.clickLeft = false;
         this.drag = false;
@@ -131,8 +83,6 @@ public class MainController {
     }
 
     public void onMouseDragged(double x, double y) {
-        // System.out.println("Mouse dragged on " + x + " " + y);
-        System.out.println("Mouse dragged on " + x + " " + y );
         this.drag = true;
     }
 
@@ -151,6 +101,34 @@ public class MainController {
 
     public void setSelection(boolean b) {
         this.select = b;
+    }
+
+    public boolean isDraggeg() {
+        return this.drag;
+    }
+
+    public void setDrag(boolean b) {
+        this.drag = b;
+    }
+
+    public void setMenu(boolean b) {
+        this.menu = b;
+    }
+
+    public void addCommand(Command cmd) {
+        this.model.execute(cmd);
+    }
+
+    public boolean isHoldingShape() {
+        return this.holdedShape != null;
+    }
+
+    public Shape getHoldedShapeClone() {
+        return (Shape) this.holdedShape.clone();
+    }
+
+    public ShapeContainer getHoldedShapeOrigin() {
+        return holdedShapeOrigin;
     }
 }
 
