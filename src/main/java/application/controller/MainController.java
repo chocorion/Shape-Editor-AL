@@ -51,6 +51,7 @@ public class MainController {
                         Math.abs(beginX - endX),
                         Math.abs(beginY - endY)
                 );
+                this.model.update();
             }
             if (!select) {
                 this.beginX = (int)x;
@@ -109,6 +110,7 @@ public class MainController {
                 System.out.println("raté");
             }
             menu = false;
+            select = false;
 
 
 
