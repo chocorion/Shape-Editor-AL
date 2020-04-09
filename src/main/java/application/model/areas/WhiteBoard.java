@@ -65,7 +65,7 @@ public class WhiteBoard extends ModelObservableImp implements ShapeContainer {
 
     public boolean isIn(int x, int y) {
         if (x > model.getToolBar().getWidth() && x <= this.model.getWidth()) {
-            return y >= 0 && y <= this.model.getHeight();
+            return y >= model.getTopBar().getHeight() && y <= this.model.getHeight();
         }
 
         return false;
