@@ -39,11 +39,14 @@ public class MainController {
             this.holdedShape = this.model.getToolBar().getShape((int) x, (int) y);
             this.holdedShapeOrigin = this.model.getToolBar();
         }
-        else if(this.model.getWhiteBoard().isIn((int)x,(int)y) && !select){
-            System.out.println("Click on whiteboard");
-            this.beginX = (int)x;
-            this.beginY =(int)y;
+        else if(this.model.getWhiteBoard().isIn((int)x,(int)y)){
+            System.out.println("WHITEBOARD");
+            if (!select) {
+                this.beginX = (int)x;
+                this.beginY =(int)y;
+            }
             this.clickLeft = true;
+
             Shape currentShape = model.getWhiteBoard().getShapeAt((int) x, (int) y);
             if (currentShape != null) {
                 this.holdedShape = currentShape;
@@ -64,8 +67,8 @@ public class MainController {
 
     public void onLeftClickReleased(double x, double y) {
 
-        if(this.model.getWhiteBoard().isIn((int)x, (int)y) && clickLeft && drag && !select) {
-            System.out.println("Selection");
+        if(this.model.getWhiteBoard().isIn((int)x, (int)y) && clickLeft && drag) {
+            System.out.println("SELECTION");
             this.endX = (int) x;
             this.endY = (int) y;
             this.view.drawSelection(beginX, beginY, Math.abs(beginX - endX), Math.abs(beginY - endY));
@@ -113,7 +116,7 @@ public class MainController {
     public void onMouseDragged(double x, double y) {
         // System.out.println("Mouse dragged on " + x + " " + y);
         System.out.println("Mouse dragged on " + x + " " + y );
-        this.drag = true;;
+        this.drag = true;
     }
 
 
