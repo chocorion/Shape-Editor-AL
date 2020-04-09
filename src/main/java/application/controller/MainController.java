@@ -57,8 +57,8 @@ public class MainController {
             this.model.execute(new AddShape(this.model.getWhiteBoard(), clone));
 
         } else if (this.holdedShape != null && model.getToolBar().isIn((int) x, (int) y)) {
-            // TODO make command version
-            this.model.getToolBar().addShape((Shape) this.holdedShape.clone());
+            this.model.execute(new AddShape(this.model.getToolBar(), (Shape) holdedShape.clone()));
+
         } else if (this.holdedShape == null) {
             if (this.model.getTopBar().isIn((int) x, (int) y)) {
                 this.model.getTopBar().clickOnButton((int) x, (int) y);
