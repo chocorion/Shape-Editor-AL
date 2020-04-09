@@ -118,6 +118,6 @@ public class Rectangle extends SingleShape {
     }
 
     public String toString() {
-        return "Rectangle(" + this.x + ", " + this.y + ", " + this.width + ", " + this.height + ");";
+        return "Rectangle(" + this.x + ", " + this.y + ", " + this.width + ", " + this.height + ")";
     }
 }

@@ -112,10 +112,19 @@ public class CompositeShapeTest {
 
         compositeShape.add(rect1);
         compositeShape.add(rect2);
+        System.err.println("Before move to -> " + compositeShape);
+        compositeShape.moveTo(181, 213);
+        System.err.println("After move to -> " + compositeShape);
 
-        compositeShape.moveTo(10, 10);
+        assert (rect1.getX() == 181 && rect1.getY() == 213);
+        assert (rect2.getX() == 231 && rect2.getY() == 263);
 
-        assert (rect1.getX() == 10 && rect1.getY() == 10);
-        assert (rect2.getX() == 60 && rect2.getY() == 60);
+        /*
+        Holding -> CompositeShape(Rectangle(0, 0, 50, 50), Rectangle(50, 50, 50, 50), )
+        clone before moving it to 181, 213-> CompositeShape(Rectangle(0, 0, 50, 50), Rectangle(50, 50, 50, 50), )
+        Add clone to whiteBoard -> CompositeShape(Rectangle(181, 213, 50, 50), Rectangle(181, 213, 50, 50), )
+         */
+
+
     }
 }

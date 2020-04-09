@@ -38,15 +38,12 @@ public class MainController {
     }
 
     public void onLeftClickReleased(double x, double y) {
-        System.out.println("Left Click released on " + x + " " + y);
+
         if (this.holdedShape != null && this.model.getWhiteBoard().isIn((int) x, (int) y)) {
             Shape clone = (Shape) holdedShape.clone();
             clone.moveTo((int) x, (int) y);
             this.model.execute(new AddShape(this.model.getWhiteBoard(), clone));
 
-
-
-            System.out.println("Adding shape in WHITEBOARD");
         } else if (this.holdedShape == null) {
             if (this.model.getTopBar().isIn((int) x, (int) y)) {
                 this.model.getTopBar().clickOnButton((int) x, (int) y);
@@ -60,7 +57,7 @@ public class MainController {
     }
 
     public void onMouseDragged(double x, double y) {
-        System.out.println("Mouse dragged on " + x + " " + y);
+        // System.out.println("Mouse dragged on " + x + " " + y);
     }
 
 }
