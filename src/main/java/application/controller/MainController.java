@@ -40,8 +40,9 @@ public class MainController {
     public void onLeftClickReleased(double x, double y) {
         System.out.println("Left Click released on " + x + " " + y);
         if (this.holdedShape != null && this.model.getWhiteBoard().isIn((int) x, (int) y)) {
-            holdedShape.moveTo((int) x, (int) y);
-            this.model.execute(new AddShape(this.model.getWhiteBoard(), holdedShape));
+            Shape clone = (Shape) holdedShape.clone();
+            clone.moveTo((int) x, (int) y);
+            this.model.execute(new AddShape(this.model.getWhiteBoard(), clone));
 
 
 

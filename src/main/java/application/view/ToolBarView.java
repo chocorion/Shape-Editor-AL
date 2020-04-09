@@ -42,8 +42,22 @@ public class ToolBarView extends ViewDecorator implements ModelObserver {
                 )
         );
 
+        double innerShapeMaxSize = Math.min(toolBar.getWidth() - 6 * borderSize, toolBar.getHeight() - 6 * borderSize);
+        int index = 0;
+        int marginBetweenCase = 10;
+
         for (Shape shape:toolBar.getInnerShapes()) {
-            shape.draw(this);
+            double factor = innerShapeMaxSize/Math.max(shape.getWidth(), shape.getHeight());
+            Shape minimizedShape = (Shape) shape.clone();
+
+            minimizedShape.resize(factor);
+            minimizedShape.moveTo(
+                    toolBar.getX() + 3 * borderSize,
+                    toolBar.getY() + index * ((int) innerShapeMaxSize + marginBetweenCase) + 4 * borderSize
+            );
+
+            minimizedShape.draw(this);
+            index++;
         }
     }
 

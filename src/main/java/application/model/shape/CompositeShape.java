@@ -41,14 +41,13 @@ public class CompositeShape implements Shape, Cloneable {
 
     @Override
     public Object clone() {
-        Object o = null;
-        try {
-            o = super.clone();
-        } catch(CloneNotSupportedException e) {
-            e.printStackTrace(System.err);
+        CompositeShape other = new CompositeShape();
+
+        for (Shape shape : this.shapeSet) {
+            other.add((Shape) shape.clone());
         }
 
-        return o;
+        return other;
     }
 
     public int getMinX() {
