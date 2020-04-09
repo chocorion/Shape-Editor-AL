@@ -36,11 +36,22 @@ public class MainController {
 
         if (this.model.getToolBar().isIn((int) x, (int) y)) {
             System.out.println("Click on Toolbar !");
+
             this.holdedShape = this.model.getToolBar().getShape((int) x, (int) y);
             this.holdedShapeOrigin = this.model.getToolBar();
         }
+
         else if(this.model.getWhiteBoard().isIn((int)x,(int)y)){
-            System.out.println("WHITEBOARD");
+            System.out.println("Click on the whiteboard");
+
+            if (select && !(this.menu && view.clickOnGroup((int) x , (int) y))){
+                select = false;
+                view.undrawSelect(Math.min(endX, beginX),
+                        Math.min(endY, beginY),
+                        Math.abs(beginX - endX),
+                        Math.abs(beginY - endY)
+                );
+            }
             if (!select) {
                 this.beginX = (int)x;
                 this.beginY =(int)y;
@@ -67,16 +78,29 @@ public class MainController {
 
     public void onLeftClickReleased(double x, double y) {
 
-        if(this.model.getWhiteBoard().isIn((int)x, (int)y) && clickLeft && drag) {
+
+        if(this.model.getWhiteBoard().isIn((int)x, (int)y) && drag) {
             System.out.println("SELECTION");
+
             this.endX = (int) x;
             this.endY = (int) y;
-            this.view.drawSelection(beginX, beginY, Math.abs(beginX - endX), Math.abs(beginY - endY));
             this.select = true;
+
+            this.view.drawSelection(
+                    Math.min(endX, beginX),
+                    Math.min(endY, beginY),
+                    Math.abs(beginX - endX),
+                    Math.abs(beginY - endY)
+            );
+
         }
+
         else if(this.menu){
             if(view.clickOnGroup((int) x , (int) y) && select) {
-                view.undrawSelect(beginX, beginY,Math.abs(beginX - endX), Math.abs(beginY - endY));
+                view.undrawSelect(Math.min(endX, beginX),
+                        Math.min(endY, beginY),
+                        Math.abs(beginX - endX),
+                        Math.abs(beginY - endY));
                 view.undrawMenu();
                 this.model.execute(new AddComposite(this.model.getWhiteBoard(), beginX, beginY,endX,endY));
                 this.model.update();
@@ -85,7 +109,7 @@ public class MainController {
                 System.out.println("raté");
             }
             menu = false;
-            select = false;
+
 
 
         }else if (this.holdedShape != null && this.model.getWhiteBoard().isIn((int) x, (int) y)) {
