@@ -1,7 +1,6 @@
 package application.model.areas;
 
 import application.model.Model;
-import application.model.shape.CompositeShape;
 import application.model.shape.Shape;
 import application.utils.ModelObservableImp;
 import application.utils.ShapeContainer;

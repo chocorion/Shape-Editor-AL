@@ -1,9 +1,9 @@
 package application.model.areas;
 
 import application.model.Model;
-import application.model.shape.CompositeShape;
 import application.model.shape.Rectangle;
 import application.model.shape.Shape;
+import application.model.shape.CompositeShape;
 import application.utils.ModelObservableImp;
 import application.utils.ShapeContainer;
 import application.utils.Color;
@@ -82,7 +82,6 @@ public class ToolBar extends ModelObservableImp implements ShapeContainer {
         return false;
     }
 
-    // TODO Refactor
     public Shape getShape(int x, int y) {
         if (!this.isIn(x, y) || (y - model.getTopBar().getHeight()) / this.getWidth() >= this.shapes.size()) {
             return null;

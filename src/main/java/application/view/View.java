@@ -11,4 +11,12 @@ public interface View {
 
     void drawRectangle(Rectangle rectangle);
     void drawPolygon(Polygon polygon);
+    void drawSelection(int x, int y, int width, int height);
+
+    void addPopUpMenu(int x, int y);
+
+    boolean clickOnGroup(int x,int y);
+
+    void undrawSelect(int x, int y, int width, int height);
+    void undrawMenu();
 }

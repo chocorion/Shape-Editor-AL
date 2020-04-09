@@ -7,6 +7,7 @@ import application.model.Model;
 import application.model.shape.Polygon;
 import application.model.shape.Rectangle;
 import application.view.ConcreteViewItf;
+import application.view.View;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -23,6 +24,8 @@ public class ViewFx extends Application implements ConcreteViewItf {
     private static Scene rootScene;
     private static GraphicsContext gc;
 
+    private boolean menu;
+    private int menuX, menuY,viewWhiteBoardW,viewWhiteBoardH;
     public ViewFx() {}
 
     public ViewFx(Model model) {
@@ -102,4 +105,61 @@ public class ViewFx extends Application implements ConcreteViewItf {
         ViewFx.gc.fillRect(2, 2, 6, 6);
         ViewFx.gc.fillRect(12, 2, 6, 6);
     }
+
+    @Override
+    public void devDrawSelection(int x, int y, int width, int height){
+        System.out.println("devDrawSelection");
+        ViewFx.gc.setStroke(Color.LIGHTGRAY);
+        ViewFx.gc.strokeRect(x,y,width,height);
+    }
+
+    @Override
+    public void devAddPopUpMenu(int x, int y){
+        this.menu = true;
+        this.menuX =x;
+        this.menuY =y;
+        System.out.println("menu");
+        int coeffW = this.getWidth() / this.model.getWidth();
+        int coeffH = this.getHeight() / this.model.getHeight();
+
+        int whiteBoardW = this.model.getWhiteBoard().getWidth();
+        int whiteBoardH = this.model.getWhiteBoard().getHeight();
+
+        this.viewWhiteBoardW = whiteBoardW*coeffW;
+        this.viewWhiteBoardH = whiteBoardH*coeffH;
+
+        ViewFx.gc.setFill(Color.LIGHTGRAY);
+        int width =viewWhiteBoardW /20;
+        int height = viewWhiteBoardH/40;
+        System.out.println(width);
+        // The "group" item
+        ViewFx.gc.fillRect(x,y,width,height);
+        ViewFx.gc.setStroke(Color.GREY);
+        ViewFx.gc.setFill(Color.BLACK);
+        ViewFx.gc.strokeRect(x,y,width,height);
+        ViewFx.gc.fillText("group",x+width/10,y+height*2/3, width);
+
+    }
+    @Override
+    public boolean devClickOnGroup(int x,int y){
+        System.out.println("click on group");
+        if( x < this.menuX+ this.viewWhiteBoardW/20 && x > this.menuX && y > this.menuY && y< this.menuY+this.viewWhiteBoardH/40)
+        return true;
+        else return false;
+    }
+
+    @Override
+    public void devUndrawSelect(int x, int y, int width, int height){
+        ViewFx.gc.clearRect(x,y,width+1,height+1);
+    }
+
+    @Override
+    public void devUndrawMenu(){
+        ViewFx.gc.clearRect(menuX,menuY,1+viewWhiteBoardW /20, 1+viewWhiteBoardH/40);
+
+    }
+
+
+
+
 }

@@ -34,4 +34,21 @@ public abstract class ViewDecorator implements View {
     public void drawPolygon(Polygon polygon) {
         this.view.drawPolygon(polygon);
     }
+
+    @Override
+    public void drawSelection(int x,int y, int width, int height){ this.view.drawSelection(x,y,width,height);}
+
+    @Override
+    public void addPopUpMenu(int x, int y){this.view.addPopUpMenu(x,y);}
+
+    @Override
+     public boolean clickOnGroup(int x,int y){return this.view.clickOnGroup(x,y);}
+
+    @Override
+    public void undrawSelect(int x, int y, int width, int height) {this.view.undrawSelect(x,y,width,height);}
+
+    @Override
+    public void undrawMenu(){this.view.undrawMenu();}
+
+
 }
