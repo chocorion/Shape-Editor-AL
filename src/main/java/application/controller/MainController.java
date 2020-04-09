@@ -91,7 +91,7 @@ public class MainController {
             this.model.execute(new AddShape(this.model.getWhiteBoard(), clone));
 
         }
-        else if (this.holdedShape != null && model.getToolBar().isIn((int) x, (int) y)) {
+        else if (this.holdedShape != null && this.holdedShapeOrigin != model.getToolBar() && model.getToolBar().isIn((int) x, (int) y)) {
         this.model.execute(new AddShape(this.model.getToolBar(), (Shape) holdedShape.clone()));
 
         }    else if (this.holdedShape == null) {
