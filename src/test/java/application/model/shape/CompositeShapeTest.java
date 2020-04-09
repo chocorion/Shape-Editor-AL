@@ -118,12 +118,35 @@ public class CompositeShapeTest {
 
         assert (rect1.getX() == 181 && rect1.getY() == 213);
         assert (rect2.getX() == 231 && rect2.getY() == 263);
+    }
 
-        /*
-        Holding -> CompositeShape(Rectangle(0, 0, 50, 50), Rectangle(50, 50, 50, 50), )
-        clone before moving it to 181, 213-> CompositeShape(Rectangle(0, 0, 50, 50), Rectangle(50, 50, 50, 50), )
-        Add clone to whiteBoard -> CompositeShape(Rectangle(181, 213, 50, 50), Rectangle(181, 213, 50, 50), )
-         */
+    @Test
+    public void moveToMultiplesComposites() {
+        CompositeShape compositeShape1 = new CompositeShape();
+        Rectangle rect1 = new Rectangle(0, 0, 50, 50, new Color(180, 100, 100));
+        Rectangle rect2 = new Rectangle(50, 50, 50, 50, new Color(180, 100, 100));
+
+        compositeShape1.add(rect1);
+        compositeShape1.add(rect2);
+
+        CompositeShape compositeShape2 = new CompositeShape();
+        Rectangle rect3 = new Rectangle(50, 50, 50, 50, new Color(180, 100, 100));
+        Rectangle rect4 = new Rectangle(100, 100, 50, 50, new Color(180, 100, 100));
+
+        compositeShape2.add(rect3);
+        compositeShape2.add(rect4);
+
+
+        CompositeShape compositeShape = new CompositeShape();
+        compositeShape.add(compositeShape1);
+        compositeShape.add(compositeShape2);
+
+        int width = compositeShape.getWidth();
+        int height = compositeShape.getHeight();
+
+        compositeShape.resize(0.5);
+        assert (compositeShape.getHeight() == height/2 && compositeShape.getWidth() == width/2);
+
 
 
     }
