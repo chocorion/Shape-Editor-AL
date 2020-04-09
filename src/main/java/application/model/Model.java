@@ -29,9 +29,6 @@ public class Model {
         this.topBar     = new TopBar(this);
         this.toolBar    = new ToolBar(this);
         this.whiteBoard = new WhiteBoard(this);
-
-
-
     }
 
     public void update() {

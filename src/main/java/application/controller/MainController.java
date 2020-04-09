@@ -7,11 +7,12 @@ import application.model.shape.Shape;
 import application.ui.javafx.ViewFx;
 import application.utils.ShapeContainer;
 import application.view.ConcreteViewItf;
+import application.view.MainView;
 import application.view.View;
 
 public class MainController {
     private Model model;
-    private View view;
+    private MainView view;
     private Controller controllerImp;
 
     private Shape holdedShape;
@@ -20,7 +21,7 @@ public class MainController {
     private boolean clickLeft, drag, select, menu;
     private int beginX,beginY,endX,endY;
 
-    public MainController(Model model, View view, ConcreteViewItf viewImp) {
+    public MainController(Model model, MainView view, ConcreteViewItf viewImp) {
         this.model = model;
         this.view = view;
 
@@ -44,9 +45,9 @@ public class MainController {
         else if(this.model.getWhiteBoard().isIn((int)x,(int)y)){
             System.out.println("Click on the whiteboard");
 
-            if (select && !(this.menu && view.clickOnGroup((int) x , (int) y))){
+            if (select && !(this.menu && view.getWhiteBoard().clickOnGroup((int) x , (int) y))){
                 select = false;
-                view.undrawSelect(Math.min(endX, beginX),
+                view.getWhiteBoard().undrawSelect(Math.min(endX, beginX),
                         Math.min(endY, beginY),
                         Math.abs(beginX - endX),
                         Math.abs(beginY - endY)
@@ -71,7 +72,7 @@ public class MainController {
     public void onRightClickPressed(double x, double y) {
         System.out.println("Right Click pressed on " + x + " " + y);
         if( !menu){
-            view.addPopUpMenu((int)x,(int)y);
+            view.getWhiteBoard().addPopUpMenu((int)x,(int)y);
             menu = true;
         }
 
@@ -87,7 +88,7 @@ public class MainController {
             this.endY = (int) y;
             this.select = true;
 
-            this.view.drawSelection(
+            this.view.getWhiteBoard().drawSelection(
                     Math.min(endX, beginX),
                     Math.min(endY, beginY),
                     Math.abs(beginX - endX),
@@ -97,12 +98,12 @@ public class MainController {
         }
 
         else if(this.menu){
-            if(view.clickOnGroup((int) x , (int) y) && select) {
-                view.undrawSelect(Math.min(endX, beginX),
+            if(view.getWhiteBoard().clickOnGroup((int) x , (int) y) && select) {
+                view.getWhiteBoard().undrawSelect(Math.min(endX, beginX),
                         Math.min(endY, beginY),
                         Math.abs(beginX - endX),
                         Math.abs(beginY - endY));
-                view.undrawMenu();
+                view.getWhiteBoard().undrawMenu();
                 this.model.execute(new AddComposite(this.model.getWhiteBoard(), beginX, beginY,endX,endY));
                 this.model.update();
             }

@@ -1,9 +1,11 @@
-package application.view;
+package application.view.areas;
 
 import application.model.areas.TopBar;
 import application.model.shape.Rectangle;
 import application.utils.Color;
 import application.utils.ModelObserver;
+import application.view.View;
+import application.view.ViewDecorator;
 
 public class TopBarView extends ViewDecorator implements ModelObserver {
     private TopBar topBar;

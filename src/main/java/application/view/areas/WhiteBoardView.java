@@ -1,4 +1,4 @@
-package application.view;
+package application.view.areas;
 
 import application.model.Model;
 import application.model.areas.WhiteBoard;
@@ -6,6 +6,8 @@ import application.model.shape.Rectangle;
 import application.model.shape.Shape;
 import application.utils.ModelObserver;
 import application.utils.Color;
+import application.view.View;
+import application.view.ViewDecorator;
 
 public class WhiteBoardView extends ViewDecorator implements ModelObserver {
     private WhiteBoard whiteBoard;
