@@ -71,4 +71,14 @@ public class WhiteBoard extends ModelObservableImp implements ShapeContainer {
 
         return false;
     }
+
+    public Shape getShapeAt(int x, int y) {
+        for (Shape shape : this.shapes) {
+            if (shape.isIn(x, y)) {
+                return shape;
+            }
+        }
+
+        return null;
+    }
 }
