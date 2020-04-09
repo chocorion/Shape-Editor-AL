@@ -90,6 +90,12 @@ public class Rectangle extends SingleShape {
     }
 
     @Override
+    public void translate(int dx, int dy) {
+        this.x += dx;
+        this.y += dy;
+    }
+
+    @Override
     public void resize(double factor) {
         this.width *= factor;
         this.height *= factor;

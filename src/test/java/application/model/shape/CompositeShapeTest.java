@@ -1,5 +1,6 @@
 package application.model.shape;
 
+import application.utils.Color;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -101,5 +102,20 @@ public class CompositeShapeTest {
         assert (shape.getMaxX() == 35 && shape.getMaxY() == 35);
 
         assert (shape.getWidth() == 25 && shape.getHeight() == 25);
+    }
+
+    @Test
+    public void moveTo() {
+        CompositeShape compositeShape = new CompositeShape();
+        Rectangle rect1 = new Rectangle(0, 0, 50, 50, new Color(180, 100, 100));
+        Rectangle rect2 = new Rectangle(50, 50, 50, 50, new Color(180, 100, 100));
+
+        compositeShape.add(rect1);
+        compositeShape.add(rect2);
+
+        compositeShape.moveTo(10, 10);
+
+        assert (rect1.getX() == 10 && rect1.getY() == 10);
+        assert (rect2.getX() == 60 && rect2.getY() == 60);
     }
 }

@@ -50,7 +50,12 @@ public class Polygon extends SingleShape {
 
     @Override
     public void moveTo(int x, int y) {
-        //TODO
+        // TODO
+    }
+
+    @Override
+    public void translate(int dx, int dy) {
+        // TODO
     }
 
     @Override

@@ -134,9 +134,15 @@ public class CompositeShape implements Shape, Cloneable {
 
     @Override
     public void moveTo(int x, int y) {
-        //TODO
         for (Shape shape:this.shapeSet) {
-            shape.moveTo(x, y);
+            shape.translate(x - this.getMinX(),y - this.getMinY());
+        }
+    }
+
+    @Override
+    public void translate(int dx, int dy) {
+        for (Shape shape:this.shapeSet) {
+            shape.translate(dx, dy);
         }
     }
 

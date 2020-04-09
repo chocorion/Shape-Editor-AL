@@ -19,6 +19,7 @@ public interface Shape {
 
     boolean isIn(int x, int y);
     void moveTo(int x, int y);
+    void translate(int dx, int dy);
 
     void resize(double factor);
     void resize(Shape containerShape, double factor);

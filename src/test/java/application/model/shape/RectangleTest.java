@@ -25,4 +25,12 @@ public class RectangleTest {
         assert (rect.getX() == 2 && rect.getY() == 2);
         assert (rect.getWidth() == 3 && rect.getHeight() == 3);
     }
+
+    @Test
+    public void translate() {
+        Rectangle r = new Rectangle(10, 20, 30, 40);
+        r.translate(20, 10);
+
+        assert (r.getX() == 30 && r.getY() == 30);
+    }
 }
