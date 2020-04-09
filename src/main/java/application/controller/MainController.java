@@ -1,5 +1,8 @@
 package application.controller;
 
+import application.controller.areas.ToolBarController;
+import application.controller.areas.TopBarController;
+import application.controller.areas.WhiteBoardController;
 import application.model.Model;
 import application.model.command.concreteCommand.AddComposite;
 import application.model.command.concreteCommand.AddShape;
@@ -13,6 +16,10 @@ public class MainController {
     private Model model;
     private MainView view;
     private Controller controllerImp;
+
+    private TopBarController     topBarController;
+    private ToolBarController    toolBarController;
+    private WhiteBoardController whiteBoardController;
 
     private Shape holdedShape;
     private ShapeContainer holdedShapeOrigin;
@@ -29,45 +36,27 @@ public class MainController {
 
         this.controllerImp = new ControllerFx(this, (ViewFx) viewImp);
         ((ViewFx) viewImp).AddController(this.controllerImp);
+
+        topBarController     = new TopBarController(this, model.getTopBar(), view.getTopBar());
+        toolBarController    = new ToolBarController(this, model.getToolBar(), view.getToolBar());
+        whiteBoardController = new WhiteBoardController(this, model.getWhiteBoard(), view.getWhiteBoard());
     }
 
     public void onLeftClickPressed(double x, double y) {
         System.out.println("Left Click pressed on " + x + " " + y);
+
         if (model.getTopBar().isIn((int) x, (int) y)) {
-            model.getTopBar().clickOnButton((int) x, (int) y);
+            topBarController.onLeftClickPressed((int) x, (int) y);
         }
+
         else if (this.model.getToolBar().isIn((int) x, (int) y)) {
-            System.out.println("Click on Toolbar !");
-
-            this.holdedShape = this.model.getToolBar().getShape((int) x, (int) y);
-            this.holdedShapeOrigin = this.model.getToolBar();
+            toolBarController.onLeftClickPressed((int) x, (int) y);
         }
 
-        else if(this.model.getWhiteBoard().isIn((int)x,(int)y)){
-            System.out.println("Click on the whiteboard");
-
-            if (select && !(this.menu && view.getWhiteBoard().clickOnGroup((int) x , (int) y))){
-                select = false;
-                view.getWhiteBoard().undrawSelect(Math.min(endX, beginX),
-                        Math.min(endY, beginY),
-                        Math.abs(beginX - endX),
-                        Math.abs(beginY - endY)
-                );
-                this.model.update();
-            }
-            if (!select) {
-                this.beginX = (int)x;
-                this.beginY =(int)y;
-            }
+        else if(this.model.getWhiteBoard().isIn((int)x,(int)y)) {
+            whiteBoardController.onLeftClickPressed((int) x, (int) y);
             this.clickLeft = true;
-
-            Shape currentShape = model.getWhiteBoard().getShapeAt((int) x, (int) y);
-            if (currentShape != null) {
-                this.holdedShape = currentShape;
-                this.holdedShapeOrigin = model.getWhiteBoard();
-            }
         }
-
     }
 
     public void onRightClickPressed(double x, double y) {
@@ -147,6 +136,22 @@ public class MainController {
         this.drag = true;
     }
 
+    public void setHoldedShape(Shape shape, ShapeContainer origin) {
+        this.holdedShape = shape;
+        this.holdedShapeOrigin = origin;
+    }
 
+    public boolean isMenuOpen() {
+        return this.menu;
+    }
 
+    public boolean isSelectionSet() {
+        return this.select;
+    }
+
+    public void setSelection(boolean b) {
+        this.select = b;
+    }
 }
+
+
