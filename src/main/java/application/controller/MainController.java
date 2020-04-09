@@ -8,7 +8,6 @@ import application.ui.javafx.ViewFx;
 import application.utils.ShapeContainer;
 import application.view.ConcreteViewItf;
 import application.view.MainView;
-import application.view.View;
 
 public class MainController {
     private Model model;
@@ -34,8 +33,10 @@ public class MainController {
 
     public void onLeftClickPressed(double x, double y) {
         System.out.println("Left Click pressed on " + x + " " + y);
-
-        if (this.model.getToolBar().isIn((int) x, (int) y)) {
+        if (model.getTopBar().isIn((int) x, (int) y)) {
+            model.getTopBar().clickOnButton((int) x, (int) y);
+        }
+        else if (this.model.getToolBar().isIn((int) x, (int) y)) {
             System.out.println("Click on Toolbar !");
 
             this.holdedShape = this.model.getToolBar().getShape((int) x, (int) y);
