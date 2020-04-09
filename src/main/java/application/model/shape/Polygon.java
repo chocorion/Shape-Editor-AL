@@ -52,5 +52,15 @@ public class Polygon extends SingleShape {
     public void moveTo(int x, int y) {
         //TODO
     }
+
+    @Override
+    public void resize(double factor) {
+        //TODO
+    }
+
+    @Override
+    public void resize(Shape containerShape, double factor) {
+        //TODO
+    }
 }
 

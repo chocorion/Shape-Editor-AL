@@ -89,6 +89,24 @@ public class Rectangle extends SingleShape {
         this.y = y;
     }
 
+    @Override
+    public void resize(double factor) {
+        this.width *= factor;
+        this.height *= factor;
+    }
+
+    @Override
+    public void resize(Shape containerShape, double factor) {
+        int minX = containerShape.getMinX();
+        int minY = containerShape.getMinY();
+
+        this.x = (int) ((this.x - minX) * factor + minX);
+        this.y = (int) ((this.y - minY) * factor + minY);
+
+        this.width *= factor;
+        this.height *= factor;
+    }
+
     public Color getColor() {
         return this.color;
     }

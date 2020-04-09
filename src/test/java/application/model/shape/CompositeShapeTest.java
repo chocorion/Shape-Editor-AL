@@ -78,4 +78,28 @@ public class CompositeShapeTest {
         assert (!shape.isIn(12, 12));
         assert (shape.isIn(9, 9));
     }
+
+    @Test
+    public void resize() {
+        CompositeShape shape = new CompositeShape();
+
+        Rectangle rect1 = new Rectangle(10, 10, 30, 30);
+        Rectangle rect2 = new Rectangle(40, 40, 20, 20);
+
+        shape.add(rect1);
+        shape.add(rect2);
+
+        shape.resize(0.5);
+
+        assert (rect1.getX() == 10 && rect1.getY() == 10);
+        assert (rect1.getWidth() == 15 && rect1.getHeight() == 15);
+
+        assert (rect2.getX() == 25 && rect2.getY() == 25);
+        assert (rect2.getWidth() == 10 && rect2.getHeight() == 10);
+
+        assert (shape.getMinX() == 10 && shape.getMinY() == 10);
+        assert (shape.getMaxX() == 35 && shape.getMaxY() == 35);
+
+        assert (shape.getWidth() == 25 && shape.getHeight() == 25);
+    }
 }

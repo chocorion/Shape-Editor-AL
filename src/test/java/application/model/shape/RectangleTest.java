@@ -16,4 +16,13 @@ public class RectangleTest {
         assert (!rect.isIn(1, 2));
         assert (!rect.isIn(9, 9));
     }
+
+    @Test
+    public void resizeWithFactor() {
+        Rectangle rect = new Rectangle(2, 2, 6, 6);
+        rect.resize(0.5);
+
+        assert (rect.getX() == 2 && rect.getY() == 2);
+        assert (rect.getWidth() == 3 && rect.getHeight() == 3);
+    }
 }
