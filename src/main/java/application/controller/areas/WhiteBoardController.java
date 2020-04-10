@@ -15,15 +15,20 @@ public class WhiteBoardController {
     private int selectionStartX, selectionStartY;
     private int selectionEndX, selectionEndY;
 
+    private boolean leftClick;
+
     public WhiteBoardController(MainController mainController, WhiteBoard model, WhiteBoardView view) {
         this.model = model;
         this.view = view;
 
         this.mainController = mainController;
+
+        leftClick = false;
     }
 
     public void onLeftClickPressed(int x, int y) {
         System.out.println("Click on the whiteboard");
+        leftClick = true;
 
         if (mainController.isSelectionSet() && !(mainController.isMenuOpen() && view.clickOnGroup(x , y))){
             mainController.setSelection(false);
@@ -49,8 +54,7 @@ public class WhiteBoardController {
     }
 
     public void onLeftClickReleased(int x, int y) {
-        System.out.println("Is holding shape -> " + mainController.isHoldingShape());
-        if (mainController.isDraggeg()) {
+        if (leftClick && mainController.isDraggeg()) {
             closeSelection(x, y);
             mainController.setSelection(true);
         }
@@ -71,12 +75,13 @@ public class WhiteBoardController {
         }
 
         else if (mainController.isHoldingShape()) {
-            System.out.println("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
             Shape clone = mainController.getHoldedShapeClone();
             clone.moveTo(x, y);
 
             mainController.addCommand(new AddShape(model, clone));
         }
+
+        leftClick = false;
     }
 
     private void closeSelection(int x, int y) {
