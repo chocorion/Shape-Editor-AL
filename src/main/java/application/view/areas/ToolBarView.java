@@ -1,6 +1,5 @@
 package application.view.areas;
 
-import application.model.Model;
 import application.model.areas.ToolBar;
 import application.model.shape.Rectangle;
 import application.model.shape.Shape;
@@ -9,20 +8,29 @@ import application.utils.ModelObserver;
 import application.view.View;
 import application.view.ViewDecorator;
 
+import java.util.HashMap;
+
 public class ToolBarView extends ViewDecorator implements ModelObserver {
     private ToolBar toolBar;
+    private final HashMap<Shape, Shape> minimisedShapes;
+
+    private static int BORDER_SIZE = 1;
+    private static int CASE_SIZE;
+    private static int CASE_MARGIN = 10;
 
     public ToolBarView(View view, ToolBar toolBar) {
         super(view);
 
         this.toolBar = toolBar;
+        this.minimisedShapes = new HashMap<>();
+
+        CASE_SIZE = Math.min(toolBar.getWidth() - 6 * BORDER_SIZE, toolBar.getHeight() - 6 * BORDER_SIZE);
     }
 
     @Override
     public void draw() {
         super.draw();
         // Draw toolbar
-        int borderSize = 1;
 
         super.drawRectangle(
                 new Rectangle(
@@ -36,26 +44,23 @@ public class ToolBarView extends ViewDecorator implements ModelObserver {
 
         super.drawRectangle(
                 new Rectangle(
-                        toolBar.getX() + borderSize,
-                        toolBar.getY() + borderSize,
-                        toolBar.getWidth() - 2 * borderSize,
-                        toolBar.getHeight() - 2 * borderSize,
+                        toolBar.getX() + BORDER_SIZE,
+                        toolBar.getY() + BORDER_SIZE,
+                        toolBar.getWidth() - 2 * BORDER_SIZE,
+                        toolBar.getHeight() - 2 * BORDER_SIZE,
                         Color.WHITE
                 )
         );
 
-        double innerShapeMaxSize = Math.min(toolBar.getWidth() - 6 * borderSize, toolBar.getHeight() - 6 * borderSize);
+        
         int index = 0;
-        int marginBetweenCase = 10;
 
         for (Shape shape:toolBar.getInnerShapes()) {
-            double factor = innerShapeMaxSize/Math.max(shape.getWidth(), shape.getHeight());
-            Shape minimizedShape = (Shape) shape.clone();
+            Shape minimizedShape = minimisedShapes.get(shape);
 
-            minimizedShape.resize(factor);
             minimizedShape.moveTo(
-                    toolBar.getX() + 3 * borderSize,
-                    toolBar.getY() + index * ((int) innerShapeMaxSize + marginBetweenCase) + 4 * borderSize
+                    toolBar.getX() + 3 * BORDER_SIZE,
+                    toolBar.getY() + index * (CASE_SIZE + CASE_MARGIN) + 4 * BORDER_SIZE
             );
 
             minimizedShape.draw(this);
@@ -65,6 +70,32 @@ public class ToolBarView extends ViewDecorator implements ModelObserver {
 
     @Override
     public void update() {
+        for (Shape shape : toolBar.getInnerShapes()) {
+            if (!minimisedShapes.containsKey(shape)) {
+                minimisedShapes.put(shape, getMinimisedClone(shape));
+            }
+        }
+        
         this.draw();
     }
+
+    private Shape getMinimisedClone(Shape shape) {
+        Shape minimised = (Shape) shape.clone();
+
+        double innerShapeMaxSize = Math.min(toolBar.getWidth() - 6 * BORDER_SIZE, toolBar.getHeight() - 6 * BORDER_SIZE);
+        double factor = innerShapeMaxSize/Math.max(shape.getWidth(), shape.getHeight());
+
+        minimised.resize(factor);
+
+        return minimised;
+    }
+
+    public int getShapeId(int x, int y) {
+        if (x > toolBar.getX() + 3 * BORDER_SIZE + toolBar.getWidth()) {
+            return -1;
+        }
+
+        return (y - toolBar.getY() - 4 * BORDER_SIZE)/(CASE_SIZE + CASE_MARGIN);
+    }
+
 }

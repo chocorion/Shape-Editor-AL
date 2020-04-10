@@ -82,11 +82,11 @@ public class ToolBar extends ModelObservableImp implements ShapeContainer {
         return false;
     }
 
-    public Shape getShape(int x, int y) {
-        if (!this.isIn(x, y) || (y - model.getTopBar().getHeight()) / this.getWidth() >= this.shapes.size()) {
-            return null;
-        }
 
-        return (Shape) this.shapes.get((y - model.getTopBar().getHeight()) / this.getWidth()).clone();
+    public Shape getShape(int shapeId) {
+        if (shapeId < 0 || shapeId >= shapes.size())
+            return null;
+
+        return (Shape) this.shapes.get(shapeId).clone();
     }
 }
