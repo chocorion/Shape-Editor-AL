@@ -52,19 +52,14 @@ public class TopBar extends ModelObservableImp {
         return (y >= this.y && y <= this.height + this.y) && (x >= 1 && x <= this.x + this.width);
     }
 
-    public void clickOnButton(int x, int y) {
-        if (!this.isIn(x, y)) {
-            return;
-        }
-
-        int marge = 4;
-
-        if (x >= marge && x <= marge + this.getButtonWidth()) {
-            System.out.println("UNDO");
-            this.model.undo();
-        } else if (x >= this.getButtonWidth() + 2 * marge && x <= 2 * this.getButtonWidth() + 2 * marge) {
-            System.out.println("REDO");
-            this.model.redo();
+    public void clickOnButton(int buttonId) {
+        switch (buttonId) {
+            case 0:
+                model.undo();
+                break;
+            case 1:
+                model.redo();
+                break;
         }
     }
 }

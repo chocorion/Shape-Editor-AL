@@ -17,7 +17,10 @@ public class TopBarController {
     }
 
     public void onLeftClickPressed(int x, int y) {
-        model.clickOnButton(x, y);
+        int buttonId = view.getButtonId(x, y);
+
+        if (buttonId != -1)
+            model.clickOnButton(buttonId);
     }
 
 }

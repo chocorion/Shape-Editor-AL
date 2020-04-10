@@ -54,12 +54,7 @@ public class WhiteBoardController {
     }
 
     public void onLeftClickReleased(int x, int y) {
-        if (leftClick && mainController.isDraggeg()) {
-            closeSelection(x, y);
-            mainController.setSelection(true);
-        }
-
-        else if (mainController.isMenuOpen()) {
+        if (mainController.isMenuOpen()) {
             if(view.clickOnGroup(x , y) && mainController.isSelectionSet()) {
                 clearSelection();
                 view.undrawMenu();
@@ -72,6 +67,11 @@ public class WhiteBoardController {
 
             mainController.setMenu(false);
             mainController.setSelection(false);
+        }
+
+        else if (leftClick && mainController.isDraggeg()) {
+            closeSelection(x, y);
+            mainController.setSelection(true);
         }
 
         else if (mainController.isHoldingShape()) {
