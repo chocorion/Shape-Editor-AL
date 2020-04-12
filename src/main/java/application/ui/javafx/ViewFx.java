@@ -16,15 +16,21 @@ import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ViewFx extends Application implements ConcreteViewItf {
     private static Model model;
     private static Scene rootScene;
     private static GraphicsContext gc;
 
-    private boolean menu;
     private int menuX, menuY,viewWhiteBoardW,viewWhiteBoardH;
+    private List<String> menuName;
+
+
     public ViewFx() {}
+
 
     public ViewFx(Model model) {
         ViewFx.model = model;
@@ -35,6 +41,10 @@ public class ViewFx extends Application implements ConcreteViewItf {
         ViewFx.gc = canvas.getGraphicsContext2D();
         root.getChildren().add(canvas);
         ViewFx.rootScene = new Scene(root);
+        this.menuName = new ArrayList<String>();
+        this.menuName.add("group");
+        this.menuName.add("ungoup");
+        this.menuName.add("color");
     }
 
     public void initViewFx () {
@@ -111,9 +121,18 @@ public class ViewFx extends Application implements ConcreteViewItf {
         ViewFx.gc.strokeRect(x,y,width,height);
     }
 
+
+
+    private void drawMenuItem(int width, int height, int index){
+        ViewFx.gc.setFill(Color.LIGHTGRAY);
+        ViewFx.gc.fillRect(this.menuX,this.menuY+height*index,width,height);
+        ViewFx.gc.setStroke(Color.GREY);
+        ViewFx.gc.setFill(Color.BLACK);
+        ViewFx.gc.strokeRect(this.menuX,this.menuY+(index*height),width,height);
+        ViewFx.gc.fillText(this.menuName.get(index),this.menuX+width/10,this.menuY+index*height+(height*2/3), width);
+    }
     @Override
     public void devAddPopUpMenu(int x, int y){
-        this.menu = true;
         this.menuX =x;
         this.menuY =y;
         System.out.println("menu");
@@ -126,24 +145,12 @@ public class ViewFx extends Application implements ConcreteViewItf {
         this.viewWhiteBoardW = whiteBoardW*coeffW;
         this.viewWhiteBoardH = whiteBoardH*coeffH;
 
-        ViewFx.gc.setFill(Color.LIGHTGRAY);
         int width =viewWhiteBoardW /20;
         int height = viewWhiteBoardH/40;
-        System.out.println(width);
-        // The "group" item
-        ViewFx.gc.setFill(Color.LIGHTGRAY);
-        ViewFx.gc.fillRect(x,y,width,height);
-        ViewFx.gc.setStroke(Color.GREY);
-        ViewFx.gc.setFill(Color.BLACK);
-        ViewFx.gc.strokeRect(x,y,width,height);
-        ViewFx.gc.fillText("group",x+width/10,y+height*2/3, width);
-        // the "ungroup" item
-        ViewFx.gc.setFill(Color.LIGHTGRAY);
-        ViewFx.gc.fillRect(x,y+height,width,height);
-        ViewFx.gc.setStroke(Color.GREY);
-        ViewFx.gc.setFill(Color.BLACK);
-        ViewFx.gc.strokeRect(x,y+height,width,height);
-        ViewFx.gc.fillText("ungroup",x+width/10,y+height+(height*2/3), width);
+
+        for (int index=0; index< this.menuName.size(); index ++){
+            drawMenuItem(width,height,index);
+        }
 
     }
     @Override
@@ -171,7 +178,7 @@ public class ViewFx extends Application implements ConcreteViewItf {
 
     @Override
     public void devUndrawMenu(){
-        ViewFx.gc.clearRect(menuX,menuY,1+viewWhiteBoardW /20, 1+2*(viewWhiteBoardH/40));
+        ViewFx.gc.clearRect(menuX,menuY,1+viewWhiteBoardW /20, 1+this.menuName.size() * (viewWhiteBoardH/40));
 
     }
 
