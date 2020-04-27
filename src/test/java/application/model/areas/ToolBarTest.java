@@ -16,18 +16,19 @@ public class ToolBarTest {
         Rectangle rect1 = new Rectangle(0, 0, 10, 10);
         Rectangle rect2 = new Rectangle(10, 10, 40, 40);
 
+        // Already some defauls shapes in toolbar
         int numberShape = toolBar.getInnerShapes().size();
 
         toolBar.addShape(rect1);
         toolBar.addShape(rect2);
 
-        Rectangle rect = (Rectangle) toolBar.getShape(0, numberShape * toolBar.getWidth() + model.getTopBar().getHeight() + 20);
+        Rectangle rect = (Rectangle) toolBar.getShape(numberShape);
 
         assert (rect != rect1 && rect != rect2 && rect != null);
         assert (rect.getX() == rect1.getX() && rect.getY() == rect1.getY());
 
         // 40 is in the second case
-        rect = (Rectangle) toolBar.getShape(0, (numberShape + 1) * toolBar.getWidth() + model.getTopBar().getHeight() + 20);
+        rect = (Rectangle) toolBar.getShape(numberShape + 1);
 
         assert (rect != rect1 && rect != rect2 && rect != null);
         //System.err.println(rect);
