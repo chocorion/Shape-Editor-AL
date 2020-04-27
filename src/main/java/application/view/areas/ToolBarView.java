@@ -4,13 +4,15 @@ import application.model.areas.ToolBar;
 import application.model.shape.Rectangle;
 import application.model.shape.Shape;
 import application.utils.Color;
+import application.utils.ModelObservable;
 import application.utils.ModelObserver;
+import application.view.ObserverDecoration;
 import application.view.View;
 import application.view.ViewDecorator;
 
 import java.util.HashMap;
 
-public class ToolBarView extends ViewDecorator implements ModelObserver {
+public class ToolBarView extends ViewDecorator implements ObserverDecoration {
     private ToolBar toolBar;
     private final HashMap<Shape, Shape> minimisedShapes;
 
@@ -98,4 +100,8 @@ public class ToolBarView extends ViewDecorator implements ModelObserver {
         return (y - toolBar.getY() - 4 * BORDER_SIZE)/(CASE_SIZE + CASE_MARGIN);
     }
 
+    @Override
+    public ModelObservable getSubject() {
+        return this.toolBar;
+    }
 }

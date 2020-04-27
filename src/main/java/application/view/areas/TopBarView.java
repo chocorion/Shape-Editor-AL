@@ -3,14 +3,16 @@ package application.view.areas;
 import application.model.areas.TopBar;
 import application.model.shape.Rectangle;
 import application.utils.Color;
+import application.utils.ModelObservable;
 import application.utils.ModelObserver;
+import application.view.ObserverDecoration;
 import application.view.View;
 import application.view.ViewDecorator;
 
 import java.util.ArrayList;
 
 
-public class TopBarView extends ViewDecorator implements ModelObserver {
+public class TopBarView extends ViewDecorator implements ObserverDecoration {
     private TopBar topBar;
     private static int BUTTON_MARGIN = 4;
 
@@ -62,5 +64,10 @@ public class TopBarView extends ViewDecorator implements ModelObserver {
         }
 
         return -1;
+    }
+
+    @Override
+    public ModelObservable getSubject() {
+        return this.topBar;
     }
 }

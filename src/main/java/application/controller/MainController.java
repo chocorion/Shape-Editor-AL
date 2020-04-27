@@ -6,6 +6,7 @@ import application.controller.areas.WhiteBoardController;
 import application.model.Model;
 import application.model.command.Command;
 import application.model.shape.Shape;
+import application.ui.javafx.ControllerFx;
 import application.ui.javafx.ViewFx;
 import application.utils.ShapeContainer;
 import application.view.ConcreteViewItf;

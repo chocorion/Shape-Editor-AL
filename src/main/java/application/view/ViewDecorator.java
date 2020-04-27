@@ -3,7 +3,7 @@ package application.view;
 import application.model.shape.Polygon;
 import application.model.shape.Rectangle;
 
-public abstract class ViewDecorator implements View {
+public abstract class ViewDecorator implements ObserverDecoration {
     private View view;
 
     public ViewDecorator(View view) {

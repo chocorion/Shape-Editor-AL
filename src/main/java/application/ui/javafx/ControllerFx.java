@@ -1,8 +1,10 @@
-package application.controller;
+package application.ui.javafx;
 
 import java.util.ArrayList;
 
 import application.Main;
+import application.controller.Controller;
+import application.controller.MainController;
 import application.model.Model;
 import application.ui.javafx.ViewFx;
 import application.view.View;
@@ -30,25 +32,17 @@ public class ControllerFx implements Controller {
         Scene scene = view.getScene();
 
         scene.setOnKeyPressed(
-                new EventHandler<KeyEvent>()
-                {
-                    public void handle(KeyEvent e)
-                    {
-                        String code = e.getCode().toString();
-                        System.out.println("Key pressed -> " + code);
-                        if (!input.contains(code))
-                            input.add(code);
-                    }
+                e -> {
+                    String code = e.getCode().toString();
+                    System.out.println("Key pressed -> " + code);
+                    if (!input.contains(code))
+                        input.add(code);
                 });
 
         scene.setOnKeyReleased(
-                new EventHandler<KeyEvent>()
-                {
-                    public void handle(KeyEvent e)
-                    {
-                        String code = e.getCode().toString();
-                        input.remove(code);
-                    }
+                e -> {
+                    String code = e.getCode().toString();
+                    input.remove(code);
                 });
 
 
@@ -77,12 +71,7 @@ public class ControllerFx implements Controller {
                 e -> mainController.onMouseDragged(e.getX(), e.getY()));
 
         scene.setOnScroll(
-                new EventHandler<ScrollEvent>()
-                {
-                    public void handle(ScrollEvent e) {
-                        moveWheel((int)e.getDeltaY());
-                    }
-                });
+                e -> moveWheel((int)e.getDeltaY()));
     }
 
 
