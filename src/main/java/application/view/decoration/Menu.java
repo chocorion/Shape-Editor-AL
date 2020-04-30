@@ -24,10 +24,14 @@ public abstract class Menu extends ViewDecorator implements ObserverDecoration {
         this.x = x;
         this.y = y;
 
-        decoration.getSubject().dettachObserver(decoration);
-        decoration.getSubject().attachObserver(this);
+        subject = decoration.getSubject();
+
+        subject.dettachObserver(decoration);
+        subject.attachObserver(this);
 
         this.update();
+
+        System.out.println("Open Menu");
     }
 
     public void close() {
@@ -35,8 +39,11 @@ public abstract class Menu extends ViewDecorator implements ObserverDecoration {
 
         subject.dettachObserver(this);
         subject.attachObserver(decoration);
+        subject = null;
 
         decoration.update();
+
+        System.out.println("Closing menu");
     }
 
     @Override

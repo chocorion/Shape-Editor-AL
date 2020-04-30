@@ -43,8 +43,6 @@ public class MainController {
     }
 
     public void onLeftClickPressed(double x, double y) {
-        System.out.println("Left Click pressed on " + x + " " + y);
-
         if (model.getTopBar().isIn((int) x, (int) y)) {
             topBarController.onLeftClickPressed((int) x, (int) y);
         }
@@ -66,7 +64,9 @@ public class MainController {
     }
 
     public void onLeftClickReleased(double x, double y) {
+        System.out.println("left click released");
         if(this.model.getWhiteBoard().isIn((int)x, (int)y)) {
+            System.out.println("In whiteboard");
             whiteBoardController.onLeftClickReleased((int) x, (int) y);
         }
 

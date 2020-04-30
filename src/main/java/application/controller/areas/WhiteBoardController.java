@@ -53,15 +53,23 @@ public class WhiteBoardController {
     }
 
     public void onLeftClickReleased(int x, int y) {
-        if (mainController.isMenuOpen()) {
+        System.out.println("In whiteboard :");
+        if (view.isMenuOpen()) {
+            System.out.println("Menu is open. In menu ? " + view.isInMenu(x, y));
             if(view.isInMenu(x , y) && mainController.isSelectionSet()) {
                 clearSelection();
-                view.undrawMenu();
+                System.out.println("Ask to close menu");
+                view.closeWhiteboardMenu();
 
+                // Only group command for the moment
                 mainController.addCommand(
                         new AddComposite(model, selectionStartX, selectionStartY, selectionEndX, selectionEndY)
                 );
                 this.model.update();
+            }
+
+            else {
+                view.closeWhiteboardMenu();
             }
 
             mainController.setMenu(false);
@@ -84,10 +92,8 @@ public class WhiteBoardController {
     }
 
     public void onRightClickPressed(int x, int y) {
-        if (!mainController.isMenuOpen()) {
-            view.openWhiteboardMenu(x, y);
-            mainController.setMenu(true);
-        }
+        view.openWhiteboardMenu(x, y);
+        mainController.setMenu(true);
     }
 
     private void closeSelection(int x, int y) {

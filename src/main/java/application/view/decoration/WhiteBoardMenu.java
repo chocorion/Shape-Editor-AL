@@ -58,30 +58,3 @@ public class WhiteBoardMenu extends Menu {
         return itemId;
     }
 }
-
-/*
-
-    @Override
-    public void devAddPopUpMenu(int x, int y){
-        this.menuX =x;
-        this.menuY =y;
-        System.out.println("menu");
-        int coeffW = this.getWidth() / this.model.getWidth();
-        int coeffH = this.getHeight() / this.model.getHeight();
-
-        int whiteBoardW = this.model.getWhiteBoard().getWidth();
-        int whiteBoardH = this.model.getWhiteBoard().getHeight();
-
-        this.viewWhiteBoardW = whiteBoardW*coeffW;
-        this.viewWhiteBoardH = whiteBoardH*coeffH;
-
-        int width =viewWhiteBoardW /20;
-        int height = viewWhiteBoardH/40;
-
-        for (int index=0; index< this.menuName.size(); index ++){
-            drawMenuItem(width,height,index);
-        }
-
-    }
-
- */
