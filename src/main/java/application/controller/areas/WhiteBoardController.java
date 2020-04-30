@@ -27,10 +27,9 @@ public class WhiteBoardController {
     }
 
     public void onLeftClickPressed(int x, int y) {
-        System.out.println("Click on the whiteboard");
         leftClick = true;
 
-        if (mainController.isSelectionSet() && !(mainController.isMenuOpen() && view.clickOnGroup(x , y))){
+        if (mainController.isSelectionSet() && !(view.isMenuOpen() && view.isInMenu(x , y))){
             mainController.setSelection(false);
 
             view.undrawSelect(
@@ -55,7 +54,7 @@ public class WhiteBoardController {
 
     public void onLeftClickReleased(int x, int y) {
         if (mainController.isMenuOpen()) {
-            if(view.clickOnGroup(x , y) && mainController.isSelectionSet()) {
+            if(view.isInMenu(x , y) && mainController.isSelectionSet()) {
                 clearSelection();
                 view.undrawMenu();
 
@@ -84,9 +83,14 @@ public class WhiteBoardController {
         leftClick = false;
     }
 
-    private void closeSelection(int x, int y) {
-        System.out.println("SELECTION");
+    public void onRightClickPressed(int x, int y) {
+        if (!mainController.isMenuOpen()) {
+            view.openWhiteboardMenu(x, y);
+            mainController.setMenu(true);
+        }
+    }
 
+    private void closeSelection(int x, int y) {
         selectionEndX = x;
         selectionEndY = y;
 

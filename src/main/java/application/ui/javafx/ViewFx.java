@@ -90,28 +90,23 @@ public class ViewFx extends Application implements ConcreteViewItf {
 
     @Override
     public void devDrawRectangle(Rectangle rectangle) {
-        System.out.println("Drawing rectangle !" + ViewFx.gc + " " + rectangle);
-
         application.utils.Color rectColor = rectangle.getColor();
         ViewFx.gc.setFill(new Color(rectColor.getR(), rectColor.getG(), rectColor.getB(), rectColor.getA()));
-
 
         ViewFx.gc.fillRect(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
     }
 
     @Override
-    public void devDrawPolygon(Polygon polygon) {
-        ViewFx.gc.fillRect(50, 50, 100, 150);
+    public void devDrawStrokeRectangle(Rectangle rectangle) {
+        application.utils.Color rectColor = rectangle.getColor();
+        ViewFx.gc.setStroke(new Color(rectColor.getR(), rectColor.getG(), rectColor.getB(), rectColor.getA()));
+
+        ViewFx.gc.strokeRect(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
     }
 
-    public void drawTopBar() {
-        //TEMPORARY
-        ViewFx.gc.setFill(Color.gray(190));
-        ViewFx.gc.fillRect(0, 0, this.getWidth(), 10);
-
-        ViewFx.gc.setFill(Color.gray(110));
-        ViewFx.gc.fillRect(2, 2, 6, 6);
-        ViewFx.gc.fillRect(12, 2, 6, 6);
+    @Override
+    public void devDrawPolygon(Polygon polygon) {
+        ViewFx.gc.fillRect(50, 50, 100, 150);
     }
 
     @Override
@@ -123,52 +118,8 @@ public class ViewFx extends Application implements ConcreteViewItf {
 
 
 
-    private void drawMenuItem(int width, int height, int index){
-        ViewFx.gc.setFill(Color.LIGHTGRAY);
-        ViewFx.gc.fillRect(this.menuX,this.menuY+height*index,width,height);
-        ViewFx.gc.setStroke(Color.GREY);
-        ViewFx.gc.setFill(Color.BLACK);
-        ViewFx.gc.strokeRect(this.menuX,this.menuY+(index*height),width,height);
-        ViewFx.gc.fillText(this.menuName.get(index),this.menuX+width/10,this.menuY+index*height+(height*2/3), width);
-    }
-    @Override
-    public void devAddPopUpMenu(int x, int y){
-        this.menuX =x;
-        this.menuY =y;
-        System.out.println("menu");
-        int coeffW = this.getWidth() / this.model.getWidth();
-        int coeffH = this.getHeight() / this.model.getHeight();
-
-        int whiteBoardW = this.model.getWhiteBoard().getWidth();
-        int whiteBoardH = this.model.getWhiteBoard().getHeight();
-
-        this.viewWhiteBoardW = whiteBoardW*coeffW;
-        this.viewWhiteBoardH = whiteBoardH*coeffH;
-
-        int width =viewWhiteBoardW /20;
-        int height = viewWhiteBoardH/40;
-
-        for (int index=0; index< this.menuName.size(); index ++){
-            drawMenuItem(width,height,index);
-        }
-
-    }
-    @Override
-    public boolean devClickOnGroup(int x,int y){
-        System.out.println("click on group");
-        if( x < this.menuX+ this.viewWhiteBoardW/20 && x > this.menuX && y > this.menuY && y< this.menuY+this.viewWhiteBoardH/40)
-        return true;
-        else return false;
-    }
 
 
-    @Override
-    public boolean devClickOnUnGroup(int x,int y){
-        System.out.println("click on group");
-        if( x < this.menuX+ this.viewWhiteBoardW/20 && x > this.menuX && y > this.menuY && y< this.menuY+2*(this.viewWhiteBoardH/40))
-            return true;
-        else return false;
-    }
 
     @Override
     public void devUndrawSelect(int x, int y, int width, int height){
@@ -182,7 +133,11 @@ public class ViewFx extends Application implements ConcreteViewItf {
 
     }
 
-
+    @Override
+    public void devDrawText(String text, int x, int y, int size, application.utils.Color color) {
+        ViewFx.gc.setFill(new Color(color.getR(), color.getG(), color.getB(), color.getA()));
+        ViewFx.gc.fillText(text, x, y, size);
+    }
 
 
 }

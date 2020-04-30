@@ -2,6 +2,7 @@ package application.view;
 
 import application.model.shape.Polygon;
 import application.model.shape.Rectangle;
+import application.utils.Color;
 
 public abstract class ViewDecorator implements ObserverDecoration {
     private View view;
@@ -31,18 +32,22 @@ public abstract class ViewDecorator implements ObserverDecoration {
     }
 
     @Override
+    public void drawStrokeRectangle(Rectangle rectangle) {
+        this.view.drawStrokeRectangle(rectangle);
+    }
+
+    @Override
+    public void drawText(String text, int x, int y, int size, Color color) {
+        this.view.drawText(text, x, y, size, color);
+    }
+
+    @Override
     public void drawPolygon(Polygon polygon) {
         this.view.drawPolygon(polygon);
     }
 
     @Override
     public void drawSelection(int x,int y, int width, int height){ this.view.drawSelection(x,y,width,height);}
-
-    @Override
-    public void addPopUpMenu(int x, int y){this.view.addPopUpMenu(x,y);}
-
-    @Override
-     public boolean clickOnGroup(int x,int y){return this.view.clickOnGroup(x,y);}
 
     @Override
     public void undrawSelect(int x, int y, int width, int height) {this.view.undrawSelect(x,y,width,height);}

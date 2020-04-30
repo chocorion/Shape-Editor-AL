@@ -2,6 +2,7 @@ package application.view;
 
 import application.model.shape.Polygon;
 import application.model.shape.Rectangle;
+import application.utils.Color;
 
 public interface View {
     void draw();
@@ -10,12 +11,13 @@ public interface View {
     int getHeight();
 
     void drawRectangle(Rectangle rectangle);
+    void drawStrokeRectangle(Rectangle rectangle);
+
     void drawPolygon(Polygon polygon);
     void drawSelection(int x, int y, int width, int height);
 
-    void addPopUpMenu(int x, int y);
+    void drawText(String text, int x, int y, int size, Color color);
 
-    boolean clickOnGroup(int x,int y);
 
     void undrawSelect(int x, int y, int width, int height);
     void undrawMenu();

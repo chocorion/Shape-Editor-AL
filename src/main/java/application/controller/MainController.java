@@ -60,9 +60,8 @@ public class MainController {
     }
 
     public void onRightClickPressed(double x, double y) {
-        if(!menu){
-            view.getWhiteBoard().addPopUpMenu((int)x,(int)y);
-            menu = true;
+        if(model.getWhiteBoard().isIn((int) x, (int) y)){
+            whiteBoardController.onRightClickPressed((int)x, (int)y);
         }
     }
 

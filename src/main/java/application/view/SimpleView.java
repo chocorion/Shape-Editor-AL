@@ -2,6 +2,7 @@ package application.view;
 
 import application.model.shape.Polygon;
 import application.model.shape.Rectangle;
+import application.utils.Color;
 
 public class SimpleView implements View {
     private ConcreteViewItf implementation;
@@ -27,8 +28,12 @@ public class SimpleView implements View {
 
     @Override
     public void drawRectangle(Rectangle rectangle) {
-        System.out.println("DrawRect in SimpleView !");
         this.implementation.devDrawRectangle(rectangle);
+    }
+
+    @Override
+    public void drawStrokeRectangle(Rectangle rectangle) {
+        this.implementation.devDrawStrokeRectangle(rectangle);
     }
 
     @Override
@@ -41,15 +46,12 @@ public class SimpleView implements View {
         System.out.println("drawSelect in SimpleView !");
         this.implementation.devDrawSelection(x,y,width,height);
     }
-    @Override
-    public void addPopUpMenu(int x, int y){
-        System.out.println("addMenu in simpleView");
-        this.implementation.devAddPopUpMenu( x,  y);
 
+    @Override
+    public void drawText(String text, int x, int y, int size, Color color) {
+        this.implementation.devDrawText(text, x, y, size, color);
     }
 
-    @Override
-    public boolean clickOnGroup(int x,int y){return this.implementation.devClickOnGroup(x,y);}
 
     @Override
     public void undrawSelect(int x, int y, int width, int height) {this.implementation.devUndrawSelect(x,y,width,height);}

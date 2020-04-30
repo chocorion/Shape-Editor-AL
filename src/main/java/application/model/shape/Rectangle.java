@@ -117,6 +117,10 @@ public class Rectangle extends SingleShape {
         return this.color;
     }
 
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
     public String toString() {
         return "Rectangle(" + this.x + ", " + this.y + ", " + this.width + ", " + this.height + ")";
     }
