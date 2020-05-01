@@ -11,6 +11,8 @@ import application.view.View;
 import application.view.ViewDecorator;
 import application.view.decoration.WhiteBoardMenu;
 
+import java.util.ArrayList;
+
 public class WhiteBoardView extends ViewDecorator implements ObserverDecoration {
     private WhiteBoard whiteBoard;
     private WhiteBoardMenu menu;
@@ -35,6 +37,24 @@ public class WhiteBoardView extends ViewDecorator implements ObserverDecoration 
         for (Shape shape:whiteBoard.getInnerShapes()) {
             shape.draw(this);
         }
+    }
+
+    public void drawShapeSelection(ArrayList<Shape> shapes) {
+        for (Shape shape : shapes) {
+            drawShapeSelection(shape);
+        }
+    }
+
+    public void drawShapeSelection(Shape shape) {
+        int selectionMarge = 4;
+
+        new Rectangle(
+                shape.getMinX() - selectionMarge,
+                shape.getMinY() - selectionMarge,
+                shape.getMaxX() - shape.getMinX() + 2 * selectionMarge,
+                shape.getMaxY() - shape.getMinY() + 2 * selectionMarge,
+                Color.SELECTION
+        ).draw(this);
     }
 
     @Override

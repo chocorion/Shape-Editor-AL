@@ -6,6 +6,8 @@ public class Color {
     public static final Color LIGHT_GREY = new Color(190, 190, 190);
     public static final Color BLUE = new Color(30, 30, 230);
 
+    public static final Color SELECTION = new Color(30, 30, 150, 0.4);
+
 
     private int r, g, b;
     private double a;

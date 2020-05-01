@@ -84,6 +84,14 @@ public class Rectangle extends SingleShape {
     }
 
     @Override
+    public boolean intersect(Rectangle rect) {
+        boolean hoverlap = (x < rect.x + rect.width) && (rect.x < x + width);
+        boolean voverlap = (y < rect.y + rect.height) && (rect.y < y + height);
+
+        return hoverlap && voverlap;
+    }
+
+    @Override
     public void moveTo(int x, int y) {
         this.x = x;
         this.y = y;

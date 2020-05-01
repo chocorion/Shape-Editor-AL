@@ -49,6 +49,11 @@ public class Polygon extends SingleShape {
     }
 
     @Override
+    public boolean intersect(Rectangle rectangle) {
+        return false;
+    }
+
+    @Override
     public void moveTo(int x, int y) {
         // TODO
     }

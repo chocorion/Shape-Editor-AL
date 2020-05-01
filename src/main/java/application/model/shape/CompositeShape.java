@@ -133,6 +133,20 @@ public class CompositeShape implements Shape, Cloneable {
     }
 
     @Override
+    public boolean intersect(Rectangle rect) {
+        int minX = getMinX();
+        int maxX = getMaxX();
+        int minY = getMinY();
+        int maxY = getMaxY();
+
+
+        boolean hoverlap = (minX < rect.getX() + rect.getWidth()) && (rect.getX() < minX + (maxX - minX));
+        boolean voverlap = (minY < rect.getY() + rect.getHeight()) && (rect.getY() < minY + (maxY - minY));
+
+        return hoverlap && voverlap;
+    }
+
+    @Override
     public void moveTo(int x, int y) {
         int minX = this.getMinX();
         int minY = this.getMinY();

@@ -18,6 +18,7 @@ public interface Shape {
     int getMaxY();
 
     boolean isIn(int x, int y);
+    boolean intersect(Rectangle rectangle);
     void moveTo(int x, int y);
     void translate(int dx, int dy);
 
