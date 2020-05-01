@@ -22,6 +22,8 @@ public class WhiteBoardController {
     private boolean selection;
     private boolean canDrawSelection;
 
+    private ArrayList<Shape> selectedShapes;
+
     public WhiteBoardController(MainController mainController, WhiteBoard model, WhiteBoardView view) {
         this.model = model;
         this.view = view;
@@ -31,20 +33,17 @@ public class WhiteBoardController {
         leftClick     = false;
         selection     = false;
         canDrawSelection = false;
+
+        selectedShapes = new ArrayList<>();
     }
 
     public void onLeftClickPressed(int x, int y) {
         leftClick = true;
 
         if (mainController.isSelectionSet() && !(view.isMenuOpen() && view.isInMenu(x , y))){
+            System.out.println("HERE CLEARING");
             mainController.setSelection(false);
-
-            view.undrawSelect(
-                    Math.min(selectionEndX, selectionStartX),
-                    Math.min(selectionEndY, selectionStartY),
-                    Math.abs(selectionStartX - selectionEndX),
-                    Math.abs(selectionStartY - selectionEndY)
-            );
+            view.clearSelection();
             model.update();
         }
 
@@ -69,6 +68,7 @@ public class WhiteBoardController {
                 // Only group command for the moment
                 clearSelection();
                 view.closeWhiteboardMenu();
+                view.clearSelection();
 
                 mainController.addCommand(
                         new AddComposite(model, selectionStartX, selectionStartY, selectionEndX, selectionEndY)
@@ -85,14 +85,11 @@ public class WhiteBoardController {
         }
 
         else if (leftClick && selection) {
-            // Here, select shapes !
-            System.out.println("Here");
             selection = false;
             clearSelection();
-            mainController.setSelection(false);
+            mainController.setSelection(true);
             model.update();
 
-            // TODO Utiliser l'intersection pour créer le groupe de formes
             Rectangle selection = new Rectangle(
                     selectionStartX,
                     selectionStartY,
@@ -100,14 +97,15 @@ public class WhiteBoardController {
                     selectionEndY - selectionStartY
             );
 
-            ArrayList<Shape> selectedShapes = new ArrayList<>();
+            selectedShapes.clear();
             for (Shape shape : model.getInnerShapes()) {
                 if (shape.intersect(selection)) {
                     selectedShapes.add(shape);
                 }
             }
 
-            view.drawShapeSelection(selectedShapes);
+            view.addSelection(selectedShapes);
+            view.update();
         }
 
         else if (mainController.isHoldingShape()) {

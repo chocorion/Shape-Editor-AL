@@ -17,11 +17,15 @@ public class WhiteBoardView extends ViewDecorator implements ObserverDecoration 
     private WhiteBoard whiteBoard;
     private WhiteBoardMenu menu;
 
+    private ArrayList<Shape> selectedShapes;
+
     public WhiteBoardView(View view, WhiteBoard whiteBoard) {
         super(view);
 
         this.whiteBoard = whiteBoard;
         menu = new WhiteBoardMenu(this);
+
+        selectedShapes = new ArrayList<>();
     }
 
     @Override
@@ -37,6 +41,16 @@ public class WhiteBoardView extends ViewDecorator implements ObserverDecoration 
         for (Shape shape:whiteBoard.getInnerShapes()) {
             shape.draw(this);
         }
+
+        drawShapeSelection(selectedShapes);
+    }
+
+    public void addSelection(ArrayList<Shape> shapes) {
+        selectedShapes.addAll(shapes);
+    }
+
+    public void clearSelection() {
+        selectedShapes.clear();
     }
 
     public void drawShapeSelection(ArrayList<Shape> shapes) {

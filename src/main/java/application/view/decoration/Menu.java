@@ -30,8 +30,6 @@ public abstract class Menu extends ViewDecorator implements ObserverDecoration {
         subject.attachObserver(this);
 
         this.update();
-
-        System.out.println("Open Menu");
     }
 
     public void close() {
