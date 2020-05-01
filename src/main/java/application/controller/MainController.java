@@ -83,6 +83,10 @@ public class MainController {
     }
 
     public void onMouseDragged(double x, double y) {
+        if (model.getWhiteBoard().isIn((int) x, (int) y)) {
+            whiteBoardController.onMouseDragged((int) x, (int) y);
+        }
+
         this.drag = true;
     }
 

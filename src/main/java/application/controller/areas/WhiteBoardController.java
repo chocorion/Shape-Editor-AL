@@ -16,6 +16,7 @@ public class WhiteBoardController {
     private int selectionEndX, selectionEndY;
 
     private boolean leftClick;
+    private boolean selection;
 
     public WhiteBoardController(MainController mainController, WhiteBoard model, WhiteBoardView view) {
         this.model = model;
@@ -24,6 +25,7 @@ public class WhiteBoardController {
         this.mainController = mainController;
 
         leftClick = false;
+        selection = false;
     }
 
     public void onLeftClickPressed(int x, int y) {
@@ -53,15 +55,13 @@ public class WhiteBoardController {
     }
 
     public void onLeftClickReleased(int x, int y) {
-        System.out.println("In whiteboard :");
         if (view.isMenuOpen()) {
-            System.out.println("Menu is open. In menu ? " + view.isInMenu(x, y));
             if(view.isInMenu(x , y) && mainController.isSelectionSet()) {
-                clearSelection();
-                System.out.println("Ask to close menu");
-                view.closeWhiteboardMenu();
 
                 // Only group command for the moment
+                clearSelection();
+                view.closeWhiteboardMenu();
+
                 mainController.addCommand(
                         new AddComposite(model, selectionStartX, selectionStartY, selectionEndX, selectionEndY)
                 );
@@ -96,7 +96,17 @@ public class WhiteBoardController {
         mainController.setMenu(true);
     }
 
+    public void onMouseDragged(int x, int y) {
+        // User is creating selection
+        if (leftClick) {
+            clearSelection();
+            closeSelection(x, y);
+        }
+    }
+
     private void closeSelection(int x, int y) {
+        selection = true;
+
         selectionEndX = x;
         selectionEndY = y;
 
@@ -109,11 +119,19 @@ public class WhiteBoardController {
     }
 
     private void clearSelection() {
+        if (!selection) return;
+
+
         view.undrawSelect(
             Math.min(selectionEndX, selectionStartX),
             Math.min(selectionEndY, selectionStartY),
             Math.abs(selectionStartX - selectionEndX),
             Math.abs(selectionStartY - selectionEndY)
         );
+
+        // Ugly, have to find another way of doing it.
+        model.update();
+
+        selection = false;
     }
 }
