@@ -27,10 +27,6 @@ public class ViewFx extends Application implements ConcreteViewItf {
     private static Scene rootScene;
     private static GraphicsContext gc;
 
-    private int menuX, menuY,viewWhiteBoardW,viewWhiteBoardH;
-    private List<String> menuName;
-
-
     public ViewFx() {}
 
 
@@ -55,6 +51,9 @@ public class ViewFx extends Application implements ConcreteViewItf {
 
     @Override
     public void start(final Stage primaryStage) {
+        primaryStage.setMinWidth(480);
+        primaryStage.setMinHeight(480);
+
         primaryStage.setTitle("Shape Editor");
         primaryStage.setScene(ViewFx.rootScene);
         primaryStage.show();

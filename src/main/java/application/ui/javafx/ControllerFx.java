@@ -21,7 +21,6 @@ import javafx.scene.input.ScrollEvent;
  */
 public class ControllerFx implements Controller {
     ArrayList<String> input;
-    Point2D mousePos;
 
     /**
      * Basic constructor. Init all user events.
@@ -30,6 +29,14 @@ public class ControllerFx implements Controller {
         this.input = new ArrayList<>();
 
         Scene scene = view.getScene();
+
+        scene.widthProperty().addListener((obs, oldVal, newVal) -> {
+            mainController.onWindowsResize(newVal.intValue(), (int) scene.getHeight());
+        });
+
+        scene.heightProperty().addListener((obs, oldVal, newVal) -> {
+            mainController.onWindowsResize((int) scene.getWidth(), newVal.intValue());
+        });
 
         scene.setOnKeyPressed(
                 e -> {
@@ -69,39 +76,6 @@ public class ControllerFx implements Controller {
 
         scene.setOnMouseDragged(
                 e -> mainController.onMouseDragged(e.getX(), e.getY()));
-
-        scene.setOnScroll(
-                e -> moveWheel((int)e.getDeltaY()));
-    }
-
-
-
-    /**
-     * Set the mouse's position.
-     * @param x Position x
-     * @param y	Position y
-     */
-    private void setMousePos(double x, double y) {
-        this.mousePos = new Point2D(x, y);
-    }
-
-    /**
-     * Calls the associated fonction in sceneManager with the mouse's position when the mouse is clicked.
-     * @param button Button of the mouse(left : 0, right : 1)
-     * @param x Position x
-     * @param y	Position y
-     */
-    private void mouseClicked(int button, double x, double y) {
-        //this.sceneManager.mouseClicked(button, x, y, this.input);
-    }
-
-    /**
-     * Calls the associated fonction in sceneManager with the vertical delta of the wheel when it is moving.
-     * @param dy Wheel's vertical delta
-     */
-    private void moveWheel(int dy) {
-        int speed = 5;
-        //this.sceneManager.moveWheel(dy / speed);
     }
 
     /**
@@ -109,23 +83,6 @@ public class ControllerFx implements Controller {
      * the user events.
      */
     public boolean tick() {
-        if(this.input.contains("ESCAPE")){
-            this.input.remove("ESCAPE");
-            //this.sceneManager.inputEscape();
-        }
-        if(this.input.contains("MOUSE_LEFT")){
-            //this.sceneManager.inputMouseLeft(this.mousePos.getX(), this.mousePos.getY());
-        }
-        if(this.input.contains("CONTROL")){
-            if(this.input.contains("S")) {
-                this.input.remove("S");
-                //this.sceneManager.saveGame();
-            }
-            else if(this.input.contains("L")) {
-                this.input.remove("L");
-                //this.sceneManager.restoreGame();
-            }
-        }
 
         return true;
     }

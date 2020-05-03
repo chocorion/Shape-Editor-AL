@@ -57,6 +57,10 @@ public class MainController {
     public void onMouseDragged(double x, double y) {
         while (!currentState.onMouseDragged((int) x, (int) y));
     }
+
+    public void onWindowsResize(int width, int height) {
+        System.out.println("New windows size, width : " + width + " height : " + height);
+    }
 }
 
 

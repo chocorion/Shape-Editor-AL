@@ -21,7 +21,9 @@ public class ModelObservableImp implements ModelObservable {
 
     @Override
     public void notifyObserver() {
-        for (ModelObserver obs : this.modelObservers) {
+        ArrayList<ModelObserver> copy = (ArrayList<ModelObserver>) modelObservers.clone();
+
+        for (ModelObserver obs : copy) {
             obs.update();
         }
     }
