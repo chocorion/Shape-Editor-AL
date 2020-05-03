@@ -78,12 +78,7 @@ public class SelectionState extends ControllerStateImp {
             return true;
         }
 
-        view.getWhiteBoard().undrawSelect(
-                Math.min(endX, startX),
-                Math.min(endY, startY),
-                Math.abs(startX - endX),
-                Math.abs(startY - endY)
-        );
+        view.getWhiteBoard().clearSelection();
         view.getWhiteBoard().update();
 
         if (!model.getWhiteBoard().isIn(x, y)) {
@@ -136,12 +131,7 @@ public class SelectionState extends ControllerStateImp {
     @Override
     public boolean onMouseDragged(int x, int y) {
         if (doingSelection && model.getWhiteBoard().isIn(x, y)) {
-            view.getWhiteBoard().undrawSelect(
-                    Math.min(endX, startX),
-                    Math.min(endY, startY),
-                    Math.abs(startX - endX),
-                    Math.abs(startY - endY)
-            );
+            view.getWhiteBoard().clearSelection();
 
             view.getWhiteBoard().update();
             endX = x;

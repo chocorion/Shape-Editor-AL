@@ -12,6 +12,8 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -41,10 +43,6 @@ public class ViewFx extends Application implements ConcreteViewItf {
         ViewFx.gc = canvas.getGraphicsContext2D();
         root.getChildren().add(canvas);
         ViewFx.rootScene = new Scene(root);
-        this.menuName = new ArrayList<String>();
-        this.menuName.add("group");
-        this.menuName.add("ungoup");
-        this.menuName.add("color");
     }
 
     public void initViewFx () {
@@ -116,21 +114,12 @@ public class ViewFx extends Application implements ConcreteViewItf {
         ViewFx.gc.strokeRect(x,y,width,height);
     }
 
-
-
-
-
-
     @Override
-    public void devUndrawSelect(int x, int y, int width, int height){
-        ViewFx.gc.clearRect(x,y,width+1,height+1);
-    }
-
-
-    @Override
-    public void devUndrawMenu(){
-        ViewFx.gc.clearRect(menuX,menuY,1+viewWhiteBoardW /20, 1+this.menuName.size() * (viewWhiteBoardH/40));
-
+    public void devDrawImage(String path, int x, int y, int width, int height) {
+        //TODO Système de cache dans l'objet pour ne pas recréer d'image à chaque fois
+        System.out.println("drawing " + path + " x : " + x + " y : " + y + " width : " + width + " height : " + height);
+        Image image = new Image(path);
+        ViewFx.gc.drawImage(image, x, y, width, height);
     }
 
     @Override

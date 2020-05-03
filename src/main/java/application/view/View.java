@@ -16,9 +16,7 @@ public interface View {
     void drawPolygon(Polygon polygon);
     void drawSelection(int x, int y, int width, int height);
 
+    void drawImage(String path, Rectangle rect);
+
     void drawText(String text, int x, int y, int size, Color color);
-
-
-    void undrawSelect(int x, int y, int width, int height);
-    void undrawMenu();
 }

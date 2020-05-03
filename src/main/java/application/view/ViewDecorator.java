@@ -37,6 +37,11 @@ public abstract class ViewDecorator implements ObserverDecoration {
     }
 
     @Override
+    public void drawImage(String name, Rectangle rect) {
+        view.drawImage(name, rect);
+    }
+
+    @Override
     public void drawText(String text, int x, int y, int size, Color color) {
         this.view.drawText(text, x, y, size, color);
     }
@@ -48,12 +53,4 @@ public abstract class ViewDecorator implements ObserverDecoration {
 
     @Override
     public void drawSelection(int x,int y, int width, int height){ this.view.drawSelection(x,y,width,height);}
-
-    @Override
-    public void undrawSelect(int x, int y, int width, int height) {this.view.undrawSelect(x,y,width,height);}
-
-    @Override
-    public void undrawMenu(){this.view.undrawMenu();}
-
-
 }

@@ -3,11 +3,13 @@ package application.view.areas;
 import application.model.areas.TopBar;
 import application.model.shape.Rectangle;
 import application.utils.Color;
+import application.utils.ImageManager;
 import application.utils.ModelObservable;
 import application.utils.ModelObserver;
 import application.view.ObserverDecoration;
 import application.view.View;
 import application.view.ViewDecorator;
+import javafx.util.Pair;
 
 import java.util.ArrayList;
 
@@ -16,7 +18,7 @@ public class TopBarView extends ViewDecorator implements ObserverDecoration {
     private TopBar topBar;
     private static int BUTTON_MARGIN = 4;
 
-    private ArrayList<Rectangle> buttons;
+    private ArrayList<Pair<Rectangle, String>> buttons;
 
     public TopBarView(View view, TopBar topBar) {
         super(view);
@@ -24,8 +26,22 @@ public class TopBarView extends ViewDecorator implements ObserverDecoration {
 
         buttons = new ArrayList<>();
 
-        for (int i = 0; i < 3; i++)
-            buttons.add(createButton(topBar.getX(), topBar.getY(), topBar.getButtonWidth(), BUTTON_MARGIN, i));
+        String[] buttonNames = {
+                "undo",
+                "redo",
+                "export",
+                "import"
+        };
+
+        for (int i = 0; i < 4; i++) {
+            buttons.add(
+                    new Pair<>(
+                            createButton(topBar.getX(), topBar.getY(), topBar.getButtonWidth(), BUTTON_MARGIN, i),
+                            buttonNames[i]
+                    )
+            );
+        }
+
     }
 
     @Override
@@ -36,9 +52,7 @@ public class TopBarView extends ViewDecorator implements ObserverDecoration {
         super.drawRectangle(new Rectangle(topBar.getX(), topBar.getY(), topBar.getWidth(), topBar.getHeight(), Color.BLACK));
         super.drawRectangle(new Rectangle(topBar.getX() + borderSize, topBar.getY() + borderSize, topBar.getWidth() - 2 * borderSize, topBar.getHeight() - 2 * borderSize, Color.WHITE));
 
-        for (Rectangle button : this.buttons) {
-            super.drawRectangle(button);
-        }
+        drawButtons();
 
     }
 
@@ -56,9 +70,18 @@ public class TopBarView extends ViewDecorator implements ObserverDecoration {
         );
     }
 
+    private void drawButtons() {
+        for (Pair<Rectangle, String> pair : buttons) {
+            super.drawImage(
+                    ImageManager.getImage(pair.getValue()),
+                    pair.getKey()
+            );
+        }
+    }
+
     public int getButtonId(int x, int y) {
         for (int i = 0; i < buttons.size(); i++) {
-            if (buttons.get(i).isIn(x, y)) {
+            if (buttons.get(i).getKey().isIn(x, y)) {
                 return i;
             }
         }

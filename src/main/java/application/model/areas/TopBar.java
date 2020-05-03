@@ -57,6 +57,7 @@ public class TopBar extends ModelObservableImp {
             case 0:
                 model.undo();
                 break;
+
             case 1:
                 model.redo();
                 break;
