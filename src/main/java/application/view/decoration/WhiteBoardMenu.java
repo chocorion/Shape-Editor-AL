@@ -57,4 +57,8 @@ public class WhiteBoardMenu extends Menu {
 
         return itemId;
     }
+
+    public boolean isIn(int x, int y) {
+        return getItemId(x, y) != -1;
+    }
 }

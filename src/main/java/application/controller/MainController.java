@@ -25,12 +25,12 @@ public class MainController {
         ((ViewFx) viewImp).AddController(this.controllerImp);
 
 
-        Default.setInstance(this, model, view);
-        Menu.setInstance(this, model, view);
-        Selection.setInstance(this, model, view);
-        ShapeHolding.setInstance(this, model, view);
+        DefaultState.setInstance(this, model, view);
+        WhiteBoardMenuState.setInstance(this, model, view);
+        SelectionState.setInstance(this, model, view);
+        ShapeHoldingState.setInstance(this, model, view);
 
-        currentState = Default.getInstance();
+        currentState = DefaultState.getInstance();
     }
 
     public void switchState(ControllerState newState) {

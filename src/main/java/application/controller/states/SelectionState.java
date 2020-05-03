@@ -8,9 +8,9 @@ import application.view.MainView;
 
 import java.util.ArrayList;
 
-public class Selection extends ControllerStateImp {
+public class SelectionState extends ControllerStateImp {
     private final MainController mainController;
-    private static Selection instance;
+    private static SelectionState instance;
 
     private final MainView view;
     private final Model model;
@@ -26,7 +26,7 @@ public class Selection extends ControllerStateImp {
 
     private final ArrayList<Shape> selectedShape;
 
-    private Selection(MainController mainController, Model model, MainView view) {
+    private SelectionState(MainController mainController, Model model, MainView view) {
         this.mainController = mainController;
 
         this.model = model;
@@ -39,10 +39,10 @@ public class Selection extends ControllerStateImp {
     }
 
     public static void setInstance(MainController mainController, Model model, MainView view) {
-        instance = new Selection(mainController, model, view);
+        instance = new SelectionState(mainController, model, view);
     }
 
-    public static Selection getInstance() {
+    public static SelectionState getInstance() {
         return instance;
     }
 
@@ -55,7 +55,7 @@ public class Selection extends ControllerStateImp {
             view.getWhiteBoard().clearSelection();
             view.getWhiteBoard().update();
 
-            mainController.switchState(Default.getInstance());
+            mainController.switchState(DefaultState.getInstance());
 
             return true;
         }
@@ -74,7 +74,7 @@ public class Selection extends ControllerStateImp {
 
         if (startY == endY && startX == endX) {
             System.out.println("Empty selection");
-            mainController.switchState(Default.getInstance());
+            mainController.switchState(DefaultState.getInstance());
             return true;
         }
 
@@ -87,7 +87,7 @@ public class Selection extends ControllerStateImp {
         view.getWhiteBoard().update();
 
         if (!model.getWhiteBoard().isIn(x, y)) {
-            mainController.switchState(Default.getInstance());
+            mainController.switchState(DefaultState.getInstance());
         }
 
         else {
@@ -114,7 +114,7 @@ public class Selection extends ControllerStateImp {
                 view.getWhiteBoard().addSelection(selectedShape);
                 view.getWhiteBoard().update();
             } else {
-                mainController.switchState(Default.getInstance());
+                mainController.switchState(DefaultState.getInstance());
             }
 
 
@@ -126,7 +126,7 @@ public class Selection extends ControllerStateImp {
     @Override
     public boolean onRightClickPressed(int x, int y) {
         if (selectionDone) {
-            mainController.switchState(Menu.getInstance());
+            mainController.switchState(WhiteBoardMenuState.getInstance());
             return false;
         }
 

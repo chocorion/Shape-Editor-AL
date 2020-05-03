@@ -7,8 +7,8 @@ import application.model.shape.Shape;
 import application.utils.ShapeContainer;
 import application.view.MainView;
 
-public class ShapeHolding extends ControllerStateImp {
-    private static ShapeHolding instance;
+public class ShapeHoldingState extends ControllerStateImp {
+    private static ShapeHoldingState instance;
 
     private ShapeContainer from;
     private Shape holdedShape;
@@ -17,17 +17,17 @@ public class ShapeHolding extends ControllerStateImp {
     private Model model;
     private MainView view;
 
-    private ShapeHolding(MainController mainController, Model model, MainView view) {
+    private ShapeHoldingState(MainController mainController, Model model, MainView view) {
         this.mainController = mainController;
         this.model = model;
         this.view = view;
     }
 
     public static void setInstance(MainController mainController, Model model, MainView view) {
-        instance = new ShapeHolding(mainController, model, view);
+        instance = new ShapeHoldingState(mainController, model, view);
     }
 
-    public static ShapeHolding getInstance() {
+    public static ShapeHoldingState getInstance() {
         return instance;
     }
 
@@ -40,7 +40,7 @@ public class ShapeHolding extends ControllerStateImp {
                 holdedShape = model.getToolBar().getShape(shapeId);
                 from = model.getToolBar();
             } else {
-                mainController.switchState(Default.getInstance());
+                mainController.switchState(DefaultState.getInstance());
             }
         }
 
@@ -48,7 +48,7 @@ public class ShapeHolding extends ControllerStateImp {
             Shape s = model.getWhiteBoard().getShapeAt(x, y);
 
             if (s == null) {
-                mainController.switchState(Default.getInstance());
+                mainController.switchState(DefaultState.getInstance());
             } else {
                 holdedShape = s;
                 from = model.getWhiteBoard();
@@ -76,7 +76,7 @@ public class ShapeHolding extends ControllerStateImp {
             model.execute(new AddShape(dest, clonedShape));
         }
 
-        mainController.switchState(Default.getInstance());
+        mainController.switchState(DefaultState.getInstance());
 
         return true;
     }

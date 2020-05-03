@@ -2,16 +2,19 @@ package application.controller.states;
 
 import application.controller.MainController;
 import application.model.Model;
+import application.model.command.concreteCommand.AddComposite;
+import application.utils.ShapeContainer;
 import application.view.MainView;
+import application.view.decoration.WhiteBoardMenu;
 
-public class Menu extends ControllerStateImp {
-    private static Menu instance;
+public class WhiteBoardMenuState extends ControllerStateImp {
+    private static WhiteBoardMenuState instance;
     private final MainController mainController;
 
     private final Model model;
     private final MainView view;
 
-    private Menu(MainController mainController, Model model, MainView view) {
+    private WhiteBoardMenuState(MainController mainController, Model model, MainView view) {
         this.mainController = mainController;
 
         this.model = model;
@@ -20,27 +23,27 @@ public class Menu extends ControllerStateImp {
 
     @Override
     public boolean onLeftClickPressed(int x, int y) {
-        if (view.getWhiteBoard().isInMenu(x, y)) {
-            System.out.println("Click on menu");
-
-        } else {
-            view.getWhiteBoard().clearSelection();
-            view.getWhiteBoard().closeWhiteboardMenu();
-
-            mainController.switchState(Default.getInstance());
-        }
-
         return true;
     }
 
     @Override
     public boolean onLeftClickReleased(int x, int y) {
-        /*
-        Chercher la bonne case du menu, réaliser la bonne action
-        mainController.addCommand(
-                        new AddComposite(model, selectionStartX, selectionStartY, selectionEndX, selectionEndY)
-                );
-         */
+        WhiteBoardMenu menu = view.getWhiteBoard().getMenu();
+        int itemId = menu.getItemId(x, y);
+
+        if (itemId == 0) {
+            model.execute(
+                    new AddComposite(model.getWhiteBoard(), view.getWhiteBoard().getSelectedShapes())
+            );
+
+        } else {
+            view.getWhiteBoard().clearSelection();
+            view.getWhiteBoard().closeWhiteboardMenu();
+
+            mainController.switchState(DefaultState.getInstance());
+        }
+
+
         return true;
     }
 
@@ -51,12 +54,12 @@ public class Menu extends ControllerStateImp {
     }
 
 
-    public static Menu getInstance() {
+    public static WhiteBoardMenuState getInstance() {
         return instance;
     }
 
     public static void setInstance(MainController mainController, Model model, MainView view) {
-        instance = new Menu(mainController, model, view);
+        instance = new WhiteBoardMenuState(mainController, model, view);
     }
 
     @Override

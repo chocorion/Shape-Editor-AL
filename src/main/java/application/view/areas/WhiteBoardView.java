@@ -49,6 +49,10 @@ public class WhiteBoardView extends ViewDecorator implements ObserverDecoration 
         selectedShapes.addAll(shapes);
     }
 
+    public ArrayList<Shape> getSelectedShapes() {
+        return selectedShapes;
+    }
+
     public void clearSelection() {
         selectedShapes.clear();
     }
@@ -101,11 +105,7 @@ public class WhiteBoardView extends ViewDecorator implements ObserverDecoration 
         }
     }
 
-    public boolean isMenuOpen() {
-        return menu.isToggle();
-    }
-
-    public boolean isInMenu(int x, int y) {
-        return menu.getItemId(x, y) != -1;
+    public WhiteBoardMenu getMenu() {
+        return menu;
     }
 }

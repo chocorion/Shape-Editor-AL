@@ -6,8 +6,10 @@ import application.model.shape.CompositeShape;
 import application.model.shape.Shape;
 import application.utils.ShapeContainer;
 
+import java.util.ArrayList;
+
 public class AddComposite implements Command {
-    private WhiteBoard shapeContainer;
+    private ShapeContainer shapeContainer;
     private CompositeShape shape;
 
     public AddComposite(WhiteBoard shapeContainer,int beginX, int beginY,int endX, int endY) {
@@ -23,6 +25,15 @@ public class AddComposite implements Command {
                     this.shape.add(s);
                 }
             }
+        }
+    }
+
+    public AddComposite(ShapeContainer shapeContainer, ArrayList<Shape> shapes) {
+        this.shape = new CompositeShape();
+        this.shapeContainer = shapeContainer;
+
+        for (Shape s : shapes) {
+            shape.add(s);
         }
     }
 

@@ -6,25 +6,25 @@ import application.model.shape.Shape;
 import application.view.MainView;
 
 
-public class Default extends ControllerStateImp {
-    private static Default state;
+public class DefaultState extends ControllerStateImp {
+    private static DefaultState state;
 
     MainController mainController;
     Model model;
     MainView view;
 
-    private Default(MainController mainController, Model model, MainView view) {
+    private DefaultState(MainController mainController, Model model, MainView view) {
         this.mainController = mainController;
         this.model = model;
         this.view = view;
     }
 
     public static void setInstance(MainController mainController, Model model, MainView view) {
-        state = new Default(mainController, model, view);
+        state = new DefaultState(mainController, model, view);
     }
 
 
-    public static Default getInstance() {
+    public static DefaultState getInstance() {
         return state;
     }
 
@@ -41,7 +41,7 @@ public class Default extends ControllerStateImp {
             int shapeId = view.getToolBar().getShapeId(x, y);
 
             if (shapeId != -1) {
-                mainController.switchState(ShapeHolding.getInstance());
+                mainController.switchState(ShapeHoldingState.getInstance());
                 return false;
             }
         }
@@ -50,9 +50,9 @@ public class Default extends ControllerStateImp {
             Shape currentShape = model.getWhiteBoard().getShapeAt(x, y);
 
             if (currentShape != null) {
-               mainController.switchState(ShapeHolding.getInstance());
+               mainController.switchState(ShapeHoldingState.getInstance());
             } else {
-                mainController.switchState(Selection.getInstance());
+                mainController.switchState(SelectionState.getInstance());
             }
 
             return false;
