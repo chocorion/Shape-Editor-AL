@@ -57,15 +57,19 @@ public class ToolBarView extends ViewDecorator implements ObserverDecoration {
         int index = 0;
 
         for (Shape shape:toolBar.getInnerShapes()) {
-            Shape minimizedShape = minimisedShapes.get(shape);
+            Shape minimizedShape = getMinimisedClone(shape);
 
             minimizedShape.moveTo(
                     area.getX() + CASE_MARGIN,
                     area.getY() + index * (CASE_MARGIN + caseSize)
             );
 
+            System.out.println("Drawing minified shape -> ");
+            System.out.println("\tx : " + minimizedShape.getMinX() + ", y : " + minimizedShape.getMinX() + ", width : " + minimizedShape.getWidth() + ", height : " + minimizedShape.getHeight());
             minimizedShape.draw(this);
             index++;
+
+
         }
     }
 
@@ -76,12 +80,6 @@ public class ToolBarView extends ViewDecorator implements ObserverDecoration {
                 area.getWidth() - 2 * CASE_MARGIN,
                 area.getHeight() - 2 * CASE_MARGIN
         );
-
-        for (Shape shape : toolBar.getInnerShapes()) {
-            if (!minimisedShapes.containsKey(shape)) {
-                minimisedShapes.put(shape, getMinimisedClone(shape));
-            }
-        }
         
         this.draw();
     }
