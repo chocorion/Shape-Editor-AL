@@ -4,6 +4,7 @@ import application.controller.MainController;
 import application.model.Model;
 import application.model.shape.Shape;
 import application.view.MainView;
+import application.view.areas.Layout;
 
 
 public class DefaultState extends ControllerStateImp {
@@ -30,14 +31,17 @@ public class DefaultState extends ControllerStateImp {
 
     @Override
     public boolean onLeftClickPressed(int x, int y) {
-        if (model.getTopBar().isIn(x, y)) {
+        if (Layout.getTopBar().isIn(x, y)) {
             int buttonId = view.getTopBar().getButtonId(x, y);
 
-            if (buttonId != -1)
-                model.getTopBar().clickOnButton(buttonId);
+            if (buttonId == 0) {
+                model.undo();
+            } else if (buttonId == 1) {
+                model.redo();
+            }
         }
 
-        else if (model.getToolBar().isIn(x, y)) {
+        else if (Layout.getToolBar().isIn(x, y)) {
             int shapeId = view.getToolBar().getShapeId(x, y);
 
             if (shapeId != -1) {
@@ -46,7 +50,7 @@ public class DefaultState extends ControllerStateImp {
             }
         }
 
-        else if (model.getWhiteBoard().isIn(x, y)) {
+        else if (Layout.getWhiteBoard().isIn(x, y)) {
             Shape currentShape = model.getWhiteBoard().getShapeAt(x, y);
 
             if (currentShape != null) {

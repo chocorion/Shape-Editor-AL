@@ -4,7 +4,7 @@ import application.model.shape.Polygon;
 import application.model.shape.Rectangle;
 import application.utils.Color;
 
-public abstract class ViewDecorator implements ObserverDecoration {
+public abstract class ViewDecorator implements View {
     private View view;
 
     public ViewDecorator(View view) {

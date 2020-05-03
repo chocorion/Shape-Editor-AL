@@ -6,6 +6,7 @@ import application.model.shape.Shape;
 import application.utils.Color;
 import application.utils.ModelObservable;
 import application.utils.ModelObserver;
+import application.view.MainView;
 import application.view.ObserverDecoration;
 import application.view.View;
 import application.view.ViewDecorator;
@@ -16,17 +17,23 @@ public class ToolBarView extends ViewDecorator implements ObserverDecoration {
     private ToolBar toolBar;
     private final HashMap<Shape, Shape> minimisedShapes;
 
-    private static int BORDER_SIZE = 1;
-    private static int CASE_SIZE;
-    private static int CASE_MARGIN = 10;
+    private static int CASE_MARGIN = 5;
 
-    public ToolBarView(View view, ToolBar toolBar) {
+    private Rectangle area;
+    private int caseSize;
+
+    public ToolBarView(MainView mainView, View view, ToolBar toolBar) {
         super(view);
 
         this.toolBar = toolBar;
         this.minimisedShapes = new HashMap<>();
 
-        CASE_SIZE = Math.min(toolBar.getWidth() - 6 * BORDER_SIZE, toolBar.getHeight() - 6 * BORDER_SIZE);
+        area = Layout.getToolBar();
+
+        caseSize = (int) Math.min(
+                area.getWidth() - 2 * CASE_MARGIN,
+                area.getHeight() - 2 * CASE_MARGIN
+        );
     }
 
     @Override
@@ -34,22 +41,14 @@ public class ToolBarView extends ViewDecorator implements ObserverDecoration {
         super.draw();
         // Draw toolbar
 
-        super.drawRectangle(
-                new Rectangle(
-                        toolBar.getX(),
-                        toolBar.getY(),
-                        toolBar.getWidth(),
-                        toolBar.getHeight(),
-                        Color.BLACK
-                )
-        );
+        super.drawRectangle(area);
 
         super.drawRectangle(
                 new Rectangle(
-                        toolBar.getX() + BORDER_SIZE,
-                        toolBar.getY() + BORDER_SIZE,
-                        toolBar.getWidth() - 2 * BORDER_SIZE,
-                        toolBar.getHeight() - 2 * BORDER_SIZE,
+                        area.getX() + Layout.BORDER,
+                        area.getY() + Layout.BORDER,
+                        area.getWidth() - 2 * Layout.BORDER,
+                        area.getHeight() - 2 * Layout.BORDER,
                         Color.WHITE
                 )
         );
@@ -61,8 +60,8 @@ public class ToolBarView extends ViewDecorator implements ObserverDecoration {
             Shape minimizedShape = minimisedShapes.get(shape);
 
             minimizedShape.moveTo(
-                    toolBar.getX() + 3 * BORDER_SIZE,
-                    toolBar.getY() + index * (CASE_SIZE + CASE_MARGIN) + 4 * BORDER_SIZE
+                    area.getX() + CASE_MARGIN,
+                    area.getY() + index * (CASE_MARGIN + caseSize)
             );
 
             minimizedShape.draw(this);
@@ -72,6 +71,12 @@ public class ToolBarView extends ViewDecorator implements ObserverDecoration {
 
     @Override
     public void update() {
+        area = Layout.getToolBar();
+        caseSize = (int) Math.min(
+                area.getWidth() - 2 * CASE_MARGIN,
+                area.getHeight() - 2 * CASE_MARGIN
+        );
+
         for (Shape shape : toolBar.getInnerShapes()) {
             if (!minimisedShapes.containsKey(shape)) {
                 minimisedShapes.put(shape, getMinimisedClone(shape));
@@ -84,7 +89,7 @@ public class ToolBarView extends ViewDecorator implements ObserverDecoration {
     private Shape getMinimisedClone(Shape shape) {
         Shape minimised = (Shape) shape.clone();
 
-        double innerShapeMaxSize = Math.min(toolBar.getWidth() - 6 * BORDER_SIZE, toolBar.getHeight() - 6 * BORDER_SIZE);
+        double innerShapeMaxSize = caseSize;
         double factor = innerShapeMaxSize/Math.max(shape.getWidth(), shape.getHeight());
 
         minimised.resize(factor);
@@ -93,11 +98,11 @@ public class ToolBarView extends ViewDecorator implements ObserverDecoration {
     }
 
     public int getShapeId(int x, int y) {
-        if (x > toolBar.getX() + 3 * BORDER_SIZE + toolBar.getWidth()) {
+        if (x > area.getX() + area.getWidth() || x < area.getX()) {
             return -1;
         }
 
-        return (y - toolBar.getY() - 4 * BORDER_SIZE)/(CASE_SIZE + CASE_MARGIN);
+        return (int) ((y - area.getY())/(caseSize + CASE_MARGIN));
     }
 
     @Override

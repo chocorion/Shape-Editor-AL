@@ -4,23 +4,28 @@ import application.model.shape.Rectangle;
 import application.utils.Color;
 import application.utils.ImageManager;
 import application.utils.ModelObservable;
-import application.view.ObserverDecoration;
-import application.view.View;
-import application.view.ViewDecorator;
+import application.view.*;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
 
 
-public class TopBarView extends ViewDecorator implements ObserverDecoration {
-    private TopBar topBar;
-    private static int BUTTON_MARGIN = 4;
-
+public class TopBarView extends ViewDecorator {
     private ArrayList<Pair<Rectangle, String>> buttons;
+    private Rectangle area;
+    private MainView mainView;
 
-    public TopBarView(View view, TopBar topBar) {
+    private static int BUTTON_WIDTH;
+    private static int BUTTON_MARGIN;
+
+    public TopBarView(MainView mainView, View view) {
         super(view);
-        this.topBar = topBar;
+        this.mainView = mainView;
+
+        area = Layout.getTopBar();
+        BUTTON_MARGIN = (int) (area.getHeight()/6);
+        BUTTON_WIDTH  = (int) area.getHeight() - 2 * BUTTON_MARGIN;
+
 
         buttons = new ArrayList<>();
 
@@ -34,7 +39,7 @@ public class TopBarView extends ViewDecorator implements ObserverDecoration {
         for (int i = 0; i < 4; i++) {
             buttons.add(
                     new Pair<>(
-                            createButton(topBar.getX(), topBar.getY(), topBar.getButtonWidth(), BUTTON_MARGIN, i),
+                            createButton(area.getX(), area.getY(), BUTTON_WIDTH, BUTTON_MARGIN, i),
                             buttonNames[i]
                     )
             );
@@ -45,21 +50,30 @@ public class TopBarView extends ViewDecorator implements ObserverDecoration {
     @Override
     public void draw() {
         super.draw();
-        int borderSize = 1;
+
         // draw topBar
-        super.drawRectangle(new Rectangle(topBar.getX(), topBar.getY(), topBar.getWidth(), topBar.getHeight(), Color.BLACK));
-        super.drawRectangle(new Rectangle(topBar.getX() + borderSize, topBar.getY() + borderSize, topBar.getWidth() - 2 * borderSize, topBar.getHeight() - 2 * borderSize, Color.WHITE));
+        super.drawRectangle(area);
+
+        super.drawRectangle(
+                new Rectangle(
+                        area.getX() + Layout.BORDER,
+                        area.getY() + Layout.BORDER,
+                        area.getWidth() - 2 * Layout.BORDER,
+                        area.getHeight() - 2 * Layout.BORDER,
+                        Color.WHITE
+                )
+        );
 
         drawButtons();
 
     }
 
-    @Override
     public void update() {
+        area = Layout.getTopBar();
         this.draw();
     }
 
-    private Rectangle createButton(int topBarX, int topBarY, int size, int margin, int buttonId) {
+    private Rectangle createButton(double topBarX, double topBarY, int size, int margin, int buttonId) {
         return new Rectangle(
                 topBarX + buttonId * (size + margin/2) + margin,
                 topBarY + margin,
@@ -85,10 +99,5 @@ public class TopBarView extends ViewDecorator implements ObserverDecoration {
         }
 
         return -1;
-    }
-
-    @Override
-    public ModelObservable getSubject() {
-        return this.topBar;
     }
 }

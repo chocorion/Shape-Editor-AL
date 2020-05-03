@@ -4,10 +4,10 @@ import application.model.shape.Polygon;
 import application.model.shape.Rectangle;
 import application.utils.Color;
 
-public class SimpleView implements View {
+public class ViewBridge implements View {
     private ConcreteViewItf implementation;
 
-    public SimpleView(ConcreteViewItf concreteView) {
+    public ViewBridge(ConcreteViewItf concreteView) {
         this.implementation = concreteView;
     }
 
@@ -48,7 +48,13 @@ public class SimpleView implements View {
 
     @Override
     public void drawImage(String path, Rectangle r) {
-        implementation.devDrawImage(path, r.getX(), r.getY(), r.getWidth(), r.getHeight());
+        implementation.devDrawImage(
+                path,
+                (int) r.getX(),
+                (int) r.getY(),
+                (int) r.getWidth(),
+                (int) r.getHeight()
+        );
     }
 
     @Override

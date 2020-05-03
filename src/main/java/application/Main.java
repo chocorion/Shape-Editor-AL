@@ -4,9 +4,6 @@ import application.controller.MainController;
 import application.model.Model;
 import application.ui.javafx.ViewFx;
 import application.view.*;
-import application.view.areas.ToolBarView;
-import application.view.areas.TopBarView;
-import application.view.areas.WhiteBoardView;
 
 
 public class Main {
@@ -25,13 +22,12 @@ public class Main {
 
     public static void buildUi() {
         ViewFx viewFx = new ViewFx(model);
-        View simpleView = new SimpleView(viewFx);
+        View viewBridge = new ViewBridge(viewFx);
 
-        view = new MainView(model, simpleView);
+        view = new MainView(model, viewBridge);
 
         model.getToolBar().attachObserver(view.getToolBar());
         model.getWhiteBoard().attachObserver(view.getWhiteBoard());
-        model.getTopBar().attachObserver(view.getTopBar());
 
         controller = new MainController(model, view, viewFx);
         viewFx.initViewFx();

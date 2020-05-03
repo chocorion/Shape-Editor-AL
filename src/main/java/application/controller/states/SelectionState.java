@@ -5,6 +5,7 @@ import application.model.Model;
 import application.model.shape.Rectangle;
 import application.model.shape.Shape;
 import application.view.MainView;
+import application.view.areas.Layout;
 
 import java.util.ArrayList;
 
@@ -81,7 +82,7 @@ public class SelectionState extends ControllerStateImp {
         view.getWhiteBoard().clearSelection();
         view.getWhiteBoard().update();
 
-        if (!model.getWhiteBoard().isIn(x, y)) {
+        if (!Layout.getWhiteBoard().isIn(x, y)) {
             mainController.switchState(DefaultState.getInstance());
         }
 
@@ -130,7 +131,7 @@ public class SelectionState extends ControllerStateImp {
 
     @Override
     public boolean onMouseDragged(int x, int y) {
-        if (doingSelection && model.getWhiteBoard().isIn(x, y)) {
+        if (doingSelection && Layout.getWhiteBoard().isIn(x, y)) {
             view.getWhiteBoard().clearSelection();
 
             view.getWhiteBoard().update();

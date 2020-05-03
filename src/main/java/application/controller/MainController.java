@@ -60,6 +60,7 @@ public class MainController {
 
     public void onWindowsResize(int width, int height) {
         System.out.println("New windows size, width : " + width + " height : " + height);
+        view.changeSize(width, height);
     }
 }
 

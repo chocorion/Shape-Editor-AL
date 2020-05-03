@@ -6,6 +6,7 @@ import application.model.command.concreteCommand.AddShape;
 import application.model.shape.Shape;
 import application.model.areas.ShapeContainer;
 import application.view.MainView;
+import application.view.areas.Layout;
 
 public class ShapeHoldingState extends ControllerStateImp {
     private static ShapeHoldingState instance;
@@ -33,7 +34,7 @@ public class ShapeHoldingState extends ControllerStateImp {
 
     @Override
     public boolean onLeftClickPressed(int x, int y) {
-        if (model.getToolBar().isIn(x, y)) {
+        if (Layout.getToolBar().isIn(x, y)) {
             int shapeId = view.getToolBar().getShapeId(x, y);
 
             if (shapeId != -1) {
@@ -44,7 +45,7 @@ public class ShapeHoldingState extends ControllerStateImp {
             }
         }
 
-        else if (model.getWhiteBoard().isIn(x, y)) {
+        else if (Layout.getWhiteBoard().isIn(x, y)) {
             Shape s = model.getWhiteBoard().getShapeAt(x, y);
 
             if (s == null) {
@@ -63,9 +64,9 @@ public class ShapeHoldingState extends ControllerStateImp {
         // Ici, penser à la gestion de la corbeille
         ShapeContainer dest = null;
 
-        if (model.getWhiteBoard() != from && model.getWhiteBoard().isIn(x, y)) {
+        if (model.getWhiteBoard() != from && Layout.getWhiteBoard().isIn(x, y)) {
             dest = model.getWhiteBoard();
-        } else if (model.getToolBar() != from && model.getToolBar().isIn(x, y)) {
+        } else if (model.getToolBar() != from && Layout.getToolBar().isIn(x, y)) {
             dest = model.getToolBar();
         }
 

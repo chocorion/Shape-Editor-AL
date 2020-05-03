@@ -6,6 +6,7 @@ import application.model.shape.Shape;
 import application.utils.ModelObservable;
 import application.utils.ModelObserver;
 import application.utils.Color;
+import application.view.MainView;
 import application.view.ObserverDecoration;
 import application.view.View;
 import application.view.ViewDecorator;
@@ -18,9 +19,12 @@ public class WhiteBoardView extends ViewDecorator implements ObserverDecoration 
     private WhiteBoardMenu menu;
 
     private ArrayList<Shape> selectedShapes;
+    private Rectangle area;
 
-    public WhiteBoardView(View view, WhiteBoard whiteBoard) {
+    public WhiteBoardView(MainView mainView, View view, WhiteBoard whiteBoard) {
         super(view);
+
+        area = Layout.getWhiteBoard();
 
         this.whiteBoard = whiteBoard;
         menu = new WhiteBoardMenu(this);
@@ -32,11 +36,17 @@ public class WhiteBoardView extends ViewDecorator implements ObserverDecoration 
     public void draw() {
         super.draw();
 
-        int borderSize = 1;
+        super.drawRectangle(area);
 
-        super.drawRectangle(new Rectangle(whiteBoard.getX(), whiteBoard.getY(), whiteBoard.getWidth(), whiteBoard.getHeight(), Color.BLACK));
-        super.drawRectangle(new Rectangle(whiteBoard.getX() + borderSize, whiteBoard.getY() + borderSize, whiteBoard.getWidth() - 2 * borderSize, whiteBoard.getHeight() - 2 * borderSize, Color.WHITE));
-
+        super.drawRectangle(
+                new Rectangle(
+                        area.getX() + Layout.BORDER,
+                        area.getY() + Layout.BORDER,
+                        area.getWidth() - 2 * Layout.BORDER,
+                        area.getHeight() - 2 * Layout.BORDER,
+                        Color.WHITE
+                )
+        );
         // Draw big white rectangle
         for (Shape shape:whiteBoard.getInnerShapes()) {
             shape.draw(this);
@@ -77,7 +87,10 @@ public class WhiteBoardView extends ViewDecorator implements ObserverDecoration 
 
     @Override
     public void update() {
+
+        area = Layout.getWhiteBoard();
         this.draw();
+        System.out.println("WHITEBOARD AREA " + area);
     }
 
     @Override

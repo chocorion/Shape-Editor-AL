@@ -6,6 +6,7 @@ import application.model.Model;
 import application.model.shape.Polygon;
 import application.model.shape.Rectangle;
 import application.view.ConcreteViewItf;
+import application.view.areas.Layout;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -35,7 +36,7 @@ public class ViewFx extends Application implements ConcreteViewItf {
 
         Group root = new Group();
 
-        Canvas canvas = new Canvas(model.getWidth(), model.getHeight());
+        Canvas canvas = new Canvas(10000, 10000);
         ViewFx.gc = canvas.getGraphicsContext2D();
         root.getChildren().add(canvas);
         ViewFx.rootScene = new Scene(root);
@@ -53,6 +54,8 @@ public class ViewFx extends Application implements ConcreteViewItf {
     public void start(final Stage primaryStage) {
         primaryStage.setMinWidth(480);
         primaryStage.setMinHeight(480);
+        primaryStage.setWidth(500);
+        primaryStage.setHeight(600);
 
         primaryStage.setTitle("Shape Editor");
         primaryStage.setScene(ViewFx.rootScene);
