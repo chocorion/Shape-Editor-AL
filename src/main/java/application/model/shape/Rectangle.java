@@ -4,22 +4,11 @@ import application.utils.Color;
 import application.view.View;
 
 public class Rectangle extends SingleShape {
-    private int x, y;
-    private int width, height;
+    private double x, y;
+    private double width, height;
     private Color color;
 
-    public Rectangle(int x, int y, int width, int height) {
-        this.x = x;
-        this.y = y;
-
-        this.width = width;
-        this.height = height;
-
-        // For test
-        this.color = Color.BLACK;
-    }
-
-    public Rectangle(int x, int y, int width, int height, Color color) {
+    public Rectangle(double x, double y, double width, double height, Color color) {
         this.x = x;
         this.y = y;
 
@@ -30,52 +19,58 @@ public class Rectangle extends SingleShape {
         this.color = color;
     }
 
+    public Rectangle(double x, double y, double width, double height) {
+        this(x, y, width, height, Color.BLACK);
+    }
+
+
+
 
     @Override
     public void draw(View view) {
         view.drawRectangle(this);
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
     @Override
-    public int getWidth() {
+    public double getWidth() {
         return width;
     }
 
     @Override
-    public int getHeight() {
+    public double getHeight() {
         return height;
     }
 
     @Override
-    public int getMinX() {
+    public double getMinX() {
         return this.x;
     }
 
     @Override
-    public int getMinY() {
+    public double getMinY() {
         return this.y;
     }
 
     @Override
-    public int getMaxX() {
+    public double getMaxX() {
         return this.x + this.width;
     }
 
     @Override
-    public int getMaxY() {
+    public double getMaxY() {
         return this.y + this.height;
     }
 
     @Override
-    public boolean isIn(int x, int y) {
+    public boolean isIn(double x, double y) {
         if (x >= this.x && x <= this.x + this.width) {
             return y >= this.y && y <= this.y + this.height;
         }
@@ -92,13 +87,13 @@ public class Rectangle extends SingleShape {
     }
 
     @Override
-    public void moveTo(int x, int y) {
+    public void moveTo(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
     @Override
-    public void translate(int dx, int dy) {
+    public void translate(double dx, double dy) {
         this.x += dx;
         this.y += dy;
     }
@@ -111,11 +106,11 @@ public class Rectangle extends SingleShape {
 
     @Override
     public void resize(Shape containerShape, double factor) {
-        int minX = containerShape.getMinX();
-        int minY = containerShape.getMinY();
+        double minX = containerShape.getMinX();
+        double minY = containerShape.getMinY();
 
-        this.x = (int) ((this.x - minX) * factor + minX);
-        this.y = (int) ((this.y - minY) * factor + minY);
+        this.x = ((this.x - minX) * factor + minX);
+        this.y = ((this.y - minY) * factor + minY);
 
         this.width *= factor;
         this.height *= factor;

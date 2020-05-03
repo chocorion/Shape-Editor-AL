@@ -4,50 +4,47 @@ import java.util.Stack;
 
 public class CommandManager {
 
-    private Stack<Command> commandAdded;
-    private Stack<Command> commandRemoved;
+    private final Stack<Command> commandAdded;
+    private final Stack<Command> commandRemoved;
 
     private boolean isRemovedClean;
 
     public CommandManager() {
-        this.commandAdded   = new Stack<>();
-        this.commandRemoved = new Stack<>();
+        commandAdded   = new Stack<>();
+        commandRemoved = new Stack<>();
 
-        this.isRemovedClean = true;
+        isRemovedClean = true;
     }
 
     public void execute(Command cmd) {
         cmd.execute();
 
-        this.commandAdded.push(cmd);
-        this.isRemovedClean = false;
+        commandAdded.push(cmd);
+        isRemovedClean = false;
 
-        while (!this.commandRemoved.empty()) {
-            this.commandRemoved.pop();
+        while (!commandRemoved.empty()) {
+            commandRemoved.pop();
         }
     }
 
     public void undo() {
-        System.out.println("In undo :");
-        if (this.commandAdded.empty()) {
-            System.out.println("\tcommandAdded empty...");
+        if (commandAdded.empty()) {
             return;
         }
 
         Command cmd = this.commandAdded.pop();
-        System.out.println("\t command poped -> " + cmd);
         cmd.inverse();
 
-        this.commandRemoved.push(cmd);
-        this.isRemovedClean = true;
+        commandRemoved.push(cmd);
+        isRemovedClean = true;
     }
 
     public void redo() {
-        if (this.isRemovedClean && !this.commandRemoved.empty()) {
-            Command cmd = this.commandRemoved.pop();
+        if (isRemovedClean && !commandRemoved.empty()) {
+            Command cmd = commandRemoved.pop();
             cmd.execute();
 
-            this.commandAdded.push(cmd);
+            commandAdded.push(cmd);
         }
     }
 }

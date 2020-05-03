@@ -3,11 +3,11 @@ package application.model.command.concreteCommand;
 import application.model.command.Command;
 import application.model.shape.CompositeShape;
 import application.model.shape.Shape;
-import application.utils.ShapeContainer;
+import application.model.areas.ShapeContainer;
 
 public class ExpandComposite implements Command {
-    private ShapeContainer container;
-    private CompositeShape shape;
+    private final ShapeContainer container;
+    private final CompositeShape shape;
 
     public ExpandComposite(ShapeContainer container, CompositeShape composite) {
         this.container = container;
@@ -30,5 +30,10 @@ public class ExpandComposite implements Command {
         }
 
         container.addShape(shape);
+    }
+
+    @Override
+    public String toString() {
+        return "expandComposite(" + container + ", " + shape +")";
     }
 }

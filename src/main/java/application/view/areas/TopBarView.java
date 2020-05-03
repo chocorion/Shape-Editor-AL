@@ -1,11 +1,9 @@
 package application.view.areas;
 
-import application.model.areas.TopBar;
 import application.model.shape.Rectangle;
 import application.utils.Color;
 import application.utils.ImageManager;
 import application.utils.ModelObservable;
-import application.utils.ModelObserver;
 import application.view.ObserverDecoration;
 import application.view.View;
 import application.view.ViewDecorator;

@@ -1,4 +1,4 @@
-package application.utils;
+package application.model.areas;
 
 import application.model.shape.Shape;
 

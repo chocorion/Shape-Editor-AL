@@ -4,47 +4,44 @@ import application.view.View;
 
 // TODO
 public class Polygon extends SingleShape {
-    public Polygon() {
-
-    }
 
     @Override
     public void draw(View view) {
-        view.drawPolygon(this);
+
     }
 
     @Override
-    public int getWidth() {
+    public double getWidth() {
         return 0;
     }
 
     @Override
-    public int getHeight() {
+    public double getHeight() {
         return 0;
     }
 
     @Override
-    public int getMinX() {
+    public double getMinX() {
         return 0;
     }
 
     @Override
-    public int getMinY() {
+    public double getMinY() {
         return 0;
     }
 
     @Override
-    public int getMaxX() {
+    public double getMaxX() {
         return 0;
     }
 
     @Override
-    public int getMaxY() {
+    public double getMaxY() {
         return 0;
     }
 
     @Override
-    public boolean isIn(int x, int y) {
+    public boolean isIn(double x, double y) {
         return false;
     }
 
@@ -54,23 +51,23 @@ public class Polygon extends SingleShape {
     }
 
     @Override
-    public void moveTo(int x, int y) {
-        // TODO
+    public void moveTo(double x, double y) {
+
     }
 
     @Override
-    public void translate(int dx, int dy) {
-        // TODO
+    public void translate(double dx, double dy) {
+
     }
 
     @Override
     public void resize(double factor) {
-        //TODO
+
     }
 
     @Override
     public void resize(Shape containerShape, double factor) {
-        //TODO
+
     }
 }
 

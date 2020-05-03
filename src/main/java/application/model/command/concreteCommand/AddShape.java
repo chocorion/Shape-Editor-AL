@@ -2,7 +2,7 @@ package application.model.command.concreteCommand;
 
 import application.model.command.Command;
 import application.model.shape.Shape;
-import application.utils.ShapeContainer;
+import application.model.areas.ShapeContainer;
 
 public class AddShape implements Command {
     private ShapeContainer shapeContainer;
@@ -26,6 +26,6 @@ public class AddShape implements Command {
 
     @Override
     public String toString() {
-        return "Command(" + this.shapeContainer + ", " + this.shape +")";
+        return "addShape(" + this.shapeContainer + ", " + this.shape +")";
     }
 }

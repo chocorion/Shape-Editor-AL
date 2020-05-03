@@ -6,7 +6,6 @@ import application.model.command.concreteCommand.AddComposite;
 import application.model.command.concreteCommand.ExpandComposite;
 import application.model.shape.CompositeShape;
 import application.model.shape.Shape;
-import application.utils.ShapeContainer;
 import application.view.MainView;
 import application.view.decoration.WhiteBoardMenu;
 

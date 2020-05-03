@@ -9,33 +9,33 @@ public class CompositeShape implements Shape, Cloneable {
     Set<Shape> shapeSet;
 
     public CompositeShape() {
-        this.shapeSet = new HashSet<>();
+        shapeSet = new HashSet<>();
     }
 
     @Override
     public void add(Shape shape) {
-        this.shapeSet.add(shape);
+        shapeSet.add(shape);
     }
 
     @Override
     public void remove(Shape shape) {
-        this.shapeSet.remove(shape);
+        shapeSet.remove(shape);
     }
 
     @Override
     public void draw(View view) {
-        for (Shape shape : this.shapeSet) {
+        for (Shape shape : shapeSet) {
             shape.draw(view);
         }
     }
 
     @Override
-    public int getWidth() {
+    public double getWidth() {
         return this.getMaxX() - this.getMinX();
     }
 
     @Override
-    public int getHeight() {
+    public double getHeight() {
         return this.getMaxY() - this.getMinY();
     }
 
@@ -43,22 +43,22 @@ public class CompositeShape implements Shape, Cloneable {
     public Object clone() {
         CompositeShape other = new CompositeShape();
 
-        for (Shape shape : this.shapeSet) {
+        for (Shape shape : shapeSet) {
             other.add((Shape) shape.clone());
         }
 
         return other;
     }
 
-    public int getMinX() {
+    public double getMinX() {
         if (this.shapeSet.size() == 0) {
             return -1;
         }
 
-        int minX = Integer.MAX_VALUE;
+        double minX = Double.MAX_VALUE;
 
         for (Shape shape: this.shapeSet) {
-            int shapeMinX = shape.getMinX();
+            double shapeMinX = shape.getMinX();
 
             if (minX > shapeMinX) {
                 minX = shapeMinX;
@@ -68,15 +68,15 @@ public class CompositeShape implements Shape, Cloneable {
         return minX;
     }
 
-    public int getMaxX() {
+    public double getMaxX() {
         if (this.shapeSet.size() == 0) {
             return -1;
         }
 
-        int maxX = Integer.MIN_VALUE;
+        double maxX = Double.MIN_VALUE;
 
         for (Shape shape: this.shapeSet) {
-            int shapeMaxX = shape.getMaxX();
+            double shapeMaxX = shape.getMaxX();
 
             if (maxX < shapeMaxX) {
                 maxX = shapeMaxX;
@@ -86,15 +86,15 @@ public class CompositeShape implements Shape, Cloneable {
         return maxX;
     }
 
-    public int getMinY() {
+    public double getMinY() {
         if (this.shapeSet.size() == 0) {
             return -1;
         }
 
-        int minY = Integer.MAX_VALUE;
+        double minY = Double.MAX_VALUE;
 
         for (Shape shape: this.shapeSet) {
-            int shapeMinY = shape.getMinY();
+            double shapeMinY = shape.getMinY();
 
             if (minY > shapeMinY) {
                 minY = shapeMinY;
@@ -104,15 +104,15 @@ public class CompositeShape implements Shape, Cloneable {
         return minY;
     }
 
-    public int getMaxY() {
+    public double getMaxY() {
         if (this.shapeSet.size() == 0) {
             return -1;
         }
 
-        int maxY = Integer.MIN_VALUE;
+        double maxY = Double.MIN_VALUE;
 
         for (Shape shape: this.shapeSet) {
-            int shapeMaxY = shape.getMaxY();
+            double shapeMaxY = shape.getMaxY();
 
             if (maxY < shapeMaxY) {
                 maxY = shapeMaxY;
@@ -123,7 +123,7 @@ public class CompositeShape implements Shape, Cloneable {
     }
 
     @Override
-    public boolean isIn(int x, int y) {
+    public boolean isIn(double x, double y) {
         for (Shape shape:this.shapeSet) {
             if (shape.isIn(x, y)) {
                 return true;
@@ -134,10 +134,10 @@ public class CompositeShape implements Shape, Cloneable {
 
     @Override
     public boolean intersect(Rectangle rect) {
-        int minX = getMinX();
-        int maxX = getMaxX();
-        int minY = getMinY();
-        int maxY = getMaxY();
+        double minX = getMinX();
+        double maxX = getMaxX();
+        double minY = getMinY();
+        double maxY = getMaxY();
 
 
         boolean hoverlap = (minX < rect.getX() + rect.getWidth()) && (rect.getX() < minX + (maxX - minX));
@@ -147,9 +147,9 @@ public class CompositeShape implements Shape, Cloneable {
     }
 
     @Override
-    public void moveTo(int x, int y) {
-        int minX = this.getMinX();
-        int minY = this.getMinY();
+    public void moveTo(double x, double y) {
+        double minX = this.getMinX();
+        double minY = this.getMinY();
 
         for (Shape shape : this.shapeSet) {
             shape.translate(x - minX,y - minY);
@@ -157,7 +157,7 @@ public class CompositeShape implements Shape, Cloneable {
     }
 
     @Override
-    public void translate(int dx, int dy) {
+    public void translate(double dx, double dy) {
         for (Shape shape:this.shapeSet) {
             shape.translate(dx, dy);
         }

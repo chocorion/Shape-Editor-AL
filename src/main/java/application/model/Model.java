@@ -1,7 +1,6 @@
 package application.model;
 
 import application.model.areas.ToolBar;
-import application.model.areas.TopBar;
 import application.model.areas.WhiteBoard;
 import application.model.command.Command;
 import application.model.command.CommandManager;
@@ -9,32 +8,25 @@ import application.model.command.CommandManager;
 public class Model {
     private CommandManager commands;
 
-    private int width, height;
-
     public static Model currentModel;
 
     private ToolBar toolBar;
     private WhiteBoard whiteBoard;
-    private TopBar topBar;
+
 
     public Model() {
-        System.out.println("Model create");
+        commands = new CommandManager();
 
-        this.commands = new CommandManager();
+        // Needed by javaFx implementation..
         currentModel = this;
 
-        width = 640;
-        height = 480;
-
-        this.topBar     = new TopBar(this);
-        this.toolBar    = new ToolBar(this);
-        this.whiteBoard = new WhiteBoard(this);
+        toolBar    = new ToolBar(this);
+        whiteBoard = new WhiteBoard(this);
     }
 
     public void update() {
         this.toolBar.update();
         this.whiteBoard.update();
-        this.topBar.update();
     }
 
     public ToolBar getToolBar() {
@@ -45,28 +37,17 @@ public class Model {
         return whiteBoard;
     }
 
-    public TopBar getTopBar() {
-        return this.topBar;
-    }
-
-    public int getWidth() {
-        return this.width;
-    }
-
-    public int getHeight() {
-        return this.height;
-    }
 
     public void execute(Command command) {
-        this.commands.execute(command);
+        commands.execute(command);
     }
 
     public void undo() {
-        this.commands.undo();
+        commands.undo();
     }
 
     public void redo() {
-        this.commands.redo();
+        commands.redo();
     }
 
 }

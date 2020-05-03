@@ -4,7 +4,7 @@ import application.controller.MainController;
 import application.model.Model;
 import application.model.command.concreteCommand.AddShape;
 import application.model.shape.Shape;
-import application.utils.ShapeContainer;
+import application.model.areas.ShapeContainer;
 import application.view.MainView;
 
 public class ShapeHoldingState extends ControllerStateImp {
