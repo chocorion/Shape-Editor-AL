@@ -40,7 +40,7 @@ public class WhiteBoardMenu extends Menu {
 
         menuRect.setColor(Color.BLACK);
         super.drawStrokeRectangle(menuRect);
-        super.drawText(items[itemId], x, y + itemId * height, width, Color.BLACK);
+        super.drawText(items[itemId], x + 2, (int) (y + (itemId + 0.8) * (height)), width, Color.BLACK);
     }
 
     public int getItemId(int x, int y) {
