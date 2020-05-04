@@ -34,7 +34,6 @@ public class MainController {
     }
 
     public void switchState(ControllerState newState) {
-        System.out.println("[MainController] Switche to state : " + newState);
         currentState = newState;
     }
 
@@ -59,9 +58,11 @@ public class MainController {
     }
 
     public void onWindowsResize(int width, int height) {
-        System.out.println("New windows size, width : " + width + " height : " + height);
         view.changeSize(width, height);
     }
+
+    //TODO Key managment
+
 }
 
 

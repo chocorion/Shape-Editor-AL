@@ -20,6 +20,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -28,7 +29,10 @@ public class ViewFx extends Application implements ConcreteViewItf {
     private static Scene rootScene;
     private static GraphicsContext gc;
 
-    public ViewFx() {}
+    private static HashMap<String, Image> imageCache = new HashMap<>();
+
+    public ViewFx() {
+    }
 
 
     public ViewFx(Model model) {
@@ -111,17 +115,17 @@ public class ViewFx extends Application implements ConcreteViewItf {
 
     @Override
     public void devDrawSelection(int x, int y, int width, int height){
-        System.out.println("devDrawSelection");
         ViewFx.gc.setStroke(Color.LIGHTGRAY);
         ViewFx.gc.strokeRect(x,y,width,height);
     }
 
     @Override
     public void devDrawImage(String path, int x, int y, int width, int height) {
-        //TODO Système de cache dans l'objet pour ne pas recréer d'image à chaque fois
-        System.out.println("drawing " + path + " x : " + x + " y : " + y + " width : " + width + " height : " + height);
-        Image image = new Image(path);
-        ViewFx.gc.drawImage(image, x, y, width, height);
+        if (!imageCache.containsKey(path)) {
+            imageCache.put(path, new Image(path));
+        }
+
+        ViewFx.gc.drawImage(imageCache.get(path), x, y, width, height);
     }
 
     @Override
