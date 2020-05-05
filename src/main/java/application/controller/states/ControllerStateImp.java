@@ -25,4 +25,14 @@ public class ControllerStateImp implements ControllerState {
     public boolean onMouseDragged(int x, int y) {
         return true;
     }
+
+    @Override
+    public boolean onKeyPressed(String keyCode, int mouseX, int mouseY) {
+        return true;
+    }
+
+    @Override
+    public boolean onKeyReleased(String keyCode, int mouseX, int mouseY) {
+        return true;
+    }
 }

@@ -41,15 +41,13 @@ public class ControllerFx implements Controller {
         scene.setOnKeyPressed(
                 e -> {
                     String code = e.getCode().toString();
-                    System.out.println("Key pressed -> " + code);
-                    if (!input.contains(code))
-                        input.add(code);
+                    mainController.onKeyPressed(code);
                 });
 
         scene.setOnKeyReleased(
                 e -> {
                     String code = e.getCode().toString();
-                    input.remove(code);
+                    mainController.onKeyReleased(code);
                 });
 
 
@@ -78,10 +76,7 @@ public class ControllerFx implements Controller {
                 e -> mainController.onMouseDragged(e.getX(), e.getY()));
     }
 
-    /**
-     * Main fonction of the class, called every step of game's main loop. It manage all the inputs it receives from
-     * the user events.
-     */
+
     public boolean tick() {
 
         return true;

@@ -90,7 +90,6 @@ public class WhiteBoardView extends ViewDecorator implements ObserverDecoration 
 
         area = Layout.getWhiteBoard();
         this.draw();
-        System.out.println("WHITEBOARD AREA " + area);
     }
 
     @Override

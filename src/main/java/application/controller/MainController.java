@@ -7,19 +7,26 @@ import application.ui.javafx.ViewFx;
 import application.view.ConcreteViewItf;
 import application.view.MainView;
 
+import java.util.ArrayList;
+
 public class MainController {
     private Model model;
     private MainView view;
     private Controller controllerImp;
 
+    private ArrayList<String> keysPressed;
+
 
     private ControllerState currentState;
 
+    private int lastMouseX, lastMouseY;
 
     public MainController(Model model, MainView view, ConcreteViewItf viewImp) {
         this.model = model;
         this.view = view;
 
+        keysPressed = new ArrayList<>();
+        lastMouseX = lastMouseY = 0;
 
         this.controllerImp = new ControllerFx(this, (ViewFx) viewImp);
         ((ViewFx) viewImp).AddController(this.controllerImp);
@@ -29,6 +36,7 @@ public class MainController {
         WhiteBoardMenuState.setInstance(this, model, view);
         SelectionState.setInstance(this, model, view);
         ShapeHoldingState.setInstance(this, model, view);
+        MovingShape.setInstance(this, model, view);
 
         currentState = DefaultState.getInstance();
     }
@@ -54,15 +62,29 @@ public class MainController {
     }
 
     public void onMouseDragged(double x, double y) {
-        while (!currentState.onMouseDragged((int) x, (int) y));
+        lastMouseX = (int) x;
+        lastMouseY = (int) y;
+        while (!currentState.onMouseDragged(lastMouseX, lastMouseY));
     }
 
     public void onWindowsResize(int width, int height) {
         view.changeSize(width, height);
     }
 
-    //TODO Key managment
+    public void onKeyPressed(String key) {
+        // TODO manage state, moving shape
+        if (!keysPressed.contains(key)) {
+            keysPressed.add(key);
+        }
 
+        while (!currentState.onKeyPressed(key, lastMouseX, lastMouseY));
+    }
+
+    public void onKeyReleased(String key) {
+        keysPressed.remove(key);
+
+        while (!currentState.onKeyReleased(key, lastMouseX, lastMouseY));
+    }
 }
 
 

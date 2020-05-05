@@ -20,8 +20,7 @@ public class AddShape implements Command {
 
     @Override
     public void inverse() {
-        System.out.println("Removing shape : " + this.shape);
-        this.shapeContainer.removeShape(this.shape);
+        shapeContainer.removeShape(shape);
     }
 
     @Override

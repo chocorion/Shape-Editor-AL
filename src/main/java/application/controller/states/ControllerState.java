@@ -8,4 +8,6 @@ public interface ControllerState {
     boolean onRightClickPressed(int x, int y);
     boolean onRightClickReleased(int x, int y);
     boolean onMouseDragged(int x, int y);
+    boolean onKeyPressed(String keyCode, int mouseX, int mouseY);
+    boolean onKeyReleased(String keyCode, int mouseX, int mouseY);
 }

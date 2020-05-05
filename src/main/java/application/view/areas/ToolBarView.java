@@ -64,8 +64,6 @@ public class ToolBarView extends ViewDecorator implements ObserverDecoration {
                     area.getY() + index * (CASE_MARGIN + caseSize)
             );
 
-            System.out.println("Drawing minified shape -> ");
-            System.out.println("\tx : " + minimizedShape.getMinX() + ", y : " + minimizedShape.getMinX() + ", width : " + minimizedShape.getWidth() + ", height : " + minimizedShape.getHeight());
             minimizedShape.draw(this);
             index++;
 

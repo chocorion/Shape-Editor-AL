@@ -40,8 +40,6 @@ public abstract class Menu extends ViewDecorator implements ObserverDecoration {
         subject = null;
 
         decoration.update();
-
-        System.out.println("Closing menu");
     }
 
     @Override
