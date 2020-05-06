@@ -53,6 +53,6 @@ public class ToolBar extends ModelObservableImp implements ShapeContainer {
         if (shapeId < 0 || shapeId >= shapes.size())
             return null;
 
-        return (Shape) shapes.get(shapeId).clone();
+        return (Shape) shapes.get(shapeId);
     }
 }

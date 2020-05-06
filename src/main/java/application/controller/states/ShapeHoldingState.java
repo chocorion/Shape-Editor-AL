@@ -3,6 +3,7 @@ package application.controller.states;
 import application.controller.MainController;
 import application.model.Model;
 import application.model.command.concreteCommand.AddShape;
+import application.model.command.concreteCommand.RemoveShape;
 import application.model.shape.Shape;
 import application.model.areas.ShapeContainer;
 import application.view.MainView;
@@ -61,13 +62,25 @@ public class ShapeHoldingState extends ControllerStateImp {
 
     @Override
     public boolean onLeftClickReleased(int x, int y) {
-        // Ici, penser à la gestion de la corbeille
         ShapeContainer dest = null;
 
         if (model.getWhiteBoard() != from && Layout.getWhiteBoard().isIn(x, y)) {
             dest = model.getWhiteBoard();
-        } else if (model.getToolBar() != from && Layout.getToolBar().isIn(x, y)) {
-            dest = model.getToolBar();
+        }
+
+        else if (Layout.getToolBar().isIn(x, y)) {
+            if (view.getToolBar().isInTrash(x, y)) {
+                if (model.getToolBar() != from) {
+                    model.execute(new RemoveShape(holdedShape, from));
+                } else {
+                    //TODO Put in the old position
+                    model.execute(new RemoveShape(holdedShape, from));
+                }
+            }
+
+            else if (model.getToolBar() != from) {
+                dest = model.getToolBar();
+            }
         }
 
         if (dest != null) {
