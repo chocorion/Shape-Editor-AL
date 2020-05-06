@@ -25,6 +25,8 @@ public class SelectionState extends ControllerStateImp {
     private boolean selectionDone;
     private boolean doingSelection;
 
+    private boolean ctrlActivate;
+
     private final ArrayList<Shape> selectedShape;
 
     private SelectionState(MainController mainController, Model model, MainView view) {
@@ -35,6 +37,7 @@ public class SelectionState extends ControllerStateImp {
 
         selectionDone  = false;
         doingSelection = false;
+        ctrlActivate = false;
 
         selectedShape = new ArrayList<>();
     }
@@ -49,7 +52,7 @@ public class SelectionState extends ControllerStateImp {
 
     @Override
     public boolean onLeftClickPressed(int x, int y) {
-        if (selectionDone) {
+        if (selectionDone && !ctrlActivate) {
             selectionDone = false;
             selectedShape.clear();
 
@@ -73,8 +76,7 @@ public class SelectionState extends ControllerStateImp {
     public boolean onLeftClickReleased(int x, int y) {
         System.out.println("In selection :");
 
-        if (startY == endY && startX == endX) {
-            System.out.println("Empty selection");
+        if (startY == endY && startX == endX && !ctrlActivate) {
             mainController.switchState(DefaultState.getInstance());
             return true;
         }
@@ -83,7 +85,8 @@ public class SelectionState extends ControllerStateImp {
         view.getWhiteBoard().update();
 
         if (!Layout.getWhiteBoard().isIn(x, y)) {
-            mainController.switchState(DefaultState.getInstance());
+            if (!ctrlActivate)
+                mainController.switchState(DefaultState.getInstance());
         }
 
         else {
@@ -132,8 +135,6 @@ public class SelectionState extends ControllerStateImp {
     @Override
     public boolean onMouseDragged(int x, int y) {
         if (doingSelection && Layout.getWhiteBoard().isIn(x, y)) {
-            view.getWhiteBoard().clearSelection();
-
             view.getWhiteBoard().update();
             endX = x;
             endY = y;
@@ -144,6 +145,30 @@ public class SelectionState extends ControllerStateImp {
                     Math.abs(startX - endX),
                     Math.abs(startY - endY)
             );
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onKeyPressed(String keyCode, int mouseX, int mouseY) {
+        if (keyCode.equals("CONTROL")) {
+            ctrlActivate = true;
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onKeyReleased(String keyCode, int mouseX, int mouseY) {
+        if (keyCode.equals("CONTROL")) {
+            ctrlActivate = false;
+
+            if (doingSelection) {
+                selectionDone = true;
+                mainController.switchState(DefaultState.getInstance());
+                return false;
+            }
         }
 
         return true;
