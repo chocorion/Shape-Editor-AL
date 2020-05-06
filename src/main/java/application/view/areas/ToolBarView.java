@@ -4,6 +4,7 @@ import application.model.areas.ToolBar;
 import application.model.shape.Rectangle;
 import application.model.shape.Shape;
 import application.utils.Color;
+import application.utils.ImageManager;
 import application.utils.ModelObservable;
 import application.utils.ModelObserver;
 import application.view.MainView;
@@ -20,6 +21,7 @@ public class ToolBarView extends ViewDecorator implements ObserverDecoration {
     private static int CASE_MARGIN = 5;
 
     private Rectangle area;
+    private Rectangle trash;
     private int caseSize;
 
     public ToolBarView(MainView mainView, View view, ToolBar toolBar) {
@@ -29,6 +31,12 @@ public class ToolBarView extends ViewDecorator implements ObserverDecoration {
         this.minimisedShapes = new HashMap<>();
 
         area = Layout.getToolBar();
+        trash = new Rectangle(
+                area.getX() + CASE_MARGIN,
+                area.getHeight() - Math.min(area.getWidth(), area.getHeight()) + CASE_MARGIN,
+                Math.min(area.getWidth(), area.getHeight()) - 2 * CASE_MARGIN,
+                Math.min(area.getWidth(), area.getHeight()) - 2 * CASE_MARGIN
+        );
 
         caseSize = (int) Math.min(
                 area.getWidth() - 2 * CASE_MARGIN,
@@ -66,9 +74,10 @@ public class ToolBarView extends ViewDecorator implements ObserverDecoration {
 
             minimizedShape.draw(this);
             index++;
-
-
         }
+
+
+        super.drawImage(ImageManager.getImage("trash"), trash);
     }
 
     @Override
@@ -77,6 +86,13 @@ public class ToolBarView extends ViewDecorator implements ObserverDecoration {
         caseSize = (int) Math.min(
                 area.getWidth() - 2 * CASE_MARGIN,
                 area.getHeight() - 2 * CASE_MARGIN
+        );
+
+        trash = new Rectangle(
+                area.getX() + CASE_MARGIN,
+                area.getHeight() - Math.min(area.getWidth(), area.getHeight()) + CASE_MARGIN,
+                Math.min(area.getWidth(), area.getHeight()) - 2 * CASE_MARGIN,
+                Math.min(area.getWidth(), area.getHeight()) - 2 * CASE_MARGIN
         );
         
         this.draw();
@@ -91,6 +107,10 @@ public class ToolBarView extends ViewDecorator implements ObserverDecoration {
         minimised.resize(factor);
 
         return minimised;
+    }
+
+    public boolean isInTrash(int x, int y) {
+        return trash.isIn(x, y);
     }
 
     public int getShapeId(int x, int y) {

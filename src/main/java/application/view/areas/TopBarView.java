@@ -65,7 +65,6 @@ public class TopBarView extends ViewDecorator {
         );
 
         drawButtons();
-
     }
 
     public void update() {
