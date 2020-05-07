@@ -5,6 +5,12 @@ import application.model.Model;
 import application.model.shape.Shape;
 import application.view.MainView;
 import application.view.areas.Layout;
+import application.view.decoration.WhiteBoardMenu;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 
 
 public class DefaultState extends ControllerStateImp {
@@ -60,6 +66,21 @@ public class DefaultState extends ControllerStateImp {
             }
 
             return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onRightClickPressed(int x, int y) {
+        if (Layout.getWhiteBoard().isIn(x, y)) {
+            Shape currentShape = model.getWhiteBoard().getShapeAt(x, y);
+
+            if (currentShape != null) {
+                view.getWhiteBoard().addSelection(new ArrayList<>(Collections.singletonList(currentShape)));
+                mainController.switchState(WhiteBoardMenuState.getInstance());
+                return false;
+            }
         }
 
         return true;
