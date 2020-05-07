@@ -8,6 +8,7 @@ import application.view.MainView;
 import application.view.areas.Layout;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class SelectionState extends ControllerStateImp {
     private final MainController mainController;
@@ -78,8 +79,23 @@ public class SelectionState extends ControllerStateImp {
 
     @Override
     public boolean onLeftClickReleased(int x, int y) {
-        if (startY == endY && startX == endX && !ctrlActivate) {
-            mainController.switchState(DefaultState.getInstance());
+        if (startY == endY && startX == endX) {
+            if (!ctrlActivate && mainController.isKeyPressed("CONTROL")) {
+                ctrlActivate = true;
+            }
+
+            if (!ctrlActivate)
+                mainController.switchState(DefaultState.getInstance());
+            else {
+                if (Layout.getWhiteBoard().isIn(x, y)) {
+                    Shape s = model.getWhiteBoard().getShapeAt(x, y);
+
+                    if (s != null) {
+                        view.getWhiteBoard().addSelection(new ArrayList<>(Collections.singleton(s)));
+                        view.getWhiteBoard().update();
+                    }
+                }
+            }
             return true;
         }
 
