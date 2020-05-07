@@ -5,11 +5,8 @@ import application.model.Model;
 import application.model.shape.Shape;
 import application.view.MainView;
 import application.view.areas.Layout;
-import application.view.decoration.WhiteBoardMenu;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 
 

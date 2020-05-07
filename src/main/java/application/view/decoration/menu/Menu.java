@@ -1,4 +1,4 @@
-package application.view.decoration;
+package application.view.decoration.menu;
 
 import application.utils.ModelObservable;
 import application.view.ObserverDecoration;

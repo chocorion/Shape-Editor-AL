@@ -37,6 +37,7 @@ public class MainController {
         SelectionState.setInstance(this, model, view);
         ShapeHoldingState.setInstance(this, model, view);
         MovingShape.setInstance(this, model, view);
+        EditionMenuState.setInstance(this, model, view);
 
         currentState = DefaultState.getInstance();
     }

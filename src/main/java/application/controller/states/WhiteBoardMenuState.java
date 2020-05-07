@@ -7,7 +7,7 @@ import application.model.command.concreteCommand.ExpandComposite;
 import application.model.shape.CompositeShape;
 import application.model.shape.Shape;
 import application.view.MainView;
-import application.view.decoration.WhiteBoardMenu;
+import application.view.decoration.menu.WhiteBoardMenu;
 
 import java.util.ArrayList;
 
@@ -40,7 +40,7 @@ public class WhiteBoardMenuState extends ControllerStateImp {
                     new AddComposite(model.getWhiteBoard(), view.getWhiteBoard().getSelectedShapes())
             );
 
-
+            closeAndSwitch();
 
         } else if (itemId == 1) {
             ArrayList<Shape> selection = view.getWhiteBoard().getSelectedShapes();
@@ -51,14 +51,17 @@ public class WhiteBoardMenuState extends ControllerStateImp {
                             new ExpandComposite(model.getWhiteBoard(), (CompositeShape) selection.get(0))
                     );
                 }
+
+                closeAndSwitch();
             }
+        } else if (itemId == 2) {
+            System.out.println("EDITION MENU");
+            menu.openEditionMenu();
+            mainController.switchState(EditionMenuState.getInstance());
+            return true;
+        } else {
+            closeAndSwitch();
         }
-
-        view.getWhiteBoard().clearSelection();
-        view.getWhiteBoard().closeWhiteboardMenu();
-
-        mainController.switchState(DefaultState.getInstance());
-
         return true;
     }
 
@@ -75,6 +78,13 @@ public class WhiteBoardMenuState extends ControllerStateImp {
 
     public static void setInstance(MainController mainController, Model model, MainView view) {
         instance = new WhiteBoardMenuState(mainController, model, view);
+    }
+
+    private void closeAndSwitch() {
+        view.getWhiteBoard().clearSelection();
+        view.getWhiteBoard().closeWhiteboardMenu();
+
+        mainController.switchState(DefaultState.getInstance());
     }
 
     @Override

@@ -7,10 +7,6 @@ import application.view.areas.Layout;
 import application.view.areas.ToolBarView;
 import application.view.areas.TopBarView;
 import application.view.areas.WhiteBoardView;
-import application.view.decoration.Menu;
-import application.view.decoration.WhiteBoardMenu;
-
-import java.awt.*;
 
 public class MainView {
     private ToolBarView     toolBar;

@@ -1,8 +1,9 @@
-package application.view.decoration;
+package application.view.decoration.menu;
 
 import application.model.shape.Rectangle;
 import application.utils.Color;
 import application.view.ObserverDecoration;
+import application.view.decoration.menu.Menu;
 
 public class WhiteBoardMenu extends Menu {
     private static String[] items = {
@@ -11,16 +12,23 @@ public class WhiteBoardMenu extends Menu {
             "Edit"
     };
 
+    private EditionMenu editionMenu;
+
     private static int width  = 60;
     private static int height = 20;
 
     public WhiteBoardMenu(ObserverDecoration decoration) {
         super(decoration);
+
+        editionMenu = new EditionMenu(decoration);
     }
 
     @Override
     public void update() {
-        this.draw();
+        if (editionMenu.isToggle())
+            editionMenu.update();
+        else
+            this.draw();
     }
 
     @Override
@@ -59,6 +67,19 @@ public class WhiteBoardMenu extends Menu {
     }
 
     public boolean isIn(int x, int y) {
+        if (editionMenu.isToggle()) {
+            return editionMenu.isIn(x, y);
+        }
         return getItemId(x, y) != -1;
+    }
+
+    public void openEditionMenu() {
+        close();
+        editionMenu.open(x, y);
+    }
+
+    public void closeEditionMenu() {
+        editionMenu.close();
+        open(x, y);
     }
 }

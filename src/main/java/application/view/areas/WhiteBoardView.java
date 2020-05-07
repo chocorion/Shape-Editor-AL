@@ -4,13 +4,12 @@ import application.model.areas.WhiteBoard;
 import application.model.shape.Rectangle;
 import application.model.shape.Shape;
 import application.utils.ModelObservable;
-import application.utils.ModelObserver;
 import application.utils.Color;
 import application.view.MainView;
 import application.view.ObserverDecoration;
 import application.view.View;
 import application.view.ViewDecorator;
-import application.view.decoration.WhiteBoardMenu;
+import application.view.decoration.menu.WhiteBoardMenu;
 
 import java.util.ArrayList;
 
