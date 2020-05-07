@@ -52,6 +52,10 @@ public class SelectionState extends ControllerStateImp {
 
     @Override
     public boolean onLeftClickPressed(int x, int y) {
+        if (!ctrlActivate && mainController.isKeyPressed("CONTROL")) {
+            ctrlActivate = true;
+        }
+
         if (selectionDone && !ctrlActivate) {
             selectionDone = false;
             selectedShape.clear();
@@ -74,8 +78,6 @@ public class SelectionState extends ControllerStateImp {
 
     @Override
     public boolean onLeftClickReleased(int x, int y) {
-        System.out.println("In selection :");
-
         if (startY == endY && startX == endX && !ctrlActivate) {
             mainController.switchState(DefaultState.getInstance());
             return true;

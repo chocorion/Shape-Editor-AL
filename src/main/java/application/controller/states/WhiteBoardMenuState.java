@@ -40,6 +40,8 @@ public class WhiteBoardMenuState extends ControllerStateImp {
                     new AddComposite(model.getWhiteBoard(), view.getWhiteBoard().getSelectedShapes())
             );
 
+
+
         } else if (itemId == 1) {
             ArrayList<Shape> selection = view.getWhiteBoard().getSelectedShapes();
 
@@ -50,14 +52,12 @@ public class WhiteBoardMenuState extends ControllerStateImp {
                     );
                 }
             }
-
-        } else {
-            view.getWhiteBoard().clearSelection();
-            view.getWhiteBoard().closeWhiteboardMenu();
-
-            mainController.switchState(DefaultState.getInstance());
         }
 
+        view.getWhiteBoard().clearSelection();
+        view.getWhiteBoard().closeWhiteboardMenu();
+
+        mainController.switchState(DefaultState.getInstance());
 
         return true;
     }

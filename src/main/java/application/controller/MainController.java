@@ -85,6 +85,10 @@ public class MainController {
 
         while (!currentState.onKeyReleased(key, lastMouseX, lastMouseY));
     }
+
+    public boolean isKeyPressed(String keyCode) {
+        return keysPressed.contains(keyCode);
+    }
 }
 
 

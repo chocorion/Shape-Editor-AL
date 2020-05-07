@@ -32,7 +32,7 @@ public class CommandManager {
             return;
         }
 
-        Command cmd = this.commandAdded.pop();
+        Command cmd = commandAdded.pop();
         cmd.inverse();
 
         commandRemoved.push(cmd);
