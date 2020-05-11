@@ -19,6 +19,7 @@ public class ToolBarView extends ViewDecorator implements ObserverDecoration {
     private final HashMap<Shape, Shape> minimisedShapes;
 
     private static int CASE_MARGIN = 5;
+    private static int START_MARGIN = 5;
 
     private Rectangle area;
     private Rectangle trash;
@@ -69,7 +70,7 @@ public class ToolBarView extends ViewDecorator implements ObserverDecoration {
 
             minimizedShape.moveTo(
                     area.getX() + CASE_MARGIN,
-                    area.getY() + index * (CASE_MARGIN + caseSize)
+                    area.getY() + index * (CASE_MARGIN + caseSize)+ START_MARGIN
             );
 
             minimizedShape.draw(this);

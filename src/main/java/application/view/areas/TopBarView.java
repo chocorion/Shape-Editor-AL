@@ -17,6 +17,7 @@ public class TopBarView extends ViewDecorator {
 
     private static int BUTTON_WIDTH;
     private static int BUTTON_MARGIN;
+    private static int BUTTON_HEIGHT;
 
     public TopBarView(MainView mainView, View view) {
         super(view);
@@ -24,8 +25,8 @@ public class TopBarView extends ViewDecorator {
 
         area = Layout.getTopBar();
         BUTTON_MARGIN = (int) (area.getHeight()/6);
-        BUTTON_WIDTH  = (int) area.getHeight() - 2 * BUTTON_MARGIN;
-
+        BUTTON_HEIGHT  = (int) area.getHeight() - 2 * BUTTON_MARGIN;
+        BUTTON_WIDTH = (int) area.getWidth()/10;
 
         buttons = new ArrayList<>();
 
@@ -39,7 +40,7 @@ public class TopBarView extends ViewDecorator {
         for (int i = 0; i < 4; i++) {
             buttons.add(
                     new Pair<>(
-                            createButton(area.getX(), area.getY(), BUTTON_WIDTH, BUTTON_MARGIN, i),
+                            createButton(area.getX(), area.getY(), BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_MARGIN, i),
                             buttonNames[i]
                     )
             );
@@ -72,12 +73,12 @@ public class TopBarView extends ViewDecorator {
         this.draw();
     }
 
-    private Rectangle createButton(double topBarX, double topBarY, int size, int margin, int buttonId) {
+    private Rectangle createButton(double topBarX, double topBarY, int width, int height, int margin, int buttonId) {
         return new Rectangle(
-                topBarX + buttonId * (size + margin/2) + margin,
+                topBarX + buttonId * (width + margin/2) + margin,
                 topBarY + margin,
-                size,
-                size
+                width,
+                height
         );
     }
 
