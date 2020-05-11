@@ -8,6 +8,7 @@ import application.utils.ModelObserver;
 import application.view.*;
 
 import application.view.menu.EditionMenu;
+import application.view.menu.EditionSubMenu;
 import application.view.menu.WhiteBoardMenu;
 
 import java.util.ArrayList;
@@ -137,5 +138,9 @@ public class WhiteBoardView implements ModelObserver {
 
     public WhiteBoardMenu getMenu() {
         return menu;
+    }
+
+    public EditionMenu getEditionMenu() {
+        return editionMenu;
     }
 }

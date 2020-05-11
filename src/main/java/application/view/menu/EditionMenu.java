@@ -33,9 +33,9 @@ public class EditionMenu {
 
         subMenus = new ArrayList<>();
 
-        subMenus.add(new subMenuColor(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
-        subMenus.add(new subMenuColor(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
-        subMenus.add(new subMenuColor(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+        subMenus.add(new SubMenuColor(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+        subMenus.add(new SubMenuColor(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+        subMenus.add(new SubMenuColor(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
 
         selectedMenu = 0;
     }
@@ -45,9 +45,8 @@ public class EditionMenu {
         this.x = x;
         this.y = y;
 
-        view.drawRectangle(
-                new Rectangle(this.x, this.y, width, height, new Color(178, 255, 171))
-        );
+        view.drawRoundedRectShadow(x, y, width, height, 12, 3, Color.WHITE);
+
 
         view.drawRectangle(
                 new Rectangle(this.x + margin, this.y + margin, width - 2 * margin, header_height,
@@ -61,6 +60,7 @@ public class EditionMenu {
 
         int buttonSize = (width - 2 * margin)/subMenus.size();
         int index = 0;
+
         for (EditionSubMenu submenu : subMenus) {
             view.drawRectangle(new Rectangle(index * buttonSize + x + margin, y + margin, buttonSize, header_height));
             view.drawText(submenu.getName(),index * buttonSize + x + margin, y + margin + 10, buttonSize, Color.LIGHT_GREY);
@@ -72,5 +72,9 @@ public class EditionMenu {
 
     public boolean isIn(int x, int y) {
         return (x <= this.x + width && x >= this.x && y <= this.y + height && y >= this.y);
+    }
+
+    public EditionSubMenu getSelectedMenu() {
+        return subMenus.get(selectedMenu);
     }
 }
