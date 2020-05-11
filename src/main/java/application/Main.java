@@ -2,6 +2,8 @@ package application;
 
 import application.controller.MainController;
 import application.model.Model;
+import application.ui.UIFactory;
+import application.ui.javafx.UIFx;
 import application.ui.javafx.ViewFx;
 import application.view.*;
 
@@ -21,16 +23,20 @@ public class Main {
 
 
     public static void buildUi() {
-        ViewFx viewFx = new ViewFx(model);
-        View viewBridge = new ViewBridge(viewFx);
+        UIFactory uiFactory = new UIFx();
+
+        ConcreteViewItf concreteView = uiFactory.getView(model);
+        ViewBridge viewBridge = new ViewBridge(concreteView);
 
         view = new MainView(model, viewBridge);
 
         model.getToolBar().attachObserver(view.getToolBar());
         model.getWhiteBoard().attachObserver(view.getWhiteBoard());
 
-        controller = new MainController(model, view, viewFx);
-        viewFx.initViewFx();
+        controller = new MainController(model, view);
+        uiFactory.getController(controller, concreteView);
+
+        ((ViewFx) concreteView).initViewFx();
     }
 
 

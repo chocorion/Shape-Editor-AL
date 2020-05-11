@@ -11,7 +11,6 @@ public interface ConcreteViewItf {
     void devDrawRectangle(Rectangle rectangle);
     void devDrawStrokeRectangle(Rectangle rectangle);
     void devDrawPolygon(Polygon polygon);
-    void devDrawSelection(int x, int y, int width, int height);
 
     void devDrawImage(String path, int x, int y, int width, int height);
 

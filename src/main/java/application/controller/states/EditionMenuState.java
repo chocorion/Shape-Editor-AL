@@ -3,9 +3,7 @@ package application.controller.states;
 import application.controller.MainController;
 import application.model.Model;
 import application.view.MainView;
-import application.view.decoration.menu.WhiteBoardMenu;
 
-import javax.swing.text.DefaultTextUI;
 
 public class EditionMenuState extends ControllerStateImp {
     private static EditionMenuState state;
@@ -32,7 +30,7 @@ public class EditionMenuState extends ControllerStateImp {
     @Override
     public boolean onLeftClickReleased(int x, int y) {
         if (!view.getWhiteBoard().getMenu().isIn(x, y)) {
-            view.getWhiteBoard().getMenu().closeEditionMenu();
+            view.getWhiteBoard().closeEditionMenu();
             mainController.switchState(WhiteBoardMenuState.getInstance());
             return true;
         }

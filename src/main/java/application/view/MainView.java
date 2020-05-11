@@ -17,11 +17,11 @@ public class MainView {
     private int windowsHeight;
 
     private Model model;
-    private View view;
+    private ViewBridge view;
 
-    public MainView(Model model, View view) {
+    public MainView(Model model, ViewBridge viewBridge) {
         this.model = model;
-        this.view = view;
+        view = viewBridge;
 
         windowsWidth  = 480;
         windowsHeight = 480;
@@ -69,5 +69,9 @@ public class MainView {
 
     public int getHeight() {
         return windowsHeight;
+    }
+
+    public ViewBridge getViewBridge() {
+        return view;
     }
 }

@@ -1,12 +1,12 @@
 package application.model.shape;
 
-import application.view.View;
+import application.view.ViewBridge;
 
 // TODO
 public class Polygon extends SingleShape {
 
     @Override
-    public void draw(View view) {
+    public void draw(ViewBridge view) {
 
     }
 

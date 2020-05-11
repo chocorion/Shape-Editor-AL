@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class MainController {
     private Model model;
     private MainView view;
-    private Controller controllerImp;
 
     private ArrayList<String> keysPressed;
 
@@ -21,16 +20,12 @@ public class MainController {
 
     private int lastMouseX, lastMouseY;
 
-    public MainController(Model model, MainView view, ConcreteViewItf viewImp) {
+    public MainController(Model model, MainView view) {
         this.model = model;
         this.view = view;
 
         keysPressed = new ArrayList<>();
         lastMouseX = lastMouseY = 0;
-
-        this.controllerImp = new ControllerFx(this, (ViewFx) viewImp);
-        ((ViewFx) viewImp).AddController(this.controllerImp);
-
 
         DefaultState.setInstance(this, model, view);
         WhiteBoardMenuState.setInstance(this, model, view);

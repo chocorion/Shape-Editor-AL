@@ -1,7 +1,7 @@
 package application.model.shape;
 
 import application.utils.Color;
-import application.view.View;
+import application.view.ViewBridge;
 
 public class Rectangle extends SingleShape {
     private double x, y;
@@ -27,7 +27,7 @@ public class Rectangle extends SingleShape {
 
 
     @Override
-    public void draw(View view) {
+    public void draw(ViewBridge view) {
         view.drawRectangle(this);
     }
 

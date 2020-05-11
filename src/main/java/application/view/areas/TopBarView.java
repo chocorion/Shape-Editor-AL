@@ -10,18 +10,19 @@ import javafx.util.Pair;
 import java.util.ArrayList;
 
 
-public class TopBarView extends ViewDecorator {
+public class TopBarView {
     private ArrayList<Pair<Rectangle, String>> buttons;
     private Rectangle area;
     private MainView mainView;
+    private ViewBridge view;
 
     private static int BUTTON_WIDTH;
     private static int BUTTON_MARGIN;
     private static int BUTTON_HEIGHT;
 
-    public TopBarView(MainView mainView, View view) {
-        super(view);
+    public TopBarView(MainView mainView, ViewBridge view) {
         this.mainView = mainView;
+        this.view = view;
 
         area = Layout.getTopBar();
         BUTTON_MARGIN = (int) (area.getHeight()/6);
@@ -48,14 +49,11 @@ public class TopBarView extends ViewDecorator {
 
     }
 
-    @Override
     public void draw() {
-        super.draw();
-
         // draw topBar
-        super.drawRectangle(area);
+        view.drawRectangle(area);
 
-        super.drawRectangle(
+        view.drawRectangle(
                 new Rectangle(
                         area.getX() + Layout.BORDER,
                         area.getY() + Layout.BORDER,
@@ -84,7 +82,7 @@ public class TopBarView extends ViewDecorator {
 
     private void drawButtons() {
         for (Pair<Rectangle, String> pair : buttons) {
-            super.drawImage(
+            view.drawImage(
                     ImageManager.getImage(pair.getValue()),
                     pair.getKey()
             );

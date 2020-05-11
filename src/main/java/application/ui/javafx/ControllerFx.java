@@ -2,19 +2,10 @@ package application.ui.javafx;
 
 import java.util.ArrayList;
 
-import application.Main;
 import application.controller.Controller;
 import application.controller.MainController;
-import application.model.Model;
-import application.ui.javafx.ViewFx;
-import application.view.View;
-import javafx.event.EventHandler;
-import javafx.geometry.Point2D;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
 
 /**
  * This class get all the input from the user, and calls the associate fonction in scene manager.
@@ -82,7 +73,4 @@ public class ControllerFx implements Controller {
         return true;
     }
 
-    public void onStart() {
-        System.out.println("CONTROLLER ON START");
-    }
 }

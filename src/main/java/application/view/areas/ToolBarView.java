@@ -7,14 +7,11 @@ import application.utils.Color;
 import application.utils.ImageManager;
 import application.utils.ModelObservable;
 import application.utils.ModelObserver;
-import application.view.MainView;
-import application.view.ObserverDecoration;
-import application.view.View;
-import application.view.ViewDecorator;
+import application.view.*;
 
 import java.util.HashMap;
 
-public class ToolBarView extends ViewDecorator implements ObserverDecoration {
+public class ToolBarView implements ModelObserver {
     private ToolBar toolBar;
     private final HashMap<Shape, Shape> minimisedShapes;
 
@@ -25,8 +22,10 @@ public class ToolBarView extends ViewDecorator implements ObserverDecoration {
     private Rectangle trash;
     private int caseSize;
 
-    public ToolBarView(MainView mainView, View view, ToolBar toolBar) {
-        super(view);
+    private ViewBridge view;
+
+    public ToolBarView(MainView mainView, ViewBridge view, ToolBar toolBar) {
+        this.view = view;
 
         this.toolBar = toolBar;
         this.minimisedShapes = new HashMap<>();
@@ -45,14 +44,12 @@ public class ToolBarView extends ViewDecorator implements ObserverDecoration {
         );
     }
 
-    @Override
     public void draw() {
-        super.draw();
         // Draw toolbar
 
-        super.drawRectangle(area);
+        view.drawRectangle(area);
 
-        super.drawRectangle(
+        view.drawRectangle(
                 new Rectangle(
                         area.getX() + Layout.BORDER,
                         area.getY() + Layout.BORDER,
@@ -73,12 +70,12 @@ public class ToolBarView extends ViewDecorator implements ObserverDecoration {
                     area.getY() + index * (CASE_MARGIN + caseSize)+ START_MARGIN
             );
 
-            minimizedShape.draw(this);
+            minimizedShape.draw(view);
             index++;
         }
 
 
-        super.drawImage(ImageManager.getImage("trash"), trash);
+        view.drawImage(ImageManager.getImage("trash"), trash);
     }
 
     @Override
@@ -120,10 +117,5 @@ public class ToolBarView extends ViewDecorator implements ObserverDecoration {
         }
 
         return (int) ((y - area.getY())/(caseSize + CASE_MARGIN));
-    }
-
-    @Override
-    public ModelObservable getSubject() {
-        return this.toolBar;
     }
 }

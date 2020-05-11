@@ -1,13 +1,13 @@
 package application.model.shape;
 
 import application.exceptions.UnsupportedOperationException;
-import application.view.View;
+import application.view.ViewBridge;
 
 public interface Shape {
     void add(Shape shape)    throws UnsupportedOperationException;
     void remove(Shape shape) throws UnsupportedOperationException;
 
-    void draw(View view);
+    void draw(ViewBridge view);
 
     double getWidth();
     double getHeight();

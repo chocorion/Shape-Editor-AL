@@ -5,39 +5,46 @@ import application.model.shape.Rectangle;
 import application.model.shape.Shape;
 import application.utils.ModelObservable;
 import application.utils.Color;
-import application.view.MainView;
-import application.view.ObserverDecoration;
-import application.view.View;
-import application.view.ViewDecorator;
+import application.utils.ModelObserver;
+import application.view.*;
+import application.view.decoration.menu.EditionMenu;
 import application.view.decoration.menu.WhiteBoardMenu;
 
 import java.util.ArrayList;
 
-public class WhiteBoardView extends ViewDecorator implements ObserverDecoration {
+public class WhiteBoardView implements ModelObserver {
     private WhiteBoard whiteBoard;
     private WhiteBoardMenu menu;
+    private EditionMenu editionMenu;
 
     private ArrayList<Shape> selectedShapes;
     private Rectangle area;
 
-    public WhiteBoardView(MainView mainView, View view, WhiteBoard whiteBoard) {
-        super(view);
+    private ViewBridge view;
+
+    private boolean isMenuOpen;
+    private boolean isEditionMenuOpen;
+    private int menuX, menuY;
+
+    public WhiteBoardView(MainView mainView, ViewBridge view, WhiteBoard whiteBoard) {
+        this.view = view;
 
         area = Layout.getWhiteBoard();
 
         this.whiteBoard = whiteBoard;
-        menu = new WhiteBoardMenu(this);
+        menu = new WhiteBoardMenu(view);
 
         selectedShapes = new ArrayList<>();
+        isMenuOpen = false;
+        isEditionMenuOpen = false;
+        editionMenu = new EditionMenu(view);
     }
 
-    @Override
+
     public void draw() {
-        super.draw();
+        view.drawRectangle(area);
 
-        super.drawRectangle(area);
-
-        super.drawRectangle(
+        view.drawRectangle(
                 new Rectangle(
                         area.getX() + Layout.BORDER,
                         area.getY() + Layout.BORDER,
@@ -46,12 +53,18 @@ public class WhiteBoardView extends ViewDecorator implements ObserverDecoration 
                         Color.WHITE
                 )
         );
+
         // Draw big white rectangle
         for (Shape shape:whiteBoard.getInnerShapes()) {
-            shape.draw(this);
+            shape.draw(view);
         }
 
         drawShapeSelection(selectedShapes);
+
+        if (isMenuOpen)
+            menu.draw(menuX, menuY);
+        else if (isEditionMenuOpen)
+            editionMenu.draw(menuX, menuY);
     }
 
     public void addSelection(ArrayList<Shape> shapes) {
@@ -81,7 +94,7 @@ public class WhiteBoardView extends ViewDecorator implements ObserverDecoration 
                 shape.getMaxX() - shape.getMinX() + 2 * selectionMarge,
                 shape.getMaxY() - shape.getMinY() + 2 * selectionMarge,
                 Color.SELECTION
-        ).draw(this);
+        ).draw(view);
     }
 
     @Override
@@ -91,29 +104,35 @@ public class WhiteBoardView extends ViewDecorator implements ObserverDecoration 
         this.draw();
     }
 
-    @Override
-    public ModelObservable getSubject() {
-        return this.whiteBoard;
-    }
 
-    /**
-     * @brief open menu on whiteboard. If menu was already open, close the current one and re-
-     *        open it at the new position.
-     * @param x coord x of the menu in the model representation.
-     * @param y coord y of the menu in the model representation.
-     */
     public void openWhiteboardMenu(int x, int y) {
-        if (menu.isToggle()) {
-            menu.close();
-        }
+        menuX = x;
+        menuY = y;
 
-        menu.open(x, y);
+        isMenuOpen = true;
+        draw();
     }
 
     public void closeWhiteboardMenu() {
-        if (menu.isToggle()) {
-            menu.close();
-        }
+        isMenuOpen = false;
+        draw();
+    }
+
+    public void openEditionMenu(int x, int y) {
+        System.out.println("OPENING EDITION MENU");
+        menuX = x;
+        menuY = y;
+
+        isMenuOpen = false;
+        isEditionMenuOpen = true;
+        draw();
+    }
+
+    public void closeEditionMenu() {
+        isEditionMenuOpen = false;
+        isMenuOpen = true;
+
+        draw();
     }
 
     public WhiteBoardMenu getMenu() {

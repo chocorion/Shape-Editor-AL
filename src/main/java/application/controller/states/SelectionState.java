@@ -157,7 +157,7 @@ public class SelectionState extends ControllerStateImp {
             endX = x;
             endY = y;
 
-            view.getWhiteBoard().drawSelection(
+            view.getViewBridge().drawSelection(
                     Math.min(endX, startX),
                     Math.min(endY, startY),
                     Math.abs(startX - endX),

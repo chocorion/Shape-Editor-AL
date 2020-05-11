@@ -2,51 +2,32 @@ package application.view;
 
 import application.model.shape.Polygon;
 import application.model.shape.Rectangle;
+import application.ui.javafx.ViewFx;
 import application.utils.Color;
 
-public class ViewBridge implements View {
+public class ViewBridge {
     private ConcreteViewItf implementation;
 
     public ViewBridge(ConcreteViewItf concreteView) {
-        this.implementation = concreteView;
+        implementation = concreteView;
     }
 
-    @Override
-    public void draw() {
-        // Refresh display ?
-    }
 
-    @Override
-    public int getWidth() {
-        return this.implementation.getWidth();
-    }
-
-    @Override
-    public int getHeight() {
-        return this.implementation.getHeight();
-    }
-
-    @Override
     public void drawRectangle(Rectangle rectangle) {
-        this.implementation.devDrawRectangle(rectangle);
+        implementation.devDrawRectangle(rectangle);
     }
 
-    @Override
+
     public void drawStrokeRectangle(Rectangle rectangle) {
-        this.implementation.devDrawStrokeRectangle(rectangle);
+        implementation.devDrawStrokeRectangle(rectangle);
     }
 
-    @Override
+
     public void drawPolygon(Polygon polygon) {
-        this.implementation.devDrawPolygon(polygon);
+        implementation.devDrawPolygon(polygon);
     }
 
-    @Override
-    public void drawSelection(int x, int y, int width, int height){
-        this.implementation.devDrawSelection(x,y,width,height);
-    }
 
-    @Override
     public void drawImage(String path, Rectangle r) {
         implementation.devDrawImage(
                 path,
@@ -57,8 +38,12 @@ public class ViewBridge implements View {
         );
     }
 
-    @Override
+
     public void drawText(String text, int x, int y, int size, Color color) {
         this.implementation.devDrawText(text, x, y, size, color);
+    }
+
+    public void drawSelection(int x, int y, int width, int height) {
+        implementation.devDrawStrokeRectangle(new Rectangle(x, y, width, height, Color.BLUE));
     }
 }

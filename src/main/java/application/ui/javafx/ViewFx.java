@@ -113,11 +113,6 @@ public class ViewFx extends Application implements ConcreteViewItf {
         ViewFx.gc.fillRect(50, 50, 100, 150);
     }
 
-    @Override
-    public void devDrawSelection(int x, int y, int width, int height){
-        ViewFx.gc.setStroke(Color.LIGHTGRAY);
-        ViewFx.gc.strokeRect(x,y,width,height);
-    }
 
     @Override
     public void devDrawImage(String path, int x, int y, int width, int height) {
