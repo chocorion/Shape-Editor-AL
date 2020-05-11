@@ -3,9 +3,8 @@ package application.view.menu;
 import application.model.shape.Rectangle;
 import application.utils.Color;
 import application.view.ViewBridge;
-import application.view.menu.SubMenu;
 
-public class subMenuColor implements SubMenu {
+public class subMenuColor implements EditionSubMenu {
     private int x, y, width, height;
     private Rectangle area;
     private ViewBridge view;
@@ -25,7 +24,7 @@ public class subMenuColor implements SubMenu {
     }
 
     @Override
-    public String toString() {
-        return "Color";
+    public String getName() {
+        return "color";
     }
 }

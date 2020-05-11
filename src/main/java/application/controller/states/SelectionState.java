@@ -151,7 +151,7 @@ public class SelectionState extends ControllerStateImp {
     }
 
     @Override
-    public boolean onMouseDragged(int x, int y) {
+    public boolean onMouseMoved(int x, int y) {
         if (doingSelection && Layout.getWhiteBoard().isIn(x, y)) {
             view.getWhiteBoard().update();
             endX = x;

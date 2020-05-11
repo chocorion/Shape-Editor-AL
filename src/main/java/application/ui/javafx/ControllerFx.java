@@ -2,7 +2,7 @@ package application.ui.javafx;
 
 import java.util.ArrayList;
 
-import application.controller.Controller;
+import application.controller.ConcreteControllerItf;
 import application.controller.MainController;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseButton;
@@ -10,7 +10,7 @@ import javafx.scene.input.MouseButton;
 /**
  * This class get all the input from the user, and calls the associate fonction in scene manager.
  */
-public class ControllerFx implements Controller {
+public class ControllerFx implements ConcreteControllerItf {
     ArrayList<String> input;
 
     /**
@@ -63,8 +63,13 @@ public class ControllerFx implements Controller {
                     }
                 });
 
+        scene.setOnMouseMoved(
+                e -> mainController.onMouseMoved(e.getX(), e.getY())
+        );
+
         scene.setOnMouseDragged(
-                e -> mainController.onMouseDragged(e.getX(), e.getY()));
+                e -> mainController.onMouseMoved(e.getX(), e.getY())
+        );
     }
 
 

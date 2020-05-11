@@ -9,6 +9,6 @@ public interface ConcreteViewItf {
     void devDrawPolygon(Polygon polygon);
 
     void devDrawImage(String path, int x, int y, int width, int height);
-
+    void devDrawRoundedRect(int x, int y, int width, int height, int arcWidth, int arcHeight, Color color);
     void devDrawText(String text, int x, int y, int size, Color color);
 }

@@ -38,6 +38,7 @@ public class MainController {
     }
 
     public void switchState(ControllerState newState) {
+        System.out.println("[MainController] Switch state to " + newState.toString());
         currentState = newState;
     }
 
@@ -55,12 +56,15 @@ public class MainController {
 
     public void onRightClickReleased(double x, double y) {
         while (!currentState.onRightClickReleased((int) x, (int) y));
+
+        System.out.println("Out of rightClick...");
     }
 
-    public void onMouseDragged(double x, double y) {
+    public void onMouseMoved(double x, double y) {
         lastMouseX = (int) x;
         lastMouseY = (int) y;
-        while (!currentState.onMouseDragged(lastMouseX, lastMouseY));
+
+        while (!currentState.onMouseMoved(lastMouseX, lastMouseY));
     }
 
     public void onWindowsResize(int width, int height) {

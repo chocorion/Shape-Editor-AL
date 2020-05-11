@@ -5,22 +5,24 @@ import application.utils.Color;
 import application.view.ViewBridge;
 
 public class WhiteBoardMenu {
-    private static String[] items = {
+    private static final String[] items = {
             "Group",
             "Ungroup",
             "Edit"
     };
 
 
-    private static int width  = 60;
-    private static int height = 20;
+    private static final int width  = 60;
+    private static final int height = 20;
 
-    private ViewBridge view;
+    private final ViewBridge view;
 
     private int x, y;
+    private int currentySelected;
 
     public WhiteBoardMenu(ViewBridge view) {
         this.view = view;
+        currentySelected = -1;
     }
 
 
@@ -28,19 +30,31 @@ public class WhiteBoardMenu {
         this.x = x;
         this.y = y;
 
-        // Draw menu here
+        view.drawRoundedRectShadow(x, y, width, items.length * height, 20, 3, Color.WHITE);
+        drawWithoutShadow(x, y);
+    }
+
+    public void drawWithoutShadow(int x, int y) {
+        view.drawRoundedRect(x, y, width, items.length * height, 20, Color.WHITE);
+
+        if (currentySelected != -1) {
+            view.drawRoundedRect(x, y + currentySelected * height, width, height, 20, new Color(156, 221, 255));
+        }
         for (int i = 0; i < items.length; i++) {
-            drawMenuItem(i);
+            if (i == currentySelected)
+                view.drawText(items[i], x + 2, (int) (y + (i + 0.8) * (height)), width, Color.WHITE);
+            else
+                view.drawText(items[i], x + 2, (int) (y + (i + 0.8) * (height)), width, Color.BLACK);
         }
     }
 
-    private void drawMenuItem(int itemId) {
-        Rectangle menuRect = new Rectangle(this.x, this.y + itemId * height, width, height, Color.LIGHT_GREY);
-        view.drawRectangle(menuRect);
 
-        menuRect.setColor(Color.BLACK);
-        view.drawStrokeRectangle(menuRect);
-        view.drawText(items[itemId], x + 2, (int) (y + (itemId + 0.8) * (height)), width, Color.BLACK);
+    public void setCurrentySelected(int id) {
+        int old = currentySelected;
+        currentySelected = id;
+
+        if (id != old)
+            drawWithoutShadow(x, y);
     }
 
     public int getItemId(int x, int y) {

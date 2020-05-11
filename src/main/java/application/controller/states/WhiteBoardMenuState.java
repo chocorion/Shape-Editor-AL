@@ -55,13 +55,13 @@ public class WhiteBoardMenuState extends ControllerStateImp {
                 closeAndSwitch();
             }
         } else if (itemId == 2) {
-            System.out.println("EDITION MENU");
             view.getWhiteBoard().openEditionMenu(x, y);
             mainController.switchState(EditionMenuState.getInstance());
             return true;
         } else {
             closeAndSwitch();
         }
+
         return true;
     }
 
@@ -71,6 +71,15 @@ public class WhiteBoardMenuState extends ControllerStateImp {
         return true;
     }
 
+    @Override
+    public boolean onMouseMoved(int x, int y) {
+        WhiteBoardMenu menu = view.getWhiteBoard().getMenu();
+        int itemId = menu.getItemId(x, y);
+
+        menu.setCurrentySelected(itemId);
+
+        return true;
+    }
 
     public static WhiteBoardMenuState getInstance() {
         return instance;

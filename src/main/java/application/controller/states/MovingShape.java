@@ -46,7 +46,7 @@ public class MovingShape extends ControllerStateImp {
     }
 
     @Override
-    public boolean onMouseDragged(int x, int y) {
+    public boolean onMouseMoved(int x, int y) {
         if (holding != null) {
             if (Layout.getWhiteBoard().isIn(x - diffX, y - diffY)) {
                 model.getWhiteBoard().moveShape(holding, x - diffX, y - diffY);
@@ -69,5 +69,10 @@ public class MovingShape extends ControllerStateImp {
 
     public static MovingShape getInstance() {
         return state;
+    }
+
+    @Override
+    public String toString() {
+        return "moving shape";
     }
 }

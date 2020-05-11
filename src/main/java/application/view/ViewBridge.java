@@ -58,10 +58,28 @@ public class ViewBridge {
 
 
     public void drawText(String text, int x, int y, int size, Color color) {
-        this.implementation.devDrawText(text, x, y, size, color);
+        implementation.devDrawText(text, x, y, size, color);
     }
 
     public void drawSelection(int x, int y, int width, int height) {
         implementation.devDrawStrokeRectangle(x, y, width, height, Color.BLUE);
+    }
+
+    public void drawRoundedRectShadow(int x, int y, int width, int height, int roundSize, int shadowSize, Color color) {
+        implementation.devDrawRoundedRect(
+                x - shadowSize,
+                y - shadowSize,
+                width + 2 * shadowSize,
+                height + 2 * shadowSize,
+                roundSize + shadowSize,
+                roundSize + shadowSize,
+                new Color(30, 30, 30, 0.4)
+        );
+
+        implementation.devDrawRoundedRect(x, y, width, height, roundSize, roundSize, color);
+    }
+
+    public void drawRoundedRect(int x, int y, int width, int height, int roundSize, Color color) {
+        implementation.devDrawRoundedRect(x, y, width, height, roundSize, roundSize, color);
     }
 }

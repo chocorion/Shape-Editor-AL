@@ -1,5 +1,5 @@
 package application.controller;
 
-public interface Controller {
+public interface ConcreteControllerItf {
     boolean tick();
 }

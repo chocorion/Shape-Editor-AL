@@ -1,6 +1,6 @@
 package application.ui.javafx;
 
-import application.controller.Controller;
+import application.controller.ConcreteControllerItf;
 import application.controller.MainController;
 import application.model.Model;
 import application.ui.UIFactory;
@@ -14,7 +14,7 @@ public class UIFx implements UIFactory {
     }
 
     @Override
-    public Controller getController(MainController mainController, ConcreteViewItf view) {
+    public ConcreteControllerItf getController(MainController mainController, ConcreteViewItf view) {
         assert view instanceof ViewFx;
 
         return new ControllerFx(mainController, (ViewFx) view);

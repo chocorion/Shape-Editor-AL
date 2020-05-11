@@ -22,7 +22,7 @@ public class ControllerStateImp implements ControllerState {
     }
 
     @Override
-    public boolean onMouseDragged(int x, int y) {
+    public boolean onMouseMoved(int x, int y) {
         return true;
     }
 

@@ -1,5 +1,6 @@
 package application.view.menu;
 
-public interface SubMenu {
+public interface EditionSubMenu {
     void draw(int x, int y);
+    String getName();
 }

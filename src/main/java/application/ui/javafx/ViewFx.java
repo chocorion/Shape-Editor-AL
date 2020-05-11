@@ -1,7 +1,7 @@
 package application.ui.javafx;
 
 
-import application.controller.Controller;
+import application.controller.ConcreteControllerItf;
 import application.model.Model;
 import application.model.shape.Polygon;
 
@@ -64,7 +64,7 @@ public class ViewFx extends Application implements ConcreteViewItf {
         model.update();
     }
 
-    public void AddController(Controller controller) {
+    public void AddController(ConcreteControllerItf controller) {
         new AnimationTimer(){
             long prevNanoTime = System.nanoTime();
             public void handle(long currentNanoTime){
@@ -105,6 +105,12 @@ public class ViewFx extends Application implements ConcreteViewItf {
         }
 
         ViewFx.gc.drawImage(imageCache.get(path), x, y, width, height);
+    }
+
+    @Override
+    public void devDrawRoundedRect(int x, int y, int width, int height, int arcWidth, int arcHeight, application.utils.Color color) {
+        ViewFx.gc.setFill(new Color(color.getR(), color.getG(), color.getB(), color.getA()));
+        ViewFx.gc.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
     }
 
     @Override

@@ -36,4 +36,9 @@ public class EditionMenuState extends ControllerStateImp {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "edition menu";
+    }
 }

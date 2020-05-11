@@ -15,7 +15,7 @@ public class EditionMenu {
     private static int header_height = 20;
     private static int footer_height = 45;
 
-    private ArrayList<SubMenu> subMenus;
+    private ArrayList<EditionSubMenu> subMenus;
 
     private int selectedMenu;
 
@@ -61,9 +61,9 @@ public class EditionMenu {
 
         int buttonSize = (width - 2 * margin)/subMenus.size();
         int index = 0;
-        for (SubMenu submenu : subMenus) {
+        for (EditionSubMenu submenu : subMenus) {
             view.drawRectangle(new Rectangle(index * buttonSize + x + margin, y + margin, buttonSize, header_height));
-            view.drawText(submenu.toString(),index * buttonSize + x + margin, y + margin + 10, buttonSize, Color.LIGHT_GREY);
+            view.drawText(submenu.getName(),index * buttonSize + x + margin, y + margin + 10, buttonSize, Color.LIGHT_GREY);
             index++;
         }
 
