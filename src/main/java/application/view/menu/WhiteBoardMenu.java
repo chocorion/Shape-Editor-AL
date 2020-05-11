@@ -1,4 +1,4 @@
-package application.view.decoration.menu;
+package application.view.menu;
 
 import application.model.shape.Rectangle;
 import application.utils.Color;
@@ -10,7 +10,6 @@ public class WhiteBoardMenu {
             "Ungroup",
             "Edit"
     };
-
 
 
     private static int width  = 60;

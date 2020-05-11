@@ -1,4 +1,4 @@
-package application.view.decoration.menu;
+package application.view.menu;
 
 import application.model.shape.Rectangle;
 import application.utils.Color;
@@ -29,7 +29,7 @@ public class EditionMenu {
         int subMenuX = this.x + margin;
         int subMenuY = this.y + 2 * margin + header_height;
         int subMenuWidth = width - 2 * margin;
-        int subMenuHeight = height - 4 * margin;
+        int subMenuHeight = height - 4 * margin - header_height - footer_height;
 
         subMenus = new ArrayList<>();
 

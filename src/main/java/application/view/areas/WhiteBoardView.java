@@ -3,12 +3,12 @@ package application.view.areas;
 import application.model.areas.WhiteBoard;
 import application.model.shape.Rectangle;
 import application.model.shape.Shape;
-import application.utils.ModelObservable;
 import application.utils.Color;
 import application.utils.ModelObserver;
 import application.view.*;
-import application.view.decoration.menu.EditionMenu;
-import application.view.decoration.menu.WhiteBoardMenu;
+
+import application.view.menu.EditionMenu;
+import application.view.menu.WhiteBoardMenu;
 
 import java.util.ArrayList;
 

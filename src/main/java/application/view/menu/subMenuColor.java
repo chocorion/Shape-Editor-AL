@@ -1,8 +1,9 @@
-package application.view.decoration.menu;
+package application.view.menu;
 
 import application.model.shape.Rectangle;
 import application.utils.Color;
 import application.view.ViewBridge;
+import application.view.menu.SubMenu;
 
 public class subMenuColor implements SubMenu {
     private int x, y, width, height;
@@ -16,14 +17,11 @@ public class subMenuColor implements SubMenu {
         this.y = y;
         this.width = width;
         this.height = height;
-
-        this.area = new Rectangle(x, y, width, height, Color.BLUE);
     }
 
     @Override
     public void draw(int x, int y) {
-        System.out.println("Area x : " + area.getX() + ", area y : " + area.getY());
-        view.drawStrokeRectangle(this.area);
+        view.drawStrokeRectangle(x, y, width, height, Color.BLUE);
     }
 
     @Override

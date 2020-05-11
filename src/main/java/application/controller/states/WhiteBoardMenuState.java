@@ -7,7 +7,7 @@ import application.model.command.concreteCommand.ExpandComposite;
 import application.model.shape.CompositeShape;
 import application.model.shape.Shape;
 import application.view.MainView;
-import application.view.decoration.menu.WhiteBoardMenu;
+import application.view.menu.WhiteBoardMenu;
 
 import java.util.ArrayList;
 

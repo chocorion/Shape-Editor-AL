@@ -4,9 +4,8 @@ package application.ui.javafx;
 import application.controller.Controller;
 import application.model.Model;
 import application.model.shape.Polygon;
-import application.model.shape.Rectangle;
+
 import application.view.ConcreteViewItf;
-import application.view.areas.Layout;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -14,14 +13,12 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 import javafx.scene.paint.Color;
-import javafx.stage.Screen;
+
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 
 public class ViewFx extends Application implements ConcreteViewItf {
@@ -81,31 +78,18 @@ public class ViewFx extends Application implements ConcreteViewItf {
         }.start();
     }
 
-
     @Override
-    public int getWidth() {
-        return (int) Screen.getPrimary().getVisualBounds().getWidth();
+    public void devDrawRectangle(int x, int y, int width, int height, application.utils.Color color) {
+        ViewFx.gc.setFill(new Color(color.getR(), color.getG(), color.getB(), color.getA()));
+
+        ViewFx.gc.fillRect(x, y, width, height);
     }
 
     @Override
-    public int getHeight() {
-        return (int) Screen.getPrimary().getVisualBounds().getHeight();
-    }
+    public void devDrawStrokeRectangle(int x, int y, int width, int height, application.utils.Color color) {
+        ViewFx.gc.setStroke(new Color(color.getR(), color.getG(), color.getB(), color.getA()));
 
-    @Override
-    public void devDrawRectangle(Rectangle rectangle) {
-        application.utils.Color rectColor = rectangle.getColor();
-        ViewFx.gc.setFill(new Color(rectColor.getR(), rectColor.getG(), rectColor.getB(), rectColor.getA()));
-
-        ViewFx.gc.fillRect(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
-    }
-
-    @Override
-    public void devDrawStrokeRectangle(Rectangle rectangle) {
-        application.utils.Color rectColor = rectangle.getColor();
-        ViewFx.gc.setStroke(new Color(rectColor.getR(), rectColor.getG(), rectColor.getB(), rectColor.getA()));
-
-        ViewFx.gc.strokeRect(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
+        ViewFx.gc.strokeRect(x, y, width, height);
     }
 
     @Override

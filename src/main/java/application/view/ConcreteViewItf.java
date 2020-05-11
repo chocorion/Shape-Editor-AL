@@ -1,15 +1,11 @@
 package application.view;
 
 import application.model.shape.Polygon;
-import application.model.shape.Rectangle;
 import application.utils.Color;
 
 public interface ConcreteViewItf {
-    int getWidth();
-    int getHeight();
-
-    void devDrawRectangle(Rectangle rectangle);
-    void devDrawStrokeRectangle(Rectangle rectangle);
+    void devDrawRectangle(int x, int y, int width, int height, Color color);
+    void devDrawStrokeRectangle(int x, int y, int width, int height, Color color);
     void devDrawPolygon(Polygon polygon);
 
     void devDrawImage(String path, int x, int y, int width, int height);

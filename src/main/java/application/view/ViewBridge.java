@@ -12,14 +12,32 @@ public class ViewBridge {
         implementation = concreteView;
     }
 
-
-    public void drawRectangle(Rectangle rectangle) {
-        implementation.devDrawRectangle(rectangle);
+    public void drawRectangle(int x, int y, int width, int height, Color color) {
+        implementation.devDrawRectangle(x, y, width, height, color);
     }
 
+    public void drawRectangle(Rectangle rectangle) {
+        implementation.devDrawRectangle(
+                (int) rectangle.getX(),
+                (int) rectangle.getY(),
+                (int) rectangle.getWidth(),
+                (int) rectangle.getHeight(),
+                rectangle.getColor()
+        );
+    }
+
+    public void drawStrokeRectangle(int x, int y, int width, int height, Color color) {
+        implementation.devDrawStrokeRectangle(x, y, width, height, color);
+    }
 
     public void drawStrokeRectangle(Rectangle rectangle) {
-        implementation.devDrawStrokeRectangle(rectangle);
+        implementation.devDrawStrokeRectangle(
+                (int) rectangle.getX(),
+                (int) rectangle.getY(),
+                (int) rectangle.getWidth(),
+                (int) rectangle.getHeight(),
+                rectangle.getColor()
+        );
     }
 
 
@@ -44,6 +62,6 @@ public class ViewBridge {
     }
 
     public void drawSelection(int x, int y, int width, int height) {
-        implementation.devDrawStrokeRectangle(new Rectangle(x, y, width, height, Color.BLUE));
+        implementation.devDrawStrokeRectangle(x, y, width, height, Color.BLUE);
     }
 }
