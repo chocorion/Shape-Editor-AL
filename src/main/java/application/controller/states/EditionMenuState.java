@@ -1,55 +1,61 @@
 package application.controller.states;
 
 import application.controller.MainController;
+import application.controller.states.substates.SubMenuColorState;
+import application.controller.states.substates.SubMenuResizeState;
 import application.model.Model;
 import application.view.MainView;
 import application.view.menu.EditionMenu;
-import application.view.menu.SubMenuColor;
+import application.view.menu.SubMenuResize;
 
 
-public class EditionMenuStateColor extends ControllerStateImp {
-    private static EditionMenuStateColor state;
+public class EditionMenuState extends ControllerStateImp {
+    private static EditionMenuState state;
+
+    private ControllerState subState;
 
     MainController mainController;
     Model model;
     MainView view;
 
     EditionMenu menu;
-    SubMenuColor menuColor;
-    int sliderId;
+
     int buttonId;
 
-    private EditionMenuStateColor(MainController mainController, Model model, MainView view) {
+    private EditionMenuState(MainController mainController, Model model, MainView view) {
         this.mainController = mainController;
         this.model = model;
         this.view = view;
 
         menu = view.getWhiteBoard().getEditionMenu();
-        menuColor = (SubMenuColor) menu.getSelectedMenu();
 
-        sliderId = -1;
         buttonId = -1;
+
+        SubMenuResizeState.setInstance(mainController, model, view);
+        SubMenuColorState.setInstance(mainController, model, view);
+
+        // By default
+        subState = SubMenuColorState.getInstance();
     }
 
     public static void setInstance(MainController mainController, Model model, MainView view) {
-        state = new EditionMenuStateColor(mainController, model, view);
+        state = new EditionMenuState(mainController, model, view);
     }
 
 
-    public static EditionMenuStateColor getInstance() {
+    public static EditionMenuState getInstance() {
         return state;
     }
 
     @Override
     public boolean onLeftClickReleased(int x, int y) {
-        if (sliderId != -1) {
-            sliderId = -1;
-            return true;
-        }
-
         if (buttonId != -1) {
             view.getWhiteBoard().getEditionMenu().unpushButton(buttonId);
             buttonId = -1;
+            return true;
+        }
+
+        if (subState.onLeftClickReleased(x, y)) {
             return true;
         }
 
@@ -65,13 +71,25 @@ public class EditionMenuStateColor extends ControllerStateImp {
 
     @Override
     public boolean onLeftClickPressed(int x, int y) {
-        // TODO Clean toute cette partie, la, c'est trop moche
         if (menu.isIn(x, y)) {
-            sliderId = menuColor.getSliderId(x, y);
-            buttonId = view.getWhiteBoard().getEditionMenu().getButtonId(x, y);
+
+            if (menu.isInSubmenu(x, y)) {
+                subState.onLeftClickPressed(x, y);
+                return true;
+            }
+
+            buttonId = menu.getButtonId(x, y);
 
             if (buttonId != -1) {
-                view.getWhiteBoard().getEditionMenu().pushButton(buttonId);
+                menu.pushButton(buttonId);
+            }
+
+            if (buttonId == 0) {
+                menu.switchSubmenu(0);
+                subState = SubMenuColorState.getInstance();
+            } else if (buttonId == 1) {
+                menu.switchSubmenu(1);
+                subState = SubMenuResizeState.getInstance();
             }
         }
 
@@ -80,8 +98,8 @@ public class EditionMenuStateColor extends ControllerStateImp {
 
     @Override
     public boolean onMouseMoved(int x, int y) {
-        if (sliderId != -1)
-            menuColor.moveSlider(x, y, sliderId);
+        subState.onMouseMoved(x, y);
+
         return true;
     }
 

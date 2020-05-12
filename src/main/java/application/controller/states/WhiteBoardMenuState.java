@@ -56,7 +56,7 @@ public class WhiteBoardMenuState extends ControllerStateImp {
             }
         } else if (itemId == 2) {
             view.getWhiteBoard().openEditionMenu(x, y);
-            mainController.switchState(EditionMenuStateColor.getInstance());
+            mainController.switchState(EditionMenuState.getInstance());
             return true;
         } else {
             closeAndSwitch();
