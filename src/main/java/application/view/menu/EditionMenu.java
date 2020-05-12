@@ -4,6 +4,7 @@ import application.model.shape.Rectangle;
 import application.utils.Color;
 import application.view.ViewBridge;
 import application.view.element.TextButton;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -17,7 +18,8 @@ public class EditionMenu {
     private static int footer_height = 45;
 
     private ArrayList<EditionSubMenu> subMenus;
-    TextButton[] buttons;
+    TextButton[] footerButtons;
+    ArrayList<TextButton> headerButtons;
 
     private int selectedMenu;
 
@@ -44,11 +46,23 @@ public class EditionMenu {
 
         int marge_x = (width - 3 * button_width)/4;
         int marge_y = (footer_height - button_height - margin)/2;
-        buttons = new TextButton[] {
+
+        footerButtons = new TextButton[] {
                 new TextButton(view, marge_x, height - footer_height + marge_y, button_width, button_height, "Apply"),
                 new TextButton(view, button_width + 2 * marge_x, height - footer_height + marge_y, button_width, button_height, "Reset"),
                 new TextButton(view, 2 * button_width + 3 * marge_x, height - footer_height + marge_y, button_width, button_height, "Cancel"),
         };
+
+        headerButtons = new ArrayList<>();
+        int numberButtons = subMenus.size();
+        int index = 0;
+
+        for (EditionSubMenu subMenu : subMenus) {
+            headerButtons.add(
+                    new TextButton(view, index * width/numberButtons, 5, width/numberButtons, header_height, subMenu.getName())
+            );
+            index++;
+        }
 
         selectedMenu = 0;
     }
@@ -74,15 +88,13 @@ public class EditionMenu {
         int buttonSize = (width - 2 * margin)/subMenus.size();
         int index = 0;
 
-        for (EditionSubMenu submenu : subMenus) {
-            view.drawRectangle(new Rectangle(index * buttonSize + x + margin, y + margin, buttonSize, header_height));
-            view.drawText(submenu.getName(),index * buttonSize + x + margin, y + margin + 10, buttonSize, Color.LIGHT_GREY);
-            index++;
+        for (TextButton button : headerButtons) {
+            button.draw(this.x, this.y);
         }
 
         subMenus.get(selectedMenu).draw(x + margin, y + header_height + 2 * margin);
 
-        for (TextButton button : buttons)
+        for (TextButton button : footerButtons)
             button.draw(x, y);
     }
 
@@ -95,8 +107,8 @@ public class EditionMenu {
     }
 
     public int getButtonId(int x, int y) {
-        for (int i = 0; i < buttons.length; i++) {
-            if (buttons[i].isIn(x - this.x, y - this.y)) {
+        for (int i = 0; i < footerButtons.length; i++) {
+            if (footerButtons[i].isIn(x - this.x, y - this.y)) {
                 return i;
             }
         }
@@ -105,15 +117,15 @@ public class EditionMenu {
     }
 
     public void pushButton(int buttonId) {
-        if (buttonId >= 0 && buttonId < buttons.length) {
-            buttons[buttonId].push();
+        if (buttonId >= 0 && buttonId < footerButtons.length) {
+            footerButtons[buttonId].push();
             draw(x, y);
         }
     }
 
     public void unpushButton(int buttonId) {
-        if (buttonId >= 0 && buttonId < buttons.length) {
-            buttons[buttonId].unpush();
+        if (buttonId >= 0 && buttonId < footerButtons.length) {
+            footerButtons[buttonId].unpush();
             draw(x, y);
         }
     }
