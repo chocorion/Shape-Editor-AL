@@ -10,6 +10,7 @@ import application.view.MainView;
 import application.view.menu.WhiteBoardMenu;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class WhiteBoardMenuState extends ControllerStateImp {
     private static WhiteBoardMenuState instance;
@@ -43,12 +44,13 @@ public class WhiteBoardMenuState extends ControllerStateImp {
             closeAndSwitch();
 
         } else if (itemId == 1) {
-            ArrayList<Shape> selection = view.getWhiteBoard().getSelectedShapes();
+            HashSet<Shape> selection = view.getWhiteBoard().getSelectedShapes();
 
             if (selection.size() == 1) {
-                if (selection.get(0) instanceof CompositeShape) {
+                Shape s = selection.iterator().next();
+                if (s instanceof CompositeShape) {
                     model.execute(
-                            new ExpandComposite(model.getWhiteBoard(), (CompositeShape) selection.get(0))
+                            new ExpandComposite(model.getWhiteBoard(), (CompositeShape) s)
                     );
                 }
 

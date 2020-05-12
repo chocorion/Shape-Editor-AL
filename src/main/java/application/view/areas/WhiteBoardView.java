@@ -8,20 +8,20 @@ import application.utils.ModelObserver;
 import application.view.*;
 
 import application.view.menu.EditionMenu;
-import application.view.menu.EditionSubMenu;
 import application.view.menu.WhiteBoardMenu;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class WhiteBoardView implements ModelObserver {
-    private WhiteBoard whiteBoard;
-    private WhiteBoardMenu menu;
-    private EditionMenu editionMenu;
+    private final WhiteBoard whiteBoard;
+    private final WhiteBoardMenu menu;
+    private final EditionMenu editionMenu;
 
-    private ArrayList<Shape> selectedShapes;
+    private final HashSet<Shape> selectedShapes;
     private Rectangle area;
 
-    private ViewBridge view;
+    private final ViewBridge view;
 
     private boolean isMenuOpen;
     private boolean isEditionMenuOpen;
@@ -35,7 +35,7 @@ public class WhiteBoardView implements ModelObserver {
         this.whiteBoard = whiteBoard;
         menu = new WhiteBoardMenu(view);
 
-        selectedShapes = new ArrayList<>();
+        selectedShapes = new HashSet<>();
         isMenuOpen = false;
         isEditionMenuOpen = false;
         editionMenu = new EditionMenu(view);
@@ -60,7 +60,7 @@ public class WhiteBoardView implements ModelObserver {
             shape.draw(view);
         }
 
-        drawShapeSelection(selectedShapes);
+        drawSelectedShapes(selectedShapes);
 
         if (isMenuOpen)
             menu.draw(menuX, menuY);
@@ -72,7 +72,7 @@ public class WhiteBoardView implements ModelObserver {
         selectedShapes.addAll(shapes);
     }
 
-    public ArrayList<Shape> getSelectedShapes() {
+    public HashSet<Shape> getSelectedShapes() {
         return selectedShapes;
     }
 
@@ -80,13 +80,13 @@ public class WhiteBoardView implements ModelObserver {
         selectedShapes.clear();
     }
 
-    public void drawShapeSelection(ArrayList<Shape> shapes) {
+    public void drawSelectedShapes(HashSet<Shape> shapes) {
         for (Shape shape : shapes) {
-            drawShapeSelection(shape);
+            drawSelectedShapes(shape);
         }
     }
 
-    public void drawShapeSelection(Shape shape) {
+    public void drawSelectedShapes(Shape shape) {
         int selectionMarge = 4;
 
         new Rectangle(
@@ -120,7 +120,6 @@ public class WhiteBoardView implements ModelObserver {
     }
 
     public void openEditionMenu(int x, int y) {
-        System.out.println("OPENING EDITION MENU");
         menuX = x;
         menuY = y;
 

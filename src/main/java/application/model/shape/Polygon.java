@@ -1,9 +1,11 @@
 package application.model.shape;
 
+import application.utils.Color;
 import application.view.ViewBridge;
 
 // TODO
 public class Polygon extends SingleShape {
+    private Color color;
 
     @Override
     public void draw(ViewBridge view) {
@@ -68,6 +70,11 @@ public class Polygon extends SingleShape {
     @Override
     public void resize(Shape containerShape, double factor) {
 
+    }
+
+    @Override
+    public void setColor(Color color) {
+        this.color = color;
     }
 }
 

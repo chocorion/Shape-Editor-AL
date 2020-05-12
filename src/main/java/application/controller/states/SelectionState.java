@@ -25,6 +25,7 @@ public class SelectionState extends ControllerStateImp {
 
     private boolean selectionDone;
     private boolean doingSelection;
+    private boolean leftClick;
 
     private boolean ctrlActivate;
 
@@ -39,6 +40,7 @@ public class SelectionState extends ControllerStateImp {
         selectionDone  = false;
         doingSelection = false;
         ctrlActivate = false;
+        leftClick = false;
 
         selectedShape = new ArrayList<>();
     }
@@ -53,6 +55,8 @@ public class SelectionState extends ControllerStateImp {
 
     @Override
     public boolean onLeftClickPressed(int x, int y) {
+        leftClick = true;
+
         if (!ctrlActivate && mainController.isKeyPressed("CONTROL")) {
             ctrlActivate = true;
         }
@@ -79,6 +83,7 @@ public class SelectionState extends ControllerStateImp {
 
     @Override
     public boolean onLeftClickReleased(int x, int y) {
+        leftClick = false;
         if (startY == endY && startX == endX) {
             if (!ctrlActivate && mainController.isKeyPressed("CONTROL")) {
                 ctrlActivate = true;
@@ -99,8 +104,11 @@ public class SelectionState extends ControllerStateImp {
             return true;
         }
 
-        view.getWhiteBoard().clearSelection();
-        view.getWhiteBoard().update();
+        if (!ctrlActivate) {
+            view.getWhiteBoard().clearSelection();
+            view.getWhiteBoard().update();
+        }
+
 
         if (!Layout.getWhiteBoard().isIn(x, y)) {
             if (!ctrlActivate)
@@ -152,7 +160,7 @@ public class SelectionState extends ControllerStateImp {
 
     @Override
     public boolean onMouseMoved(int x, int y) {
-        if (doingSelection && Layout.getWhiteBoard().isIn(x, y)) {
+        if (doingSelection && Layout.getWhiteBoard().isIn(x, y) && leftClick) {
             view.getWhiteBoard().update();
             endX = x;
             endY = y;

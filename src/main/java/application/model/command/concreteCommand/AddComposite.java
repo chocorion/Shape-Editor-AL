@@ -6,13 +6,14 @@ import application.model.shape.Shape;
 import application.model.areas.ShapeContainer;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class AddComposite implements Command {
     private final ShapeContainer shapeContainer;
     private final CompositeShape shape;
 
 
-    public AddComposite(ShapeContainer shapeContainer, ArrayList<Shape> shapes) {
+    public AddComposite(ShapeContainer shapeContainer, Set<Shape> shapes) {
         this.shape = new CompositeShape();
         this.shapeContainer = shapeContainer;
 

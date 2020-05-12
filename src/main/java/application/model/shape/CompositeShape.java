@@ -1,5 +1,6 @@
 package application.model.shape;
 
+import application.utils.Color;
 import application.view.ViewBridge;
 
 import java.util.HashSet;
@@ -174,6 +175,13 @@ public class CompositeShape implements Shape, Cloneable {
     public void resize(Shape shapeContainer, double factor) {
         for (Shape shape : this.shapeSet) {
             shape.resize(shapeContainer, factor);
+        }
+    }
+
+    @Override
+    public void setColor(Color color) {
+        for (Shape shape : shapeSet) {
+            shape.setColor(color);
         }
     }
 

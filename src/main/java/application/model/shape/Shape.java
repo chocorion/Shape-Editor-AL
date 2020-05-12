@@ -1,6 +1,7 @@
 package application.model.shape;
 
 import application.exceptions.UnsupportedOperationException;
+import application.utils.Color;
 import application.view.ViewBridge;
 
 public interface Shape {
@@ -24,6 +25,7 @@ public interface Shape {
 
     void resize(double factor);
     void resize(Shape containerShape, double factor);
+    void setColor(Color color);
 
     Object clone();
 }

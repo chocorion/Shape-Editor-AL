@@ -24,8 +24,6 @@ public class Rectangle extends SingleShape {
     }
 
 
-
-
     @Override
     public void draw(ViewBridge view) {
         view.drawRectangle(this);
@@ -120,6 +118,7 @@ public class Rectangle extends SingleShape {
         return this.color;
     }
 
+    @Override
     public void setColor(Color color) {
         this.color = color;
     }
