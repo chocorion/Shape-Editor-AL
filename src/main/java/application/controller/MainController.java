@@ -37,6 +37,7 @@ public class MainController {
     public void switchState(ControllerState newState) {
         System.out.println("[MainController] Switch state to " + newState.toString());
         currentState = newState;
+        newState.onSwitch();
     }
 
     public void onLeftClickPressed(double x, double y) {

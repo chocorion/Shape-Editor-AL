@@ -8,4 +8,6 @@ public interface ControllerState {
     boolean onMouseMoved(int x, int y);
     boolean onKeyPressed(String keyCode, int mouseX, int mouseY);
     boolean onKeyReleased(String keyCode, int mouseX, int mouseY);
+
+    void onSwitch();
 }

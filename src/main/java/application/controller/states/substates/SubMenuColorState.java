@@ -4,6 +4,8 @@ package application.controller.states.substates;
 import application.controller.MainController;
 import application.controller.states.ControllerStateImp;
 import application.model.Model;
+import application.model.shape.Shape;
+import application.utils.Color;
 import application.view.MainView;
 import application.view.menu.EditionMenu;
 import application.view.menu.SubMenuColor;
@@ -60,6 +62,13 @@ public class SubMenuColorState extends ControllerStateImp {
     public boolean onMouseMoved(int x, int y) {
         if (sliderId != -1) {
             ((SubMenuColor) menu.getSelectedMenu()).moveSlider(x, y, sliderId);
+
+            Color c = ((SubMenuColor) menu.getSelectedMenu()).getColor();
+            for (Shape s : view.getWhiteBoard().getSelectedShapes()) {
+                s.setColor(c);
+            }
+            view.getWhiteBoard().update();
+
             return true;
         }
 

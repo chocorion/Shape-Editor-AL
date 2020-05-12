@@ -35,4 +35,7 @@ public class ControllerStateImp implements ControllerState {
     public boolean onKeyReleased(String keyCode, int mouseX, int mouseY) {
         return true;
     }
+
+    @Override
+    public void onSwitch() {}
 }

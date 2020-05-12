@@ -12,6 +12,7 @@ import application.view.menu.WhiteBoardMenu;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Set;
 
 public class WhiteBoardView implements ModelObserver {
     private final WhiteBoard whiteBoard;
@@ -55,12 +56,13 @@ public class WhiteBoardView implements ModelObserver {
                 )
         );
 
+        drawSelectedShapes(selectedShapes);
+
         // Draw big white rectangle
         for (Shape shape:whiteBoard.getInnerShapes()) {
             shape.draw(view);
         }
 
-        drawSelectedShapes(selectedShapes);
 
         if (isMenuOpen)
             menu.draw(menuX, menuY);
@@ -69,6 +71,10 @@ public class WhiteBoardView implements ModelObserver {
     }
 
     public void addSelection(ArrayList<Shape> shapes) {
+        selectedShapes.addAll(shapes);
+    }
+
+    public void addSelection(Set<Shape> shapes) {
         selectedShapes.addAll(shapes);
     }
 

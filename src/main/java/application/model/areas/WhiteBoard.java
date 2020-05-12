@@ -6,6 +6,7 @@ import application.utils.ModelObservableImp;
 import application.view.areas.Layout;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class WhiteBoard extends ModelObservableImp implements ShapeContainer {
     private final ArrayList<Shape> shapes;
@@ -48,6 +49,18 @@ public class WhiteBoard extends ModelObservableImp implements ShapeContainer {
 
     public void moveShape(Shape shape, int x, int y) {
         shape.moveTo(x, y);
+        update();
+    }
+
+    public void replace(Set<Shape> oldShape, Set<Shape> newShape) {
+        for (Shape s : oldShape) {
+            removeShape(s);
+        }
+
+        for (Shape s : newShape) {
+            addShape(s);
+        }
+
         update();
     }
 }

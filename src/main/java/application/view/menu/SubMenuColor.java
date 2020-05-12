@@ -92,6 +92,9 @@ public class SubMenuColor implements EditionSubMenu {
         draw(this.x, this.y);
     }
 
+    public Color getColor() {
+        return color;
+    }
 
     @Override
     public String getName() {
