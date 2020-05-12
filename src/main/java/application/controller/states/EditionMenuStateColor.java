@@ -17,6 +17,7 @@ public class EditionMenuStateColor extends ControllerStateImp {
     EditionMenu menu;
     SubMenuColor menuColor;
     int sliderId;
+    int buttonId;
 
     private EditionMenuStateColor(MainController mainController, Model model, MainView view) {
         this.mainController = mainController;
@@ -27,6 +28,7 @@ public class EditionMenuStateColor extends ControllerStateImp {
         menuColor = (SubMenuColor) menu.getSelectedMenu();
 
         sliderId = -1;
+        buttonId = -1;
     }
 
     public static void setInstance(MainController mainController, Model model, MainView view) {
@@ -45,6 +47,12 @@ public class EditionMenuStateColor extends ControllerStateImp {
             return true;
         }
 
+        if (buttonId != -1) {
+            view.getWhiteBoard().getEditionMenu().unpushButton(buttonId);
+            buttonId = -1;
+            return true;
+        }
+
         if (!menu.isIn(x, y)) {
             view.getWhiteBoard().closeEditionMenu();
             mainController.switchState(WhiteBoardMenuState.getInstance());
@@ -57,9 +65,14 @@ public class EditionMenuStateColor extends ControllerStateImp {
 
     @Override
     public boolean onLeftClickPressed(int x, int y) {
-        // Vérifier si le clique n'a pas eu lieux sur la barre ongle
+        // TODO Clean toute cette partie, la, c'est trop moche
         if (menu.isIn(x, y)) {
             sliderId = menuColor.getSliderId(x, y);
+            buttonId = view.getWhiteBoard().getEditionMenu().getButtonId(x, y);
+
+            if (buttonId != -1) {
+                view.getWhiteBoard().getEditionMenu().pushButton(buttonId);
+            }
         }
 
         return true;

@@ -3,6 +3,7 @@ package application.view.menu;
 import application.model.shape.Rectangle;
 import application.utils.Color;
 import application.view.ViewBridge;
+import application.view.element.TextButton;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,7 @@ public class EditionMenu {
     private static int footer_height = 45;
 
     private ArrayList<EditionSubMenu> subMenus;
+    TextButton[] buttons;
 
     private int selectedMenu;
 
@@ -36,6 +38,17 @@ public class EditionMenu {
         subMenus.add(new SubMenuColor(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
         subMenus.add(new SubMenuColor(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
         subMenus.add(new SubMenuColor(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+
+        int button_width = width/5;
+        int button_height = (int) (footer_height * 0.7);
+
+        int marge_x = (width - 3 * button_width)/4;
+        int marge_y = (footer_height - button_height - margin)/2;
+        buttons = new TextButton[] {
+                new TextButton(view, marge_x, height - footer_height + marge_y, button_width, button_height, "Apply"),
+                new TextButton(view, button_width + 2 * marge_x, height - footer_height + marge_y, button_width, button_height, "Reset"),
+                new TextButton(view, 2 * button_width + 3 * marge_x, height - footer_height + marge_y, button_width, button_height, "Cancel"),
+        };
 
         selectedMenu = 0;
     }
@@ -68,6 +81,9 @@ public class EditionMenu {
         }
 
         subMenus.get(selectedMenu).draw(x + margin, y + header_height + 2 * margin);
+
+        for (TextButton button : buttons)
+            button.draw(x, y);
     }
 
     public boolean isIn(int x, int y) {
@@ -76,5 +92,29 @@ public class EditionMenu {
 
     public EditionSubMenu getSelectedMenu() {
         return subMenus.get(selectedMenu);
+    }
+
+    public int getButtonId(int x, int y) {
+        for (int i = 0; i < buttons.length; i++) {
+            if (buttons[i].isIn(x - this.x, y - this.y)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    public void pushButton(int buttonId) {
+        if (buttonId >= 0 && buttonId < buttons.length) {
+            buttons[buttonId].push();
+            draw(x, y);
+        }
+    }
+
+    public void unpushButton(int buttonId) {
+        if (buttonId >= 0 && buttonId < buttons.length) {
+            buttons[buttonId].unpush();
+            draw(x, y);
+        }
     }
 }
