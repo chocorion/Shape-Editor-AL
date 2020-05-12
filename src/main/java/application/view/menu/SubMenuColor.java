@@ -1,53 +1,8 @@
 package application.view.menu;
 
-import application.model.shape.Rectangle;
 import application.utils.Color;
 import application.view.ViewBridge;
-
-class ColorSlider {
-    static int width, height;
-    int x, y, value;
-    int buttonX, buttonY, buttonW, buttonH;
-
-    public ColorSlider(int x, int y, int value, int buttonW, int buttonH) {
-        this.x = x;
-        this.y = y;
-        this.value = value;
-
-        buttonX = x - buttonW/2 + (int) (width * (value/100.));
-        buttonY = y - buttonH/2;
-        this.buttonW = buttonW;
-        this.buttonH = buttonH;
-    }
-
-    void draw(ViewBridge view, int offsetX, int offsetY) {
-        view.drawRectangle(x + offsetX, y + offsetY, width, height, Color.BLACK);
-
-        view.drawRoundedRect(
-                offsetX + buttonX,
-                offsetY + buttonY,
-                buttonW,
-                buttonH,
-                5,
-                Color.BLUE
-        );
-    }
-
-    void updateValue(int x, int y) {
-        if (x > width || x < 0) return;
-
-        buttonX = x - buttonW/2 + (int) (width * (value/100.));
-        value = (int) (width/(double)buttonX) * 100;
-    }
-
-    boolean isOnButton(int x, int y) {
-        if (x >= this.x && x < this.x + width) {
-            return y >= this.y && y < this.y + height;
-        }
-
-        return false;
-    }
-}
+import application.view.element.Slider;
 
 
 public class SubMenuColor implements EditionSubMenu {
@@ -55,10 +10,10 @@ public class SubMenuColor implements EditionSubMenu {
     private ViewBridge view;
 
     // Value of the button on the progress bars.
-    private int Rvalue, Gvalue, Bvalue;
+    private double Rvalue, Gvalue, Bvalue;
     private Color color;
 
-    ColorSlider Rslider, Gslider, Bslider;
+    Slider Rslider, Gslider, Bslider;
 
     public SubMenuColor(ViewBridge view, int x, int y, int width, int height) {
         this.view = view;
@@ -70,24 +25,21 @@ public class SubMenuColor implements EditionSubMenu {
 
         color = new Color(0, 0, 0);
 
-        ColorSlider.width = (int) (width * 0.7);
-        ColorSlider.height = 2;
-
-        Rvalue = 50;
-        Gvalue = 50;
-        Bvalue = 50;
+        Rvalue = 0.5;
+        Gvalue = 0.5;
+        Bvalue = 0.5;
 
 
-        Rslider = new ColorSlider(width / 5, height / 8, Rvalue, 8, 18);
-        Gslider = new ColorSlider(width / 5, 2 * height / 8, Rvalue, 8, 18);
-        Bslider = new ColorSlider(width / 5, 3 * height / 8, Rvalue, 8, 18);
+        Rslider = new Slider(view, width/5, height / 8, (int) (width * 0.7), 2, 0.5, 8, 18);
+        Gslider = new Slider(view, width/5, 2 * height / 8, (int) (width * 0.7), 2, 0.5, 8, 18);
+        Bslider = new Slider(view, width/5, 3 * height / 8, (int) (width * 0.7), 2, 0.5, 8, 18);
     }
 
     private void updateColor() {
         color = new Color(
-                (int) (255 * Rvalue/100.),
-                (int) (255 * Gvalue/100.),
-                (int) (255 * Bvalue/100.)
+                (int) (255 * Rvalue),
+                (int) (255 * Gvalue),
+                (int) (255 * Bvalue)
         );
     }
 
@@ -96,23 +48,24 @@ public class SubMenuColor implements EditionSubMenu {
         this.x = x;
         this.y = y;
 
-        view.drawStrokeRectangle(x, y, width, height, Color.BLUE);
+        view.drawRoundedRectShadow(x, y, width, height, 20, 2, Color.WHITE);
 
         view.drawText("R", x + 5, y + height/8, 15, Color.BLACK);
         view.drawText("G", x + 5, y + 2 * height/8, 15, Color.BLACK);
         view.drawText("B", x + 5, y + 3 * height/8, 15, Color.BLACK);
 
-        Rslider.draw(view, x, y);
-        Gslider.draw(view, x, y);
-        Bslider.draw(view, x, y);
+        Rslider.draw(x, y);
+        Gslider.draw(x, y);
+        Bslider.draw(x, y);
 
         updateColor();
 
         view.drawText("Current color:", x + 5, y + 5 * height/8, 90, Color.BLACK);
-        view.drawRoundedRect(x + (int) (width/1.5), y + 5 * height/8, 50, 50, 50, color);
+        view.drawRoundedRectShadow(x + (int) (width/1.5), y + 5 * height/8, 50, 50, 50, 2, color);
     }
 
     public int getSliderId(int x, int y) {
+        System.out.println("In getSliderId for " + x + ", " + y);
         if      (Rslider.isOnButton(x - this.x, y - this.y))     return 0;
         else if (Gslider.isOnButton(x - this.x, y - this.y))     return 1;
         else if (Bslider.isOnButton(x - this.x, y - this.y))     return 2;
@@ -122,18 +75,18 @@ public class SubMenuColor implements EditionSubMenu {
 
     public void moveSlider(int x, int y, int sliderId) {
         if (sliderId == 0)  {
-            Rslider.updateValue(x - this.x, y - this.y);
-            Rvalue = Rslider.value;
+            Rslider.moveButton(x - this.x);
+            Rvalue = Rslider.getValue();
         }
 
         else if (sliderId == 1)  {
-            Gslider.updateValue(x - this.x, y - this.y);
-            Gvalue = Gslider.value;
+            Gslider.moveButton(x - this.x);
+            Gvalue = Gslider.getValue();
         }
 
         else if (sliderId == 2)  {
-            Bslider.updateValue(x - this.x, y - this.y);
-            Bvalue = Bslider.value;
+            Bslider.moveButton(x - this.x);
+            Bvalue = Bslider.getValue();
         }
 
         draw(this.x, this.y);

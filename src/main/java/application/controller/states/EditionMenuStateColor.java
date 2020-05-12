@@ -40,6 +40,11 @@ public class EditionMenuStateColor extends ControllerStateImp {
 
     @Override
     public boolean onLeftClickReleased(int x, int y) {
+        if (sliderId != -1) {
+            sliderId = -1;
+            return true;
+        }
+
         if (!menu.isIn(x, y)) {
             view.getWhiteBoard().closeEditionMenu();
             mainController.switchState(WhiteBoardMenuState.getInstance());
@@ -54,9 +59,7 @@ public class EditionMenuStateColor extends ControllerStateImp {
     public boolean onLeftClickPressed(int x, int y) {
         // Vérifier si le clique n'a pas eu lieux sur la barre ongle
         if (menu.isIn(x, y)) {
-            System.out.println("Is in");
             sliderId = menuColor.getSliderId(x, y);
-            System.out.println("Slider id -> " + sliderId);
         }
 
         return true;
