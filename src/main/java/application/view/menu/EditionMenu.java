@@ -74,20 +74,6 @@ public class EditionMenu {
 
         view.drawRoundedRectShadow(x, y, width, height, 12, 3, Color.WHITE);
 
-
-        view.drawRectangle(
-                new Rectangle(this.x + margin, this.y + margin, width - 2 * margin, header_height,
-                        new Color(182, 232, 144))
-        );
-
-        view.drawRectangle(
-                new Rectangle(this.x + margin, this.y + height - footer_height - margin, width - 2 * margin, footer_height,
-                        new Color(234, 255, 158))
-        );
-
-        int buttonSize = (width - 2 * margin)/subMenus.size();
-        int index = 0;
-
         for (TextButton button : headerButtons) {
             button.draw(this.x, this.y);
         }
