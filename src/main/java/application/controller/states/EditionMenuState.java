@@ -104,15 +104,15 @@ public class EditionMenuState extends ControllerStateImp {
             }
             else if (buttonId == 3) {
                 System.out.println("Click on Reset");
-                model.getWhiteBoard().replace(view.getWhiteBoard().getSelectedShapes(), shapeSave);
-                view.getWhiteBoard().clearSelection();
-                view.getWhiteBoard().addSelection(shapeSave);
+                reset();
 
-                shapeSave.clear();
-                makeSave(view.getWhiteBoard().getSelectedShapes());
             }
             else if (buttonId == 4) {
                 System.out.println("Click on Cancel");
+                reset();
+                view.getWhiteBoard().closeEditionMenu();
+                mainController.switchState(WhiteBoardMenuState.getInstance());
+                return true;
             }
         }
 
@@ -129,6 +129,15 @@ public class EditionMenuState extends ControllerStateImp {
         for (Shape shape:shapes) {
             shapeSave.add((Shape) shape.clone());
         }
+    }
+
+    private void reset() {
+        model.getWhiteBoard().replace(view.getWhiteBoard().getSelectedShapes(), shapeSave);
+        view.getWhiteBoard().clearSelection();
+        view.getWhiteBoard().addSelection(shapeSave);
+
+        shapeSave.clear();
+        makeSave(view.getWhiteBoard().getSelectedShapes());
     }
 
     @Override
