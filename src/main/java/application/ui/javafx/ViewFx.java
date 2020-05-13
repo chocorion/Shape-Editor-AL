@@ -12,6 +12,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 
 import javafx.scene.paint.Color;
@@ -19,6 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 
 public class ViewFx extends Application implements ConcreteViewItf {
@@ -117,6 +119,32 @@ public class ViewFx extends Application implements ConcreteViewItf {
     public void devDrawText(String text, int x, int y, int size, application.utils.Color color) {
         ViewFx.gc.setFill(new Color(color.getR(), color.getG(), color.getB(), color.getA()));
         ViewFx.gc.fillText(text, x, y, size);
+    }
+
+    @Override
+    public void devDrawSaveMenu() {
+        TextInputDialog dialog = new TextInputDialog("path ...");
+        dialog.setTitle("Saving");
+        dialog.setHeaderText("Saving Path Output");
+        dialog.setContentText("Please enter a valid path:");
+
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()){
+            this.model.getWhiteBoard().save(result.get());
+        }
+    }
+
+    @Override
+    public void devDrawLoadMenu() {
+        TextInputDialog dialog = new TextInputDialog("path ...");
+        dialog.setTitle("Loading");
+        dialog.setHeaderText("Loading Path Input");
+        dialog.setContentText("Please enter a valid path:");
+
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()){
+            this.model.getWhiteBoard().load(result.get());
+        }
     }
 
 

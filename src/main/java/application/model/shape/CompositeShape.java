@@ -188,13 +188,11 @@ public class CompositeShape implements Shape, Cloneable {
     @Override
     public String toString() {
         StringBuffer string = new StringBuffer();
-        string.append("CompositeShape(");
+        string.append("CompositeShape "+ shapeSet.size()+"\n");
 
         for (Shape shape : this.shapeSet) {
-            string.append(shape).append(", ");
+            string.append(shape);
         }
-        string.append(")");
-
         return string.toString();
     }
 

@@ -82,4 +82,12 @@ public class ViewBridge {
     public void drawRoundedRect(int x, int y, int width, int height, int roundSize, Color color) {
         implementation.devDrawRoundedRect(x, y, width, height, roundSize, roundSize, color);
     }
+
+    public void drawSaveMenu() {
+        implementation.devDrawSaveMenu();
+    }
+
+    public void drawLoadMenu(){
+        implementation.devDrawLoadMenu();
+    }
 }
