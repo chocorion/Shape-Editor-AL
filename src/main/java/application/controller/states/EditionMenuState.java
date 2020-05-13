@@ -10,8 +10,6 @@ import application.view.MainView;
 import application.view.menu.EditionMenu;
 
 import java.util.HashSet;
-import java.util.Set;
-
 
 public class EditionMenuState extends ControllerStateImp {
     private static EditionMenuState state;
@@ -68,7 +66,7 @@ public class EditionMenuState extends ControllerStateImp {
         }
 
         if (!menu.isIn(x, y)) {
-            close();
+            reset();
             view.getWhiteBoard().closeEditionMenu();
             mainController.switchState(WhiteBoardMenuState.getInstance());
             return true;
@@ -114,10 +112,11 @@ public class EditionMenuState extends ControllerStateImp {
             else if (buttonId == 3) {
                 System.out.println("Click on Reset");
                 reset();
+                makeSave();
             }
             else if (buttonId == 4) {
                 System.out.println("Click on Cancel");
-                close();
+                reset();
                 view.getWhiteBoard().closeEditionMenu();
                 mainController.switchState(WhiteBoardMenuState.getInstance());
                 return true;
@@ -147,16 +146,8 @@ public class EditionMenuState extends ControllerStateImp {
         view.getWhiteBoard().addSelection(selectedClone);
     }
 
+
     private void reset() {
-        model.getWhiteBoard().replace(view.getWhiteBoard().getSelectedShapes(), shapeSave);
-
-        view.getWhiteBoard().clearSelection();
-        view.getWhiteBoard().addSelection(shapeSave);
-
-        makeSave();
-    }
-
-    private void close() {
         model.getWhiteBoard().replace(view.getWhiteBoard().getSelectedShapes(), shapeSave);
 
         view.getWhiteBoard().clearSelection();

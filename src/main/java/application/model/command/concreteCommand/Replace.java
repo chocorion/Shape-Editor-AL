@@ -31,8 +31,6 @@ public class Replace implements Command {
 
     @Override
     public void inverse() {
-        System.out.println("Reversing replace cmd");
-
         for (Shape shape : newShape) {
             container.removeShape(shape);
         }
