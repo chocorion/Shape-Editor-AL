@@ -74,4 +74,12 @@ public class MainView {
     public ViewBridge getViewBridge() {
         return view;
     }
+
+    public void save() {
+        whiteBoard.drawSaveMenu();
+    }
+
+    public void load() {
+        whiteBoard.drawLoadMenu();
+    }
 }

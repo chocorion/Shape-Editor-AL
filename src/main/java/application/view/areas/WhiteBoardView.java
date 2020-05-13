@@ -9,9 +9,11 @@ import application.view.*;
 
 import application.view.menu.EditionMenu;
 import application.view.menu.WhiteBoardMenu;
+import javafx.scene.control.TextInputDialog;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public class WhiteBoardView implements ModelObserver {
@@ -147,5 +149,13 @@ public class WhiteBoardView implements ModelObserver {
 
     public EditionMenu getEditionMenu() {
         return editionMenu;
+    }
+
+    public void drawSaveMenu() {
+        view.drawSaveMenu();
+    }
+
+    public void drawLoadMenu(){
+        view.drawLoadMenu();
     }
 }

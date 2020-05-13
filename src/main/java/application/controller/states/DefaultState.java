@@ -41,6 +41,10 @@ public class DefaultState extends ControllerStateImp {
                 model.undo();
             } else if (buttonId == 1) {
                 model.redo();
+            }else if (buttonId == 2){
+                view.save();
+            }else if (buttonId ==3){
+                view.load();
             }
         }
 

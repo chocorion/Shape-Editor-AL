@@ -27,5 +27,7 @@ public interface Shape {
     void resize(Shape containerShape, double factor);
     void setColor(Color color);
 
+    String toString();
+
     Object clone();
 }
