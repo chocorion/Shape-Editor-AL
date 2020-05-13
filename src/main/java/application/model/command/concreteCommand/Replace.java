@@ -11,6 +11,8 @@ public class Replace implements Command {
     private ShapeContainer container;
 
     public Replace(ShapeContainer container, Set<Shape> oldShape, Set<Shape> newShape) {
+        this.container = container;
+
         this.oldShape = oldShape;
         this.newShape = newShape;
     }

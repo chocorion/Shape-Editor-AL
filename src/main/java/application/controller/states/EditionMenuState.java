@@ -4,6 +4,7 @@ import application.controller.MainController;
 import application.controller.states.substates.SubMenuColorState;
 import application.controller.states.substates.SubMenuResizeState;
 import application.model.Model;
+import application.model.command.concreteCommand.Replace;
 import application.model.shape.Shape;
 import application.view.MainView;
 import application.view.menu.EditionMenu;
@@ -67,6 +68,7 @@ public class EditionMenuState extends ControllerStateImp {
         }
 
         if (!menu.isIn(x, y)) {
+            close();
             view.getWhiteBoard().closeEditionMenu();
             mainController.switchState(WhiteBoardMenuState.getInstance());
             return true;
@@ -101,15 +103,19 @@ public class EditionMenuState extends ControllerStateImp {
             }
             else if (buttonId == 2) {
                 System.out.println("Click on apply");
+                model.execute(new Replace(model.getWhiteBoard(), shapeSave, view.getWhiteBoard().getSelectedShapes()));
             }
             else if (buttonId == 3) {
                 System.out.println("Click on Reset");
                 reset();
 
+                // Tmp
+                model.getWhiteBoard().update();
+
             }
             else if (buttonId == 4) {
                 System.out.println("Click on Cancel");
-                reset();
+                close();
                 view.getWhiteBoard().closeEditionMenu();
                 mainController.switchState(WhiteBoardMenuState.getInstance());
                 return true;
@@ -121,23 +127,38 @@ public class EditionMenuState extends ControllerStateImp {
 
     @Override
     public void onSwitch() {
-        shapeSave.clear();
-        makeSave(view.getWhiteBoard().getSelectedShapes());
+        makeSave();
     }
 
-    private void makeSave(Set<Shape> shapes) {
-        for (Shape shape:shapes) {
-            shapeSave.add((Shape) shape.clone());
+    private void makeSave() {
+        shapeSave.clear();
+        shapeSave.addAll(view.getWhiteBoard().getSelectedShapes());
+        HashSet<Shape> selectedClone = new HashSet<>();
+
+        for (Shape s : shapeSave) {
+            selectedClone.add((Shape) s.clone());
         }
+
+        model.getWhiteBoard().replace(shapeSave, selectedClone);
+
+        view.getWhiteBoard().clearSelection();
+        view.getWhiteBoard().addSelection(selectedClone);
     }
 
     private void reset() {
         model.getWhiteBoard().replace(view.getWhiteBoard().getSelectedShapes(), shapeSave);
+
         view.getWhiteBoard().clearSelection();
         view.getWhiteBoard().addSelection(shapeSave);
 
-        shapeSave.clear();
-        makeSave(view.getWhiteBoard().getSelectedShapes());
+        makeSave();
+    }
+
+    private void close() {
+        model.getWhiteBoard().replace(view.getWhiteBoard().getSelectedShapes(), shapeSave);
+
+        view.getWhiteBoard().clearSelection();
+        view.getWhiteBoard().addSelection(shapeSave);
     }
 
     @Override
