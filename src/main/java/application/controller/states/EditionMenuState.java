@@ -103,15 +103,17 @@ public class EditionMenuState extends ControllerStateImp {
             }
             else if (buttonId == 2) {
                 System.out.println("Click on apply");
-                model.execute(new Replace(model.getWhiteBoard(), shapeSave, view.getWhiteBoard().getSelectedShapes()));
+
+                HashSet<Shape> newShape = new HashSet<>(view.getWhiteBoard().getSelectedShapes());
+
+                model.getWhiteBoard().replace(view.getWhiteBoard().getSelectedShapes(), shapeSave);
+                model.execute(new Replace(model.getWhiteBoard(), shapeSave, newShape));
+
+                makeSave();
             }
             else if (buttonId == 3) {
                 System.out.println("Click on Reset");
                 reset();
-
-                // Tmp
-                model.getWhiteBoard().update();
-
             }
             else if (buttonId == 4) {
                 System.out.println("Click on Cancel");

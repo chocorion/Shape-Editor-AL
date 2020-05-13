@@ -4,6 +4,7 @@ import application.model.areas.ShapeContainer;
 import application.model.command.Command;
 import application.model.shape.Shape;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Replace implements Command {
@@ -13,8 +14,8 @@ public class Replace implements Command {
     public Replace(ShapeContainer container, Set<Shape> oldShape, Set<Shape> newShape) {
         this.container = container;
 
-        this.oldShape = oldShape;
-        this.newShape = newShape;
+        this.oldShape = new HashSet<>(oldShape);
+        this.newShape = new HashSet<>(newShape);
     }
 
     @Override
@@ -30,6 +31,8 @@ public class Replace implements Command {
 
     @Override
     public void inverse() {
+        System.out.println("Reversing replace cmd");
+
         for (Shape shape : newShape) {
             container.removeShape(shape);
         }
