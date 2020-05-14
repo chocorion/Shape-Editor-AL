@@ -43,6 +43,16 @@ public class SubMenuResizeRectangle implements EditionSubMenu {
         return -1;
     }
 
+    public double getSliderValue(int sliderId) {
+        if (sliderId == 0)
+            return SliderWidth.getValue();
+
+        else if (sliderId == 1)
+            return SliderHeight.getValue();
+
+        return 0.;
+    }
+
     public void moveSlider(int x, int y, int sliderId) {
         if (sliderId == 0)  {
             SliderWidth.moveButton(x - this.x);

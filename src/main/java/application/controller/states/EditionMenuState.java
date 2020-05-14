@@ -2,7 +2,7 @@ package application.controller.states;
 
 import application.controller.MainController;
 import application.controller.states.substates.SubMenuColorState;
-import application.controller.states.substates.SubMenuResizeState;
+import application.controller.states.substates.SubMenuResizeRectangleState;
 import application.model.Model;
 import application.model.command.concreteCommand.Replace;
 import application.model.shape.Shape;
@@ -35,7 +35,7 @@ public class EditionMenuState extends ControllerStateImp {
 
         buttonId = -1;
 
-        SubMenuResizeState.setInstance(mainController, model, view);
+        SubMenuResizeRectangleState.setInstance(mainController, model, view);
         SubMenuColorState.setInstance(mainController, model, view);
 
         // By default
@@ -92,11 +92,13 @@ public class EditionMenuState extends ControllerStateImp {
             if (buttonId == 0) {
                 menu.switchSubmenu(0);
                 subState = SubMenuColorState.getInstance();
+                subState.onSwitch();
             }
 
             else if (buttonId == 1) {
                 menu.switchSubmenu(1);
-                subState = SubMenuResizeState.getInstance();
+                subState = SubMenuResizeRectangleState.getInstance();
+                subState.onSwitch();
             }
 
             else if (buttonId == 2) {

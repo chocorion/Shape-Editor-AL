@@ -3,25 +3,26 @@ package application.controller.states.substates;
 
 import application.controller.MainController;
 import application.controller.states.ControllerStateImp;
-import application.controller.states.EditionMenuState;
 import application.model.Model;
+import application.model.shape.Rectangle;
 import application.view.MainView;
 import application.view.menu.EditionMenu;
 import application.view.menu.SubMenuResizeRectangle;
 
 
-public class SubMenuResizeState extends ControllerStateImp {
-    private static SubMenuResizeState state;
+public class SubMenuResizeRectangleState extends ControllerStateImp {
+    private static SubMenuResizeRectangleState state;
 
     MainController mainController;
     Model model;
     MainView view;
 
     EditionMenu menu;
+    Rectangle rect;
 
     int sliderId;
 
-    private SubMenuResizeState(MainController mainController, Model model, MainView view) {
+    private SubMenuResizeRectangleState(MainController mainController, Model model, MainView view) {
         this.mainController = mainController;
         this.model = model;
         this.view = view;
@@ -32,11 +33,11 @@ public class SubMenuResizeState extends ControllerStateImp {
     }
 
     public static void setInstance(MainController mainController, Model model, MainView view) {
-        state = new SubMenuResizeState(mainController, model, view);
+        state = new SubMenuResizeRectangleState(mainController, model, view);
     }
 
 
-    public static SubMenuResizeState getInstance() {
+    public static SubMenuResizeRectangleState getInstance() {
         return state;
     }
 
@@ -61,6 +62,18 @@ public class SubMenuResizeState extends ControllerStateImp {
     public boolean onMouseMoved(int x, int y) {
         if (sliderId != -1) {
             ((SubMenuResizeRectangle) menu.getSelectedMenu()).moveSlider(x, y, sliderId);
+            double value = ((SubMenuResizeRectangle) menu.getSelectedMenu()).getSliderValue(sliderId);
+            // Give good resize factor
+            value = (value + 0.5);
+
+            System.out.println("new factor value is -> " + value);
+            if (sliderId == 0) {
+                rect.resizeWidth(value);
+            } else if (sliderId == 1) {
+                rect.resizeHeight(value);
+            }
+            model.getWhiteBoard().update();
+
             return true;
         }
 
@@ -70,6 +83,7 @@ public class SubMenuResizeState extends ControllerStateImp {
     @Override
     public void onSwitch() {
         menu = view.getWhiteBoard().getEditionMenu();
+        rect = (Rectangle) view.getWhiteBoard().getSelectedShapes().iterator().next();
     }
 
     @Override

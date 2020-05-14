@@ -114,6 +114,22 @@ public class Rectangle extends SingleShape {
         this.height *= factor;
     }
 
+    public void resizeWidth(double factor) {
+        double newWidth = width * factor;
+        double offsetX = (width - newWidth)/2;
+
+        x += offsetX;
+        width = newWidth;
+    }
+
+    public void resizeHeight(double factor) {
+        double newHeight = height * factor;
+        double offsetY = (height - newHeight)/2;
+
+        y += offsetY;
+        height = newHeight;
+    }
+
     @Override
     public Color getColor() {
         return this.color;

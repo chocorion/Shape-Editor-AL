@@ -115,7 +115,7 @@ public class EditionMenu {
         this.y = y;
 
         view.drawRoundedRectShadow(x, y, width, height, 12, 3, Color.WHITE);
-        System.out.println("Drawing edition menu, " + buttons.size() + " buttons !");
+
         for (TextButton button : buttons) {
             button.draw(this.x, this.y);
         }
@@ -163,8 +163,8 @@ public class EditionMenu {
 
     public void switchSubmenu(int submenuId) {
         if (submenuId >= 0 && submenuId < subMenus.size()) {
-            System.out.println("SWITCH SUBMENU");
             selectedMenu = submenuId;
+
             draw(this.x, this.y);
         }
     }
