@@ -13,6 +13,10 @@ import application.view.menu.SubMenuResizeRectangle;
 public class SubMenuResizeRectangleState extends ControllerStateImp {
     private static SubMenuResizeRectangleState state;
 
+    private double originalWidth;
+    private double originalHeight;
+
+
     MainController mainController;
     Model model;
     MainView view;
@@ -63,14 +67,15 @@ public class SubMenuResizeRectangleState extends ControllerStateImp {
         if (sliderId != -1) {
             ((SubMenuResizeRectangle) menu.getSelectedMenu()).moveSlider(x, y, sliderId);
             double value = ((SubMenuResizeRectangle) menu.getSelectedMenu()).getSliderValue(sliderId);
-            // Give good resize factor
-            value = (value + 0.5);
 
-            System.out.println("new factor value is -> " + value);
+            value *= 2;
+
+
+
             if (sliderId == 0) {
-                rect.resizeWidth(value);
+                rect.setWidth(originalWidth * value);
             } else if (sliderId == 1) {
-                rect.resizeHeight(value);
+                rect.setHeight(originalHeight * value);
             }
             model.getWhiteBoard().update();
 
@@ -84,6 +89,9 @@ public class SubMenuResizeRectangleState extends ControllerStateImp {
     public void onSwitch() {
         menu = view.getWhiteBoard().getEditionMenu();
         rect = (Rectangle) view.getWhiteBoard().getSelectedShapes().iterator().next();
+
+        originalWidth = rect.getWidth();
+        originalHeight = rect.getHeight();
     }
 
     @Override

@@ -8,6 +8,8 @@ public class Rectangle extends SingleShape {
     private double width, height;
     private Color color;
 
+
+
     public Rectangle(double x, double y, double width, double height, Color color) {
         this.x = x;
         this.y = y;
@@ -114,20 +116,15 @@ public class Rectangle extends SingleShape {
         this.height *= factor;
     }
 
-    public void resizeWidth(double factor) {
-        double newWidth = width * factor;
-        double offsetX = (width - newWidth)/2;
+    public void setWidth(double newWidth) {
+        this.x += (width - newWidth)/2;
+        this.width = newWidth;
 
-        x += offsetX;
-        width = newWidth;
     }
 
-    public void resizeHeight(double factor) {
-        double newHeight = height * factor;
-        double offsetY = (height - newHeight)/2;
-
-        y += offsetY;
-        height = newHeight;
+    public void setHeight(double newHeight) {
+        this.y += (height - newHeight)/2;
+        this.height = newHeight;
     }
 
     @Override
