@@ -54,6 +54,15 @@ public class Slider {
 
         value = ((buttonX + buttonW/2 - this.x))/(double)width;
     }
+    
+
+    public void moveButtonToValue(double value) {
+        if (value < 0. || value > 1.)   return;
+
+        this.value = value;
+        buttonX = (int) (width * value) - buttonW + this.x;
+    }
+
 
     public boolean isOnButton(int x, int y) {
         if (x <= buttonX + buttonW && x >= buttonX) {

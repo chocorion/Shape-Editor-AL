@@ -76,6 +76,21 @@ public class SubMenuColorState extends ControllerStateImp {
     }
 
     @Override
+    public void onSwitch() {
+        setSlidersToShapeColor();
+    }
+
+    private void setSlidersToShapeColor() {
+        Shape currentShape = view.getWhiteBoard().getSelectedShapes().iterator().next();
+        Color currentColor = currentShape.getColor();
+
+        ((SubMenuColor) menu.getSelectedMenu()).moveSlider(currentColor.getR(), 0);
+        ((SubMenuColor) menu.getSelectedMenu()).moveSlider(currentColor.getG(), 1);
+        ((SubMenuColor) menu.getSelectedMenu()).moveSlider(currentColor.getB(), 2);
+
+    }
+
+    @Override
     public String toString() {
         return "submenu color";
     }

@@ -76,5 +76,10 @@ public class Polygon extends SingleShape {
     public void setColor(Color color) {
         this.color = color;
     }
+
+    @Override
+    public Color getColor() {
+        return this.color;
+    }
 }
 

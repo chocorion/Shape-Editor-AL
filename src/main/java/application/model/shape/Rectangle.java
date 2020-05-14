@@ -114,6 +114,7 @@ public class Rectangle extends SingleShape {
         this.height *= factor;
     }
 
+    @Override
     public Color getColor() {
         return this.color;
     }

@@ -26,6 +26,7 @@ public interface Shape {
     void resize(double factor);
     void resize(Shape containerShape, double factor);
     void setColor(Color color);
+    Color getColor();
 
     String toString();
 

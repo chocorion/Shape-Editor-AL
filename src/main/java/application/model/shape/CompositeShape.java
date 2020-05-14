@@ -186,9 +186,16 @@ public class CompositeShape implements Shape, Cloneable {
     }
 
     @Override
+    public Color getColor() {
+        if (shapeSet.isEmpty()) return null;
+
+        return shapeSet.iterator().next().getColor();
+    }
+
+    @Override
     public String toString() {
         StringBuffer string = new StringBuffer();
-        string.append("CompositeShape "+ shapeSet.size()+"\n");
+        string.append("CompositeShape ").append(shapeSet.size()).append("\n");
 
         for (Shape shape : this.shapeSet) {
             string.append(shape);

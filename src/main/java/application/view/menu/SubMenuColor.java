@@ -92,6 +92,25 @@ public class SubMenuColor implements EditionSubMenu {
         draw(this.x, this.y);
     }
 
+    public void moveSlider(double value, int sliderId) {
+        if (sliderId == 0)  {
+            Rslider.moveButtonToValue(value);
+            Rvalue = Rslider.getValue();
+        }
+
+        else if (sliderId == 1)  {
+            Gslider.moveButtonToValue(value);
+            Gvalue = Gslider.getValue();
+        }
+
+        else if (sliderId == 2)  {
+            Bslider.moveButtonToValue(value);
+            Bvalue = Bslider.getValue();
+        }
+
+        draw(this.x, this.y);
+    }
+
     public Color getColor() {
         return color;
     }

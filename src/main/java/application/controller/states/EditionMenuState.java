@@ -95,10 +95,12 @@ public class EditionMenuState extends ControllerStateImp {
                 menu.switchSubmenu(0);
                 subState = SubMenuColorState.getInstance();
             }
+
             else if (buttonId == 1) {
                 menu.switchSubmenu(1);
                 subState = SubMenuResizeState.getInstance();
             }
+
             else if (buttonId == 2) {
                 System.out.println("Click on apply");
 
@@ -109,11 +111,13 @@ public class EditionMenuState extends ControllerStateImp {
 
                 makeSave();
             }
+
             else if (buttonId == 3) {
                 System.out.println("Click on Reset");
                 reset();
-                makeSave();
+                onSwitch();
             }
+
             else if (buttonId == 4) {
                 System.out.println("Click on Cancel");
                 reset();
@@ -129,6 +133,7 @@ public class EditionMenuState extends ControllerStateImp {
     @Override
     public void onSwitch() {
         makeSave();
+        subState.onSwitch();
     }
 
     private void makeSave() {
