@@ -19,7 +19,7 @@ import java.util.Set;
 public class WhiteBoardView implements ModelObserver {
     private final WhiteBoard whiteBoard;
     private final WhiteBoardMenu menu;
-    private final EditionMenu editionMenu;
+    private EditionMenu editionMenu;
 
     private final HashSet<Shape> selectedShapes;
     private Rectangle area;
@@ -41,7 +41,6 @@ public class WhiteBoardView implements ModelObserver {
         selectedShapes = new HashSet<>();
         isMenuOpen = false;
         isEditionMenuOpen = false;
-        editionMenu = new EditionMenu(view);
     }
 
 
@@ -127,18 +126,20 @@ public class WhiteBoardView implements ModelObserver {
         draw();
     }
 
-    public void openEditionMenu(int x, int y) {
+    public void openEditionMenu(int x, int y, Shape selectedShape) {
         menuX = x;
         menuY = y;
 
         isMenuOpen = false;
         isEditionMenuOpen = true;
+        editionMenu = EditionMenu.getInstanceFor(view, selectedShape);
         draw();
     }
 
     public void closeEditionMenu() {
         isEditionMenuOpen = false;
         isMenuOpen = true;
+        editionMenu = null;
 
         draw();
     }

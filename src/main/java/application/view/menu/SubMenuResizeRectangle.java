@@ -4,13 +4,13 @@ import application.utils.Color;
 import application.view.ViewBridge;
 import application.view.element.Slider;
 
-public class SubMenuResize implements EditionSubMenu {
+public class SubMenuResizeRectangle implements EditionSubMenu {
     private int x, y, width, height;
     private ViewBridge view;
 
     Slider SliderWidth, SliderHeight;
 
-    public SubMenuResize(ViewBridge view, int x, int y, int width, int height) {
+    public SubMenuResizeRectangle(ViewBridge view, int x, int y, int width, int height) {
         this.view = view;
 
         this.x = x;

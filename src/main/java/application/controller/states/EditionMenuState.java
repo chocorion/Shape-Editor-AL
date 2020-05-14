@@ -33,8 +33,6 @@ public class EditionMenuState extends ControllerStateImp {
 
         shapeSave = new HashSet<>();
 
-        menu = view.getWhiteBoard().getEditionMenu();
-
         buttonId = -1;
 
         SubMenuResizeState.setInstance(mainController, model, view);
@@ -132,6 +130,8 @@ public class EditionMenuState extends ControllerStateImp {
 
     @Override
     public void onSwitch() {
+        menu = view.getWhiteBoard().getEditionMenu();
+
         makeSave();
         subState.onSwitch();
     }

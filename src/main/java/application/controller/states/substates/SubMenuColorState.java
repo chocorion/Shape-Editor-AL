@@ -77,6 +77,7 @@ public class SubMenuColorState extends ControllerStateImp {
 
     @Override
     public void onSwitch() {
+        menu = view.getWhiteBoard().getEditionMenu();
         setSlidersToShapeColor();
     }
 

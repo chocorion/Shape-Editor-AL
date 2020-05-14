@@ -3,10 +3,11 @@ package application.controller.states.substates;
 
 import application.controller.MainController;
 import application.controller.states.ControllerStateImp;
+import application.controller.states.EditionMenuState;
 import application.model.Model;
 import application.view.MainView;
 import application.view.menu.EditionMenu;
-import application.view.menu.SubMenuResize;
+import application.view.menu.SubMenuResizeRectangle;
 
 
 public class SubMenuResizeState extends ControllerStateImp {
@@ -51,7 +52,7 @@ public class SubMenuResizeState extends ControllerStateImp {
 
     @Override
     public boolean onLeftClickPressed(int x, int y) {
-        sliderId = ((SubMenuResize) menu.getSelectedMenu()).getSliderId(x, y);
+        sliderId = ((SubMenuResizeRectangle) menu.getSelectedMenu()).getSliderId(x, y);
 
         return true;
     }
@@ -59,11 +60,16 @@ public class SubMenuResizeState extends ControllerStateImp {
     @Override
     public boolean onMouseMoved(int x, int y) {
         if (sliderId != -1) {
-            ((SubMenuResize) menu.getSelectedMenu()).moveSlider(x, y, sliderId);
+            ((SubMenuResizeRectangle) menu.getSelectedMenu()).moveSlider(x, y, sliderId);
             return true;
         }
 
         return false;
+    }
+
+    @Override
+    public void onSwitch() {
+        menu = view.getWhiteBoard().getEditionMenu();
     }
 
     @Override

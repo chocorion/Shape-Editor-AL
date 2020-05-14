@@ -1,14 +1,16 @@
 package application.view.menu;
 
 import application.model.shape.Rectangle;
+import application.model.shape.Shape;
 import application.utils.Color;
 import application.view.ViewBridge;
 import application.view.element.TextButton;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 public class EditionMenu {
+    private static EditionMenu instance;
+
     private static int width = 240;
     private static int height = 240;
 
@@ -17,8 +19,14 @@ public class EditionMenu {
     private static int header_height = 20;
     private static int footer_height = 45;
 
+    private static int subMenuX = margin;
+    private static int subMenuY = 2 * margin + header_height;
+    private static int subMenuWidth = width - 2 * margin;
+    private static int subMenuHeight = height - 4 * margin - header_height - footer_height;
+
+
     private ArrayList<EditionSubMenu> subMenus;
-    ArrayList<TextButton> buttons;
+    private ArrayList<TextButton> buttons;
 
     private int selectedMenu;
 
@@ -26,57 +34,79 @@ public class EditionMenu {
 
     private int x, y;
 
-    public EditionMenu(ViewBridge view) {
+    private EditionMenu(ViewBridge view) {
         this.view = view;
 
-        int subMenuX = this.x + margin;
-        int subMenuY = this.y + 2 * margin + header_height;
-        int subMenuWidth = width - 2 * margin;
-        int subMenuHeight = height - 4 * margin - header_height - footer_height;
-
         subMenus = new ArrayList<>();
+        buttons = new ArrayList<>();
+    }
 
-        subMenus.add(0, new SubMenuColor(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
-        subMenus.add(1, new SubMenuResize(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+    private void buildHeader() {
+        int numberButtons = subMenus.size();
 
+        for (int i = 0; i < numberButtons; i++) {
+            buttons.add(
+                    new TextButton(
+                            view,
+                            i * width/numberButtons,
+                            5,
+                            width/numberButtons,
+                            header_height,
+                            subMenus.get(i).getName()
+                    )
+            );
+        }
+    }
 
+    private void buildFooter() {
         int button_width = width/5;
         int button_height = (int) (footer_height * 0.7);
 
         int marge_x = (width - 3 * button_width)/4;
         int marge_y = (footer_height - button_height - margin)/2;
 
-        buttons = new ArrayList<>();
-
         int numberButtons = subMenus.size();
-        int index = 0;
-
-        for (EditionSubMenu subMenu : subMenus) {
-            buttons.add(
-                    index,
-                    new TextButton(view, index * width/numberButtons, 5, width/numberButtons, header_height, subMenu.getName())
-            );
-            index++;
-        }
 
         buttons.add(
-                index++,
                 new TextButton(view, marge_x, height - footer_height + marge_y, button_width, button_height, "Apply")
         );
 
         buttons.add(
-                index++,
                 new TextButton(view, button_width + 2 * marge_x, height - footer_height + marge_y, button_width, button_height, "Reset")
         );
 
         buttons.add(
-                index++,
                 new TextButton(view, 2 * button_width + 3 * marge_x, height - footer_height + marge_y, button_width, button_height, "Cancel")
         );
+    }
 
+    private void buildRectangleSubMenu() {
+        System.out.println("Building rectangle submenu");
+        subMenus.clear();
 
+        subMenus.add(0, new SubMenuColor(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+        subMenus.add(1, new SubMenuResizeRectangle(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
 
         selectedMenu = 0;
+    }
+
+
+    public static EditionMenu getInstanceFor(ViewBridge view, Shape shape) {
+        if (instance == null) {
+            instance = new EditionMenu(view);
+        }
+
+        instance.buttons.clear();
+
+        if (shape instanceof Rectangle) instance.buildRectangleSubMenu();
+
+        // Tmp, don't have others shapes for the moment
+        else instance.buildRectangleSubMenu();
+
+        instance.buildHeader();
+        instance.buildFooter();
+
+        return instance;
     }
 
 
@@ -85,7 +115,7 @@ public class EditionMenu {
         this.y = y;
 
         view.drawRoundedRectShadow(x, y, width, height, 12, 3, Color.WHITE);
-
+        System.out.println("Drawing edition menu, " + buttons.size() + " buttons !");
         for (TextButton button : buttons) {
             button.draw(this.x, this.y);
         }
@@ -115,7 +145,6 @@ public class EditionMenu {
 
         return -1;
     }
-
 
 
     public void pushButton(int buttonId) {

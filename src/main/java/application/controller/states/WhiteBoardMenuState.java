@@ -57,8 +57,18 @@ public class WhiteBoardMenuState extends ControllerStateImp {
                 closeAndSwitch();
             }
         } else if (itemId == 2) {
-            view.getWhiteBoard().openEditionMenu(x, y);
-            mainController.switchState(EditionMenuState.getInstance());
+            HashSet<Shape> selectedShapes = view.getWhiteBoard().getSelectedShapes();
+            Shape selected;
+
+            if (selectedShapes.size() == 1) {
+                selected = selectedShapes.iterator().next();
+
+                view.getWhiteBoard().openEditionMenu(x, y, selected);
+                mainController.switchState(EditionMenuState.getInstance());
+            } else {
+                System.out.println("Can't open edition menu, more than one shape in selection !");
+            }
+
             return true;
         } else {
             closeAndSwitch();
