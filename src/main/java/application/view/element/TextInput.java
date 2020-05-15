@@ -3,6 +3,7 @@ package application.view.element;
 import application.utils.Color;
 import application.view.Drawable;
 import application.view.ViewBridge;
+import application.view.element.interaction.TextInputInteraction;
 
 public class TextInput implements Drawable {
     private int x, y;
@@ -48,5 +49,9 @@ public class TextInput implements Drawable {
 
     public String getText() {
         return txt.toString();
+    }
+
+    public TextInputInteraction getInteraction() {
+        return new TextInputInteraction(this);
     }
 }

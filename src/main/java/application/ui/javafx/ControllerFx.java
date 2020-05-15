@@ -22,7 +22,7 @@ public class ControllerFx implements ConcreteControllerItf {
         specialKeys = new ArrayList<>();
         specialKeys.add("ENTER");
         specialKeys.add("CONTROL");
-        specialKeys.add("BACKSPACE");
+        specialKeys.add("BACK_SPACE");
 
         Scene scene = view.getScene();
 

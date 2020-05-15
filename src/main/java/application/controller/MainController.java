@@ -54,8 +54,6 @@ public class MainController {
 
     public void onRightClickReleased(double x, double y) {
         while (!currentState.onRightClickReleased((int) x, (int) y));
-
-        System.out.println("Out of rightClick...");
     }
 
     public void onMouseMoved(double x, double y) {
@@ -70,7 +68,6 @@ public class MainController {
     }
 
     public void onKeyPressed(String key) {
-        System.out.println("Press on -> " + key);
         if (!keysPressed.contains(key)) {
             keysPressed.add(key);
         }

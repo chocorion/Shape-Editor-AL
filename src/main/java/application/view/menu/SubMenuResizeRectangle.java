@@ -3,6 +3,7 @@ package application.view.menu;
 import application.utils.Color;
 import application.view.ViewBridge;
 import application.view.element.TextInput;
+import application.view.element.interaction.Interaction;
 
 public class SubMenuResizeRectangle implements EditionSubMenu {
     private int x, y, width, height;
@@ -43,6 +44,16 @@ public class SubMenuResizeRectangle implements EditionSubMenu {
         return -1;
     }
 
+    public Interaction getInteraction(int inputId) {
+        if (inputId == 0)
+            return widthInput.getInteraction();
+
+        if (inputId == 1)
+            return heightInput.getInteraction();
+
+        return null;
+    }
+
     public String getText(int inputId) {
         if (inputId == 0)
             return widthInput.getText();
@@ -53,13 +64,6 @@ public class SubMenuResizeRectangle implements EditionSubMenu {
         return "";
     }
 
-    public void addText(int inputId, String txt) {
-        if (inputId == 0) {
-            widthInput.append(txt);
-        } else if (inputId == 1) {
-            heightInput.append(txt);
-        }
-    }
 
     @Override
     public String getName() {
