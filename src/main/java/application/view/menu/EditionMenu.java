@@ -106,6 +106,7 @@ public class EditionMenu {
 
         subMenus.add(0, new SubMenuColor(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
         subMenus.add(1, new SubMenuResizeGlobal(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+        subMenus.add(2, new SubMenuRotate(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
 
         selectedMenu = 0;
     }

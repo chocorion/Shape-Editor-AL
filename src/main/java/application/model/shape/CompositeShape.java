@@ -165,6 +165,11 @@ public class CompositeShape implements Shape, Cloneable {
     }
 
     @Override
+    public void setAngle(double diffAngle) {
+        //TODO
+    }
+
+    @Override
     public void resize(double factor) {
         for (Shape shape : this.shapeSet) {
             shape.resize(this, factor);

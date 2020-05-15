@@ -99,6 +99,11 @@ public class Rectangle extends SingleShape {
     }
 
     @Override
+    public void setAngle(double diffAngle) {
+        //TODO
+    }
+
+    @Override
     public void resize(double factor) {
         this.width *= factor;
         this.height *= factor;

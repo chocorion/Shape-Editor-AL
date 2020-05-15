@@ -4,6 +4,7 @@ import application.controller.MainController;
 import application.controller.states.substates.SubMenuColorState;
 import application.controller.states.substates.SubMenuResizeGlobalState;
 import application.controller.states.substates.SubMenuResizeRectangleState;
+import application.controller.states.substates.SubMenuRotationState;
 import application.model.Model;
 import application.model.command.concreteCommand.Replace;
 import application.model.shape.Shape;
@@ -41,6 +42,7 @@ public class EditionMenuState extends ControllerStateImp {
         SubMenuResizeRectangleState.setInstance(mainController, model, view);
         SubMenuColorState.setInstance(mainController, model, view);
         SubMenuResizeGlobalState.setInstance(mainController, model, view);
+        SubMenuRotationState.setInstance(mainController, model, view);
 
         // By default
         subState = SubMenuColorState.getInstance();
@@ -151,6 +153,10 @@ public class EditionMenuState extends ControllerStateImp {
 
             else if (menu.getSelectedMenu() instanceof SubMenuResizeGlobal)
                 subState = SubMenuResizeGlobalState.getInstance();
+        }
+
+        else if (menu.getSelectedMenu().getName().equals("rotate")) {
+            subState = SubMenuRotationState.getInstance();
         }
     }
 

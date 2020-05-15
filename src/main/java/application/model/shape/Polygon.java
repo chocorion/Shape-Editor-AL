@@ -134,6 +134,11 @@ public class Polygon extends SingleShape {
     }
 
     @Override
+    public void setAngle(double newAngle) {
+        angle = newAngle;
+    }
+
+    @Override
     public void resize(double factor) {
         this.size *= factor;
     }

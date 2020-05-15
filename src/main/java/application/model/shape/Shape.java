@@ -22,6 +22,8 @@ public interface Shape {
     boolean intersect(Rectangle rectangle);
     void moveTo(double x, double y);
     void translate(double dx, double dy);
+    void setAngle(double newAngle);
+
 
     void resize(double factor);
     void resize(Shape containerShape, double factor);
