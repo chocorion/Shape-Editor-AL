@@ -3,14 +3,11 @@ package application.controller.states.substates;
 import application.controller.MainController;
 import application.controller.states.ControllerStateImp;
 import application.model.Model;
-import application.model.shape.CompositeShape;
 import application.model.shape.Polygon;
-import application.model.shape.Shape;
 import application.view.MainView;
 import application.view.element.interaction.Interaction;
 import application.view.menu.EditionMenu;
 import application.view.menu.SubMenuPolygon;
-import application.view.menu.SubMenuResizeGlobal;
 
 public class SubMenuPolygonState extends ControllerStateImp {
     private static SubMenuPolygonState state;
@@ -24,8 +21,6 @@ public class SubMenuPolygonState extends ControllerStateImp {
     EditionMenu menu;
     SubMenuPolygon subMenu;
     Polygon polygon;
-
-    private double originalWidth;
 
     int inputId;
 

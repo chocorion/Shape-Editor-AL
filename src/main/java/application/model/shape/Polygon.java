@@ -10,8 +10,9 @@ public class Polygon extends SingleShape {
     private int numberSide;
     private double size;
     private int x, y;
-    private double sideLenght;
     private double angle;
+
+    Pair<double[], double[]> points;
 
     public Polygon(int x, int y, double size, int numberSide, Color color) {
         this.x = x;
@@ -21,9 +22,15 @@ public class Polygon extends SingleShape {
 
         this.angle = 0;
         this.color = color;
+
+        points = computePoints();
     }
 
     public Pair<double[], double[]> getPoints() {
+        return this.points;
+    }
+
+    public Pair<double[], double[]> computePoints() {
         double[] xPoints = new double[numberSide];
         double[] yPoints = new double[numberSide];
 
@@ -55,22 +62,54 @@ public class Polygon extends SingleShape {
 
     @Override
     public double getMinX() {
-        return x;
+        double[] p = points.getKey();
+        double minX = p[0];
+
+        for (int i = 1; i < p.length; i++) {
+            if (p[i] < minX)
+                minX = p[i];
+        }
+
+        return minX;
     }
 
     @Override
     public double getMinY() {
-        return y;
+        double[] p = points.getValue();
+        double minY = p[0];
+
+        for (int i = 1; i < p.length; i++) {
+            if (p[i] < minY)
+                minY = p[i];
+        }
+
+        return minY;
     }
 
     @Override
     public double getMaxX() {
-        return x + size;
+        double[] p = points.getKey();
+        double maxX = p[0];
+
+        for (int i = 1; i < p.length; i++) {
+            if (p[i] > maxX)
+                maxX = p[i];
+        }
+
+        return maxX;
     }
 
     @Override
     public double getMaxY() {
-        return y + size;
+        double[] p = points.getValue();
+        double maxY = p[0];
+
+        for (int i = 1; i < p.length; i++) {
+            if (p[i] > maxY)
+                maxY = p[i];
+        }
+
+        return maxY;
     }
 
     @Override
@@ -125,22 +164,28 @@ public class Polygon extends SingleShape {
     public void moveTo(double x, double y) {
         this.x = (int) x;
         this.y = (int) y;
+
+        points = computePoints();
     }
 
     @Override
     public void translate(double dx, double dy) {
         this.x += dx;
         this.y += dy;
+
+        points = computePoints();
     }
 
     @Override
     public void setAngle(double newAngle) {
         angle = newAngle;
+        points = computePoints();
     }
 
     @Override
     public void resize(double factor) {
         this.size *= factor;
+        points = computePoints();
     }
 
     @Override
@@ -152,10 +197,14 @@ public class Polygon extends SingleShape {
         this.y = (int) ((this.y - minY) * factor + minY);
 
         this.size *= factor;
+        points = computePoints();
     }
 
     public void setNumberSide(int newNumber) {
-        if (newNumber > 2) numberSide = newNumber;
+        if (newNumber > 2) {
+            numberSide = newNumber;
+            points = computePoints();
+        }
     }
 
     @Override
