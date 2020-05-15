@@ -154,6 +154,10 @@ public class Polygon extends SingleShape {
         this.size *= factor;
     }
 
+    public void setNumberSide(int newNumber) {
+        if (newNumber > 2) numberSide = newNumber;
+    }
+
     @Override
     public void setColor(Color color) {
         this.color = color;

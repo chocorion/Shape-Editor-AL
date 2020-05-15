@@ -1,10 +1,7 @@
 package application.controller.states;
 
 import application.controller.MainController;
-import application.controller.states.substates.SubMenuColorState;
-import application.controller.states.substates.SubMenuResizeGlobalState;
-import application.controller.states.substates.SubMenuResizeRectangleState;
-import application.controller.states.substates.SubMenuRotationState;
+import application.controller.states.substates.*;
 import application.model.Model;
 import application.model.command.concreteCommand.Replace;
 import application.model.shape.Shape;
@@ -43,6 +40,7 @@ public class EditionMenuState extends ControllerStateImp {
         SubMenuColorState.setInstance(mainController, model, view);
         SubMenuResizeGlobalState.setInstance(mainController, model, view);
         SubMenuRotationState.setInstance(mainController, model, view);
+        SubMenuPolygonState.setInstance(mainController, model, view);
 
         // By default
         subState = SubMenuColorState.getInstance();
@@ -129,6 +127,10 @@ public class EditionMenuState extends ControllerStateImp {
                 mainController.switchState(WhiteBoardMenuState.getInstance());
                 return true;
             }
+        } else {
+            reset();
+            view.getWhiteBoard().closeEditionMenu();
+            mainController.switchState(WhiteBoardMenuState.getInstance());
         }
 
         return true;
@@ -157,6 +159,10 @@ public class EditionMenuState extends ControllerStateImp {
 
         else if (menu.getSelectedMenu().getName().equals("rotate")) {
             subState = SubMenuRotationState.getInstance();
+        }
+
+        else if (menu.getSelectedMenu().getName().equals("numberSide")) {
+            subState = SubMenuPolygonState.getInstance();
         }
     }
 
