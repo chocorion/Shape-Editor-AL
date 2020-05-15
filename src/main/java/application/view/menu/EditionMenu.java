@@ -1,6 +1,7 @@
 package application.view.menu;
 
 import application.model.shape.CompositeShape;
+import application.model.shape.Polygon;
 import application.model.shape.Rectangle;
 import application.model.shape.Shape;
 import application.utils.Color;
@@ -66,8 +67,6 @@ public class EditionMenu {
         int marge_x = (width - 3 * button_width)/4;
         int marge_y = (footer_height - button_height - margin)/2;
 
-        int numberButtons = subMenus.size();
-
         buttons.add(
                 new TextButton(view, marge_x, height - footer_height + marge_y, button_width, button_height, "Apply")
         );
@@ -101,6 +100,16 @@ public class EditionMenu {
         selectedMenu = 0;
     }
 
+    private void buildPolygonSubMenu() {
+        System.out.println("Building rectangle submenu");
+        subMenus.clear();
+
+        subMenus.add(0, new SubMenuColor(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+        //subMenus.add(1, new SubMenuResizeComposite(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+
+        selectedMenu = 0;
+    }
+
 
     public static EditionMenu getInstanceFor(ViewBridge view, Shape shape) {
         if (instance == null) {
@@ -109,8 +118,14 @@ public class EditionMenu {
 
         instance.buttons.clear();
 
-        if (shape instanceof Rectangle) instance.buildRectangleSubMenu();
-        else if (shape instanceof CompositeShape) instance.buildCompositeSubMenu();
+        if (shape instanceof Rectangle)
+            instance.buildRectangleSubMenu();
+
+        else if (shape instanceof CompositeShape)
+            instance.buildCompositeSubMenu();
+
+        else if (shape instanceof Polygon)
+            instance.buildPolygonSubMenu();
 
 
         instance.buildHeader();
@@ -154,6 +169,10 @@ public class EditionMenu {
         }
 
         return -1;
+    }
+
+    public int getSubmenuNumber() {
+        return subMenus.size();
     }
 
 

@@ -93,27 +93,27 @@ public class EditionMenuState extends ControllerStateImp {
                 menu.pushButton(buttonId);
             }
 
-            if (buttonId == 0) {
-                menu.switchSubmenu(0);
-                subState = SubMenuColorState.getInstance();
+            int numberSubMenus = menu.getSubmenuNumber();
+
+            if (buttonId < numberSubMenus) {
+                menu.switchSubmenu(buttonId);
+
+                if (menu.getSelectedMenu().getName().equals("color")) {
+                    subState = SubMenuColorState.getInstance();
+                }
+
+                else if (menu.getSelectedMenu().getName().equals("resize")) {
+                    if (menu.getSelectedMenu() instanceof SubMenuResizeRectangle)
+                        subState = SubMenuResizeRectangleState.getInstance();
+
+                    else if (menu.getSelectedMenu() instanceof SubMenuResizeComposite)
+                        subState = SubMenuResizeCompositeState.getInstance();
+                }
+
                 subState.onSwitch();
             }
 
-            else if (buttonId == 1) {
-                menu.switchSubmenu(1);
-
-                if (menu.getSelectedMenu() instanceof SubMenuResizeRectangle)
-                    subState = SubMenuResizeRectangleState.getInstance();
-
-                else if (menu.getSelectedMenu() instanceof SubMenuResizeComposite)
-                    subState = SubMenuResizeCompositeState.getInstance();
-
-                System.out.println("" + menu.getSelectedMenu() + "Substate is " + subState);
-
-                subState.onSwitch();
-            }
-
-            else if (buttonId == 2) {
+            else if (buttonId - numberSubMenus == 0) {
                 System.out.println("Click on apply");
 
                 HashSet<Shape> newShape = new HashSet<>(view.getWhiteBoard().getSelectedShapes());
@@ -124,13 +124,13 @@ public class EditionMenuState extends ControllerStateImp {
                 makeSave();
             }
 
-            else if (buttonId == 3) {
+            else if (buttonId - numberSubMenus == 1) {
                 System.out.println("Click on Reset");
                 reset();
                 onSwitch();
             }
 
-            else if (buttonId == 4) {
+            else if (buttonId - numberSubMenus == 2) {
                 System.out.println("Click on Cancel");
                 reset();
                 view.getWhiteBoard().closeEditionMenu();
