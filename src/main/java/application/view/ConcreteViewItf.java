@@ -7,7 +7,7 @@ public interface ConcreteViewItf {
     void devDrawRectangle(int x, int y, int width, int height, Color color);
     void devDrawStrokeRectangle(int x, int y, int width, int height, Color color);
 
-    void devDrawPolygon(Polygon polygon);
+    void devDrawPolygon(double[] x, double[] y, Color color);
 
     void devDrawImage(String path, int x, int y, int width, int height);
     void devDrawRoundedRect(int x, int y, int width, int height, int arcWidth, int arcHeight, Color color);

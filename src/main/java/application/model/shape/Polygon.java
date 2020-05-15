@@ -1,6 +1,7 @@
 package application.model.shape;
 
 import application.utils.Color;
+import application.utils.Pair;
 import application.view.ViewBridge;
 
 
@@ -10,6 +11,7 @@ public class Polygon extends SingleShape {
     private double size;
     private int x, y;
     private double sideLenght;
+    private double angle;
 
     public Polygon(int x, int y, double size, int numberSide, Color color) {
         this.x = x;
@@ -17,12 +19,28 @@ public class Polygon extends SingleShape {
         this.size = size;
         this.numberSide = numberSide;
 
+        this.angle = 0;
         this.color = color;
+    }
+
+    public Pair<double[], double[]> getPoints() {
+        double[] xPoints = new double[numberSide];
+        double[] yPoints = new double[numberSide];
+
+        double angleDiff = 360./numberSide;
+        double radius = size/2;
+
+        for (int i = 0; i < numberSide; i++) {
+            xPoints[i] = x + radius + radius * Math.cos(Math.toRadians(angle + i * angleDiff));
+            yPoints[i] = y + radius + radius * Math.sin(Math.toRadians(angle + i * angleDiff));
+        }
+
+        return new Pair<>(xPoints, yPoints);
     }
 
     @Override
     public void draw(ViewBridge view) {
-
+        view.drawPolygon(this);
     }
 
     @Override
@@ -57,6 +75,18 @@ public class Polygon extends SingleShape {
 
     @Override
     public boolean isIn(double x, double y) {
+        /*
+        int i;
+        int j;
+        boolean result = false;
+        for (i = 0, j = points.length - 1; i < points.length; j = i++) {
+            if ((points[i].y > test.y) != (points[j].y > test.y) &&
+                    (test.x < (points[j].x - points[i].x) * (test.y - points[i].y) / (points[j].y-points[i].y) + points[i].x)) {
+                result = !result;
+            }
+        }
+        return result;*/
+
         return false;
     }
 

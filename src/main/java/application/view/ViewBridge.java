@@ -4,6 +4,7 @@ import application.model.shape.Polygon;
 import application.model.shape.Rectangle;
 import application.ui.javafx.ViewFx;
 import application.utils.Color;
+import application.utils.Pair;
 
 public class ViewBridge {
     private ConcreteViewItf implementation;
@@ -42,7 +43,8 @@ public class ViewBridge {
 
 
     public void drawPolygon(Polygon polygon) {
-        implementation.devDrawPolygon(polygon);
+        Pair<double[], double[]> points = polygon.getPoints();
+        implementation.devDrawPolygon(points.getKey(), points.getValue(), polygon.getColor());
     }
 
 

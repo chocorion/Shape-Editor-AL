@@ -5,6 +5,7 @@ import application.controller.ConcreteControllerItf;
 import application.model.Model;
 import application.model.shape.Polygon;
 
+import application.utils.Pair;
 import application.view.ConcreteViewItf;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -95,8 +96,10 @@ public class ViewFx extends Application implements ConcreteViewItf {
     }
 
     @Override
-    public void devDrawPolygon(Polygon polygon) {
-        // TODO get all points coords
+    public void devDrawPolygon(double[] x, double[] y, application.utils.Color color) {
+        ViewFx.gc.setFill(new Color(color.getR(), color.getG(), color.getB(), color.getA()));
+
+        ViewFx.gc.fillPolygon(x, y, x.length);
     }
 
 
