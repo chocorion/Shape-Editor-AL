@@ -3,9 +3,22 @@ package application.model.shape;
 import application.utils.Color;
 import application.view.ViewBridge;
 
-// TODO
+
 public class Polygon extends SingleShape {
     private Color color;
+    private int numberSide;
+    private double size;
+    private int x, y;
+    private double sideLenght;
+
+    public Polygon(int x, int y, double size, int numberSide, Color color) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.numberSide = numberSide;
+
+        this.color = color;
+    }
 
     @Override
     public void draw(ViewBridge view) {
@@ -14,32 +27,32 @@ public class Polygon extends SingleShape {
 
     @Override
     public double getWidth() {
-        return 0;
+        return size;
     }
 
     @Override
     public double getHeight() {
-        return 0;
+        return size;
     }
 
     @Override
     public double getMinX() {
-        return 0;
+        return x;
     }
 
     @Override
     public double getMinY() {
-        return 0;
+        return y;
     }
 
     @Override
     public double getMaxX() {
-        return 0;
+        return x + size;
     }
 
     @Override
     public double getMaxY() {
-        return 0;
+        return y + size;
     }
 
     @Override
@@ -54,7 +67,8 @@ public class Polygon extends SingleShape {
 
     @Override
     public void moveTo(double x, double y) {
-
+        this.x += x;
+        this.y += y;
     }
 
     @Override

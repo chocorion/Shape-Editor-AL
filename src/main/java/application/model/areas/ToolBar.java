@@ -1,6 +1,7 @@
 package application.model.areas;
 
 import application.model.Model;
+import application.model.shape.Polygon;
 import application.model.shape.Rectangle;
 import application.model.shape.Shape;
 import application.model.shape.CompositeShape;
@@ -17,7 +18,7 @@ public class ToolBar extends ModelObservableImp implements ShapeContainer {
         shapes = new ArrayList<>();
         shapes.add(new Rectangle(0, 0, 33, 20, Color.BLUE));
         shapes.add(new Rectangle(0, 0, 33, 50, Color.LIGHT_GREY));
-        shapes.add(new Rectangle(0, 0, 65, 20, Color.BLACK));
+        shapes.add(new Polygon(0, 0, 33, 6, Color.BLUE));
 
         CompositeShape compositeShape = new CompositeShape();
         compositeShape.add(new Rectangle(0, 0, 50, 50, new Color(180, 100, 100)));

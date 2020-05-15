@@ -96,7 +96,7 @@ public class ViewFx extends Application implements ConcreteViewItf {
 
     @Override
     public void devDrawPolygon(Polygon polygon) {
-        ViewFx.gc.fillRect(50, 50, 100, 150);
+        // TODO get all points coords
     }
 
 

@@ -6,6 +6,7 @@ import application.utils.Color;
 public interface ConcreteViewItf {
     void devDrawRectangle(int x, int y, int width, int height, Color color);
     void devDrawStrokeRectangle(int x, int y, int width, int height, Color color);
+
     void devDrawPolygon(Polygon polygon);
 
     void devDrawImage(String path, int x, int y, int width, int height);

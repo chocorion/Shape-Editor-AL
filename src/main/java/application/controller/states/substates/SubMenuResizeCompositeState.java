@@ -29,6 +29,8 @@ public class SubMenuResizeCompositeState extends ControllerStateImp {
     SubMenuResizeComposite subMenu;
     CompositeShape composite;
 
+    private double originalWidth;
+
     int inputId;
 
     private SubMenuResizeCompositeState(MainController mainController, Model model, MainView view) {
@@ -76,8 +78,11 @@ public class SubMenuResizeCompositeState extends ControllerStateImp {
                 double value = Double.parseDouble(subMenu.getText(inputId));
 
                 if (value > 0 && value < maxFactor) {
-                    if (inputId == 0)
+                    if (inputId == 0) {
+                        composite.resize(originalWidth/composite.getWidth());
                         composite.resize(value);
+                    }
+
                 }
             } catch (Exception ignored) {}
 
@@ -93,6 +98,7 @@ public class SubMenuResizeCompositeState extends ControllerStateImp {
         subMenu = (SubMenuResizeComposite) menu.getSelectedMenu();
         composite = (CompositeShape) view.getWhiteBoard().getSelectedShapes().iterator().next();
 
+        originalWidth = composite.getWidth();
     }
 
     @Override
