@@ -2,12 +2,15 @@ package application.controller.states;
 
 import application.controller.MainController;
 import application.controller.states.substates.SubMenuColorState;
+import application.controller.states.substates.SubMenuResizeCompositeState;
 import application.controller.states.substates.SubMenuResizeRectangleState;
 import application.model.Model;
 import application.model.command.concreteCommand.Replace;
 import application.model.shape.Shape;
 import application.view.MainView;
 import application.view.menu.EditionMenu;
+import application.view.menu.SubMenuResizeComposite;
+import application.view.menu.SubMenuResizeRectangle;
 
 import java.util.HashSet;
 
@@ -37,6 +40,7 @@ public class EditionMenuState extends ControllerStateImp {
 
         SubMenuResizeRectangleState.setInstance(mainController, model, view);
         SubMenuColorState.setInstance(mainController, model, view);
+        SubMenuResizeCompositeState.setInstance(mainController, model, view);
 
         // By default
         subState = SubMenuColorState.getInstance();
@@ -97,7 +101,15 @@ public class EditionMenuState extends ControllerStateImp {
 
             else if (buttonId == 1) {
                 menu.switchSubmenu(1);
-                subState = SubMenuResizeRectangleState.getInstance();
+
+                if (menu.getSelectedMenu() instanceof SubMenuResizeRectangle)
+                    subState = SubMenuResizeRectangleState.getInstance();
+
+                else if (menu.getSelectedMenu() instanceof SubMenuResizeComposite)
+                    subState = SubMenuResizeCompositeState.getInstance();
+
+                System.out.println("" + menu.getSelectedMenu() + "Substate is " + subState);
+
                 subState.onSwitch();
             }
 

@@ -1,21 +1,20 @@
 package application.controller.states.substates;
 
-
 import application.controller.MainController;
 import application.controller.states.ControllerStateImp;
 import application.model.Model;
+import application.model.shape.CompositeShape;
 import application.model.shape.Rectangle;
 import application.view.MainView;
 import application.view.element.interaction.Interaction;
 import application.view.menu.EditionMenu;
+import application.view.menu.SubMenuResizeComposite;
 import application.view.menu.SubMenuResizeRectangle;
 
+public class SubMenuResizeCompositeState extends ControllerStateImp {
+    private static SubMenuResizeCompositeState state;
 
-public class SubMenuResizeRectangleState extends ControllerStateImp {
-    private static SubMenuResizeRectangleState state;
-
-    private double originalWidth;
-    private double originalHeight;
+    private double lastFactor;
 
     private static double maxFactor = 10.;
 
@@ -27,12 +26,12 @@ public class SubMenuResizeRectangleState extends ControllerStateImp {
     Interaction interaction;
 
     EditionMenu menu;
-    SubMenuResizeRectangle subMenu;
-    Rectangle rect;
+    SubMenuResizeComposite subMenu;
+    CompositeShape composite;
 
     int inputId;
 
-    private SubMenuResizeRectangleState(MainController mainController, Model model, MainView view) {
+    private SubMenuResizeCompositeState(MainController mainController, Model model, MainView view) {
         this.mainController = mainController;
         this.model = model;
         this.view = view;
@@ -44,11 +43,11 @@ public class SubMenuResizeRectangleState extends ControllerStateImp {
     }
 
     public static void setInstance(MainController mainController, Model model, MainView view) {
-        state = new SubMenuResizeRectangleState(mainController, model, view);
+        state = new SubMenuResizeCompositeState(mainController, model, view);
     }
 
 
-    public static SubMenuResizeRectangleState getInstance() {
+    public static SubMenuResizeCompositeState getInstance() {
         return state;
     }
 
@@ -78,10 +77,7 @@ public class SubMenuResizeRectangleState extends ControllerStateImp {
 
                 if (value > 0 && value < maxFactor) {
                     if (inputId == 0)
-                        rect.setWidth(originalWidth * value);
-
-                    else if (inputId == 1)
-                        rect.setHeight(originalHeight * value);
+                        composite.resize(value);
                 }
             } catch (Exception ignored) {}
 
@@ -94,15 +90,13 @@ public class SubMenuResizeRectangleState extends ControllerStateImp {
     @Override
     public void onSwitch() {
         menu = view.getWhiteBoard().getEditionMenu();
-        subMenu = (SubMenuResizeRectangle) menu.getSelectedMenu();
-        rect = (Rectangle) view.getWhiteBoard().getSelectedShapes().iterator().next();
+        subMenu = (SubMenuResizeComposite) menu.getSelectedMenu();
+        composite = (CompositeShape) view.getWhiteBoard().getSelectedShapes().iterator().next();
 
-        originalWidth = rect.getWidth();
-        originalHeight = rect.getHeight();
     }
 
     @Override
     public String toString() {
-        return "submenu resize rectangle";
+        return "submenu resize composite";
     }
 }

@@ -1,5 +1,6 @@
 package application.view.menu;
 
+import application.model.shape.CompositeShape;
 import application.model.shape.Rectangle;
 import application.model.shape.Shape;
 import application.utils.Color;
@@ -90,6 +91,16 @@ public class EditionMenu {
         selectedMenu = 0;
     }
 
+    private void buildCompositeSubMenu() {
+        System.out.println("Building rectangle submenu");
+        subMenus.clear();
+
+        subMenus.add(0, new SubMenuColor(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+        subMenus.add(1, new SubMenuResizeComposite(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+
+        selectedMenu = 0;
+    }
+
 
     public static EditionMenu getInstanceFor(ViewBridge view, Shape shape) {
         if (instance == null) {
@@ -99,9 +110,8 @@ public class EditionMenu {
         instance.buttons.clear();
 
         if (shape instanceof Rectangle) instance.buildRectangleSubMenu();
+        else if (shape instanceof CompositeShape) instance.buildCompositeSubMenu();
 
-        // Tmp, don't have others shapes for the moment
-        else instance.buildRectangleSubMenu();
 
         instance.buildHeader();
         instance.buildFooter();
@@ -167,5 +177,7 @@ public class EditionMenu {
 
             draw(this.x, this.y);
         }
+
+        System.out.println("Submenu id is " + submenuId + ", -> " + getSelectedMenu());
     }
 }
