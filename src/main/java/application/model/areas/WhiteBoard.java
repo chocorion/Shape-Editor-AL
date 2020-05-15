@@ -139,4 +139,10 @@ public class WhiteBoard extends ModelObservableImp implements ShapeContainer {
             e.printStackTrace();
         }
     }
+
+    public void toFirstPlan(Shape currentShape) {
+        shapes.remove(currentShape);
+        shapes.add(currentShape);
+        update();
+    }
 }
