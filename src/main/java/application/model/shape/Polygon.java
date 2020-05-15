@@ -75,45 +75,78 @@ public class Polygon extends SingleShape {
 
     @Override
     public boolean isIn(double x, double y) {
-        /*
+        Pair<double[], double[]> points = getPoints();
+
+        double[] pointsX = points.getKey();
+        double[] pointsY = points.getValue();
+
         int i;
         int j;
         boolean result = false;
-        for (i = 0, j = points.length - 1; i < points.length; j = i++) {
-            if ((points[i].y > test.y) != (points[j].y > test.y) &&
-                    (test.x < (points[j].x - points[i].x) * (test.y - points[i].y) / (points[j].y-points[i].y) + points[i].x)) {
+        // assumes that pointx.length == pointy.lenght
+        for (i = 0, j = pointsX.length - 1; i < pointsX.length; j = i++) {
+            if ((pointsY[i] > y) != (pointsY[j] > y) &&
+                    (x < (pointsX[j] - pointsX[i]) * (y - pointsY[i]) / (pointsY[j] - pointsY[i]) + pointsX[i])) {
                 result = !result;
             }
         }
-        return result;*/
 
-        return false;
+        return result;
     }
 
     @Override
     public boolean intersect(Rectangle rectangle) {
+        if (isIn(rectangle.getX(), rectangle.getY()))
+            return true;
+
+        if (isIn(rectangle.getX() + rectangle.getWidth(), rectangle.getY()))
+            return true;
+
+        if (isIn(rectangle.getX(), rectangle.getY() + rectangle.getHeight()))
+            return true;
+
+        if (isIn(rectangle.getX() + rectangle.getWidth(), rectangle.getY() + rectangle.getHeight()))
+            return true;
+
+        Pair<double[], double[]> points = getPoints();
+
+        double[] pointsX = points.getKey();
+        double[] pointsY = points.getValue();
+
+        for (int i = 0; i < pointsX.length; i++) {
+            if (rectangle.isIn(pointsX[i], pointsY[i]))
+                return true;
+        }
+
         return false;
     }
 
     @Override
     public void moveTo(double x, double y) {
-        this.x += x;
-        this.y += y;
+        this.x = (int) x;
+        this.y = (int) y;
     }
 
     @Override
     public void translate(double dx, double dy) {
-
+        this.x += dx;
+        this.y += dy;
     }
 
     @Override
     public void resize(double factor) {
-
+        this.size *= factor;
     }
 
     @Override
     public void resize(Shape containerShape, double factor) {
+        double minX = containerShape.getMinX();
+        double minY = containerShape.getMinY();
 
+        this.x = (int) ((this.x - minX) * factor + minX);
+        this.y = (int) ((this.y - minY) * factor + minY);
+
+        this.size *= factor;
     }
 
     @Override
