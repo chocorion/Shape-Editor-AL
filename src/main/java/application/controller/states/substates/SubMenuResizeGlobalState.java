@@ -4,15 +4,14 @@ import application.controller.MainController;
 import application.controller.states.ControllerStateImp;
 import application.model.Model;
 import application.model.shape.CompositeShape;
-import application.model.shape.Rectangle;
+import application.model.shape.Shape;
 import application.view.MainView;
 import application.view.element.interaction.Interaction;
 import application.view.menu.EditionMenu;
-import application.view.menu.SubMenuResizeComposite;
-import application.view.menu.SubMenuResizeRectangle;
+import application.view.menu.SubMenuResizeGlobal;
 
-public class SubMenuResizeCompositeState extends ControllerStateImp {
-    private static SubMenuResizeCompositeState state;
+public class SubMenuResizeGlobalState extends ControllerStateImp {
+    private static SubMenuResizeGlobalState state;
 
     private double lastFactor;
 
@@ -26,14 +25,14 @@ public class SubMenuResizeCompositeState extends ControllerStateImp {
     Interaction interaction;
 
     EditionMenu menu;
-    SubMenuResizeComposite subMenu;
-    CompositeShape composite;
+    SubMenuResizeGlobal subMenu;
+    Shape shape;
 
     private double originalWidth;
 
     int inputId;
 
-    private SubMenuResizeCompositeState(MainController mainController, Model model, MainView view) {
+    private SubMenuResizeGlobalState(MainController mainController, Model model, MainView view) {
         this.mainController = mainController;
         this.model = model;
         this.view = view;
@@ -45,11 +44,11 @@ public class SubMenuResizeCompositeState extends ControllerStateImp {
     }
 
     public static void setInstance(MainController mainController, Model model, MainView view) {
-        state = new SubMenuResizeCompositeState(mainController, model, view);
+        state = new SubMenuResizeGlobalState(mainController, model, view);
     }
 
 
-    public static SubMenuResizeCompositeState getInstance() {
+    public static SubMenuResizeGlobalState getInstance() {
         return state;
     }
 
@@ -79,8 +78,8 @@ public class SubMenuResizeCompositeState extends ControllerStateImp {
 
                 if (value > 0 && value < maxFactor) {
                     if (inputId == 0) {
-                        composite.resize(originalWidth/composite.getWidth());
-                        composite.resize(value);
+                        shape.resize(originalWidth/ shape.getWidth());
+                        shape.resize(value);
                     }
 
                 }
@@ -95,10 +94,10 @@ public class SubMenuResizeCompositeState extends ControllerStateImp {
     @Override
     public void onSwitch() {
         menu = view.getWhiteBoard().getEditionMenu();
-        subMenu = (SubMenuResizeComposite) menu.getSelectedMenu();
-        composite = (CompositeShape) view.getWhiteBoard().getSelectedShapes().iterator().next();
+        subMenu = (SubMenuResizeGlobal) menu.getSelectedMenu();
+        shape = view.getWhiteBoard().getSelectedShapes().iterator().next();
 
-        originalWidth = composite.getWidth();
+        originalWidth = shape.getWidth();
     }
 
     @Override

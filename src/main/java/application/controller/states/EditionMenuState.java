@@ -2,14 +2,14 @@ package application.controller.states;
 
 import application.controller.MainController;
 import application.controller.states.substates.SubMenuColorState;
-import application.controller.states.substates.SubMenuResizeCompositeState;
+import application.controller.states.substates.SubMenuResizeGlobalState;
 import application.controller.states.substates.SubMenuResizeRectangleState;
 import application.model.Model;
 import application.model.command.concreteCommand.Replace;
 import application.model.shape.Shape;
 import application.view.MainView;
 import application.view.menu.EditionMenu;
-import application.view.menu.SubMenuResizeComposite;
+import application.view.menu.SubMenuResizeGlobal;
 import application.view.menu.SubMenuResizeRectangle;
 
 import java.util.HashSet;
@@ -40,7 +40,7 @@ public class EditionMenuState extends ControllerStateImp {
 
         SubMenuResizeRectangleState.setInstance(mainController, model, view);
         SubMenuColorState.setInstance(mainController, model, view);
-        SubMenuResizeCompositeState.setInstance(mainController, model, view);
+        SubMenuResizeGlobalState.setInstance(mainController, model, view);
 
         // By default
         subState = SubMenuColorState.getInstance();
@@ -98,17 +98,7 @@ public class EditionMenuState extends ControllerStateImp {
             if (buttonId < numberSubMenus) {
                 menu.switchSubmenu(buttonId);
 
-                if (menu.getSelectedMenu().getName().equals("color")) {
-                    subState = SubMenuColorState.getInstance();
-                }
-
-                else if (menu.getSelectedMenu().getName().equals("resize")) {
-                    if (menu.getSelectedMenu() instanceof SubMenuResizeRectangle)
-                        subState = SubMenuResizeRectangleState.getInstance();
-
-                    else if (menu.getSelectedMenu() instanceof SubMenuResizeComposite)
-                        subState = SubMenuResizeCompositeState.getInstance();
-                }
+                switchState();
 
                 subState.onSwitch();
             }
@@ -145,9 +135,23 @@ public class EditionMenuState extends ControllerStateImp {
     @Override
     public void onSwitch() {
         menu = view.getWhiteBoard().getEditionMenu();
-
+        switchState();
         makeSave();
         subState.onSwitch();
+    }
+
+    private void switchState() {
+        if (menu.getSelectedMenu().getName().equals("color")) {
+            subState = SubMenuColorState.getInstance();
+        }
+
+        else if (menu.getSelectedMenu().getName().equals("resize")) {
+            if (menu.getSelectedMenu() instanceof SubMenuResizeRectangle)
+                subState = SubMenuResizeRectangleState.getInstance();
+
+            else if (menu.getSelectedMenu() instanceof SubMenuResizeGlobal)
+                subState = SubMenuResizeGlobalState.getInstance();
+        }
     }
 
     private void makeSave() {

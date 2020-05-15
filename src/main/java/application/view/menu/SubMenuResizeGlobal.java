@@ -5,13 +5,13 @@ import application.view.ViewBridge;
 import application.view.element.TextInput;
 import application.view.element.interaction.Interaction;
 
-public class SubMenuResizeComposite implements EditionSubMenu {
+public class SubMenuResizeGlobal implements EditionSubMenu {
     private int x, y, width, height;
     private ViewBridge view;
 
     TextInput sizeInput;
 
-    public SubMenuResizeComposite(ViewBridge view, int x, int y, int width, int height) {
+    public SubMenuResizeGlobal(ViewBridge view, int x, int y, int width, int height) {
         this.view = view;
 
         this.x = x;

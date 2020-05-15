@@ -95,7 +95,7 @@ public class EditionMenu {
         subMenus.clear();
 
         subMenus.add(0, new SubMenuColor(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
-        subMenus.add(1, new SubMenuResizeComposite(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+        subMenus.add(1, new SubMenuResizeGlobal(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
 
         selectedMenu = 0;
     }
@@ -105,7 +105,7 @@ public class EditionMenu {
         subMenus.clear();
 
         subMenus.add(0, new SubMenuColor(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
-        //subMenus.add(1, new SubMenuResizeComposite(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+        subMenus.add(1, new SubMenuResizeGlobal(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
 
         selectedMenu = 0;
     }
