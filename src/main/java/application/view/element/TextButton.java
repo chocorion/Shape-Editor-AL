@@ -1,9 +1,10 @@
 package application.view.element;
 
 import application.utils.Color;
+import application.view.Drawable;
 import application.view.ViewBridge;
 
-public class TextButton {
+public class TextButton implements Drawable {
     private int x, y, width, height;
     private String txt;
     private boolean pushed;
@@ -21,7 +22,7 @@ public class TextButton {
         pushed = false;
     }
 
-
+    @Override
     public void draw(int xOffset, int yOffset) {
         // Put in two separated functions
         if (!pushed) {

@@ -1,9 +1,10 @@
 package application.view.element;
 
 import application.utils.Color;
+import application.view.Drawable;
 import application.view.ViewBridge;
 
-public class Slider {
+public class Slider implements Drawable {
     private int width, height;
     private int x, y;
     private int buttonX, buttonY, buttonW, buttonH;
@@ -28,6 +29,7 @@ public class Slider {
         this.height = height;
     }
 
+    @Override
     public void draw(int offsetX, int offsetY) {
         view.drawRectangle(x + offsetX, y + offsetY - height/2, width, height, Color.BLACK);
 

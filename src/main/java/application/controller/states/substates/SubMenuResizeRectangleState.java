@@ -24,7 +24,7 @@ public class SubMenuResizeRectangleState extends ControllerStateImp {
     EditionMenu menu;
     Rectangle rect;
 
-    int sliderId;
+    int inputId;
 
     private SubMenuResizeRectangleState(MainController mainController, Model model, MainView view) {
         this.mainController = mainController;
@@ -33,7 +33,7 @@ public class SubMenuResizeRectangleState extends ControllerStateImp {
 
         menu = view.getWhiteBoard().getEditionMenu();
 
-        sliderId = -1;
+        inputId = -1;
     }
 
     public static void setInstance(MainController mainController, Model model, MainView view) {
@@ -45,45 +45,32 @@ public class SubMenuResizeRectangleState extends ControllerStateImp {
         return state;
     }
 
-    @Override
-    public boolean onLeftClickReleased(int x, int y) {
-        if (sliderId != -1) {
-            sliderId = -1;
-            return true;
-        }
-
-        return false;
-    }
 
     @Override
     public boolean onLeftClickPressed(int x, int y) {
-        sliderId = ((SubMenuResizeRectangle) menu.getSelectedMenu()).getSliderId(x, y);
+        inputId = ((SubMenuResizeRectangle) menu.getSelectedMenu()).getInputId(x, y);
+        System.out.println("[resize] press on input, id -> " + inputId);
 
         return true;
     }
 
     @Override
-    public boolean onMouseMoved(int x, int y) {
-        if (sliderId != -1) {
-            ((SubMenuResizeRectangle) menu.getSelectedMenu()).moveSlider(x, y, sliderId);
-            double value = ((SubMenuResizeRectangle) menu.getSelectedMenu()).getSliderValue(sliderId);
-
-            value *= 2;
-
-
-
-            if (sliderId == 0) {
-                rect.setWidth(originalWidth * value);
-            } else if (sliderId == 1) {
-                rect.setHeight(originalHeight * value);
-            }
-            model.getWhiteBoard().update();
-
-            return true;
+    public boolean onKeyPressed(String keyCode, int mouseX, int mouseY) {
+        if (inputId != -1) {
+            System.out.println("Press key !");
+            // ENTER, BACK_SPACE
+            ((SubMenuResizeRectangle) menu.getSelectedMenu()).addText(inputId, keyCode);
+            view.getWhiteBoard().update();
         }
 
-        return false;
+        return true;
     }
+
+    @Override
+    public boolean onKeyReleased(String keyCode, int mouseX, int mouseY) {
+        return true;
+    }
+
 
     @Override
     public void onSwitch() {

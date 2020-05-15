@@ -58,7 +58,7 @@ public class MovingShape extends ControllerStateImp {
 
     @Override
     public boolean onKeyReleased(String keyCode, int mouseX, int mouseY) {
-        if (keyCode.equals("SPACE")) {
+        if (keyCode.equals(" ")) {
             mainController.switchState(DefaultState.getInstance());
             holding = null;
             return false;

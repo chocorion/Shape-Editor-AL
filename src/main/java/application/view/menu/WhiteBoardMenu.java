@@ -2,9 +2,10 @@ package application.view.menu;
 
 import application.model.shape.Rectangle;
 import application.utils.Color;
+import application.view.Drawable;
 import application.view.ViewBridge;
 
-public class WhiteBoardMenu {
+public class WhiteBoardMenu implements Drawable {
     private static final String[] items = {
             "Group",
             "Ungroup",
@@ -25,7 +26,7 @@ public class WhiteBoardMenu {
         currentySelected = -1;
     }
 
-
+    @Override
     public void draw(int x, int y) {
         this.x = x;
         this.y = y;

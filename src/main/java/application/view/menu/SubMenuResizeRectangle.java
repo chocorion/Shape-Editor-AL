@@ -2,13 +2,13 @@ package application.view.menu;
 
 import application.utils.Color;
 import application.view.ViewBridge;
-import application.view.element.Slider;
+import application.view.element.TextInput;
 
 public class SubMenuResizeRectangle implements EditionSubMenu {
     private int x, y, width, height;
     private ViewBridge view;
 
-    Slider SliderWidth, SliderHeight;
+    TextInput widthInput, heightInput;
 
     public SubMenuResizeRectangle(ViewBridge view, int x, int y, int width, int height) {
         this.view = view;
@@ -18,8 +18,8 @@ public class SubMenuResizeRectangle implements EditionSubMenu {
         this.width = width;
         this.height = height;
 
-        SliderWidth = new Slider(view, width/5, height / 8, (int) (width * 0.7), 2, 0.5, 8, 18);
-        SliderHeight = new Slider(view, width/5, 2 * height / 8, (int) (width * 0.7), 2, 0.5, 8, 18);
+        widthInput = new TextInput(view, width/5, height / 8, (int) (width * 0.7), 18);
+        heightInput = new TextInput(view, width/5, 2 * height / 8, (int) (width * 0.7), 18);
     }
 
     @Override
@@ -32,60 +32,34 @@ public class SubMenuResizeRectangle implements EditionSubMenu {
         view.drawText("Width", x + 5, y + height/8, 30, Color.BLACK);
         view.drawText("Height", x + 5, y + 2 * height/8, 30, Color.BLACK);
 
-        SliderWidth.draw(x, y);
-        SliderHeight.draw(x, y);
+        widthInput.draw(x, y);
+        heightInput.draw(x, y);
     }
 
-    public int getSliderId(int x, int y) {
-        if      (SliderWidth.isOnButton(x - this.x, y - this.y))     return 0;
-        else if (SliderHeight.isOnButton(x - this.x, y - this.y))     return 1;
+    public int getInputId(int x, int y) {
+        if      (widthInput.isIn(x - this.x, y - this.y))     return 0;
+        else if (heightInput.isIn(x - this.x, y - this.y))     return 1;
 
         return -1;
     }
 
-    public double getSliderValue(int sliderId) {
-        if (sliderId == 0)
-            return SliderWidth.getValue();
+    public String getText(int inputId) {
+        if (inputId == 0)
+            return widthInput.getText();
 
-        else if (sliderId == 1)
-            return SliderHeight.getValue();
+        else if (inputId == 1)
+            return heightInput.getText();
 
-        return 0.;
+        return "";
     }
 
-    public void moveSlider(int x, int y, int sliderId) {
-        if (sliderId == 0)  {
-            SliderWidth.moveButton(x - this.x);
-            //Rvalue = Rslider.getValue();
+    public void addText(int inputId, String txt) {
+        if (inputId == 0) {
+            widthInput.append(txt);
+        } else if (inputId == 1) {
+            heightInput.append(txt);
         }
-
-        else if (sliderId == 1)  {
-            SliderHeight.moveButton(x - this.x);
-            //Gvalue = Gslider.getValue();
-        }
-
-
-        draw(this.x, this.y);
     }
-
-    /*public void moveSlider(double value, int sliderId) {
-        if (sliderId == 0)  {
-            Rslider.moveButtonToValue(value);
-            Rvalue = Rslider.getValue();
-        }
-
-        else if (sliderId == 1)  {
-            Gslider.moveButtonToValue(value);
-            Gvalue = Gslider.getValue();
-        }
-
-        else if (sliderId == 2)  {
-            Bslider.moveButtonToValue(value);
-            Bvalue = Bslider.getValue();
-        }
-
-        draw(this.x, this.y);
-    }*/
 
     @Override
     public String getName() {

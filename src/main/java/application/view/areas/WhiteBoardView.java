@@ -9,11 +9,9 @@ import application.view.*;
 
 import application.view.menu.EditionMenu;
 import application.view.menu.WhiteBoardMenu;
-import javafx.scene.control.TextInputDialog;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 public class WhiteBoardView implements ModelObserver {

@@ -12,12 +12,17 @@ import javafx.scene.input.MouseButton;
  */
 public class ControllerFx implements ConcreteControllerItf {
     ArrayList<String> input;
+    ArrayList<String> specialKeys;
 
     /**
      * Basic constructor. Init all user events.
      */
     public ControllerFx(MainController mainController, ViewFx view) {
         this.input = new ArrayList<>();
+        specialKeys = new ArrayList<>();
+        specialKeys.add("ENTER");
+        specialKeys.add("CONTROL");
+        specialKeys.add("BACKSPACE");
 
         Scene scene = view.getScene();
 
@@ -31,14 +36,18 @@ public class ControllerFx implements ConcreteControllerItf {
 
         scene.setOnKeyPressed(
                 e -> {
-                    String code = e.getCode().toString();
-                    mainController.onKeyPressed(code);
+                    if (specialKeys.contains(e.getCode().toString()))
+                        mainController.onKeyPressed(e.getCode().toString());
+                    else
+                        mainController.onKeyPressed(e.getText());
                 });
 
         scene.setOnKeyReleased(
                 e -> {
-                    String code = e.getCode().toString();
-                    mainController.onKeyReleased(code);
+                    if (specialKeys.contains(e.getCode().toString()))
+                        mainController.onKeyReleased(e.getCode().toString());
+                    else
+                        mainController.onKeyReleased(e.getText());
                 });
 
 

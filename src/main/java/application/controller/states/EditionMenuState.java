@@ -169,6 +169,18 @@ public class EditionMenuState extends ControllerStateImp {
     }
 
     @Override
+    public boolean onKeyPressed(String keyCode, int mouseX, int mouseY) {
+        subState.onKeyPressed(keyCode, mouseX, mouseY);
+        return true;
+    }
+
+    @Override
+    public boolean onKeyReleased(String keyCode, int mouseX, int mouseY) {
+        subState.onKeyReleased(keyCode, mouseX, mouseY);
+        return true;
+    }
+
+    @Override
     public String toString() {
         return "edition menu";
     }

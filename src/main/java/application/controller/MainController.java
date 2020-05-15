@@ -70,7 +70,7 @@ public class MainController {
     }
 
     public void onKeyPressed(String key) {
-        // TODO manage state, moving shape
+        System.out.println("Press on -> " + key);
         if (!keysPressed.contains(key)) {
             keysPressed.add(key);
         }
