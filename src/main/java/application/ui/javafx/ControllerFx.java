@@ -23,6 +23,7 @@ public class ControllerFx implements ConcreteControllerItf {
         specialKeys.add("ENTER");
         specialKeys.add("CONTROL");
         specialKeys.add("BACK_SPACE");
+        specialKeys.add("ALT");
 
         Scene scene = view.getScene();
 

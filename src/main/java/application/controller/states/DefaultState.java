@@ -60,9 +60,8 @@ public class DefaultState extends ControllerStateImp {
         else if (Layout.getWhiteBoard().isIn(x, y)) {
             Shape currentShape = model.getWhiteBoard().getShapeAt(x, y);
 
-            if (currentShape != null) {
+            if (currentShape != null && mainController.isKeyPressed("ALT"))
                 model.getWhiteBoard().toFirstPlan(currentShape);
-            }
 
             if (currentShape != null && !mainController.isKeyPressed("CONTROL")) {
                mainController.switchState(ShapeHoldingState.getInstance());
