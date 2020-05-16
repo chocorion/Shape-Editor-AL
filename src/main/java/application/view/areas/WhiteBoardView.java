@@ -142,6 +142,13 @@ public class WhiteBoardView implements ModelObserver {
         draw();
     }
 
+    public void moveMenuTo(int x, int y) {
+        menuX = x;
+        menuY = y;
+
+        update();
+    }
+
     public WhiteBoardMenu getMenu() {
         return menu;
     }

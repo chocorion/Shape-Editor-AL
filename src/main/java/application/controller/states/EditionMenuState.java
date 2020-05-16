@@ -26,6 +26,8 @@ public class EditionMenuState extends ControllerStateImp {
     HashSet<Shape> shapeSave;
 
     int buttonId;
+    boolean moving;
+    int mouseX, mouseY;
 
     private EditionMenuState(MainController mainController, Model model, MainView view) {
         this.mainController = mainController;
@@ -35,6 +37,7 @@ public class EditionMenuState extends ControllerStateImp {
         shapeSave = new HashSet<>();
 
         buttonId = -1;
+        moving = false;
 
         SubMenuResizeRectangleState.setInstance(mainController, model, view);
         SubMenuColorState.setInstance(mainController, model, view);
@@ -58,6 +61,8 @@ public class EditionMenuState extends ControllerStateImp {
 
     @Override
     public boolean onLeftClickReleased(int x, int y) {
+        moving = false;
+
         if (buttonId != -1) {
             view.getWhiteBoard().getEditionMenu().unpushButton(buttonId);
             buttonId = -1;
@@ -82,6 +87,11 @@ public class EditionMenuState extends ControllerStateImp {
     @Override
     public boolean onLeftClickPressed(int x, int y) {
         if (menu.isIn(x, y)) {
+            if (mainController.isKeyPressed(" ")) {
+                moving = true;
+                mouseX = x - menu.getX();
+                mouseY = y - menu.getY();
+            }
 
             if (menu.isInSubmenu(x, y)) {
                 subState.onLeftClickPressed(x, y);
@@ -196,7 +206,12 @@ public class EditionMenuState extends ControllerStateImp {
 
     @Override
     public boolean onMouseMoved(int x, int y) {
-        subState.onMouseMoved(x, y);
+        if (moving) {
+            view.getWhiteBoard().moveMenuTo(x - mouseX, y - mouseY);
+        } else {
+            subState.onMouseMoved(x, y);
+        }
+
 
         return true;
     }

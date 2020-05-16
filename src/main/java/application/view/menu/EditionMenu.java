@@ -203,4 +203,17 @@ public class EditionMenu {
 
         System.out.println("Submenu id is " + submenuId + ", -> " + getSelectedMenu());
     }
+
+    public void moveMenuTo(int newX, int newY) {
+        this.x = newX;
+        this.y = newY;
+    }
+
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
 }
