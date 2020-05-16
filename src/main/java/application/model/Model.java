@@ -1,5 +1,6 @@
 package application.model;
 
+import application.model.Memento.ToolBarState;
 import application.model.areas.ToolBar;
 import application.model.areas.WhiteBoard;
 import application.model.command.Command;
@@ -12,6 +13,7 @@ public class Model {
 
     private ToolBar toolBar;
     private WhiteBoard whiteBoard;
+    private ToolBarState toolBarState;
 
 
     public Model() {
@@ -19,8 +21,9 @@ public class Model {
 
         // Needed by javaFx implementation..
         currentModel = this;
-
+        this.toolBarState = new ToolBarState("");
         toolBar    = new ToolBar(this);
+        toolBar.restore(this.toolBarState);
         whiteBoard = new WhiteBoard(this);
     }
 
@@ -50,4 +53,7 @@ public class Model {
         commands.redo();
     }
 
+    public void hitSave() {
+        this.toolBarState = this.toolBar.save();
+    }
 }
