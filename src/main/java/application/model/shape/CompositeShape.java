@@ -3,14 +3,15 @@ package application.model.shape;
 import application.utils.Color;
 import application.view.ViewBridge;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 public class CompositeShape implements Shape, Cloneable {
-    Set<Shape> shapeSet;
+    ArrayList<Shape> shapeSet;
 
     public CompositeShape() {
-        shapeSet = new HashSet<>();
+        shapeSet = new ArrayList<>();
     }
 
     @Override
@@ -208,7 +209,7 @@ public class CompositeShape implements Shape, Cloneable {
         return string.toString();
     }
 
-    public Set<Shape> getShape(){
+    public ArrayList<Shape> getShape(){
         return this.shapeSet;
     }
 
