@@ -92,6 +92,14 @@ public class DefaultState extends ControllerStateImp {
 
     @Override
     public boolean onKeyPressed(String keyCode, int mouseX, int mouseY) {
+        System.out.println("Receive -> " + keyCode);
+        if (mainController.isKeyPressed("CONTROL")) {
+            if (keyCode.equals("\u001A")) {
+                model.undo();
+            } else if (keyCode.equals("\u0019")) {
+                model.redo();
+            }
+        }
         if (keyCode.equals(" ")) {
             if (Layout.getWhiteBoard().isIn(mouseX, mouseY)) {
                 // TODO: What if mouse was already pressed when switching to movingShape ?
