@@ -69,7 +69,7 @@ public class SubMenuRoundState extends ControllerStateImp {
             try {
                 int value = Integer.parseInt(subMenu.getText(inputId));
 
-                if (value > 0) {
+                if (value >= 0) {
                     if (inputId == 0) {
                         rect.setRoundValue(value);
                         model.getWhiteBoard().update();

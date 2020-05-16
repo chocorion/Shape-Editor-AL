@@ -18,6 +18,8 @@ import javafx.scene.image.Image;
 
 import javafx.scene.paint.Color;
 
+import javafx.scene.transform.Affine;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
 import java.util.HashMap;
@@ -148,6 +150,15 @@ public class ViewFx extends Application implements ConcreteViewItf {
         if (result.isPresent()){
             this.model.getWhiteBoard().load(result.get());
         }
+    }
+
+    @Override
+    public void devDrawRoundedRectRotation(int x, int y, int width, int height, int arcWidth, int arcHeight, int angle, application.utils.Color color) {
+        ViewFx.gc.save();
+        ViewFx.gc.transform(new Affine(new Rotate(angle, x + width/2, y + height/2)));
+        ViewFx.gc.setFill(new Color(color.getR(), color.getG(), color.getB(), color.getA()));
+        ViewFx.gc.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
+        ViewFx.gc.restore();
     }
 
 
