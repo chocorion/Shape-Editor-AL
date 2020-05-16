@@ -1,13 +1,17 @@
 package application.model.shape;
 
 import application.utils.Color;
+import application.utils.Pair;
 import application.view.ViewBridge;
 
 public class Rectangle extends SingleShape {
     private double x, y;
     private double width, height;
     private Color color;
+
     private double angle;
+    private double pointX[];
+    private double pointY[];
 
     private double roundValue;
 
@@ -18,6 +22,9 @@ public class Rectangle extends SingleShape {
 
         this.width = width;
         this.height = height;
+
+        pointX = new double[] {x, x + width, x + width, x};
+        pointY = new double[] {y, y, y + height, y + height};
 
         // For test
         this.angle =0;
@@ -55,22 +62,66 @@ public class Rectangle extends SingleShape {
 
     @Override
     public double getMinX() {
-        return this.x;
+        double minX = pointX[0];
+
+        for (int i = 1; i < pointX.length; i++) {
+            if (pointX[i] < minX)
+                minX = pointX[i];
+        }
+
+        return minX;
     }
 
     @Override
     public double getMinY() {
-        return this.y;
+        double minY = pointY[0];
+
+        for (int i = 1; i < pointY.length; i++) {
+            if (pointY[i] < minY)
+                minY = pointY[i];
+        }
+
+        return minY;
     }
 
     @Override
     public double getMaxX() {
-        return this.x + this.width;
+        double maxX = pointX[0];
+
+        for (int i = 1; i < pointX.length; i++) {
+            if (pointX[i] > maxX)
+                maxX = pointX[i];
+        }
+
+        return maxX;
     }
 
     @Override
     public double getMaxY() {
-        return this.y + this.height;
+        double maxY = pointY[0];
+
+        for (int i = 1; i < pointY.length; i++) {
+            if (pointY[i] > maxY)
+                maxY = pointY[i];
+        }
+
+        return maxY;
+    }
+
+    private void computePoints() {
+        double currentPx, currentPy;
+        double rAngle = Math.toRadians(angle);
+
+        System.out.println("Points compute for rect in " + x + ", " + y + ", " + width + ", " + height);
+        for (int i = 0; i < pointX.length; i++) {
+            currentPx = pointX[i] - (x + width/2);
+            currentPy = pointY[i] - (y + height/2);
+
+            pointX[i] = currentPx * Math.cos(rAngle) - currentPy * Math.sin(rAngle) + (x + width/2);
+            pointY[i] = currentPx * Math.sin(rAngle) + currentPy * Math.cos(rAngle) + (y + height/2);
+
+            System.out.println("\t" + pointX[i] + ", " + pointY[i]);
+        }
     }
 
     public double getRoundValue() {
@@ -83,36 +134,63 @@ public class Rectangle extends SingleShape {
 
     @Override
     public boolean isIn(double x, double y) {
-        if (x >= this.x && x <= this.x + this.width) {
-            return y >= this.y && y <= this.y + this.height;
+        int i;
+        int j;
+        boolean result = false;
+
+        for (i = 0, j = pointX.length - 1; i < pointX.length; j = i++) {
+            if ((pointY[i] > y) != (pointY[j] > y) &&
+                    (x < (pointX[j] - pointX[i]) * (y - pointY[i]) / (pointY[j] - pointY[i]) + pointX[i])) {
+                result = !result;
+            }
+        }
+
+        return result;
+    }
+
+    @Override
+    public boolean intersect(Rectangle rectangle) {
+        if (isIn(rectangle.getX(), rectangle.getY()))
+            return true;
+
+        if (isIn(rectangle.getX() + rectangle.getWidth(), rectangle.getY()))
+            return true;
+
+        if (isIn(rectangle.getX(), rectangle.getY() + rectangle.getHeight()))
+            return true;
+
+        if (isIn(rectangle.getX() + rectangle.getWidth(), rectangle.getY() + rectangle.getHeight()))
+            return true;
+
+
+        for (int i = 0; i < pointX.length; i++) {
+            if (rectangle.isIn(pointX[i], pointY[i]))
+                return true;
         }
 
         return false;
     }
 
     @Override
-    public boolean intersect(Rectangle rect) {
-        boolean hoverlap = (x < rect.x + rect.width) && (rect.x < x + width);
-        boolean voverlap = (y < rect.y + rect.height) && (rect.y < y + height);
-
-        return hoverlap && voverlap;
-    }
-
-    @Override
     public void moveTo(double x, double y) {
         this.x = x;
         this.y = y;
+
+        computePoints();
     }
 
     @Override
     public void translate(double dx, double dy) {
         this.x += dx;
         this.y += dy;
+
+        computePoints();
     }
 
     @Override
     public void setAngle(double newAngle) {
         this.angle = newAngle;
+        computePoints();
     }
 
     public double getAngle() {
@@ -123,6 +201,8 @@ public class Rectangle extends SingleShape {
     public void resize(double factor) {
         this.width *= factor;
         this.height *= factor;
+
+        computePoints();
     }
 
     @Override
@@ -135,17 +215,22 @@ public class Rectangle extends SingleShape {
 
         this.width *= factor;
         this.height *= factor;
+
+        computePoints();
     }
 
     public void setWidth(double newWidth) {
         this.x += (width - newWidth)/2;
         this.width = newWidth;
 
+        computePoints();
     }
 
     public void setHeight(double newHeight) {
         this.y += (height - newHeight)/2;
         this.height = newHeight;
+
+        computePoints();
     }
 
     @Override
