@@ -21,6 +21,8 @@ public class ToolBarState {
     }
 
     public String getState() {
-        return "src/main/java/application/model/Memento/toolbarState.txt";
+        File file = new File("src/main/java/application/model/Memento/toolbarState.txt");
+        if(file.length() == 9) return "src/main/java/application/model/Memento/toolbarFirst.txt";
+       return "src/main/java/application/model/Memento/toolbarState.txt";
     }
 }
