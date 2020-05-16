@@ -16,6 +16,7 @@ public class DefaultState extends ControllerStateImp {
     MainController mainController;
     Model model;
     MainView view;
+    private boolean leftClick;
 
     private DefaultState(MainController mainController, Model model, MainView view) {
         this.mainController = mainController;
@@ -60,6 +61,12 @@ public class DefaultState extends ControllerStateImp {
         else if (Layout.getWhiteBoard().isIn(x, y)) {
             Shape currentShape = model.getWhiteBoard().getShapeAt(x, y);
 
+            if (mainController.isKeyPressed(" ")) {
+                mainController.switchState(MovingShape.getInstance());
+                return false;
+            }
+
+
             if (currentShape != null && mainController.isKeyPressed("ALT"))
                 model.getWhiteBoard().toFirstPlan(currentShape);
 
@@ -92,7 +99,6 @@ public class DefaultState extends ControllerStateImp {
 
     @Override
     public boolean onKeyPressed(String keyCode, int mouseX, int mouseY) {
-        System.out.println("Receive -> " + keyCode);
         if (mainController.isKeyPressed("CONTROL")) {
             if (keyCode.equals("\u001A")) {
                 model.undo();
@@ -100,14 +106,7 @@ public class DefaultState extends ControllerStateImp {
                 model.redo();
             }
         }
-        if (keyCode.equals(" ")) {
-            if (Layout.getWhiteBoard().isIn(mouseX, mouseY)) {
-                // TODO: What if mouse was already pressed when switching to movingShape ?
-                mainController.switchState(MovingShape.getInstance());
 
-                return false;
-            }
-        }
 
         return true;
     }

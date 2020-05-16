@@ -50,7 +50,7 @@ public class WhiteBoard extends ModelObservableImp implements ShapeContainer {
         return null;
     }
 
-    public void moveShape(Shape shape, int x, int y) {
+    public void moveShape(Shape shape, double x, double y) {
         shape.moveTo(x, y);
         update();
     }

@@ -105,7 +105,6 @@ public class WhiteBoardView implements ModelObserver {
 
     @Override
     public void update() {
-
         area = Layout.getWhiteBoard();
         this.draw();
     }
