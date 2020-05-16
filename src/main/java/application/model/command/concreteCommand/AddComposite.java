@@ -22,7 +22,7 @@ public class AddComposite implements Command {
         shapeList.sort(new Comparator<Shape>() {
             @Override
             public int compare(Shape shape1, Shape shape2) {
-                return (shapeContainer.getShapePlace(shape1) > shapeContainer.getShapePlace(shape2)) ? -1 : 1;
+                return (shapeContainer.getShapePlace(shape1) > shapeContainer.getShapePlace(shape2)) ? 1 : -1;
             }
         });
         

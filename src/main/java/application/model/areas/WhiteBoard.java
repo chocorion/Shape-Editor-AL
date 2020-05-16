@@ -41,9 +41,9 @@ public class WhiteBoard extends ModelObservableImp implements ShapeContainer {
     }
 
     public Shape getShapeAt(int x, int y) {
-        for (Shape shape : shapes) {
-            if (shape.isIn(x, y)) {
-                return shape;
+        for (int i = shapes.size() - 1; i >= 0; i--) {
+            if (shapes.get(i).isIn(x, y)) {
+                return shapes.get(i);
             }
         }
 
