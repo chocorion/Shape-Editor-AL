@@ -60,12 +60,10 @@ public class SubMenuColor implements EditionSubMenu {
 
         updateColor();
 
-        view.drawText("Current color:", x + 5, y + 5 * height/8, 90, Color.BLACK);
         view.drawRoundedRectShadow(x + (int) (width/1.5), y + 5 * height/8, 50, 50, 50, 2, color);
     }
 
     public int getSliderId(int x, int y) {
-        System.out.println("In getSliderId for " + x + ", " + y);
         if      (Rslider.isOnButton(x - this.x, y - this.y))     return 0;
         else if (Gslider.isOnButton(x - this.x, y - this.y))     return 1;
         else if (Bslider.isOnButton(x - this.x, y - this.y))     return 2;

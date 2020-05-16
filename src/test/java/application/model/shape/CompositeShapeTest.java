@@ -112,9 +112,7 @@ public class CompositeShapeTest {
 
         compositeShape.add(rect1);
         compositeShape.add(rect2);
-        System.err.println("Before move to -> " + compositeShape);
         compositeShape.moveTo(181, 213);
-        System.err.println("After move to -> " + compositeShape);
 
         assert (rect1.getX() == 181 && rect1.getY() == 213);
         assert (rect2.getX() == 231 && rect2.getY() == 263);

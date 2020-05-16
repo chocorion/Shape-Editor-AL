@@ -81,7 +81,6 @@ public class EditionMenu {
     }
 
     private void buildRectangleSubMenu() {
-        System.out.println("Building rectangle submenu");
         subMenus.clear();
 
         subMenus.add(0, new SubMenuColor(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
@@ -93,7 +92,6 @@ public class EditionMenu {
     }
 
     private void buildCompositeSubMenu() {
-        System.out.println("Building rectangle submenu");
         subMenus.clear();
 
         subMenus.add(0, new SubMenuColor(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
@@ -103,7 +101,6 @@ public class EditionMenu {
     }
 
     private void buildPolygonSubMenu() {
-        System.out.println("Building rectangle submenu");
         subMenus.clear();
 
         subMenus.add(0, new SubMenuColor(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
@@ -200,8 +197,6 @@ public class EditionMenu {
 
             draw(this.x, this.y);
         }
-
-        System.out.println("Submenu id is " + submenuId + ", -> " + getSelectedMenu());
     }
 
     public void moveMenuTo(int newX, int newY) {

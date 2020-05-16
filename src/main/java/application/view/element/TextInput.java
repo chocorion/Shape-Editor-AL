@@ -24,7 +24,6 @@ public class TextInput implements Drawable {
     }
 
     public void append(String s) {
-        System.out.println("Append text !");
         txt.append(s);
     }
 

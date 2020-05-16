@@ -14,7 +14,6 @@ public class TextInputInteraction extends Interaction {
     }
 
     public boolean onKeyPressed(String keyCode, int mouseX, int mouseY) {
-        System.out.println("Receive -> " + keyCode);
         if (keyCode.equals("ENTER")) {
             return false;
         }

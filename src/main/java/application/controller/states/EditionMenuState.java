@@ -115,7 +115,7 @@ public class EditionMenuState extends ControllerStateImp {
             }
 
             else if (buttonId - numberSubMenus == 0) {
-                System.out.println("Click on apply");
+                // Apply
 
                 HashSet<Shape> newShape = new HashSet<>(view.getWhiteBoard().getSelectedShapes());
 
@@ -126,13 +126,13 @@ public class EditionMenuState extends ControllerStateImp {
             }
 
             else if (buttonId - numberSubMenus == 1) {
-                System.out.println("Click on Reset");
+                // Reset
                 reset();
                 onSwitch();
             }
 
             else if (buttonId - numberSubMenus == 2) {
-                System.out.println("Click on Cancel");
+                // Cancel
                 reset();
                 view.getWhiteBoard().closeEditionMenu();
                 mainController.switchState(WhiteBoardMenuState.getInstance());
