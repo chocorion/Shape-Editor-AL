@@ -115,15 +115,12 @@ public class Rectangle extends SingleShape {
         pointX = new double[] {x, x + width, x + width, x};
         pointY = new double[] {y, y, y + height, y + height};
 
-        System.out.println("Points compute for rect in " + x + ", " + y + ", " + width + ", " + height);
         for (int i = 0; i < pointX.length; i++) {
             currentPx = pointX[i] - (x + width/2);
             currentPy = pointY[i] - (y + height/2);
 
             pointX[i] = currentPx * Math.cos(rAngle) - currentPy * Math.sin(rAngle) + (x + width/2);
             pointY[i] = currentPx * Math.sin(rAngle) + currentPy * Math.cos(rAngle) + (y + height/2);
-
-            System.out.println("\t" + pointX[i] + ", " + pointY[i]);
         }
     }
 
@@ -187,10 +184,7 @@ public class Rectangle extends SingleShape {
         this.x += dx;
         this.y += dy;
 
-        for (int i = 0; i < pointX.length; i++) {
-            pointX[i] += dx;
-            pointY[i] += dy;
-        }
+        computePoints();
     }
 
     @Override

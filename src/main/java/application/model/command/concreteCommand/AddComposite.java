@@ -27,6 +27,7 @@ public class AddComposite implements Command {
         });
         
         for (Shape s : shapeList) {
+            System.out.println("Adding shape with priority " + shapeContainer.getShapePlace(s));
             shape.add(s);
         }
         
