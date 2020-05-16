@@ -115,6 +115,10 @@ public class Rectangle extends SingleShape {
         this.angle = newAngle;
     }
 
+    public double getAngle() {
+        return angle;
+    }
+
     @Override
     public void resize(double factor) {
         this.width *= factor;

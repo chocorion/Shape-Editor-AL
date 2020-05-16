@@ -94,13 +94,14 @@ public class ViewBridge {
     }
 
     public void drawRoundedRect(Rectangle r) {
-        implementation.devDrawRoundedRect(
+        implementation.devDrawRoundedRectRotation(
                 (int) r.getX(),
                 (int) r.getY(),
                 (int) r.getWidth(),
                 (int) r.getHeight(),
                 (int) r.getRoundValue(),
                 (int) r.getRoundValue(),
+                (int) r.getAngle(),
                 r.getColor()
         );
     }

@@ -16,4 +16,6 @@ public interface ConcreteViewItf {
     void devDrawSaveMenu();
 
     void devDrawLoadMenu();
+
+    void devDrawRoundedRectRotation(int x, int y, int width, int height, int roundValue, int roundValue1, int angle, Color color);
 }
