@@ -7,6 +7,8 @@ public class Rectangle extends SingleShape {
     private double x, y;
     private double width, height;
     private Color color;
+    private double angle;
+
 
 
 
@@ -18,6 +20,7 @@ public class Rectangle extends SingleShape {
         this.height = height;
 
         // For test
+        this.angle =0;
         this.color = color;
     }
 
@@ -143,7 +146,7 @@ public class Rectangle extends SingleShape {
     }
 
     public String toString() {
-        return "Rectangle \n" + this.x + ", " + this.y + ", " + this.width + ", " + this.height + ", "
+        return "Rectangle \n" + this.x + ", " + this.y + ", " + this.width + ", " + this.height + ", "+ this.angle+ ", "+
                 +  (int)(255*this.color.getR())+", "+(int) (255* this.color.getG())+", "+(int) (255* this.color.getB())+", "+  this.color.getA()+"\n";
     }
 }

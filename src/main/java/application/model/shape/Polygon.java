@@ -9,12 +9,12 @@ public class Polygon extends SingleShape {
     private Color color;
     private int numberSide;
     private double size;
-    private int x, y;
+    private double x, y;
     private double angle;
 
     Pair<double[], double[]> points;
 
-    public Polygon(int x, int y, double size, int numberSide, Color color) {
+    public Polygon(double x, double y, double size, int numberSide, Color color) {
         this.x = x;
         this.y = y;
         this.size = size;
@@ -216,5 +216,10 @@ public class Polygon extends SingleShape {
     public Color getColor() {
         return this.color;
     }
-}
 
+    public String toString() {
+        return "Polygon \n" + this.x + ", " + this.y + ", " + this.size + ", " + this.numberSide + ", " + this.angle+ ", "+
+                +  (int)(255*this.color.getR())+", "+(int) (255* this.color.getG())+", "+(int) (255* this.color.getB())+", "+  this.color.getA()+"\n";
+    }
+    
+}

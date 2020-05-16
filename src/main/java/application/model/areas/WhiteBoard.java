@@ -2,6 +2,7 @@ package application.model.areas;
 
 import application.model.Model;
 import application.model.shape.CompositeShape;
+import application.model.shape.Polygon;
 import application.model.shape.Rectangle;
 import application.model.shape.Shape;
 import application.utils.Color;
@@ -94,12 +95,33 @@ public class WhiteBoard extends ModelObservableImp implements ShapeContainer {
         double y = Double.parseDouble(values[1]);
         double w = Double.parseDouble(values[2]);
         double h = Double.parseDouble(values[3]);
-        int r = Integer.parseInt(values[4]);
-        int g = Integer.parseInt(values[5]);
-        int b = Integer.parseInt(values[6]);
-        double a = Double.parseDouble(values[7]);
+        double angle = Double.parseDouble(values[4]);
+        int r = Integer.parseInt(values[5]);
+        int g = Integer.parseInt(values[6]);
+        int b = Integer.parseInt(values[7]);
+        double a = Double.parseDouble(values[8]);
 
-        return new Rectangle(x,y,w,h,new Color(r,g,b,a));
+        Rectangle rect = new Rectangle(x,y,w,h,new Color(r,g,b,a));
+        // r.setAngle(angle);
+        return rect;
+    }
+
+    private Shape loadPolygon(String line){
+        String[] values = line.split(", ");
+        double x = Double.parseDouble(values[0]);
+        double y = Double.parseDouble(values[1]);
+        double size = Double.parseDouble(values[2]);
+        int nbsize = Integer.parseInt(values[3]);
+        double angle = Double.parseDouble(values[4]);
+        int r = Integer.parseInt(values[5]);
+        int g = Integer.parseInt(values[6]);
+        int b = Integer.parseInt(values[7]);
+        double a = Double.parseDouble(values[8]);
+
+        Polygon p = new Polygon(x,y,size,nbsize, new Color(r,g,b,a));
+        p.setAngle(angle);
+
+        return p;
     }
 
     private Shape loadComposite(Scanner input, int number) {
@@ -109,9 +131,12 @@ public class WhiteBoard extends ModelObservableImp implements ShapeContainer {
             if (line.contains("Rectangle")) {
                 line = input.nextLine();
                 shapes.add(loadRectangle(line));
-            } else {
-                String[] values = line.split(" ");
-                shapes.add(loadComposite(input, Integer.parseInt(values[1])));
+            } else if (line.contains("Polygon")){
+                line = input.nextLine();
+                shapes.add(loadPolygon(line));
+            }else {
+                    String[] values = line.split(" ");
+                    shapes.add(loadComposite(input, Integer.parseInt(values[1])));
             }
         }
         return shapes;
@@ -127,6 +152,9 @@ public class WhiteBoard extends ModelObservableImp implements ShapeContainer {
                 if(line.contains("Rectangle")){
                     line = input.nextLine();
                     newShapes.add(loadRectangle(line));
+                } else if (line.contains("Polygon")){
+                    line = input.nextLine();
+                    newShapes.add(loadPolygon(line));
                 }else if (line.contains("Composite")){
                      String[] values = line.split(" ");
                      newShapes.add(loadComposite(input, Integer.parseInt(values[1])));
