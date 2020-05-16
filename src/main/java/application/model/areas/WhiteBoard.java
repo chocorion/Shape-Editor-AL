@@ -145,4 +145,14 @@ public class WhiteBoard extends ModelObservableImp implements ShapeContainer {
         shapes.add(currentShape);
         update();
     }
+
+    public int getShapePlace(Shape shape) {
+        for (int i = 0; i < shapes.size(); i++) {
+            if (shape == shapes.get(i)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 }

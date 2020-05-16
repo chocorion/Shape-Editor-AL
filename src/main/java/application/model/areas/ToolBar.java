@@ -45,6 +45,17 @@ public class ToolBar extends ModelObservableImp implements ShapeContainer {
         update();
     }
 
+    @Override
+    public int getShapePlace(Shape shape) {
+        for (int i = 0; i < shapes.size(); i++) {
+            if (shape == shapes.get(i)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
     public ArrayList<Shape> getInnerShapes() {
         return new ArrayList<>(shapes);
     }

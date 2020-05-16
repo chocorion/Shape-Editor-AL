@@ -6,6 +6,7 @@ import application.model.shape.Shape;
 import application.model.areas.ShapeContainer;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Set;
 
 public class AddComposite implements Command {
@@ -17,9 +18,19 @@ public class AddComposite implements Command {
         this.shape = new CompositeShape();
         this.shapeContainer = shapeContainer;
 
-        for (Shape s : shapes) {
+        ArrayList<Shape> shapeList = new ArrayList<>(shapes);
+        shapeList.sort(new Comparator<Shape>() {
+            @Override
+            public int compare(Shape shape1, Shape shape2) {
+                return (shapeContainer.getShapePlace(shape1) > shapeContainer.getShapePlace(shape2)) ? -1 : 1;
+            }
+        });
+        
+        for (Shape s : shapeList) {
             shape.add(s);
         }
+        
+        
     }
 
     @Override
