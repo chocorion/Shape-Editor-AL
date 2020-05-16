@@ -41,6 +41,7 @@ public class EditionMenuState extends ControllerStateImp {
         SubMenuResizeGlobalState.setInstance(mainController, model, view);
         SubMenuRotationState.setInstance(mainController, model, view);
         SubMenuPolygonState.setInstance(mainController, model, view);
+        SubMenuRoundState.setInstance(mainController, model, view);
 
         // By default
         subState = SubMenuColorState.getInstance();
@@ -163,6 +164,10 @@ public class EditionMenuState extends ControllerStateImp {
 
         else if (menu.getSelectedMenu().getName().equals("numberSide")) {
             subState = SubMenuPolygonState.getInstance();
+        }
+
+        else if (menu.getSelectedMenu().getName().equals("round")) {
+            subState = SubMenuRoundState.getInstance();
         }
     }
 

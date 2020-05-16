@@ -86,6 +86,7 @@ public class EditionMenu {
 
         subMenus.add(0, new SubMenuColor(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
         subMenus.add(1, new SubMenuResizeRectangle(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+        subMenus.add(2, new SubMenuRound(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
 
         selectedMenu = 0;
     }

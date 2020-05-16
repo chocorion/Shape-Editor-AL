@@ -9,7 +9,7 @@ public class Rectangle extends SingleShape {
     private Color color;
     private double angle;
 
-
+    private double roundValue;
 
 
     public Rectangle(double x, double y, double width, double height, Color color) {
@@ -21,6 +21,7 @@ public class Rectangle extends SingleShape {
 
         // For test
         this.angle =0;
+        this.roundValue = 0.;
         this.color = color;
     }
 
@@ -31,7 +32,7 @@ public class Rectangle extends SingleShape {
 
     @Override
     public void draw(ViewBridge view) {
-        view.drawRectangle(this);
+        view.drawRoundedRect(this);
     }
 
     public double getX() {
@@ -72,6 +73,14 @@ public class Rectangle extends SingleShape {
         return this.y + this.height;
     }
 
+    public double getRoundValue() {
+        return roundValue;
+    }
+
+    public void setRoundValue(double newValue) {
+        this.roundValue = newValue;
+    }
+
     @Override
     public boolean isIn(double x, double y) {
         if (x >= this.x && x <= this.x + this.width) {
@@ -102,8 +111,8 @@ public class Rectangle extends SingleShape {
     }
 
     @Override
-    public void setAngle(double diffAngle) {
-        //TODO
+    public void setAngle(double newAngle) {
+        this.angle = newAngle;
     }
 
     @Override

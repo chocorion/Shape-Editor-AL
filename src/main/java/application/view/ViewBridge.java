@@ -92,4 +92,16 @@ public class ViewBridge {
     public void drawLoadMenu(){
         implementation.devDrawLoadMenu();
     }
+
+    public void drawRoundedRect(Rectangle r) {
+        implementation.devDrawRoundedRect(
+                (int) r.getX(),
+                (int) r.getY(),
+                (int) r.getWidth(),
+                (int) r.getHeight(),
+                (int) r.getRoundValue(),
+                (int) r.getRoundValue(),
+                r.getColor()
+        );
+    }
 }
