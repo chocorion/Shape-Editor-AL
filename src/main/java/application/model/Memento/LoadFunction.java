@@ -23,9 +23,11 @@ public class LoadFunction {
         int g = Integer.parseInt(values[6]);
         int b = Integer.parseInt(values[7]);
         double a = Double.parseDouble(values[8]);
+        double round = Double.parseDouble(values[9]);
 
         Rectangle rect = new Rectangle(x,y,w,h,new Color(r,g,b,a));
         rect.setAngle(angle);
+        rect.setRoundValue(round);
         return rect;
     }
 
