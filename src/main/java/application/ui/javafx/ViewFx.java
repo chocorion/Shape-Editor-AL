@@ -22,6 +22,9 @@ import javafx.scene.transform.Affine;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -108,7 +111,11 @@ public class ViewFx extends Application implements ConcreteViewItf {
     @Override
     public void devDrawImage(String path, int x, int y, int width, int height) {
         if (!imageCache.containsKey(path)) {
-            imageCache.put(path, new Image(path));
+            try {
+                imageCache.put(path, new Image(String.valueOf(Paths.get(path).toUri().toURL())));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
         }
 
         ViewFx.gc.drawImage(imageCache.get(path), x, y, width, height);

@@ -8,11 +8,11 @@ public class ImageManager {
     static {
         images = new HashMap<>();
 
-        images.put("undo", ImageManager.class.getResource("/images/undo.png").toString());
-        images.put("redo", ImageManager.class.getResource("/images/redo.png").toString());
-        images.put("import", ImageManager.class.getResource("/images/import.png").toString());
-        images.put("export", ImageManager.class.getResource("/images/export.png").toString());
-        images.put("trash", ImageManager.class.getResource("/images/trash.png").toString());
+        images.put("undo", "src/main/resources/images/undo.png");
+        images.put("redo", "src/main/resources/images/redo.png");
+        images.put("import", "src/main/resources/images/import.png");
+        images.put("export", "src/main/resources/images/export.png");
+        images.put("trash", "src/main/resources/images/trash.png");
     }
 
     public static String getImage(String name) {
