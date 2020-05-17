@@ -1,10 +1,10 @@
 package application.view.element;
 
 import application.utils.Color;
-import application.view.Drawable;
+import application.view.IDrawable;
 import application.view.ViewBridge;
 
-public class Slider implements Drawable {
+public class Slider implements IDrawable {
     private int width, height;
     private int x, y;
     private int buttonX, buttonY, buttonW, buttonH;

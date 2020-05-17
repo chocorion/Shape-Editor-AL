@@ -1,5 +1,5 @@
 package application.view;
 
-public interface Drawable {
+public interface IDrawable {
     void draw(int x, int y);
 }

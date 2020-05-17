@@ -8,7 +8,7 @@ public class ToolBarState {
 
     public ToolBarState(String str) {
         if(!str.isEmpty()) {
-            File file = new File("src/main/resources/save/toolbarState.txt");
+            File file = new File("resources/save/toolbarState.txt");
             try {
                 FileWriter output = new FileWriter(file.getAbsoluteFile());
                 output.write(str);
@@ -21,8 +21,8 @@ public class ToolBarState {
     }
 
     public String getState() {
-        File file = new File("src/main/resources/save/toolbarState.txt");
-        if(file.length() == 9) return "src/main/resources/save/toolbarState.txt";
-       return "src/main/resources/save/toolbarState.txt";
+        File file = new File("resources/save/toolbarState.txt");
+        if(file.length() == 9) return "resources/save/toolbarState.txt";
+       return "resources/save/toolbarState.txt";
     }
 }

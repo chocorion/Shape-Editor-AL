@@ -1,11 +1,11 @@
 package application.view.element;
 
 import application.utils.Color;
-import application.view.Drawable;
+import application.view.IDrawable;
 import application.view.ViewBridge;
 import application.view.element.interaction.TextInputInteraction;
 
-public class TextInput implements Drawable {
+public class TextInput implements IDrawable {
     private int x, y;
     private int width, height;
 

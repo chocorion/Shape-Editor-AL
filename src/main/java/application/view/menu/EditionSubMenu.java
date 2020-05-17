@@ -1,8 +1,8 @@
 package application.view.menu;
 
-import application.view.Drawable;
+import application.view.IDrawable;
 
-public interface EditionSubMenu extends Drawable {
+public interface EditionSubMenu extends IDrawable {
     void draw(int x, int y);
     String getName();
 }

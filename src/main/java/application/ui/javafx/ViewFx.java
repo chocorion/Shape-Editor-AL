@@ -3,10 +3,8 @@ package application.ui.javafx;
 
 import application.controller.ConcreteControllerItf;
 import application.model.Model;
-import application.model.shape.Polygon;
 
-import application.utils.Pair;
-import application.view.ConcreteViewItf;
+import application.view.IConcreteView;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -22,14 +20,13 @@ import javafx.scene.transform.Affine;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Optional;
 
 
-public class ViewFx extends Application implements ConcreteViewItf {
+public class ViewFx extends Application implements IConcreteView {
     private static Model model;
     private static Scene rootScene;
     private static GraphicsContext gc;

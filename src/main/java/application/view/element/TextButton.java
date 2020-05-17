@@ -1,10 +1,10 @@
 package application.view.element;
 
 import application.utils.Color;
-import application.view.Drawable;
+import application.view.IDrawable;
 import application.view.ViewBridge;
 
-public class TextButton implements Drawable {
+public class TextButton implements IDrawable {
     private int x, y, width, height;
     private String txt;
     private boolean pushed;

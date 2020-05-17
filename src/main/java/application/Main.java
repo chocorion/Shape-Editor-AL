@@ -25,7 +25,7 @@ public class Main {
     public static void buildUi() {
         UIFactory uiFactory = new UIFx();
 
-        ConcreteViewItf concreteView = uiFactory.getView(model);
+        IConcreteView concreteView = uiFactory.getView(model);
         ViewBridge viewBridge = new ViewBridge(concreteView);
 
         view = new MainView(model, viewBridge);

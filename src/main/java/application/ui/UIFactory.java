@@ -3,9 +3,9 @@ package application.ui;
 import application.controller.ConcreteControllerItf;
 import application.controller.MainController;
 import application.model.Model;
-import application.view.ConcreteViewItf;
+import application.view.IConcreteView;
 
 public interface UIFactory {
-    ConcreteViewItf getView(Model model);
-    ConcreteControllerItf getController(MainController mainController, ConcreteViewItf view);
+    IConcreteView getView(Model model);
+    ConcreteControllerItf getController(MainController mainController, IConcreteView view);
 }

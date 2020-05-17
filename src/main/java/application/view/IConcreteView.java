@@ -3,7 +3,7 @@ package application.view;
 import application.model.shape.Polygon;
 import application.utils.Color;
 
-public interface ConcreteViewItf {
+public interface IConcreteView {
     void devDrawRectangle(int x, int y, int width, int height, Color color);
     void devDrawStrokeRectangle(int x, int y, int width, int height, Color color);
 

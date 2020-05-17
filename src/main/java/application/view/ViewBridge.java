@@ -2,14 +2,13 @@ package application.view;
 
 import application.model.shape.Polygon;
 import application.model.shape.Rectangle;
-import application.ui.javafx.ViewFx;
 import application.utils.Color;
 import application.utils.Pair;
 
 public class ViewBridge {
-    private ConcreteViewItf implementation;
+    private IConcreteView implementation;
 
-    public ViewBridge(ConcreteViewItf concreteView) {
+    public ViewBridge(IConcreteView concreteView) {
         implementation = concreteView;
     }
 

@@ -1,11 +1,10 @@
 package application.view.menu;
 
-import application.model.shape.Rectangle;
 import application.utils.Color;
-import application.view.Drawable;
+import application.view.IDrawable;
 import application.view.ViewBridge;
 
-public class WhiteBoardMenu implements Drawable {
+public class WhiteBoardMenu implements IDrawable {
     private static final String[] items = {
             "Group",
             "Ungroup",
