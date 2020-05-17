@@ -22,7 +22,7 @@ public class ToolBarState {
 
     public String getState() {
         File file = new File("src/main/resources/save/toolbarState.txt");
-        if(file.length() == 9) return "src/main/resources/save/toolbarFirst.txt";
+        if(file.length() == 9) return "src/main/resources/save/toolbarState.txt";
        return "src/main/resources/save/toolbarState.txt";
     }
 }
