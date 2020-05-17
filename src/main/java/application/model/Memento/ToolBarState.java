@@ -8,7 +8,8 @@ public class ToolBarState {
 
     public ToolBarState(String str) {
         if(!str.isEmpty()) {
-            File file = new File("src/main/java/application/model/Memento/toolbarState.txt");
+            // ImageManager.class.getResource("/images/undo.png").toString()
+            File file = new File("src/main/resources/save/toolbarState.txt");
             try {
                 FileWriter output = new FileWriter(file.getAbsoluteFile());
                 output.write(str);
@@ -21,8 +22,8 @@ public class ToolBarState {
     }
 
     public String getState() {
-        File file = new File("src/main/java/application/model/Memento/toolbarState.txt");
-        if(file.length() == 9) return "src/main/java/application/model/Memento/toolbarFirst.txt";
-       return "src/main/java/application/model/Memento/toolbarState.txt";
+        File file = new File("src/main/resources/save/toolbarState.txt");
+        if(file.length() == 9) return "src/main/resources/save/toolbarFirst.txt";
+       return "src/main/resources/save/toolbarState.txt";
     }
 }
