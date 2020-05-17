@@ -9,9 +9,9 @@ public class ToolBarState {
     public ToolBarState(String str) {
         if(!str.isEmpty()) {
             // ImageManager.class.getResource("/images/undo.png").toString()
-            File file = new File("src/main/resources/save/toolbarState.txt");
+            File file = new File(ToolBarState.class.getResource("/save/toolbarState.txt").toString());
             try {
-                FileWriter output = new FileWriter(file.getAbsoluteFile());
+                FileWriter output = new FileWriter(this.getClass().getResource("/save/toolbarState.txt").getPath());
                 output.write(str);
                 output.close();
             } catch (IOException e) {
@@ -22,8 +22,11 @@ public class ToolBarState {
     }
 
     public String getState() {
-        File file = new File("src/main/resources/save/toolbarState.txt");
-        if(file.length() == 9) return "src/main/resources/save/toolbarFirst.txt";
-       return "src/main/resources/save/toolbarState.txt";
+        System.out.println("Toolbar getstate, path -> " + ToolBarState.class.getResource("/save/toolbarState.txt").getPath());
+        File file = new File(ToolBarState.class.getResource("/save/toolbarState.txt").getPath());
+        System.out.println("In get state, file is -> " + file);
+
+        if(file.length() == 9) return "/save/toolbarFirst.txt";
+       return "/save/toolbarState.txt";
     }
 }

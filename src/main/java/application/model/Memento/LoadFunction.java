@@ -69,11 +69,13 @@ public class LoadFunction {
 
     public static ArrayList<Shape> loading(String path){
         ArrayList<Shape> newShapes = new ArrayList<>();
-        File file = new File(path);
+        File file = new File((ToolBarState.class.getResource(path).getPath()));
+
         try {
-            Scanner input = new Scanner(file.getAbsoluteFile());
+            Scanner input = new Scanner(file);
             while(input.hasNextLine()){
                 String line = input.nextLine();
+
                 if(line.contains("Rectangle")){
                     line = input.nextLine();
                     newShapes.add(loadRectangle(line));
@@ -86,7 +88,7 @@ public class LoadFunction {
                 }
             }
             return newShapes;
-        } catch(IOException e){
+        } catch(Exception e){
             e.printStackTrace();
             return null;
         }

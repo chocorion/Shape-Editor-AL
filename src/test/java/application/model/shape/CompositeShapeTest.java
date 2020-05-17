@@ -139,8 +139,8 @@ public class CompositeShapeTest {
         compositeShape.add(compositeShape1);
         compositeShape.add(compositeShape2);
 
-        int width = compositeShape.getWidth();
-        int height = compositeShape.getHeight();
+        int width = (int) compositeShape.getWidth();
+        int height = (int) compositeShape.getHeight();
 
         compositeShape.resize(0.5);
         assert (compositeShape.getHeight() == height/2 && compositeShape.getWidth() == width/2);
