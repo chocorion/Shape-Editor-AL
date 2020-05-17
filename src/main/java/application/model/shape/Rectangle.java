@@ -201,6 +201,7 @@ public class Rectangle extends SingleShape {
     public void resize(double factor) {
         this.width *= factor;
         this.height *= factor;
+        this.roundValue *= factor;
 
         computePoints();
     }
@@ -215,6 +216,7 @@ public class Rectangle extends SingleShape {
 
         this.width *= factor;
         this.height *= factor;
+        this.roundValue *= factor;
 
         computePoints();
     }
