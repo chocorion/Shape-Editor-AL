@@ -69,7 +69,7 @@ public class LoadFunction {
 
     public static ArrayList<Shape> loading(String path){
         ArrayList<Shape> newShapes = new ArrayList<>();
-        File file = new File((ToolBarState.class.getResource(path).getPath()));
+        File file = new File(path);
         try {
             Scanner input = new Scanner(file);
             while(input.hasNextLine()){
