@@ -77,6 +77,8 @@ public class MovingShape extends ControllerStateImp {
     }
 
     private void releaseShape(int x, int y) {
+        if (holding == null) return;
+
         double newX = holding.getMinX();
         double newY = holding.getMinY();
 
