@@ -24,7 +24,7 @@ public class ToolBarView implements ModelObserver {
 
     private ViewBridge view;
 
-    public ToolBarView(MainView mainView, ViewBridge view, ToolBar toolBar) {
+    public ToolBarView(ViewBridge view, ToolBar toolBar) {
         this.view = view;
 
         this.toolBar = toolBar;

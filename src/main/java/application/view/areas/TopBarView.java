@@ -13,15 +13,13 @@ import java.util.ArrayList;
 public class TopBarView {
     private ArrayList<Pair<Rectangle, String>> buttons;
     private Rectangle area;
-    private MainView mainView;
     private ViewBridge view;
 
     private static int BUTTON_WIDTH;
     private static int BUTTON_MARGIN;
     private static int BUTTON_HEIGHT;
 
-    public TopBarView(MainView mainView, ViewBridge view) {
-        this.mainView = mainView;
+    public TopBarView(ViewBridge view) {
         this.view = view;
 
         area = Layout.getTopBar();

@@ -7,8 +7,6 @@ public class Layout {
     public static final int RECOMMENDED_WIDTH = 640;
     public static final int RECOMMENDED_HEIGHT = 480;
 
-    private static MainView mainView;
-
     private static int width;
     private static int height;
 

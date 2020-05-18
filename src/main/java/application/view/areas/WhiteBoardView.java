@@ -28,7 +28,7 @@ public class WhiteBoardView implements ModelObserver {
     private boolean isEditionMenuOpen;
     private int menuX, menuY;
 
-    public WhiteBoardView(MainView mainView, ViewBridge view, WhiteBoard whiteBoard) {
+    public WhiteBoardView(ViewBridge view, WhiteBoard whiteBoard) {
         this.view = view;
 
         area = Layout.getWhiteBoard();

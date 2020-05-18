@@ -28,9 +28,9 @@ public class MainView {
 
         Layout.update(windowsWidth, windowsHeight);
 
-        toolBar    = new ToolBarView(this, view, model.getToolBar());
-        topBar     = new TopBarView(this, view);
-        whiteBoard = new WhiteBoardView(this, view, model.getWhiteBoard());
+        toolBar    = new ToolBarView(view, model.getToolBar());
+        topBar     = new TopBarView(view);
+        whiteBoard = new WhiteBoardView(view, model.getWhiteBoard());
 
     }
 
