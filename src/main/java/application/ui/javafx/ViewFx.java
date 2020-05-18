@@ -1,7 +1,7 @@
 package application.ui.javafx;
 
 
-import application.controller.ConcreteControllerItf;
+import application.controller.IConcreteController;
 import application.model.Model;
 
 import application.view.IConcreteView;
@@ -69,7 +69,7 @@ public class ViewFx extends Application implements IConcreteView {
         model.update();
     }
 
-    public void AddController(ConcreteControllerItf controller) {
+    public void AddController(IConcreteController controller) {
         new AnimationTimer(){
             long prevNanoTime = System.nanoTime();
             public void handle(long currentNanoTime){
