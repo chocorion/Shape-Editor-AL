@@ -46,13 +46,6 @@ public class SubMenuRotate implements EditionSubMenu {
         return 0.;
     }
 
-    public void moveSlider(double value, int sliderId) {
-        if (sliderId == 0)  {
-            slider.moveButtonToValue(value);
-            draw(this.x, this.y);
-        }
-    }
-
     public void moveSlider(int x, int y, int sliderId) {
         if (sliderId == 0)  {
             slider .moveButton(x - this.x);
