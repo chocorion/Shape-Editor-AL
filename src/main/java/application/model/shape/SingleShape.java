@@ -2,7 +2,7 @@ package application.model.shape;
 
 import application.exceptions.UnsupportedOperationException;
 
-public abstract class SingleShape implements Shape, Cloneable {
+public abstract class SingleShape implements Shape {
     @Override
     public void add(Shape shape) throws UnsupportedOperationException {
         throw new UnsupportedOperationException("Can't call add on single shape.");

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CompositeShape implements Shape, Cloneable {
+public class CompositeShape implements Shape {
     ArrayList<Shape> shapeSet;
 
     public CompositeShape() {

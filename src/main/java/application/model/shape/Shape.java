@@ -4,7 +4,7 @@ import application.exceptions.UnsupportedOperationException;
 import application.utils.Color;
 import application.view.ViewBridge;
 
-public interface Shape {
+public interface Shape extends Cloneable {
     void add(Shape shape)    throws UnsupportedOperationException;
     void remove(Shape shape) throws UnsupportedOperationException;
 
