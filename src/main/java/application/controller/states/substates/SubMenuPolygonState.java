@@ -9,6 +9,9 @@ import application.view.element.interaction.Interaction;
 import application.view.menu.EditionMenu;
 import application.view.menu.SubMenuPolygon;
 
+/**
+ * Represent the controls of the polygon sub menu in edition menu.
+ */
 public class SubMenuPolygonState extends ControllerStateImp {
     private static SubMenuPolygonState state;
 
@@ -24,6 +27,12 @@ public class SubMenuPolygonState extends ControllerStateImp {
 
     int inputId;
 
+    /**
+     * Parameterized constructor.
+     * @param mainController The current MainController.
+     * @param model The current model of the application.
+     * @param view The MainVew of the application
+     */
     private SubMenuPolygonState(MainController mainController, Model model, MainView view) {
         this.mainController = mainController;
         this.model = model;
@@ -35,11 +44,22 @@ public class SubMenuPolygonState extends ControllerStateImp {
         inputId = -1;
     }
 
+
+    /**
+     * Set the instance.
+     * @param mainController The current MainController.
+     * @param model The current model of the application.
+     * @param view The MainVew of the application
+     */
     public static void setInstance(MainController mainController, Model model, MainView view) {
         state = new SubMenuPolygonState(mainController, model, view);
     }
 
 
+    /**
+     * Return the current instance.
+     * @return Current instance.
+     */
     public static SubMenuPolygonState getInstance() {
         return state;
     }
@@ -57,6 +77,7 @@ public class SubMenuPolygonState extends ControllerStateImp {
 
         return true;
     }
+
 
     @Override
     public boolean onKeyPressed(String keyCode, int mouseX, int mouseY) {
@@ -82,12 +103,14 @@ public class SubMenuPolygonState extends ControllerStateImp {
         return true;
     }
 
+
     @Override
     public void onSwitch() {
         menu = view.getWhiteBoard().getEditionMenu();
         subMenu = (SubMenuPolygon) menu.getSelectedMenu();
         polygon = (Polygon) view.getWhiteBoard().getSelectedShapes().iterator().next();
     }
+
 
     @Override
     public String toString() {

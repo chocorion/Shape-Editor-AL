@@ -12,6 +12,11 @@ import application.view.menu.WhiteBoardMenu;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+
+/**
+ * Represent the state of the mainController when the
+ * whiteBoard menu is open.
+ */
 public class WhiteBoardMenuState extends ControllerStateImp {
     private static WhiteBoardMenuState instance;
     private final MainController mainController;
@@ -19,6 +24,12 @@ public class WhiteBoardMenuState extends ControllerStateImp {
     private final Model model;
     private final MainView view;
 
+    /**
+     * Parameterized constructor.
+     * @param mainController The current mainController.
+     * @param model The current model of the application.
+     * @param view the current mainView of the application.
+     */
     private WhiteBoardMenuState(MainController mainController, Model model, MainView view) {
         this.mainController = mainController;
 
@@ -26,10 +37,32 @@ public class WhiteBoardMenuState extends ControllerStateImp {
         this.view = view;
     }
 
+
+    /**
+     * Set the instance.
+     * @param mainController The current mainController.
+     * @param model The current model of the application.
+     * @param view the current mainView of the application.
+     */
+    public static void setInstance(MainController mainController, Model model, MainView view) {
+        instance = new WhiteBoardMenuState(mainController, model, view);
+    }
+
+
+    /**
+     * Return the current instance.
+     * @return Current instance.
+     */
+    public static WhiteBoardMenuState getInstance() {
+        return instance;
+    }
+
+
     @Override
     public boolean onLeftClickPressed(int x, int y) {
         return true;
     }
+
 
     @Override
     public boolean onLeftClickReleased(int x, int y) {
@@ -77,11 +110,13 @@ public class WhiteBoardMenuState extends ControllerStateImp {
         return true;
     }
 
+
     @Override
     public boolean onRightClickPressed(int x, int y) {
         view.getWhiteBoard().openWhiteboardMenu(x, y);
         return true;
     }
+
 
     @Override
     public boolean onMouseMoved(int x, int y) {
@@ -93,13 +128,6 @@ public class WhiteBoardMenuState extends ControllerStateImp {
         return true;
     }
 
-    public static WhiteBoardMenuState getInstance() {
-        return instance;
-    }
-
-    public static void setInstance(MainController mainController, Model model, MainView view) {
-        instance = new WhiteBoardMenuState(mainController, model, view);
-    }
 
     private void closeAndSwitch() {
         view.getWhiteBoard().clearSelection();
@@ -107,6 +135,7 @@ public class WhiteBoardMenuState extends ControllerStateImp {
 
         mainController.switchState(DefaultState.getInstance());
     }
+
 
     @Override
     public String toString() {

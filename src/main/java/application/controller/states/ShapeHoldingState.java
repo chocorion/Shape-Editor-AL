@@ -9,6 +9,10 @@ import application.model.areas.ShapeContainer;
 import application.view.MainView;
 import application.view.areas.Layout;
 
+/**
+ * Represent the state of the mainController when user
+ * drag and drop a shape.
+ */
 public class ShapeHoldingState extends ControllerStateImp {
     private static ShapeHoldingState instance;
 
@@ -19,19 +23,37 @@ public class ShapeHoldingState extends ControllerStateImp {
     private Model model;
     private MainView view;
 
+    /**
+     * Parameterized constructor.
+     * @param mainController The current mainController.
+     * @param model The current model of the application.
+     * @param view the current mainView of the application.
+     */
     private ShapeHoldingState(MainController mainController, Model model, MainView view) {
         this.mainController = mainController;
         this.model = model;
         this.view = view;
     }
 
+
+    /**
+     * Set the instance of ShapeHoldingState.
+     * @param mainController The current mainController.
+     * @param model The current model of the application.
+     * @param view the current mainView of the application.
+     */
     public static void setInstance(MainController mainController, Model model, MainView view) {
         instance = new ShapeHoldingState(mainController, model, view);
     }
 
+    /**
+     * Return the current instance.
+     * @return Current instance.
+     */
     public static ShapeHoldingState getInstance() {
         return instance;
     }
+
 
     @Override
     public boolean onLeftClickPressed(int x, int y) {
@@ -59,6 +81,7 @@ public class ShapeHoldingState extends ControllerStateImp {
 
         return true;
     }
+
 
     @Override
     public boolean onLeftClickReleased(int x, int y) {
@@ -94,6 +117,7 @@ public class ShapeHoldingState extends ControllerStateImp {
 
         return true;
     }
+
 
     @Override
     public String toString() {

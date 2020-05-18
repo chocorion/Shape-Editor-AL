@@ -10,6 +10,10 @@ import application.view.areas.Layout;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Represent the state of the mainController when user is making a shape
+ * selection.
+ */
 public class SelectionState extends ControllerStateImp {
     private final MainController mainController;
     private static SelectionState instance;
@@ -31,6 +35,12 @@ public class SelectionState extends ControllerStateImp {
 
     private final ArrayList<Shape> selectedShape;
 
+    /**
+     * Parameterized constructor.
+     * @param mainController The current mainController.
+     * @param model The current model of the application.
+     * @param view the current mainView of the application.
+     */
     private SelectionState(MainController mainController, Model model, MainView view) {
         this.mainController = mainController;
 
@@ -45,13 +55,26 @@ public class SelectionState extends ControllerStateImp {
         selectedShape = new ArrayList<>();
     }
 
+
+    /**
+     * Set the instance.
+     * @param mainController The current mainController.
+     * @param model The current model of the application.
+     * @param view the current mainView of the application.
+     */
     public static void setInstance(MainController mainController, Model model, MainView view) {
         instance = new SelectionState(mainController, model, view);
     }
 
+
+    /**
+     * Return the current instance.
+     * @return Current instance.
+     */
     public static SelectionState getInstance() {
         return instance;
     }
+
 
     @Override
     public boolean onLeftClickPressed(int x, int y) {
@@ -80,6 +103,7 @@ public class SelectionState extends ControllerStateImp {
 
         return true;
     }
+
 
     @Override
     public boolean onLeftClickReleased(int x, int y) {
@@ -141,12 +165,11 @@ public class SelectionState extends ControllerStateImp {
             } else {
                 mainController.switchState(DefaultState.getInstance());
             }
-
-
         }
 
         return true;
     }
+
 
     @Override
     public boolean onRightClickPressed(int x, int y) {
@@ -157,6 +180,7 @@ public class SelectionState extends ControllerStateImp {
 
         return true;
     }
+
 
     @Override
     public boolean onMouseMoved(int x, int y) {
@@ -176,6 +200,7 @@ public class SelectionState extends ControllerStateImp {
         return true;
     }
 
+
     @Override
     public boolean onKeyPressed(String keyCode, int mouseX, int mouseY) {
         if (keyCode.equals("CONTROL")) {
@@ -184,6 +209,7 @@ public class SelectionState extends ControllerStateImp {
 
         return true;
     }
+
 
     @Override
     public boolean onKeyReleased(String keyCode, int mouseX, int mouseY) {
@@ -199,6 +225,7 @@ public class SelectionState extends ControllerStateImp {
 
         return true;
     }
+
 
     @Override
     public String toString() {

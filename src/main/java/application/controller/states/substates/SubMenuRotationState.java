@@ -8,6 +8,10 @@ import application.view.MainView;
 import application.view.menu.EditionMenu;
 import application.view.menu.SubMenuRotate;
 
+
+/**
+ * Represent the controls of the rotation sub menu in edition menu.
+ */
 public class SubMenuRotationState extends ControllerStateImp {
     private static SubMenuRotationState state;
 
@@ -19,6 +23,12 @@ public class SubMenuRotationState extends ControllerStateImp {
 
     int sliderId;
 
+    /**
+     * Parameterized constructor.
+     * @param mainController The current MainController.
+     * @param model The current model of the application.
+     * @param view The MainVew of the application
+     */
     private SubMenuRotationState(MainController mainController, Model model, MainView view) {
         this.mainController = mainController;
         this.model = model;
@@ -29,14 +39,26 @@ public class SubMenuRotationState extends ControllerStateImp {
         sliderId = -1;
     }
 
+
+    /**
+     * Set the instance.
+     * @param mainController The current MainController.
+     * @param model The current model of the application.
+     * @param view The MainVew of the application
+     */
     public static void setInstance(MainController mainController, Model model, MainView view) {
         state = new SubMenuRotationState(mainController, model, view);
     }
 
 
+    /**
+     * Return the current instance.
+     * @return Current instance.
+     */
     public static SubMenuRotationState getInstance() {
         return state;
     }
+
 
     @Override
     public boolean onLeftClickReleased(int x, int y) {
@@ -48,12 +70,14 @@ public class SubMenuRotationState extends ControllerStateImp {
         return false;
     }
 
+
     @Override
     public boolean onLeftClickPressed(int x, int y) {
         sliderId = ((SubMenuRotate) menu.getSelectedMenu()).getSliderId(x, y);
 
         return true;
     }
+
 
     @Override
     public boolean onMouseMoved(int x, int y) {
@@ -73,10 +97,12 @@ public class SubMenuRotationState extends ControllerStateImp {
         return false;
     }
 
+
     @Override
     public void onSwitch() {
         menu = view.getWhiteBoard().getEditionMenu();
     }
+
 
     @Override
     public String toString() {

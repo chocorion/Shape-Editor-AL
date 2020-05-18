@@ -10,6 +10,9 @@ import application.view.element.interaction.Interaction;
 import application.view.menu.EditionMenu;
 import application.view.menu.SubMenuResizeGlobal;
 
+/**
+ * Represent the controls of the resize sub menu in edition menu.
+ */
 public class SubMenuResizeGlobalState extends ControllerStateImp {
     private static SubMenuResizeGlobalState state;
 
@@ -32,6 +35,12 @@ public class SubMenuResizeGlobalState extends ControllerStateImp {
 
     int inputId;
 
+    /**
+     * Parameterized constructor.
+     * @param mainController The current MainController.
+     * @param model The current model of the application.
+     * @param view The MainVew of the application
+     */
     private SubMenuResizeGlobalState(MainController mainController, Model model, MainView view) {
         this.mainController = mainController;
         this.model = model;
@@ -43,11 +52,22 @@ public class SubMenuResizeGlobalState extends ControllerStateImp {
         inputId = -1;
     }
 
+
+    /**
+     * Set the instance.
+     * @param mainController The current MainController.
+     * @param model The current model of the application.
+     * @param view The MainVew of the application
+     */
     public static void setInstance(MainController mainController, Model model, MainView view) {
         state = new SubMenuResizeGlobalState(mainController, model, view);
     }
 
 
+    /**
+     * Return the current instance.
+     * @return Current instance.
+     */
     public static SubMenuResizeGlobalState getInstance() {
         return state;
     }
@@ -65,6 +85,7 @@ public class SubMenuResizeGlobalState extends ControllerStateImp {
 
         return true;
     }
+
 
     @Override
     public boolean onKeyPressed(String keyCode, int mouseX, int mouseY) {
@@ -91,6 +112,7 @@ public class SubMenuResizeGlobalState extends ControllerStateImp {
         return true;
     }
 
+
     @Override
     public void onSwitch() {
         menu = view.getWhiteBoard().getEditionMenu();
@@ -99,6 +121,7 @@ public class SubMenuResizeGlobalState extends ControllerStateImp {
 
         originalWidth = shape.getWidth();
     }
+
 
     @Override
     public String toString() {

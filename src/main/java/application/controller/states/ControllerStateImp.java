@@ -1,5 +1,8 @@
 package application.controller.states;
 
+/**
+ * Represent a basic state that handle inputs and do nothing.
+ */
 public class ControllerStateImp implements ControllerState {
     @Override
     public boolean onLeftClickPressed(int x, int y) {

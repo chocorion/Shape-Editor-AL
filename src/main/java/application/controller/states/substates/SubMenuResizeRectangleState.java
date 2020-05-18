@@ -10,7 +10,9 @@ import application.view.element.interaction.Interaction;
 import application.view.menu.EditionMenu;
 import application.view.menu.SubMenuResizeRectangle;
 
-
+/**
+ * Represent the controls of the resize rectangle sub menu in edition menu.
+ */
 public class SubMenuResizeRectangleState extends ControllerStateImp {
     private static SubMenuResizeRectangleState state;
 
@@ -32,6 +34,12 @@ public class SubMenuResizeRectangleState extends ControllerStateImp {
 
     int inputId;
 
+    /**
+     * Parameterized constructor.
+     * @param mainController The current MainController.
+     * @param model The current model of the application.
+     * @param view The MainVew of the application
+     */
     private SubMenuResizeRectangleState(MainController mainController, Model model, MainView view) {
         this.mainController = mainController;
         this.model = model;
@@ -43,11 +51,22 @@ public class SubMenuResizeRectangleState extends ControllerStateImp {
         inputId = -1;
     }
 
+
+    /**
+     * Set the instance.
+     * @param mainController The current MainController.
+     * @param model The current model of the application.
+     * @param view The MainVew of the application
+     */
     public static void setInstance(MainController mainController, Model model, MainView view) {
         state = new SubMenuResizeRectangleState(mainController, model, view);
     }
 
 
+    /**
+     * Return the current instance.
+     * @return Current instance.
+     */
     public static SubMenuResizeRectangleState getInstance() {
         return state;
     }
@@ -65,6 +84,7 @@ public class SubMenuResizeRectangleState extends ControllerStateImp {
 
         return true;
     }
+
 
     @Override
     public boolean onKeyPressed(String keyCode, int mouseX, int mouseY) {
@@ -91,6 +111,7 @@ public class SubMenuResizeRectangleState extends ControllerStateImp {
         return true;
     }
 
+
     @Override
     public void onSwitch() {
         menu = view.getWhiteBoard().getEditionMenu();
@@ -100,6 +121,7 @@ public class SubMenuResizeRectangleState extends ControllerStateImp {
         originalWidth = rect.getWidth();
         originalHeight = rect.getHeight();
     }
+
 
     @Override
     public String toString() {

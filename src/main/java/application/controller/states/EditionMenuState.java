@@ -12,6 +12,10 @@ import application.view.menu.SubMenuResizeRectangle;
 
 import java.util.HashSet;
 
+/**
+ * Represent the state of the MainController when the edition menu is open.
+ * This state posses multiples other sub states.
+ */
 public class EditionMenuState extends ControllerStateImp {
     private static EditionMenuState state;
 
@@ -29,6 +33,13 @@ public class EditionMenuState extends ControllerStateImp {
     boolean moving;
     int mouseX, mouseY;
 
+
+    /**
+     * Parameterized constructor. Initialize all the sub states.
+     * @param mainController The current MainController.
+     * @param model The current model of the application.
+     * @param view The current MainView of the application.
+     */
     private EditionMenuState(MainController mainController, Model model, MainView view) {
         this.mainController = mainController;
         this.model = model;
@@ -39,6 +50,7 @@ public class EditionMenuState extends ControllerStateImp {
         buttonId = -1;
         moving = false;
 
+        // Initialize all the subStates.
         SubMenuResizeRectangleState.setInstance(mainController, model, view);
         SubMenuColorState.setInstance(mainController, model, view);
         SubMenuResizeGlobalState.setInstance(mainController, model, view);
@@ -50,14 +62,26 @@ public class EditionMenuState extends ControllerStateImp {
         subState = SubMenuColorState.getInstance();
     }
 
+
+    /**
+     * Set the instance of EditionMenuState.
+     * @param mainController The current MainController.
+     * @param model The current model of the application.
+     * @param view The current MainView of the application.
+     */
     public static void setInstance(MainController mainController, Model model, MainView view) {
         state = new EditionMenuState(mainController, model, view);
     }
 
 
+    /**
+     * Return the current instance.
+     * @return Current instance.
+     */
     public static EditionMenuState getInstance() {
         return state;
     }
+
 
     @Override
     public boolean onLeftClickReleased(int x, int y) {
@@ -83,6 +107,7 @@ public class EditionMenuState extends ControllerStateImp {
 
         return true;
     }
+
 
     @Override
     public boolean onLeftClickPressed(int x, int y) {
@@ -147,6 +172,7 @@ public class EditionMenuState extends ControllerStateImp {
         return true;
     }
 
+
     @Override
     public void onSwitch() {
         menu = view.getWhiteBoard().getEditionMenu();
@@ -155,32 +181,42 @@ public class EditionMenuState extends ControllerStateImp {
         subState.onSwitch();
     }
 
+
+    /**
+     * Select and switch to the good inner state.
+     */
     private void switchState() {
-        if (menu.getSelectedMenu().getName().equals("color")) {
-            subState = SubMenuColorState.getInstance();
-        }
+        switch (menu.getSelectedMenu().getName()) {
+            case "color":
+                subState = SubMenuColorState.getInstance();
+                break;
 
-        else if (menu.getSelectedMenu().getName().equals("resize")) {
-            if (menu.getSelectedMenu() instanceof SubMenuResizeRectangle)
-                subState = SubMenuResizeRectangleState.getInstance();
+            case "resize":
+                if (menu.getSelectedMenu() instanceof SubMenuResizeRectangle)
+                    subState = SubMenuResizeRectangleState.getInstance();
 
-            else if (menu.getSelectedMenu() instanceof SubMenuResizeGlobal)
-                subState = SubMenuResizeGlobalState.getInstance();
-        }
+                else if (menu.getSelectedMenu() instanceof SubMenuResizeGlobal)
+                    subState = SubMenuResizeGlobalState.getInstance();
+                break;
 
-        else if (menu.getSelectedMenu().getName().equals("rotate")) {
-            subState = SubMenuRotationState.getInstance();
-        }
+            case "rotate":
+                subState = SubMenuRotationState.getInstance();
+                break;
 
-        else if (menu.getSelectedMenu().getName().equals("numberSide")) {
-            subState = SubMenuPolygonState.getInstance();
-        }
+            case "numberSide":
+                subState = SubMenuPolygonState.getInstance();
+                break;
 
-        else if (menu.getSelectedMenu().getName().equals("round")) {
-            subState = SubMenuRoundState.getInstance();
+            case "round":
+                subState = SubMenuRoundState.getInstance();
+                break;
         }
     }
 
+    /**
+     * Make a save of the currently selected shape,
+     * and replace it on the whiteboard with a clone.
+     */
     private void makeSave() {
         shapeSave.clear();
         shapeSave.addAll(view.getWhiteBoard().getSelectedShapes());
@@ -197,12 +233,16 @@ public class EditionMenuState extends ControllerStateImp {
     }
 
 
+    /**
+     * Put back the saved selected shape, and removes the clone that replaced it.
+     */
     private void reset() {
         model.getWhiteBoard().replace(view.getWhiteBoard().getSelectedShapes(), shapeSave);
 
         view.getWhiteBoard().clearSelection();
         view.getWhiteBoard().addSelection(shapeSave);
     }
+
 
     @Override
     public boolean onMouseMoved(int x, int y) {

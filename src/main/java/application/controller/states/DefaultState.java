@@ -9,29 +9,51 @@ import application.view.areas.Layout;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
+/**
+ * Represent the default state of the mainController, when no
+ * specific action is taken.
+ */
 public class DefaultState extends ControllerStateImp {
     private static DefaultState state;
 
-    MainController mainController;
-    Model model;
-    MainView view;
+    private final MainController mainController;
+    private final Model model;
+    private final MainView view;
     private boolean leftClick;
 
+
+    /**
+     * Parameterized constructor.
+     * @param mainController The current MainController.
+     * @param model The current model of the application.
+     * @param view The MainvVew of the application
+     */
     private DefaultState(MainController mainController, Model model, MainView view) {
         this.mainController = mainController;
         this.model = model;
         this.view = view;
     }
 
+
+    /**
+     * Set the instance of defaultState.
+     * @param mainController The current MainController.
+     * @param model The current model of the application.
+     * @param view The MainView of the application
+     */
     public static void setInstance(MainController mainController, Model model, MainView view) {
         state = new DefaultState(mainController, model, view);
     }
 
 
+    /**
+     * Return the current instance.
+     * @return Current instance.
+     */
     public static DefaultState getInstance() {
         return state;
     }
+
 
     @Override
     public boolean onLeftClickPressed(int x, int y) {

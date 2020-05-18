@@ -9,6 +9,9 @@ import application.view.element.interaction.Interaction;
 import application.view.menu.EditionMenu;
 import application.view.menu.SubMenuRound;
 
+/**
+ * Represent the controls of the rectangle round sub menu in edition menu.
+ */
 public class SubMenuRoundState extends ControllerStateImp {
     private static SubMenuRoundState state;
 
@@ -25,6 +28,12 @@ public class SubMenuRoundState extends ControllerStateImp {
 
     int inputId;
 
+    /**
+     * Parameterized constructor.
+     * @param mainController The current MainController.
+     * @param model The current model of the application.
+     * @param view The MainVew of the application
+     */
     private SubMenuRoundState(MainController mainController, Model model, MainView view) {
         this.mainController = mainController;
         this.model = model;
@@ -36,11 +45,22 @@ public class SubMenuRoundState extends ControllerStateImp {
         inputId = -1;
     }
 
+
+    /**
+     * Set the current instance.
+     * @param mainController The current MainController.
+     * @param model The current model of the application.
+     * @param view The MainVew of the application
+     */
     public static void setInstance(MainController mainController, Model model, MainView view) {
         state = new SubMenuRoundState(mainController, model, view);
     }
 
 
+    /**
+     * Return the current instance.
+     * @return Current instance.
+     */
     public static SubMenuRoundState getInstance() {
         return state;
     }
@@ -58,6 +78,7 @@ public class SubMenuRoundState extends ControllerStateImp {
 
         return true;
     }
+
 
     @Override
     public boolean onKeyPressed(String keyCode, int mouseX, int mouseY) {
@@ -84,12 +105,14 @@ public class SubMenuRoundState extends ControllerStateImp {
         return true;
     }
 
+
     @Override
     public void onSwitch() {
         menu = view.getWhiteBoard().getEditionMenu();
         subMenu = (SubMenuRound) menu.getSelectedMenu();
         rect = (Rectangle) view.getWhiteBoard().getSelectedShapes().iterator().next();
     }
+
 
     @Override
     public String toString() {

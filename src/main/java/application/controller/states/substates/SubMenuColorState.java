@@ -10,7 +10,9 @@ import application.view.MainView;
 import application.view.menu.EditionMenu;
 import application.view.menu.SubMenuColor;
 
-
+/**
+ * Represent the controls of the color sub menu in edition menu.
+ */
 public class SubMenuColorState extends ControllerStateImp {
     private static SubMenuColorState state;
 
@@ -22,6 +24,12 @@ public class SubMenuColorState extends ControllerStateImp {
 
     int sliderId;
 
+    /**
+     * Parameterized constructor.
+     * @param mainController The current MainController.
+     * @param model The current model of the application.
+     * @param view The MainVew of the application
+     */
     private SubMenuColorState(MainController mainController, Model model, MainView view) {
         this.mainController = mainController;
         this.model = model;
@@ -32,14 +40,26 @@ public class SubMenuColorState extends ControllerStateImp {
         sliderId = -1;
     }
 
+
+    /**
+     * Set the instance.
+     * @param mainController The current MainController.
+     * @param model The current model of the application.
+     * @param view The MainVew of the application
+     */
     public static void setInstance(MainController mainController, Model model, MainView view) {
         state = new SubMenuColorState(mainController, model, view);
     }
 
 
+    /**
+     * Return the current instance.
+     * @return Current instance.
+     */
     public static SubMenuColorState getInstance() {
         return state;
     }
+
 
     @Override
     public boolean onLeftClickReleased(int x, int y) {
@@ -51,12 +71,14 @@ public class SubMenuColorState extends ControllerStateImp {
         return false;
     }
 
+
     @Override
     public boolean onLeftClickPressed(int x, int y) {
         sliderId = ((SubMenuColor) menu.getSelectedMenu()).getSliderId(x, y);
 
         return true;
     }
+
 
     @Override
     public boolean onMouseMoved(int x, int y) {
@@ -75,12 +97,17 @@ public class SubMenuColorState extends ControllerStateImp {
         return false;
     }
 
+
     @Override
     public void onSwitch() {
         menu = view.getWhiteBoard().getEditionMenu();
         setSlidersToShapeColor();
     }
 
+
+    /**
+     * Set all the sliders to the good value for current shape color.
+     */
     private void setSlidersToShapeColor() {
         Shape currentShape = view.getWhiteBoard().getSelectedShapes().iterator().next();
         Color currentColor = currentShape.getColor();
@@ -90,6 +117,7 @@ public class SubMenuColorState extends ControllerStateImp {
         ((SubMenuColor) menu.getSelectedMenu()).moveSlider(currentColor.getB(), 2);
 
     }
+
 
     @Override
     public String toString() {
