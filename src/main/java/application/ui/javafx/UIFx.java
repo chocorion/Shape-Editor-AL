@@ -6,12 +6,16 @@ import application.model.Model;
 import application.ui.UIFactory;
 import application.view.IConcreteView;
 
+/**
+ * JavaFx implementation of the UIFactory.
+ */
 public class UIFx implements UIFactory {
 
     @Override
     public IConcreteView getView(Model model) {
         return new ViewFx(model);
     }
+
 
     @Override
     public IConcreteController getController(MainController mainController, IConcreteView view) {

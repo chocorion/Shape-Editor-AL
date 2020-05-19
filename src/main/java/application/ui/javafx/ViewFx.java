@@ -26,6 +26,9 @@ import java.util.HashMap;
 import java.util.Optional;
 
 
+/**
+ * JavaFx implementation of the view.
+ */
 public class ViewFx extends Application implements IConcreteView {
     private static Model model;
     private static Scene rootScene;
@@ -33,10 +36,18 @@ public class ViewFx extends Application implements IConcreteView {
 
     private static HashMap<String, Image> imageCache = new HashMap<>();
 
+
+    /**
+     * Default constructor, needed for launching javaFx.
+     */
     public ViewFx() {
     }
 
 
+    /**
+     * Parameterized constructor used to build the ui.
+     * @param model Model to use.
+     */
     public ViewFx(Model model) {
         ViewFx.model = model;
 
@@ -48,13 +59,23 @@ public class ViewFx extends Application implements IConcreteView {
         ViewFx.rootScene = new Scene(root);
     }
 
+
+    /**
+     * Start the javaFx application
+     */
     public void initViewFx () {
         Application.launch(ViewFx.class, (String[]) null);
     }
 
+
+    /**
+     * Return the current rootScene, needed to add controllerFx.
+     * @return Current root scene.
+     */
     public Scene getScene() {
         return ViewFx.rootScene;
     }
+
 
     @Override
     public void start(final Stage primaryStage) {
@@ -69,38 +90,24 @@ public class ViewFx extends Application implements IConcreteView {
         model.update();
     }
 
-    public void AddController(IConcreteController controller) {
-        new AnimationTimer(){
-            long prevNanoTime = System.nanoTime();
-            public void handle(long currentNanoTime){
-                // double delta = (currentNanoTime - prevNanoTime) / 1000000.;
-                // if (!sceneManager.tick(delta)) {
-                //     System.exit(0);
-                // }
-                controller.tick();
-                // prevNanoTime = currentNanoTime;
-            }
-        }.start();
-    }
 
     @Override
     public void devDrawRectangle(int x, int y, int width, int height, application.utils.Color color) {
         ViewFx.gc.setFill(new Color(color.getR(), color.getG(), color.getB(), color.getA()));
-
         ViewFx.gc.fillRect(x, y, width, height);
     }
+
 
     @Override
     public void devDrawStrokeRectangle(int x, int y, int width, int height, application.utils.Color color) {
         ViewFx.gc.setStroke(new Color(color.getR(), color.getG(), color.getB(), color.getA()));
-
         ViewFx.gc.strokeRect(x, y, width, height);
     }
+
 
     @Override
     public void devDrawPolygon(double[] x, double[] y, application.utils.Color color) {
         ViewFx.gc.setFill(new Color(color.getR(), color.getG(), color.getB(), color.getA()));
-
         ViewFx.gc.fillPolygon(x, y, x.length);
     }
 
@@ -118,17 +125,20 @@ public class ViewFx extends Application implements IConcreteView {
         ViewFx.gc.drawImage(imageCache.get(path), x, y, width, height);
     }
 
+
     @Override
     public void devDrawRoundedRect(int x, int y, int width, int height, int arcWidth, int arcHeight, application.utils.Color color) {
         ViewFx.gc.setFill(new Color(color.getR(), color.getG(), color.getB(), color.getA()));
         ViewFx.gc.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
     }
 
+
     @Override
     public void devDrawText(String text, int x, int y, int size, application.utils.Color color) {
         ViewFx.gc.setFill(new Color(color.getR(), color.getG(), color.getB(), color.getA()));
         ViewFx.gc.fillText(text, x, y, size);
     }
+
 
     @Override
     public void devDrawSaveMenu() {
@@ -143,6 +153,7 @@ public class ViewFx extends Application implements IConcreteView {
         }
     }
 
+
     @Override
     public void devDrawLoadMenu() {
         TextInputDialog dialog = new TextInputDialog("path ...");
@@ -156,6 +167,7 @@ public class ViewFx extends Application implements IConcreteView {
         }
     }
 
+
     @Override
     public void devDrawRoundedRectRotation(int x, int y, int width, int height, int arcWidth, int arcHeight, int angle, application.utils.Color color) {
         ViewFx.gc.save();
@@ -164,6 +176,4 @@ public class ViewFx extends Application implements IConcreteView {
         ViewFx.gc.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
         ViewFx.gc.restore();
     }
-
-
 }

@@ -83,8 +83,9 @@ public class ControllerFx implements IConcreteController {
     }
 
 
+    @Override
     public boolean tick() {
-
+        // Never used, due to javaFx way to run.
         return true;
     }
 
