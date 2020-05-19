@@ -92,10 +92,10 @@ public class CompositeShapeTest {
 
         shape.resize(0.5);
 
-        assert (rect1.getX() == 10 && rect1.getY() == 10);
+        assert (rect1.getMinX() == 10 && rect1.getMinY() == 10);
         assert (rect1.getWidth() == 15 && rect1.getHeight() == 15);
 
-        assert (rect2.getX() == 25 && rect2.getY() == 25);
+        assert (rect2.getMinX() == 25 && rect2.getMinY() == 25);
         assert (rect2.getWidth() == 10 && rect2.getHeight() == 10);
 
         assert (shape.getMinX() == 10 && shape.getMinY() == 10);
@@ -114,8 +114,8 @@ public class CompositeShapeTest {
         compositeShape.add(rect2);
         compositeShape.moveTo(181, 213);
 
-        assert (rect1.getX() == 181 && rect1.getY() == 213);
-        assert (rect2.getX() == 231 && rect2.getY() == 263);
+        assert (rect1.getMinX() == 181 && rect1.getMinY() == 213);
+        assert (rect2.getMinX() == 231 && rect2.getMinY() == 263);
     }
 
     @Test

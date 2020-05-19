@@ -77,4 +77,19 @@ public class Color {
     public double getA() {
         return this.a;
     }
+
+
+    /**
+     * Tests if this color is equals to another one.
+     * @param c The other color.
+     * @return True if it's the same color, else false.
+     */
+    public boolean isEquals(Color c) {
+        return (
+                this.r == c.r &&
+                this.g == c.g &&
+                this.b == c.b &&
+                this.a == c.a
+        );
+    }
 }

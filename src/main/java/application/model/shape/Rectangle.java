@@ -3,6 +3,7 @@ package application.model.shape;
 import application.utils.Color;
 import application.utils.Pair;
 import application.view.ViewBridge;
+import org.w3c.dom.css.Rect;
 
 
 /**
@@ -301,5 +302,21 @@ public class Rectangle extends SingleShape {
     public String toString() {
         return "Rectangle \n" + this.x + ", " + this.y + ", " + this.width + ", " + this.height + ", "+ this.angle+ ", "+
                 +  (int)(255*this.color.getR())+", "+(int) (255* this.color.getG())+", "+(int) (255* this.color.getB())+", "+  this.color.getA() + ", " + roundValue+"\n";
+    }
+
+    /**
+     * Return if this rectangle is the same than an other one.
+     * @param other The other rectangle.
+     * @return true if it's the same rectangle, else false.
+     */
+    public boolean isEquals(Rectangle other) {
+        return (
+                other.x == this.x &&
+                other.y == this.y &&
+                other.width == this.width &&
+                other.height == this.height &&
+                other.angle == this.angle &&
+                other.color == this.color
+        );
     }
 }

@@ -11,7 +11,7 @@ public class RectangleTest {
         Rectangle rect = new Rectangle(2, 3, 5, 5);
 
         assert (rect.isIn(2, 3));
-        assert (rect.isIn(7, 8));
+        assert (rect.isIn(6.9, 7.9));
         assert (rect.isIn(4, 4));
         assert (!rect.isIn(1, 2));
         assert (!rect.isIn(9, 9));
@@ -22,7 +22,7 @@ public class RectangleTest {
         Rectangle rect = new Rectangle(2, 2, 6, 6);
         rect.resize(0.5);
 
-        assert (rect.getX() == 2 && rect.getY() == 2);
+        assert (rect.getMinX() == 2 && rect.getMinY() == 2);
         assert (rect.getWidth() == 3 && rect.getHeight() == 3);
     }
 
@@ -31,6 +31,6 @@ public class RectangleTest {
         Rectangle r = new Rectangle(10, 20, 30, 40);
         r.translate(20, 10);
 
-        assert (r.getX() == 30 && r.getY() == 30);
+        assert (r.getMinX() == 30 && r.getMinY() == 30);
     }
 }

@@ -23,16 +23,9 @@ public class ToolBarTest {
         toolBar.addShape(rect2);
 
         Rectangle rect = (Rectangle) toolBar.getShape(numberShape);
+        assert (rect.isEquals(rect1));
 
-        assert (rect != rect1 && rect != rect2 && rect != null);
-        assert (rect.getX() == rect1.getX() && rect.getY() == rect1.getY());
-
-        // 40 is in the second case
         rect = (Rectangle) toolBar.getShape(numberShape + 1);
-
-        assert (rect != rect1 && rect != rect2 && rect != null);
-        //System.err.println(rect);
-        assert (rect.getX() == rect2.getX() && rect.getY() == rect2.getY());
-
+        assert (rect.isEquals(rect2));
     }
 }

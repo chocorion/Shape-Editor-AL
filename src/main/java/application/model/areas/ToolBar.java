@@ -24,7 +24,6 @@ public class ToolBar extends ModelObservableImp implements ShapeContainer {
 
     /**
      * Parameterized constructor.
-     * @param model The current model of the application.
      */
     public ToolBar(Model model) {
         shapes = new ArrayList<>();
