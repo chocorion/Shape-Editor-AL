@@ -15,19 +15,32 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represent the data of the toolbar.
+ */
 public class ToolBar extends ModelObservableImp implements ShapeContainer {
     private ArrayList<Shape> shapes;
     private final Model model;
 
+    /**
+     * Parameterized constructor.
+     * @param model The current model of the application.
+     */
     public ToolBar(Model model) {
         shapes = new ArrayList<>();
         this.model = model;
     }
 
+
+    /**
+     * Methods to call when a change is made in the toolbar.
+     * Notify observers and save the current state.
+     */
     public void update() {
         super.notifyObserver();
         this.model.hitSave();
     }
+
 
     @Override
     public void addShape(Shape shape) {
@@ -35,11 +48,13 @@ public class ToolBar extends ModelObservableImp implements ShapeContainer {
         update();
     }
 
+
     @Override
     public void removeShape(Shape shape) {
         shapes.remove(shape);
         update();
     }
+
 
     @Override
     public int getShapePlace(Shape shape) {
@@ -52,6 +67,11 @@ public class ToolBar extends ModelObservableImp implements ShapeContainer {
         return -1;
     }
 
+
+    /**
+     * Return a copy of the array of shapes in the toolbar.
+     * @return List of shape.
+     */
     public ArrayList<Shape> getInnerShapes() {
         return new ArrayList<>(shapes);
     }

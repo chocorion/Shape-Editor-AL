@@ -2,6 +2,9 @@ package application.model.command;
 
 import java.util.Stack;
 
+/**
+ * Represent the command's caretaker.
+ */
 public class CommandManager {
 
     private final Stack<Command> commandAdded;
@@ -9,6 +12,10 @@ public class CommandManager {
 
     private boolean isRemovedClean;
 
+
+    /**
+     * Default constructor.
+     */
     public CommandManager() {
         commandAdded   = new Stack<>();
         commandRemoved = new Stack<>();
@@ -16,6 +23,11 @@ public class CommandManager {
         isRemovedClean = true;
     }
 
+
+    /**
+     * Execute the given command and store it to possibly inverse it later.
+     * @param cmd The command to execute.
+     */
     public void execute(Command cmd) {
         cmd.execute();
 
@@ -27,6 +39,10 @@ public class CommandManager {
         }
     }
 
+
+    /**
+     * Undo the last command.
+     */
     public void undo() {
         if (commandAdded.empty()) {
             return;
@@ -39,6 +55,10 @@ public class CommandManager {
         isRemovedClean = true;
     }
 
+
+    /**
+     * Redo the last command undo, if no command was execute since the undo.
+     */
     public void redo() {
         if (isRemovedClean && !commandRemoved.empty()) {
             Command cmd = commandRemoved.pop();

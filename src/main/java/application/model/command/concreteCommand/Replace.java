@@ -7,16 +7,29 @@ import application.model.shape.Shape;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Represent a command that replace a set of shape by
+ * another one in a container.
+ */
 public class Replace implements Command {
-    private Set<Shape> oldShape, newShape;
-    private ShapeContainer container;
+    private final Set<Shape> oldShape;
+    private final Set<Shape> newShape;
+    private final ShapeContainer container;
 
+
+    /**
+     * Parameterized constructor.
+     * @param container The container of the shapes.
+     * @param oldShape Set of shapes to replace.
+     * @param newShape Set of new shape to put in the container.
+     */
     public Replace(ShapeContainer container, Set<Shape> oldShape, Set<Shape> newShape) {
         this.container = container;
 
         this.oldShape = new HashSet<>(oldShape);
         this.newShape = new HashSet<>(newShape);
     }
+
 
     @Override
     public void execute() {
@@ -28,6 +41,7 @@ public class Replace implements Command {
             container.addShape(shape);
         }
     }
+
 
     @Override
     public void inverse() {
