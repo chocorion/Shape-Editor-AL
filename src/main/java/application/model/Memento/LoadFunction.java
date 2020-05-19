@@ -11,7 +11,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represent a static class for loading the different elements of the application.
+ */
 public class LoadFunction {
+
+    /**
+     * Load a rectangle
+     * @param line The line representing a rectangle.
+     * @return Rectangle loaded.
+     */
     private static Shape loadRectangle(String line){
         String[] values = line.split(", ");
         double x = Double.parseDouble(values[0]);
@@ -31,6 +40,12 @@ public class LoadFunction {
         return rect;
     }
 
+
+    /**
+     * Load a polygon
+     * @param line The line representing a polygon.
+     * @return The polygon loaded.
+     */
     private static Shape loadPolygon(String line){
         String[] values = line.split(", ");
         double x = Double.parseDouble(values[0]);
@@ -49,6 +64,13 @@ public class LoadFunction {
         return p;
     }
 
+
+    /**
+     * Load a composite.
+     * @param input The input to read to obtain composite representation.
+     * @param number The number of shapes in the composite.
+     * @return The composite loaded.
+     */
     private static Shape loadComposite(Scanner input, int number) {
         CompositeShape shapes = new CompositeShape();
         for (int i = 0; i < number; i++) {
@@ -67,6 +89,12 @@ public class LoadFunction {
         return shapes;
     }
 
+
+    /**
+     * Loading shapes from a file.
+     * @param path The path to the file to load.
+     * @return ArrayList of shape loaded.
+     */
     public static ArrayList<Shape> loading(String path){
         ArrayList<Shape> newShapes = new ArrayList<>();
         File file = new File(path);
@@ -79,16 +107,21 @@ public class LoadFunction {
                 if(line.contains("Rectangle")){
                     line = input.nextLine();
                     newShapes.add(loadRectangle(line));
-                } else if (line.contains("Polygon")){
+                }
+
+                else if (line.contains("Polygon")){
                     line = input.nextLine();
                     newShapes.add(loadPolygon(line));
-                }else if (line.contains("Composite")){
+                }
+
+                else if (line.contains("Composite")){
                     String[] values = line.split(" ");
                     newShapes.add(loadComposite(input, Integer.parseInt(values[1])));
                 }
             }
+
             return newShapes;
-        } catch(Exception e){
+        } catch(Exception e) {
             e.printStackTrace();
             return null;
         }

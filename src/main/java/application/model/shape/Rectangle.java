@@ -4,6 +4,10 @@ import application.utils.Color;
 import application.utils.Pair;
 import application.view.ViewBridge;
 
+
+/**
+ * Represent a rectangle in the model.
+ */
 public class Rectangle extends SingleShape {
     private double x, y;
     private double width, height;
@@ -16,6 +20,14 @@ public class Rectangle extends SingleShape {
     private double roundValue;
 
 
+    /**
+     * Parameterized constructor.
+     * @param x X top left coords.
+     * @param y Y top left coords.
+     * @param width Width of the rectangle.
+     * @param height Height of the rectangle.
+     * @param color Color of the rectangle.
+     */
     public Rectangle(double x, double y, double width, double height, Color color) {
         this.x = x;
         this.y = y;
@@ -26,12 +38,18 @@ public class Rectangle extends SingleShape {
         pointX = new double[] {x, x + width, x + width, x};
         pointY = new double[] {y, y, y + height, y + height};
 
-        // For test
         this.angle =0;
         this.roundValue = 0.;
         this.color = color;
     }
 
+    /**
+     * Parameterized constructor, with default color.
+     * @param x X top left coords.
+     * @param y Y top left coords.
+     * @param width Width of the rectangle.
+     * @param height Height of the rectangle.
+     */
     public Rectangle(double x, double y, double width, double height) {
         this(x, y, width, height, Color.BLACK);
     }
@@ -42,23 +60,18 @@ public class Rectangle extends SingleShape {
         view.drawRoundedRect(this);
     }
 
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
 
     @Override
     public double getWidth() {
         return width;
     }
 
+
     @Override
     public double getHeight() {
         return height;
     }
+
 
     @Override
     public double getMinX() {
@@ -72,6 +85,7 @@ public class Rectangle extends SingleShape {
         return minX;
     }
 
+
     @Override
     public double getMinY() {
         double minY = pointY[0];
@@ -83,6 +97,7 @@ public class Rectangle extends SingleShape {
 
         return minY;
     }
+
 
     @Override
     public double getMaxX() {
@@ -96,6 +111,7 @@ public class Rectangle extends SingleShape {
         return maxX;
     }
 
+
     @Override
     public double getMaxY() {
         double maxY = pointY[0];
@@ -108,6 +124,9 @@ public class Rectangle extends SingleShape {
         return maxY;
     }
 
+    /**
+     * Update the position of each position of rectangle's points, according to the current angle.
+     */
     private void computePoints() {
         double currentPx, currentPy;
         double rAngle = Math.toRadians(angle);
@@ -124,13 +143,24 @@ public class Rectangle extends SingleShape {
         }
     }
 
+
+    /**
+     * Return the round value.
+     * @return Round value.
+     */
     public double getRoundValue() {
         return roundValue;
     }
 
+
+    /**
+     * Set the round value.
+     * @param newValue The new round value.
+     */
     public void setRoundValue(double newValue) {
         this.roundValue = newValue;
     }
+
 
     @Override
     public boolean isIn(double x, double y) {
@@ -148,18 +178,19 @@ public class Rectangle extends SingleShape {
         return result;
     }
 
+
     @Override
     public boolean intersect(Rectangle rectangle) {
-        if (isIn(rectangle.getX(), rectangle.getY()))
+        if (isIn(rectangle.getMinX(), rectangle.getMinY()))
             return true;
 
-        if (isIn(rectangle.getX() + rectangle.getWidth(), rectangle.getY()))
+        if (isIn(rectangle.getMinX() + rectangle.getWidth(), rectangle.getMinY()))
             return true;
 
-        if (isIn(rectangle.getX(), rectangle.getY() + rectangle.getHeight()))
+        if (isIn(rectangle.getMinX(), rectangle.getMinY() + rectangle.getHeight()))
             return true;
 
-        if (isIn(rectangle.getX() + rectangle.getWidth(), rectangle.getY() + rectangle.getHeight()))
+        if (isIn(rectangle.getMinX() + rectangle.getWidth(), rectangle.getMinY() + rectangle.getHeight()))
             return true;
 
 
@@ -171,6 +202,7 @@ public class Rectangle extends SingleShape {
         return false;
     }
 
+
     @Override
     public void moveTo(double x, double y) {
         this.x = x;
@@ -178,6 +210,7 @@ public class Rectangle extends SingleShape {
 
         computePoints();
     }
+
 
     @Override
     public void translate(double dx, double dy) {
@@ -187,15 +220,22 @@ public class Rectangle extends SingleShape {
         computePoints();
     }
 
+
     @Override
     public void setAngle(double newAngle) {
         this.angle = newAngle;
         computePoints();
     }
 
+
+    /**
+     * Return the current angle of the shape, in degrees between 0 and 360.
+     * @return Current angle.
+     */
     public double getAngle() {
         return angle;
     }
+
 
     @Override
     public void resize(double factor) {
@@ -221,6 +261,11 @@ public class Rectangle extends SingleShape {
         computePoints();
     }
 
+
+    /**
+     * Set the width.
+     * @param newWidth New width value.
+     */
     public void setWidth(double newWidth) {
         this.x += (width - newWidth)/2;
         this.width = newWidth;
@@ -228,6 +273,11 @@ public class Rectangle extends SingleShape {
         computePoints();
     }
 
+
+    /**
+     * Set the height.
+     * @param newHeight New height value.
+     */
     public void setHeight(double newHeight) {
         this.y += (height - newHeight)/2;
         this.height = newHeight;
@@ -235,16 +285,19 @@ public class Rectangle extends SingleShape {
         computePoints();
     }
 
+
     @Override
     public Color getColor() {
         return this.color;
     }
+
 
     @Override
     public void setColor(Color color) {
         this.color = color;
     }
 
+    @Override
     public String toString() {
         return "Rectangle \n" + this.x + ", " + this.y + ", " + this.width + ", " + this.height + ", "+ this.angle+ ", "+
                 +  (int)(255*this.color.getR())+", "+(int) (255* this.color.getG())+", "+(int) (255* this.color.getB())+", "+  this.color.getA() + ", " + roundValue+"\n";

@@ -39,7 +39,7 @@ public class TopBarView {
         for (int i = 0; i < 4; i++) {
             buttons.add(
                     new Pair<>(
-                            createButton(area.getX(), area.getY(), BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_MARGIN, i),
+                            createButton(area.getMinX(), area.getMinY(), BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_MARGIN, i),
                             buttonNames[i]
                     )
             );
@@ -53,8 +53,8 @@ public class TopBarView {
 
         view.drawRectangle(
                 new Rectangle(
-                        area.getX() + Layout.BORDER,
-                        area.getY() + Layout.BORDER,
+                        area.getMinX() + Layout.BORDER,
+                        area.getMinY() + Layout.BORDER,
                         area.getWidth() - 2 * Layout.BORDER,
                         area.getHeight() - 2 * Layout.BORDER,
                         Color.WHITE

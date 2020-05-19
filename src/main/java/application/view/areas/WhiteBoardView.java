@@ -47,8 +47,8 @@ public class WhiteBoardView implements ModelObserver {
 
         view.drawRectangle(
                 new Rectangle(
-                        area.getX() + Layout.BORDER,
-                        area.getY() + Layout.BORDER,
+                        area.getMinX() + Layout.BORDER,
+                        area.getMinY() + Layout.BORDER,
                         area.getWidth() - 2 * Layout.BORDER,
                         area.getHeight() - 2 * Layout.BORDER,
                         Color.WHITE

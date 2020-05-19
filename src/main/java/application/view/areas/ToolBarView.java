@@ -32,7 +32,7 @@ public class ToolBarView implements ModelObserver {
 
         area = Layout.getToolBar();
         trash = new Rectangle(
-                area.getX() + CASE_MARGIN,
+                area.getMinX() + CASE_MARGIN,
                 area.getHeight() - Math.min(area.getWidth(), area.getHeight()) + CASE_MARGIN,
                 Math.min(area.getWidth(), area.getHeight()) - 2 * CASE_MARGIN,
                 Math.min(area.getWidth(), area.getHeight()) - 2 * CASE_MARGIN
@@ -51,8 +51,8 @@ public class ToolBarView implements ModelObserver {
 
         view.drawRectangle(
                 new Rectangle(
-                        area.getX() + Layout.BORDER,
-                        area.getY() + Layout.BORDER,
+                        area.getMinX() + Layout.BORDER,
+                        area.getMinY() + Layout.BORDER,
                         area.getWidth() - 2 * Layout.BORDER,
                         area.getHeight() - 2 * Layout.BORDER,
                         Color.WHITE
@@ -66,8 +66,8 @@ public class ToolBarView implements ModelObserver {
             Shape minimizedShape = getMinimisedClone(shape);
 
             minimizedShape.moveTo(
-                    area.getX() + CASE_MARGIN,
-                    area.getY() + index * (CASE_MARGIN + caseSize)+ START_MARGIN
+                    area.getMinX() + CASE_MARGIN,
+                    area.getMinY() + index * (CASE_MARGIN + caseSize)+ START_MARGIN
             );
 
             minimizedShape.draw(view);
@@ -87,7 +87,7 @@ public class ToolBarView implements ModelObserver {
         );
 
         trash = new Rectangle(
-                area.getX() + CASE_MARGIN,
+                area.getMinX() + CASE_MARGIN,
                 area.getHeight() - Math.min(area.getWidth(), area.getHeight()) + CASE_MARGIN,
                 Math.min(area.getWidth(), area.getHeight()) - 2 * CASE_MARGIN,
                 Math.min(area.getWidth(), area.getHeight()) - 2 * CASE_MARGIN
@@ -112,10 +112,10 @@ public class ToolBarView implements ModelObserver {
     }
 
     public int getShapeId(int x, int y) {
-        if (x > area.getX() + area.getWidth() || x < area.getX()) {
+        if (x > area.getMinX() + area.getWidth() || x < area.getMinX()) {
             return -1;
         }
 
-        return (int) ((y - area.getY())/(caseSize + CASE_MARGIN));
+        return (int) ((y - area.getMinY())/(caseSize + CASE_MARGIN));
     }
 }

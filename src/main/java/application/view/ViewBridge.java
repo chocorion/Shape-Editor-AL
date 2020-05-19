@@ -18,8 +18,8 @@ public class ViewBridge {
 
     public void drawRectangle(Rectangle rectangle) {
         implementation.devDrawRectangle(
-                (int) rectangle.getX(),
-                (int) rectangle.getY(),
+                (int) rectangle.getMinX(),
+                (int) rectangle.getMinY(),
                 (int) rectangle.getWidth(),
                 (int) rectangle.getHeight(),
                 rectangle.getColor()
@@ -32,8 +32,8 @@ public class ViewBridge {
 
     public void drawStrokeRectangle(Rectangle rectangle) {
         implementation.devDrawStrokeRectangle(
-                (int) rectangle.getX(),
-                (int) rectangle.getY(),
+                (int) rectangle.getMinX(),
+                (int) rectangle.getMinY(),
                 (int) rectangle.getWidth(),
                 (int) rectangle.getHeight(),
                 rectangle.getColor()
@@ -50,8 +50,8 @@ public class ViewBridge {
     public void drawImage(String path, Rectangle r) {
         implementation.devDrawImage(
                 path,
-                (int) r.getX(),
-                (int) r.getY(),
+                (int) r.getMinX(),
+                (int) r.getMinY(),
                 (int) r.getWidth(),
                 (int) r.getHeight()
         );
@@ -94,8 +94,8 @@ public class ViewBridge {
 
     public void drawRoundedRect(Rectangle r) {
         implementation.devDrawRoundedRectRotation(
-                (int) r.getX(),
-                (int) r.getY(),
+                (int) r.getMinX(),
+                (int) r.getMinY(),
                 (int) r.getWidth(),
                 (int) r.getHeight(),
                 (int) r.getRoundValue(),

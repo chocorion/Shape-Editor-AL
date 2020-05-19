@@ -4,8 +4,16 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+
+/**
+ * Represent class that save the state of the toolbar.
+ */
 public class ToolBarState {
 
+    /**
+     * Parameterized constructor.
+     * @param str Representation of the toolbar state.
+     */
     public ToolBarState(String str) {
         if(!str.isEmpty()) {
             File file = new File("resources/save/toolbarState.txt");
@@ -20,6 +28,11 @@ public class ToolBarState {
         }
     }
 
+
+    /**
+     * Return the path to the current toolbar state.
+     * @return Path to the current state.
+     */
     public String getState() {
         File file = new File("resources/save/toolbarState.txt");
         if(file.length() == 9) return "resources/save/toolbarState.txt";

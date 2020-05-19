@@ -2,6 +2,10 @@ package application.model.shape;
 
 import application.exceptions.UnsupportedOperationException;
 
+
+/**
+ * Represent a single shape, a shape that cannot contain other shapes.
+ */
 public abstract class SingleShape implements Shape {
     @Override
     public void add(Shape shape) throws UnsupportedOperationException {

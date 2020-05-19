@@ -7,22 +7,31 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Represent a shape composed by the association of other shapes.
+ */
 public class CompositeShape implements Shape {
     ArrayList<Shape> shapeSet;
 
+    /**
+     * Default constructor.
+     */
     public CompositeShape() {
         shapeSet = new ArrayList<>();
     }
+
 
     @Override
     public void add(Shape shape) {
         shapeSet.add(shape);
     }
 
+
     @Override
     public void remove(Shape shape) {
         shapeSet.remove(shape);
     }
+
 
     @Override
     public void draw(ViewBridge view) {
@@ -31,15 +40,18 @@ public class CompositeShape implements Shape {
         }
     }
 
+
     @Override
     public double getWidth() {
         return this.getMaxX() - this.getMinX();
     }
 
+
     @Override
     public double getHeight() {
         return this.getMaxY() - this.getMinY();
     }
+
 
     @Override
     public Object clone() {
@@ -52,6 +64,8 @@ public class CompositeShape implements Shape {
         return other;
     }
 
+
+    @Override
     public double getMinX() {
         if (this.shapeSet.size() == 0) {
             return -1;
@@ -70,6 +84,8 @@ public class CompositeShape implements Shape {
         return minX;
     }
 
+
+    @Override
     public double getMaxX() {
         if (this.shapeSet.size() == 0) {
             return -1;
@@ -88,6 +104,8 @@ public class CompositeShape implements Shape {
         return maxX;
     }
 
+
+    @Override
     public double getMinY() {
         if (this.shapeSet.size() == 0) {
             return -1;
@@ -106,6 +124,8 @@ public class CompositeShape implements Shape {
         return minY;
     }
 
+
+    @Override
     public double getMaxY() {
         if (this.shapeSet.size() == 0) {
             return -1;
@@ -124,6 +144,7 @@ public class CompositeShape implements Shape {
         return maxY;
     }
 
+
     @Override
     public boolean isIn(double x, double y) {
         for (Shape shape:this.shapeSet) {
@@ -134,6 +155,7 @@ public class CompositeShape implements Shape {
         return false;
     }
 
+
     @Override
     public boolean intersect(Rectangle rect) {
         double minX = getMinX();
@@ -142,11 +164,12 @@ public class CompositeShape implements Shape {
         double maxY = getMaxY();
 
 
-        boolean hoverlap = (minX < rect.getX() + rect.getWidth()) && (rect.getX() < minX + (maxX - minX));
-        boolean voverlap = (minY < rect.getY() + rect.getHeight()) && (rect.getY() < minY + (maxY - minY));
+        boolean hoverlap = (minX < rect.getMaxX()) && (rect.getMinX() < minX + (maxX - minX));
+        boolean voverlap = (minY < rect.getMaxY()) && (rect.getMinY() < minY + (maxY - minY));
 
         return hoverlap && voverlap;
     }
+
 
     @Override
     public void moveTo(double x, double y) {
@@ -158,6 +181,7 @@ public class CompositeShape implements Shape {
         }
     }
 
+
     @Override
     public void translate(double dx, double dy) {
         for (Shape shape:this.shapeSet) {
@@ -165,10 +189,12 @@ public class CompositeShape implements Shape {
         }
     }
 
+
     @Override
     public void setAngle(double diffAngle) {
         //TODO
     }
+
 
     @Override
     public void resize(double factor) {
@@ -177,12 +203,14 @@ public class CompositeShape implements Shape {
         }
     }
 
+
     @Override
     public void resize(Shape shapeContainer, double factor) {
         for (Shape shape : this.shapeSet) {
             shape.resize(shapeContainer, factor);
         }
     }
+
 
     @Override
     public void setColor(Color color) {
@@ -191,12 +219,14 @@ public class CompositeShape implements Shape {
         }
     }
 
+
     @Override
     public Color getColor() {
         if (shapeSet.isEmpty()) return null;
 
         return shapeSet.iterator().next().getColor();
     }
+
 
     @Override
     public String toString() {
@@ -209,8 +239,12 @@ public class CompositeShape implements Shape {
         return string.toString();
     }
 
-    public ArrayList<Shape> getShape(){
-        return this.shapeSet;
-    }
 
+    /**
+     * Return a copy of the shape list.
+     * @return Arraylist of shapes.
+     */
+    public ArrayList<Shape> getShape(){
+        return new ArrayList<>(this.shapeSet);
+    }
 }
