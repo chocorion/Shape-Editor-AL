@@ -20,10 +20,16 @@ public class WhiteBoardMenu implements IDrawable {
     private int x, y;
     private int currentySelected;
 
+
+    /**
+     * Parameterized constructor.
+     * @param view Bridge to use for drawing.
+     */
     public WhiteBoardMenu(ViewBridge view) {
         this.view = view;
         currentySelected = -1;
     }
+
 
     @Override
     public void draw(int x, int y) {
@@ -34,6 +40,12 @@ public class WhiteBoardMenu implements IDrawable {
         drawWithoutShadow(x, y);
     }
 
+
+    /**
+     * Draws the menu at the given position, but without the shadow around.
+     * @param x Top left x coords.
+     * @param y Top left y coords.
+     */
     public void drawWithoutShadow(int x, int y) {
         view.drawRoundedRect(x, y, width, items.length * height, 20, Color.WHITE);
 
@@ -49,6 +61,10 @@ public class WhiteBoardMenu implements IDrawable {
     }
 
 
+    /**
+     * Set the currently selected subMenu.
+     * @param id Index of the submenu.
+     */
     public void setCurrentySelected(int id) {
         int old = currentySelected;
         currentySelected = id;
@@ -57,6 +73,13 @@ public class WhiteBoardMenu implements IDrawable {
             drawWithoutShadow(x, y);
     }
 
+
+    /**
+     * Returns the index of the submenu at the given position.
+     * @param x X coords of the position.
+     * @param y Y coords of the position.
+     * @return Index of the submenu if exists, else -1.
+     */
     public int getItemId(int x, int y) {
         if (x < this.x || x > this.x + width) {
             return -1;
@@ -72,6 +95,13 @@ public class WhiteBoardMenu implements IDrawable {
         return itemId;
     }
 
+
+    /**
+     * Returns if a point is in the menu.
+     * @param x X coords of the point.
+     * @param y Y coords of the point.
+     * @return true if the point is in, else false.
+     */
     public boolean isIn(int x, int y) {
         return getItemId(x, y) != -1;
     }

@@ -5,6 +5,9 @@ import application.view.ViewBridge;
 import application.view.element.Slider;
 
 
+/**
+ * Represent the color submenu of edition menu.
+ */
 public class SubMenuColor implements EditionSubMenu {
     private int x, y, width, height;
     private ViewBridge view;
@@ -15,6 +18,15 @@ public class SubMenuColor implements EditionSubMenu {
 
     Slider Rslider, Gslider, Bslider;
 
+
+    /**
+     * Parameterized constructor.
+     * @param view Bridge to use for drawing.
+     * @param x Top left x coords.
+     * @param y Top left y coords.
+     * @param width Width of the submenu.
+     * @param height Height of the submenu.
+     */
     public SubMenuColor(ViewBridge view, int x, int y, int width, int height) {
         this.view = view;
 
@@ -35,6 +47,10 @@ public class SubMenuColor implements EditionSubMenu {
         Bslider = new Slider(view, width/5, 3 * height / 8, (int) (width * 0.7), 2, 0.5, 8, 18);
     }
 
+
+    /**
+     * Updates color value according to slider's values.
+     */
     private void updateColor() {
         color = new Color(
                 (int) (255 * Rvalue),
@@ -42,6 +58,7 @@ public class SubMenuColor implements EditionSubMenu {
                 (int) (255 * Bvalue)
         );
     }
+
 
     @Override
     public void draw(int x, int y) {
@@ -63,6 +80,13 @@ public class SubMenuColor implements EditionSubMenu {
         view.drawRoundedRectShadow(x + (int) (width/1.5), y + 5 * height/8, 50, 50, 50, 2, color);
     }
 
+
+    /**
+     * Returns the slider id for the given points if it's on button.
+     * @param x X coords of the point.
+     * @param y Y coords of the point.
+     * @return Index of the slider if it's on button, else -1.
+     */
     public int getSliderId(int x, int y) {
         if      (Rslider.isOnButton(x - this.x, y - this.y))     return 0;
         else if (Gslider.isOnButton(x - this.x, y - this.y))     return 1;
@@ -71,6 +95,13 @@ public class SubMenuColor implements EditionSubMenu {
         return -1;
     }
 
+
+    /**
+     * Moves the slider button to the position, and update color value.
+     * @param x X coords of the new position.
+     * @param y Y coords of the new position.
+     * @param sliderId Index of the slider to move.
+     */
     public void moveSlider(int x, int y, int sliderId) {
         if (sliderId == 0)  {
             Rslider.moveButton(x - this.x);
@@ -90,6 +121,12 @@ public class SubMenuColor implements EditionSubMenu {
         draw(this.x, this.y);
     }
 
+
+    /**
+     * Moves the slider button to the given value.
+     * @param value New value for the slider, must be between 0 and 1.
+     * @param sliderId Index of the slider to move.
+     */
     public void moveSlider(double value, int sliderId) {
         if (sliderId == 0)  {
             Rslider.moveButtonToValue(value);
@@ -109,6 +146,11 @@ public class SubMenuColor implements EditionSubMenu {
         draw(this.x, this.y);
     }
 
+
+    /**
+     * Returns the current color corresponding to slider values.
+     * @return Selected color.
+     */
     public Color getColor() {
         return color;
     }

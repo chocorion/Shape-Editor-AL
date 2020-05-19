@@ -2,6 +2,9 @@ package application.utils;
 
 import java.util.HashMap;
 
+/**
+ * Manage the path for image used in the application.
+ */
 public class ImageManager {
     private static HashMap<String, String> images;
 
@@ -15,6 +18,12 @@ public class ImageManager {
         images.put("trash", "resources/images/trash.png");
     }
 
+
+    /**
+     * Get the path for the given image.
+     * @param name Name of the image;
+     * @return The path of the image if exists, else null.
+     */
     public static String getImage(String name) {
         if (images.containsKey(name)) {
             return images.get(name);

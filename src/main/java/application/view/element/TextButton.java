@@ -4,6 +4,10 @@ import application.utils.Color;
 import application.view.IDrawable;
 import application.view.ViewBridge;
 
+
+/**
+ * Represent a basic graphical button, with text inside.
+ */
 public class TextButton implements IDrawable {
     private int x, y, width, height;
     private String txt;
@@ -11,6 +15,15 @@ public class TextButton implements IDrawable {
 
     private ViewBridge view;
 
+    /**
+     * Parameterized constructor.
+     * @param view Bridge to use for drawing.
+     * @param x Top left x coords.
+     * @param y Top left y coords.
+     * @param width Width of the button.
+     * @param height height of the button.
+     * @param txt Text to display in the button.
+     */
     public TextButton(ViewBridge view, int x, int y, int width, int height, String txt) {
         this.x = x;
         this.y = y;
@@ -21,6 +34,7 @@ public class TextButton implements IDrawable {
         this.view = view;
         pushed = false;
     }
+
 
     @Override
     public void draw(int xOffset, int yOffset) {
@@ -36,15 +50,29 @@ public class TextButton implements IDrawable {
         }
     }
 
+
+    /**
+     * Changes the appearance of the button to pushed button.
+     */
     public void push() {
         pushed = true;
     }
 
+
+    /**
+     * Changes the appearance of the button to un-pushed button.
+     */
     public void unpush() {
         pushed = false;
     }
 
 
+    /**
+     * Returns if a point is in the button.
+     * @param x X coords of the point.
+     * @param y Y coords of the point.
+     * @return true if the point is in, else false.
+     */
     public boolean isIn(int x, int y) {
         if (x >= this.x && x <= this.x + width) {
             return y >= this.y && y <= this.y + height;

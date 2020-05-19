@@ -8,6 +8,9 @@ import application.ui.javafx.ViewFx;
 import application.view.*;
 
 
+/**
+ * Entry point of the application
+ */
 public class Main {
     private static Model model;
     private static MainView view;
@@ -22,6 +25,9 @@ public class Main {
     }
 
 
+    /**
+     * Build and assemble all the elements of the ui.
+     */
     public static void buildUi() {
         UIFactory uiFactory = new UIFx();
 

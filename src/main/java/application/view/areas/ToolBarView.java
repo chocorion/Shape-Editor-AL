@@ -11,6 +11,9 @@ import application.view.*;
 
 import java.util.HashMap;
 
+/**
+ * Represent the view of the tool bar.
+ */
 public class ToolBarView implements ModelObserver {
     private ToolBar toolBar;
     private final HashMap<Shape, Shape> minimisedShapes;
@@ -24,6 +27,11 @@ public class ToolBarView implements ModelObserver {
 
     private ViewBridge view;
 
+    /**
+     * Parameterized constructor.
+     * @param view Bridge to the view implementation.
+     * @param toolBar Model of the tool bar.
+     */
     public ToolBarView(ViewBridge view, ToolBar toolBar) {
         this.view = view;
 
@@ -44,9 +52,11 @@ public class ToolBarView implements ModelObserver {
         );
     }
 
-    public void draw() {
-        // Draw toolbar
 
+    /**
+     * Draw the toolbar.
+     */
+    public void draw() {
         view.drawRectangle(area);
 
         view.drawRectangle(
@@ -78,6 +88,7 @@ public class ToolBarView implements ModelObserver {
         view.drawImage(ImageManager.getImage("trash"), trash);
     }
 
+
     @Override
     public void update() {
         area = Layout.getToolBar();
@@ -96,6 +107,12 @@ public class ToolBarView implements ModelObserver {
         this.draw();
     }
 
+
+    /**
+     * Creates a smaller version of the given shape, to fit the tool bar size.
+     * @param shape The shape to minimize.
+     * @return Minimised clone of the shape.
+     */
     private Shape getMinimisedClone(Shape shape) {
         Shape minimised = (Shape) shape.clone();
 
@@ -107,10 +124,24 @@ public class ToolBarView implements ModelObserver {
         return minimised;
     }
 
+
+    /**
+     * Allows to know if a point is in the toolbar's trash.
+     * @param x X coords of the point.
+     * @param y Y coored of the point.
+     * @return True if the point it in the trash, else false.
+     */
     public boolean isInTrash(int x, int y) {
         return trash.isIn(x, y);
     }
 
+
+    /**
+     * Return the corresponding shape index for a point.
+     * @param x
+     * @param y
+     * @return
+     */
     public int getShapeId(int x, int y) {
         if (x > area.getMinX() + area.getWidth() || x < area.getMinX()) {
             return -1;

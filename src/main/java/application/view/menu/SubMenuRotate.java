@@ -10,6 +10,15 @@ public class SubMenuRotate implements EditionSubMenu {
 
     Slider slider;
 
+
+    /**
+     * Parameterized constructor.
+     * @param view Bridge to use for drawing.
+     * @param x Top left x coords.
+     * @param y Top left y coords.
+     * @param width Width of the submenu.
+     * @param height Height of the submenu.
+     */
     public SubMenuRotate(ViewBridge view, int x, int y, int width, int height) {
         this.view = view;
 
@@ -20,6 +29,7 @@ public class SubMenuRotate implements EditionSubMenu {
 
         slider = new Slider(view, width/5, height / 8, (int) (width * 0.7), 2, 0.5, 8, 18);
     }
+
 
     @Override
     public void draw(int x, int y) {
@@ -33,12 +43,25 @@ public class SubMenuRotate implements EditionSubMenu {
         slider.draw(x, y);
     }
 
+
+    /**
+     * Returns the slider id for the given points if it's on button.
+     * @param x X coords of the point.
+     * @param y Y coords of the point.
+     * @return Index of the slider if it's on button, else -1.
+     */
     public int getSliderId(int x, int y) {
         if (slider.isOnButton(x - this.x, y - this.y)) return 0;
 
         return -1;
     }
 
+
+    /**
+     * Return the current value, between 0 and 1, of the slider.
+     * @param inputId Index of the slider.
+     * @return Value of the selected slider if exists, else 0.
+     */
     public double getValue(int inputId) {
         if (inputId == 0)
             return slider.getValue();
@@ -46,6 +69,13 @@ public class SubMenuRotate implements EditionSubMenu {
         return 0.;
     }
 
+
+    /**
+     * Moves the slider button to the position, and update rotation value.
+     * @param x X coords of the new position.
+     * @param y Y coords of the new position.
+     * @param sliderId Index of the slider to move.
+     */
     public void moveSlider(int x, int y, int sliderId) {
         if (sliderId == 0)  {
             slider .moveButton(x - this.x);

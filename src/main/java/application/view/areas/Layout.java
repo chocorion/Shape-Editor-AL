@@ -3,6 +3,9 @@ package application.view.areas;
 import application.model.shape.Rectangle;
 import application.view.MainView;
 
+/**
+ * Static class that contains the position of elements int the model.
+ */
 public class Layout {
     public static final int RECOMMENDED_WIDTH = 640;
     public static final int RECOMMENDED_HEIGHT = 480;
@@ -18,11 +21,21 @@ public class Layout {
     public static final int BORDER = 1;
 
 
+    /**
+     * Update elements position according to the new windows size.
+     * @param width New width of the window<.
+     * @param height New height of the windows.
+     */
     public static void update(int width, int height) {
         Layout.width = width;
         Layout.height = height;
     }
 
+
+    /**
+     * Return the top bar position.
+     * @return Top bar position.
+     */
     public static Rectangle getTopBar() {
         return new Rectangle(
                 GAPS,
@@ -32,6 +45,11 @@ public class Layout {
         );
     }
 
+
+    /**
+     * Return the tool bar position.
+     * @return Tool bar position.
+     */
     public static Rectangle getToolBar() {
         return new Rectangle(
                 GAPS,
@@ -41,6 +59,11 @@ public class Layout {
         );
     }
 
+
+    /**
+     * Return the whiteboard position.
+     * @return Whiteboard position.
+     */
     public static Rectangle getWhiteBoard() {
         return new Rectangle(
                 TOOLBAR_WIDTH + GAPS,

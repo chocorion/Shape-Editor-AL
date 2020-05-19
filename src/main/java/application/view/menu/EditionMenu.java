@@ -10,6 +10,9 @@ import application.view.element.TextButton;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the view for the shape edition menu.
+ */
 public class EditionMenu {
     private static EditionMenu instance;
 
@@ -36,6 +39,11 @@ public class EditionMenu {
 
     private int x, y;
 
+
+    /**
+     * Parameterized constructor.
+     * @param view Bridge to use for drawign.
+     */
     private EditionMenu(ViewBridge view) {
         this.view = view;
 
@@ -43,6 +51,10 @@ public class EditionMenu {
         buttons = new ArrayList<>();
     }
 
+
+    /**
+     * Build the header of the menus, with sub menu buttons.
+     */
     private void buildHeader() {
         int numberButtons = subMenus.size();
 
@@ -60,6 +72,10 @@ public class EditionMenu {
         }
     }
 
+
+    /**
+     * Build the footer of the menu.
+     */
     private void buildFooter() {
         int button_width = width/5;
         int button_height = (int) (footer_height * 0.7);
@@ -80,6 +96,10 @@ public class EditionMenu {
         );
     }
 
+
+    /**
+     * Build all sub menus available for a rectangle.
+     */
     private void buildRectangleSubMenu() {
         subMenus.clear();
 
@@ -91,6 +111,10 @@ public class EditionMenu {
         selectedMenu = 0;
     }
 
+
+    /**
+     * Build all sub menus available for a composite shape.
+     */
     private void buildCompositeSubMenu() {
         subMenus.clear();
 
@@ -100,6 +124,10 @@ public class EditionMenu {
         selectedMenu = 0;
     }
 
+
+    /**
+     * Build all sub menus available for a polygon.
+     */
     private void buildPolygonSubMenu() {
         subMenus.clear();
 
@@ -112,6 +140,12 @@ public class EditionMenu {
     }
 
 
+    /**
+     * Returns the right menu for a given shape.
+     * @param view Bridge to use for drawing.
+     * @param shape Shape to build menu for.
+     * @return Built edition menu.
+     */
     public static EditionMenu getInstanceFor(ViewBridge view, Shape shape) {
         if (instance == null) {
             instance = new EditionMenu(view);
@@ -136,6 +170,11 @@ public class EditionMenu {
     }
 
 
+    /**
+     * Draw the edition menu to the given position.
+     * @param x Top left x coords.
+     * @param y Top left y coords.
+     */
     public void draw(int x, int y) {
         this.x = x;
         this.y = y;
@@ -150,18 +189,44 @@ public class EditionMenu {
 
     }
 
+
+    /**
+     * Returns if a point is in this menu or not.
+     * @param x X coords of the point.
+     * @param y Y coords of the point.
+     * @return True is the point is in, else false.
+     */
     public boolean isIn(int x, int y) {
         return (x <= this.x + width && x >= this.x && y <= this.y + height && y >= this.y);
     }
 
+
+    /**
+     * Returns if a point is in the sub menu section.
+     * @param x X coords of the point.
+     * @param y Y coords of the point.
+     * @return True is the point is in, else false.
+     */
     public boolean isInSubmenu(int x, int y) {
         return isIn(x, y) && y >= this.y + header_height && y <= this.y + height - footer_height;
     }
 
+
+    /**
+     * Returns the currently selected submenu.
+     * @return Currently selected submenu.
+     */
     public EditionSubMenu getSelectedMenu() {
         return subMenus.get(selectedMenu);
     }
 
+
+    /**
+     * Return the button's index at the given position.
+     * @param x X coords of the point.
+     * @param y Y coords of the point.
+     * @return Index of the button if exists, else -1.
+     */
     public int getButtonId(int x, int y) {
         for (int i = 0; i < buttons.size(); i++) {
             if (buttons.get(i).isIn(x - this.x, y - this.y)) {
@@ -172,11 +237,20 @@ public class EditionMenu {
         return -1;
     }
 
+
+    /**
+     * Return the number of submenu.
+     * @return Number of submenu.
+     */
     public int getSubmenuNumber() {
         return subMenus.size();
     }
 
 
+    /**
+     * Pushes the button at the given index.
+     * @param buttonId index of the button to push.
+     */
     public void pushButton(int buttonId) {
         if (buttonId >= 0 && buttonId < buttons.size()) {
             buttons.get(buttonId).push();
@@ -184,6 +258,11 @@ public class EditionMenu {
         }
     }
 
+
+    /**
+     * Un-pushes the button at the given index.
+     * @param buttonId index of the button to un-push.
+     */
     public void unpushButton(int buttonId) {
         if (buttonId >= 0 && buttonId < buttons.size()) {
             buttons.get(buttonId).unpush();
@@ -191,6 +270,11 @@ public class EditionMenu {
         }
     }
 
+
+    /**
+     * Switches the currently selected menu.
+     * @param submenuId Index of the new selected menu.
+     */
     public void switchSubmenu(int submenuId) {
         if (submenuId >= 0 && submenuId < subMenus.size()) {
             selectedMenu = submenuId;
@@ -199,15 +283,20 @@ public class EditionMenu {
         }
     }
 
-    public void moveMenuTo(int newX, int newY) {
-        this.x = newX;
-        this.y = newY;
-    }
 
+    /**
+     * Return the top left x coords.
+     * @return Top left x coords.
+     */
     public int getX() {
         return this.x;
     }
 
+
+    /**
+     * Return the top left y coords.
+     * @return Top left y coords.
+     */
     public int getY() {
         return this.y;
     }

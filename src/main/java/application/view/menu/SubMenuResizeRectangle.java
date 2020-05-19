@@ -11,6 +11,15 @@ public class SubMenuResizeRectangle implements EditionSubMenu {
 
     TextInput widthInput, heightInput;
 
+
+    /**
+     * Parameterized constructor.
+     * @param view Bridge to use for drawing.
+     * @param x Top left x coords.
+     * @param y Top left y coords.
+     * @param width Width of the submenu.
+     * @param height Height of the submenu.
+     */
     public SubMenuResizeRectangle(ViewBridge view, int x, int y, int width, int height) {
         this.view = view;
 
@@ -22,6 +31,7 @@ public class SubMenuResizeRectangle implements EditionSubMenu {
         widthInput = new TextInput(view, width/5, height / 8, (int) (width * 0.7), 18);
         heightInput = new TextInput(view, width/5, 2 * height / 8, (int) (width * 0.7), 18);
     }
+
 
     @Override
     public void draw(int x, int y) {
@@ -37,6 +47,13 @@ public class SubMenuResizeRectangle implements EditionSubMenu {
         heightInput.draw(x, y);
     }
 
+
+    /**
+     * Returns the input id for the given points if it's on input.
+     * @param x X coords of the point.
+     * @param y Y coords of the point.
+     * @return Index of the input if it's on it, else -1.
+     */
     public int getInputId(int x, int y) {
         if      (widthInput.isIn(x - this.x, y - this.y))     return 0;
         else if (heightInput.isIn(x - this.x, y - this.y))     return 1;
@@ -44,6 +61,12 @@ public class SubMenuResizeRectangle implements EditionSubMenu {
         return -1;
     }
 
+
+    /**
+     * Returns the interaction available for the given input.
+     * @param inputId Index of the input.
+     * @return Available interaction if input exists, else null.
+     */
     public Interaction getInteraction(int inputId) {
         if (inputId == 0)
             return widthInput.getInteraction();
@@ -54,6 +77,12 @@ public class SubMenuResizeRectangle implements EditionSubMenu {
         return null;
     }
 
+
+    /**
+     * Returns the text of the given input.
+     * @param inputId Index of the input.
+     * @return Text if input exists, else null.
+     */
     public String getText(int inputId) {
         if (inputId == 0)
             return widthInput.getText();
