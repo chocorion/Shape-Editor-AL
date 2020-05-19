@@ -5,3 +5,4 @@ gradlew.bat
 .gradle/
 build/
 javafx-sdk-14/
+out/
