@@ -26,7 +26,7 @@ public class SubMenuRotate extends ViewBridge implements EditionSubMenu {
         this.width = width;
         this.height = height;
 
-        slider = new Slider(this, width/5, height / 8, (int) (width * 0.7), 2, 0.5, 8, 18);
+        slider = new Slider(implementation, width/5, height / 8, (int) (width * 0.7), 2, 0.5, 8, 18);
     }
 
 

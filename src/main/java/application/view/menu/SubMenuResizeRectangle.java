@@ -26,8 +26,8 @@ public class SubMenuResizeRectangle extends ViewBridge implements EditionSubMenu
         this.width = width;
         this.height = height;
 
-        widthInput = new TextInput(this, width/5, height / 8, (int) (width * 0.7), 18);
-        heightInput = new TextInput(this, width/5, 2 * height / 8, (int) (width * 0.7), 18);
+        widthInput = new TextInput(implementation, width/5, height / 8, (int) (width * 0.7), 18);
+        heightInput = new TextInput(implementation, width/5, 2 * height / 8, (int) (width * 0.7), 18);
     }
 
 

@@ -1,6 +1,7 @@
 package application.view.element;
 
 import application.utils.Color;
+import application.view.IConcreteView;
 import application.view.IDrawable;
 import application.view.ViewBridge;
 import application.view.element.interaction.TextInputInteraction;
@@ -9,24 +10,22 @@ import application.view.element.interaction.TextInputInteraction;
 /**
  * Represent a basic graphical text input.
  */
-public class TextInput implements IDrawable {
+public class TextInput extends ViewBridge implements IDrawable {
     private int x, y;
     private int width, height;
 
     private StringBuffer txt;
-    private ViewBridge view;
-
 
     /**
      * Parameterized constructor.
-     * @param view Bridge to use for drawing.
+     * @param view Implementation to use for drawing.
      * @param x Top left x coords.
      * @param y Top left y coords.
      * @param width Width of the text input.
      * @param height Height of the text input.
      */
-    public TextInput(ViewBridge view, int x, int y, int width, int height) {
-        this.view = view;
+    public TextInput(IConcreteView view, int x, int y, int width, int height) {
+        super(view);
         this.x = x;
         this.y = y;
 
@@ -57,8 +56,8 @@ public class TextInput implements IDrawable {
 
     @Override
     public void draw(int x, int y) {
-        view.drawRoundedRectShadow(this.x + x, this.y + y, this.width, this.height, 3, 2, Color.WHITE);
-        view.drawText(txt.toString(), this.x + x, this.y + y + (int) (height * 0.8), width, Color.BLACK);
+        drawRoundedRectShadow(this.x + x, this.y + y, this.width, this.height, 3, 2, Color.WHITE);
+        drawText(txt.toString(), this.x + x, this.y + y + (int) (height * 0.8), width, Color.BLACK);
     }
 
 

@@ -42,9 +42,9 @@ public class SubMenuColor extends ViewBridge implements EditionSubMenu {
         Bvalue = 0.5;
 
 
-        Rslider = new Slider(this, width/5, height / 8, (int) (width * 0.7), 2, 0.5, 8, 18);
-        Gslider = new Slider(this, width/5, 2 * height / 8, (int) (width * 0.7), 2, 0.5, 8, 18);
-        Bslider = new Slider(this, width/5, 3 * height / 8, (int) (width * 0.7), 2, 0.5, 8, 18);
+        Rslider = new Slider(implementation, width/5, height / 8, (int) (width * 0.7), 2, 0.5, 8, 18);
+        Gslider = new Slider(implementation, width/5, 2 * height / 8, (int) (width * 0.7), 2, 0.5, 8, 18);
+        Bslider = new Slider(implementation, width/5, 3 * height / 8, (int) (width * 0.7), 2, 0.5, 8, 18);
     }
 
 

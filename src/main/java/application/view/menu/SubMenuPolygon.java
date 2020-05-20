@@ -27,7 +27,7 @@ public class SubMenuPolygon extends ViewBridge implements EditionSubMenu {
         this.width = width;
         this.height = height;
 
-        sizeInput = new TextInput(this, width/3, height / 8, (int) (width * 0.5), 18);
+        sizeInput = new TextInput(implementation, width/3, height / 8, (int) (width * 0.5), 18);
     }
 
 

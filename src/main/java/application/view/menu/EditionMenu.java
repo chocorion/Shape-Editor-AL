@@ -61,7 +61,7 @@ public class EditionMenu extends ViewBridge implements IDrawable {
         for (int i = 0; i < numberButtons; i++) {
             buttons.add(
                     new Button(
-                            this,
+                            implementation,
                             i * width/numberButtons,
                             5,
                             width/numberButtons,
@@ -84,15 +84,15 @@ public class EditionMenu extends ViewBridge implements IDrawable {
         int marge_y = (footer_height - button_height - margin)/2;
 
         buttons.add(
-                new Button(this, marge_x, height - footer_height + marge_y, button_width, button_height, "Apply")
+                new Button(implementation, marge_x, height - footer_height + marge_y, button_width, button_height, "Apply")
         );
 
         buttons.add(
-                new Button(this, button_width + 2 * marge_x, height - footer_height + marge_y, button_width, button_height, "Reset")
+                new Button(implementation, button_width + 2 * marge_x, height - footer_height + marge_y, button_width, button_height, "Reset")
         );
 
         buttons.add(
-                new Button(this, 2 * button_width + 3 * marge_x, height - footer_height + marge_y, button_width, button_height, "Cancel")
+                new Button(implementation, 2 * button_width + 3 * marge_x, height - footer_height + marge_y, button_width, button_height, "Cancel")
         );
     }
 

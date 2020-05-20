@@ -1,6 +1,7 @@
 package application.view.element;
 
 import application.utils.Color;
+import application.view.IConcreteView;
 import application.view.IDrawable;
 import application.view.ViewBridge;
 
@@ -8,30 +9,28 @@ import application.view.ViewBridge;
 /**
  * Represent a basic graphical button, with text inside.
  */
-public class Button implements IDrawable {
+public class Button extends ViewBridge implements IDrawable {
     private int x, y, width, height;
     private String txt;
     private boolean pushed;
 
-    private ViewBridge view;
-
     /**
      * Parameterized constructor.
-     * @param view Bridge to use for drawing.
+     * @param view Implementation to use for drawing.
      * @param x Top left x coords.
      * @param y Top left y coords.
      * @param width Width of the button.
      * @param height height of the button.
      * @param txt Text to display in the button.
      */
-    public Button(ViewBridge view, int x, int y, int width, int height, String txt) {
+    public Button(IConcreteView view, int x, int y, int width, int height, String txt) {
+        super(view);
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
 
         this.txt = txt;
-        this.view = view;
         pushed = false;
     }
 
@@ -40,13 +39,13 @@ public class Button implements IDrawable {
     public void draw(int xOffset, int yOffset) {
         // Put in two separated functions
         if (!pushed) {
-            view.drawRoundedRectShadow(x + xOffset, y + yOffset, width, height, 20, 2, Color.WHITE);
-            view.drawText(txt, x + xOffset, y + yOffset + (int) (height * 0.6), (int) (width * 0.9), Color.BLACK);
+            drawRoundedRectShadow(x + xOffset, y + yOffset, width, height, 20, 2, Color.WHITE);
+            drawText(txt, x + xOffset, y + yOffset + (int) (height * 0.6), (int) (width * 0.9), Color.BLACK);
         }
 
         else {
-            view.drawRoundedRectShadow(x + xOffset, y + yOffset, width, height, 20, 2, Color.LIGHT_GREY);
-            view.drawText(txt, x + xOffset, y + yOffset+ (int) (height * 0.6), (int) (width * 0.9), Color.BLACK);
+            drawRoundedRectShadow(x + xOffset, y + yOffset, width, height, 20, 2, Color.LIGHT_GREY);
+            drawText(txt, x + xOffset, y + yOffset+ (int) (height * 0.6), (int) (width * 0.9), Color.BLACK);
         }
     }
 

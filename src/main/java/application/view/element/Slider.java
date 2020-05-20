@@ -1,6 +1,7 @@
 package application.view.element;
 
 import application.utils.Color;
+import application.view.IConcreteView;
 import application.view.IDrawable;
 import application.view.ViewBridge;
 
@@ -8,17 +9,16 @@ import application.view.ViewBridge;
 /**
  * Represent a basic graphical slider.
  */
-public class Slider implements IDrawable {
+public class Slider extends ViewBridge implements IDrawable {
     private int width, height;
     private int x, y;
     private int buttonX, buttonY, buttonW, buttonH;
 
     private double value;
-    private ViewBridge view;
 
     /**
      * Parameterized constructor.
-     * @param view Bridge to use for drawing.
+     * @param view Implementation to use for drawing.
      * @param x Top left x coords.
      * @param y Top left y coords.
      * @param width Width of the principal bar.
@@ -27,8 +27,8 @@ public class Slider implements IDrawable {
      * @param buttonWidth Width of the button.
      * @param buttonHeight Height of the button.
      */
-    public Slider(ViewBridge view, int x, int y, int width, int height, double initialValue, int buttonWidth, int buttonHeight) {
-        this.view = view;
+    public Slider(IConcreteView view, int x, int y, int width, int height, double initialValue, int buttonWidth, int buttonHeight) {
+        super(view);
         this.x = x;
         this.y = y;
         value = initialValue;
@@ -46,9 +46,9 @@ public class Slider implements IDrawable {
 
     @Override
     public void draw(int offsetX, int offsetY) {
-        view.drawRectangle(x + offsetX, y + offsetY - height/2, width, height, Color.BLACK);
+        drawRectangle(x + offsetX, y + offsetY - height/2, width, height, Color.BLACK);
 
-        view.drawRoundedRect(
+        drawRoundedRect(
                 offsetX + buttonX,
                 offsetY + buttonY,
                 buttonW,
