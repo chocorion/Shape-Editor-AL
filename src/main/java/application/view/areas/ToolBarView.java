@@ -14,7 +14,7 @@ import java.util.HashMap;
 /**
  * Represent the view of the tool bar.
  */
-public class ToolBarView implements ModelObserver {
+public class ToolBarView extends ViewBridge implements ModelObserver {
     private ToolBar toolBar;
     private final HashMap<Shape, Shape> minimisedShapes;
 
@@ -25,15 +25,13 @@ public class ToolBarView implements ModelObserver {
     private Rectangle trash;
     private int caseSize;
 
-    private ViewBridge view;
-
     /**
      * Parameterized constructor.
-     * @param view Bridge to the view implementation.
+     * @param viewImplementation Implementation to use for draw.
      * @param toolBar Model of the tool bar.
      */
-    public ToolBarView(ViewBridge view, ToolBar toolBar) {
-        this.view = view;
+    public ToolBarView(IConcreteView viewImplementation, ToolBar toolBar) {
+        super(viewImplementation);
 
         this.toolBar = toolBar;
         this.minimisedShapes = new HashMap<>();
@@ -57,9 +55,9 @@ public class ToolBarView implements ModelObserver {
      * Draw the toolbar.
      */
     public void draw() {
-        view.drawRectangle(area);
+        drawRectangle(area);
 
-        view.drawRectangle(
+        drawRectangle(
                 new Rectangle(
                         area.getMinX() + Layout.BORDER,
                         area.getMinY() + Layout.BORDER,
@@ -80,12 +78,12 @@ public class ToolBarView implements ModelObserver {
                     area.getMinY() + index * (CASE_MARGIN + caseSize)+ START_MARGIN
             );
 
-            minimizedShape.draw(view);
+            minimizedShape.draw(this);
             index++;
         }
 
 
-        view.drawImage(ImageManager.getImage("trash"), trash);
+        drawImage(ImageManager.getImage("trash"), trash);
     }
 
 
@@ -104,7 +102,7 @@ public class ToolBarView implements ModelObserver {
                 Math.min(area.getWidth(), area.getHeight()) - 2 * CASE_MARGIN
         );
         
-        this.draw();
+        draw();
     }
 
 
@@ -128,7 +126,7 @@ public class ToolBarView implements ModelObserver {
     /**
      * Allows to know if a point is in the toolbar's trash.
      * @param x X coords of the point.
-     * @param y Y coored of the point.
+     * @param y Y coords of the point.
      * @return True if the point it in the trash, else false.
      */
     public boolean isInTrash(int x, int y) {
@@ -138,9 +136,9 @@ public class ToolBarView implements ModelObserver {
 
     /**
      * Return the corresponding shape index for a point.
-     * @param x
-     * @param y
-     * @return
+     * @param x X coords of the point.
+     * @param y Y coords of the point.
+     * @return The index of the shape if exists, else -1.
      */
     public int getShapeId(int x, int y) {
         if (x > area.getMinX() + area.getWidth() || x < area.getMinX()) {

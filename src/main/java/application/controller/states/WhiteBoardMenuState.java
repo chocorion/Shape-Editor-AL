@@ -9,7 +9,6 @@ import application.model.shape.Shape;
 import application.view.MainView;
 import application.view.menu.WhiteBoardMenu;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
 
@@ -123,7 +122,7 @@ public class WhiteBoardMenuState extends ControllerStateImp {
         WhiteBoardMenu menu = view.getWhiteBoard().getMenu();
         int itemId = menu.getItemId(x, y);
 
-        menu.setCurrentySelected(itemId);
+        menu.setCurrentlySelected(itemId);
 
         return true;
     }

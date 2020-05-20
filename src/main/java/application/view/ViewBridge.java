@@ -9,7 +9,7 @@ import application.utils.Pair;
  * Represent the bridge to the view implementation.
  */
 public class ViewBridge {
-    private IConcreteView implementation;
+    protected IConcreteView implementation;
 
     /**
      * Parameterized constructor.

@@ -32,9 +32,9 @@ public class Main {
         UIFactory uiFactory = new UIFx();
 
         IConcreteView concreteView = uiFactory.getView(model);
-        ViewBridge viewBridge = new ViewBridge(concreteView);
 
-        view = new MainView(model, viewBridge);
+
+        view = new MainView(model, concreteView);
 
         model.getToolBar().attachObserver(view.getToolBar());
         model.getWhiteBoard().attachObserver(view.getWhiteBoard());

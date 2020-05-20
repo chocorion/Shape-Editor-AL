@@ -1,33 +1,32 @@
 package application.view.menu;
 
 import application.utils.Color;
+import application.view.IConcreteView;
 import application.view.ViewBridge;
 import application.view.element.Slider;
 
-public class SubMenuRotate implements EditionSubMenu {
+public class SubMenuRotate extends ViewBridge implements EditionSubMenu {
     private int x, y, width, height;
-    private ViewBridge view;
-
     Slider slider;
 
 
     /**
      * Parameterized constructor.
-     * @param view Bridge to use for drawing.
+     * @param view Implementation to use for drawing.
      * @param x Top left x coords.
      * @param y Top left y coords.
      * @param width Width of the submenu.
      * @param height Height of the submenu.
      */
-    public SubMenuRotate(ViewBridge view, int x, int y, int width, int height) {
-        this.view = view;
+    public SubMenuRotate(IConcreteView view, int x, int y, int width, int height) {
+        super(view);
 
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
 
-        slider = new Slider(view, width/5, height / 8, (int) (width * 0.7), 2, 0.5, 8, 18);
+        slider = new Slider(this, width/5, height / 8, (int) (width * 0.7), 2, 0.5, 8, 18);
     }
 
 
@@ -36,9 +35,8 @@ public class SubMenuRotate implements EditionSubMenu {
         this.x = x;
         this.y = y;
 
-        view.drawRoundedRectShadow(x, y, width, height, 20, 2, Color.WHITE);
-
-        view.drawText("Rotation", x + 5, y + height/8, 30, Color.BLACK);
+        drawRoundedRectShadow(x, y, width, height, 20, 2, Color.WHITE);
+        drawText("Rotation", x + 5, y + height/8, 30, Color.BLACK);
 
         slider.draw(x, y);
     }

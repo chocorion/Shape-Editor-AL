@@ -5,15 +5,17 @@ import application.model.shape.Polygon;
 import application.model.shape.Rectangle;
 import application.model.shape.Shape;
 import application.utils.Color;
+import application.view.IConcreteView;
+import application.view.IDrawable;
 import application.view.ViewBridge;
-import application.view.element.TextButton;
+import application.view.element.Button;
 
 import java.util.ArrayList;
 
 /**
  * Represents the view for the shape edition menu.
  */
-public class EditionMenu {
+public class EditionMenu extends ViewBridge implements IDrawable {
     private static EditionMenu instance;
 
     private static int width = 240;
@@ -31,21 +33,19 @@ public class EditionMenu {
 
 
     private ArrayList<EditionSubMenu> subMenus;
-    private ArrayList<TextButton> buttons;
+    private ArrayList<Button> buttons;
 
     private int selectedMenu;
-
-    private ViewBridge view;
 
     private int x, y;
 
 
     /**
      * Parameterized constructor.
-     * @param view Bridge to use for drawign.
+     * @param view Implementation of the view to use for drawing.
      */
-    private EditionMenu(ViewBridge view) {
-        this.view = view;
+    private EditionMenu(IConcreteView view) {
+        super(view);
 
         subMenus = new ArrayList<>();
         buttons = new ArrayList<>();
@@ -60,8 +60,8 @@ public class EditionMenu {
 
         for (int i = 0; i < numberButtons; i++) {
             buttons.add(
-                    new TextButton(
-                            view,
+                    new Button(
+                            this,
                             i * width/numberButtons,
                             5,
                             width/numberButtons,
@@ -84,15 +84,15 @@ public class EditionMenu {
         int marge_y = (footer_height - button_height - margin)/2;
 
         buttons.add(
-                new TextButton(view, marge_x, height - footer_height + marge_y, button_width, button_height, "Apply")
+                new Button(this, marge_x, height - footer_height + marge_y, button_width, button_height, "Apply")
         );
 
         buttons.add(
-                new TextButton(view, button_width + 2 * marge_x, height - footer_height + marge_y, button_width, button_height, "Reset")
+                new Button(this, button_width + 2 * marge_x, height - footer_height + marge_y, button_width, button_height, "Reset")
         );
 
         buttons.add(
-                new TextButton(view, 2 * button_width + 3 * marge_x, height - footer_height + marge_y, button_width, button_height, "Cancel")
+                new Button(this, 2 * button_width + 3 * marge_x, height - footer_height + marge_y, button_width, button_height, "Cancel")
         );
     }
 
@@ -103,10 +103,10 @@ public class EditionMenu {
     private void buildRectangleSubMenu() {
         subMenus.clear();
 
-        subMenus.add(0, new SubMenuColor(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
-        subMenus.add(1, new SubMenuResizeRectangle(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
-        subMenus.add(2, new SubMenuRotate(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
-        subMenus.add(3, new SubMenuRound(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+        subMenus.add(0, new SubMenuColor(implementation, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+        subMenus.add(1, new SubMenuResizeRectangle(implementation, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+        subMenus.add(2, new SubMenuRotate(implementation, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+        subMenus.add(3, new SubMenuRound(implementation, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
 
         selectedMenu = 0;
     }
@@ -118,8 +118,8 @@ public class EditionMenu {
     private void buildCompositeSubMenu() {
         subMenus.clear();
 
-        subMenus.add(0, new SubMenuColor(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
-        subMenus.add(1, new SubMenuResizeGlobal(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+        subMenus.add(0, new SubMenuColor(implementation, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+        subMenus.add(1, new SubMenuResizeGlobal(implementation, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
 
         selectedMenu = 0;
     }
@@ -131,10 +131,10 @@ public class EditionMenu {
     private void buildPolygonSubMenu() {
         subMenus.clear();
 
-        subMenus.add(0, new SubMenuColor(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
-        subMenus.add(1, new SubMenuResizeGlobal(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
-        subMenus.add(2, new SubMenuRotate(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
-        subMenus.add(3, new SubMenuPolygon(view, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+        subMenus.add(0, new SubMenuColor(implementation, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+        subMenus.add(1, new SubMenuResizeGlobal(implementation, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+        subMenus.add(2, new SubMenuRotate(implementation, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
+        subMenus.add(3, new SubMenuPolygon(implementation, subMenuX, subMenuY, subMenuWidth, subMenuHeight));
 
         selectedMenu = 0;
     }
@@ -142,11 +142,11 @@ public class EditionMenu {
 
     /**
      * Returns the right menu for a given shape.
-     * @param view Bridge to use for drawing.
+     * @param view Implementation to use for drawing.
      * @param shape Shape to build menu for.
      * @return Built edition menu.
      */
-    public static EditionMenu getInstanceFor(ViewBridge view, Shape shape) {
+    public static EditionMenu getInstanceFor(IConcreteView view, Shape shape) {
         if (instance == null) {
             instance = new EditionMenu(view);
         }
@@ -170,18 +170,14 @@ public class EditionMenu {
     }
 
 
-    /**
-     * Draw the edition menu to the given position.
-     * @param x Top left x coords.
-     * @param y Top left y coords.
-     */
+    @Override
     public void draw(int x, int y) {
         this.x = x;
         this.y = y;
 
-        view.drawRoundedRectShadow(x, y, width, height, 12, 3, Color.WHITE);
+        drawRoundedRectShadow(x, y, width, height, 12, 3, Color.WHITE);
 
-        for (TextButton button : buttons) {
+        for (Button button : buttons) {
             button.draw(this.x, this.y);
         }
 

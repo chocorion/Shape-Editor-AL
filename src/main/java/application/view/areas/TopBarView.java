@@ -13,10 +13,9 @@ import java.util.ArrayList;
 /**
  * Represent the view of the top bar.
  */
-public class TopBarView {
+public class TopBarView extends ViewBridge {
     private ArrayList<Pair<Rectangle, String>> buttons;
     private Rectangle area;
-    private ViewBridge view;
 
     private static int BUTTON_WIDTH;
     private static int BUTTON_MARGIN;
@@ -24,10 +23,10 @@ public class TopBarView {
 
     /**
      * Parameterized constructor.
-     * @param view Bridge to the view to use.
+     * @param concreteView Implementation to use for the draw.
      */
-    public TopBarView(ViewBridge view) {
-        this.view = view;
+    public TopBarView(IConcreteView concreteView) {
+        super(concreteView);
 
         area = Layout.getTopBar();
         BUTTON_MARGIN = (int) (area.getHeight()/6);
@@ -58,9 +57,9 @@ public class TopBarView {
      * Draw the topBar.
      */
     public void draw() {
-        view.drawRectangle(area);
+        drawRectangle(area);
 
-        view.drawRectangle(
+        drawRectangle(
                 new Rectangle(
                         area.getMinX() + Layout.BORDER,
                         area.getMinY() + Layout.BORDER,
@@ -108,7 +107,7 @@ public class TopBarView {
      */
     private void drawButtons() {
         for (Pair<Rectangle, String> pair : buttons) {
-            view.drawImage(
+            drawImage(
                     ImageManager.getImage(pair.getValue()),
                     pair.getKey()
             );

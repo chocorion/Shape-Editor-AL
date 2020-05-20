@@ -18,15 +18,13 @@ import java.util.Set;
 /**
  * Represent the view of the whiteboard.
  */
-public class WhiteBoardView implements ModelObserver {
+public class WhiteBoardView extends ViewBridge implements ModelObserver {
     private final WhiteBoard whiteBoard;
     private final WhiteBoardMenu menu;
     private EditionMenu editionMenu;
 
     private final HashSet<Shape> selectedShapes;
     private Rectangle area;
-
-    private final ViewBridge view;
 
     private boolean isMenuOpen;
     private boolean isEditionMenuOpen;
@@ -38,8 +36,8 @@ public class WhiteBoardView implements ModelObserver {
      * @param view Bridge to the view to use.
      * @param whiteBoard Model representation of the whiteboard.
      */
-    public WhiteBoardView(ViewBridge view, WhiteBoard whiteBoard) {
-        this.view = view;
+    public WhiteBoardView(IConcreteView view, WhiteBoard whiteBoard) {
+        super(view);
 
         area = Layout.getWhiteBoard();
 
@@ -56,9 +54,9 @@ public class WhiteBoardView implements ModelObserver {
      * Draw the whiteboard.
      */
     public void draw() {
-        view.drawRectangle(area);
+        drawRectangle(area);
 
-        view.drawRectangle(
+        drawRectangle(
                 new Rectangle(
                         area.getMinX() + Layout.BORDER,
                         area.getMinY() + Layout.BORDER,
@@ -72,7 +70,7 @@ public class WhiteBoardView implements ModelObserver {
 
         // Draw big white rectangle
         for (Shape shape:whiteBoard.getInnerShapes()) {
-            shape.draw(view);
+            shape.draw(this);
         }
 
 
@@ -136,7 +134,7 @@ public class WhiteBoardView implements ModelObserver {
                 shape.getMaxX() - shape.getMinX() + 2 * selectionMarge,
                 shape.getMaxY() - shape.getMinY() + 2 * selectionMarge,
                 Color.SELECTION
-        ).draw(view);
+        ).draw(this);
     }
 
 
@@ -182,7 +180,7 @@ public class WhiteBoardView implements ModelObserver {
 
         isMenuOpen = false;
         isEditionMenuOpen = true;
-        editionMenu = EditionMenu.getInstanceFor(view, selectedShape);
+        editionMenu = EditionMenu.getInstanceFor(implementation, selectedShape);
         draw();
     }
 
@@ -227,15 +225,5 @@ public class WhiteBoardView implements ModelObserver {
      */
     public EditionMenu getEditionMenu() {
         return editionMenu;
-    }
-
-
-    // TODO Find the correct place for this. In the bridge ?
-    public void drawSaveMenu() {
-        view.drawSaveMenu();
-    }
-
-    public void drawLoadMenu(){
-        view.drawLoadMenu();
     }
 }

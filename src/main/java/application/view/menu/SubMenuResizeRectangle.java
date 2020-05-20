@@ -1,35 +1,33 @@
 package application.view.menu;
 
 import application.utils.Color;
+import application.view.IConcreteView;
 import application.view.ViewBridge;
 import application.view.element.TextInput;
 import application.view.element.interaction.Interaction;
 
-public class SubMenuResizeRectangle implements EditionSubMenu {
+public class SubMenuResizeRectangle extends ViewBridge implements EditionSubMenu {
     private int x, y, width, height;
-    private ViewBridge view;
-
     TextInput widthInput, heightInput;
-
 
     /**
      * Parameterized constructor.
-     * @param view Bridge to use for drawing.
+     * @param view Implementation to use for drawing.
      * @param x Top left x coords.
      * @param y Top left y coords.
      * @param width Width of the submenu.
      * @param height Height of the submenu.
      */
-    public SubMenuResizeRectangle(ViewBridge view, int x, int y, int width, int height) {
-        this.view = view;
+    public SubMenuResizeRectangle(IConcreteView view, int x, int y, int width, int height) {
+        super(view);
 
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
 
-        widthInput = new TextInput(view, width/5, height / 8, (int) (width * 0.7), 18);
-        heightInput = new TextInput(view, width/5, 2 * height / 8, (int) (width * 0.7), 18);
+        widthInput = new TextInput(this, width/5, height / 8, (int) (width * 0.7), 18);
+        heightInput = new TextInput(this, width/5, 2 * height / 8, (int) (width * 0.7), 18);
     }
 
 
@@ -38,10 +36,10 @@ public class SubMenuResizeRectangle implements EditionSubMenu {
         this.x = x;
         this.y = y;
 
-        view.drawRoundedRectShadow(x, y, width, height, 20, 2, Color.WHITE);
+        drawRoundedRectShadow(x, y, width, height, 20, 2, Color.WHITE);
 
-        view.drawText("Width", x + 5, y + height/8, 30, Color.BLACK);
-        view.drawText("Height", x + 5, y + 2 * height/8, 30, Color.BLACK);
+        drawText("Width", x + 5, y + height/8, 30, Color.BLACK);
+        drawText("Height", x + 5, y + 2 * height/8, 30, Color.BLACK);
 
         widthInput.draw(x, y);
         heightInput.draw(x, y);

@@ -1,34 +1,33 @@
 package application.view.menu;
 
 import application.utils.Color;
+import application.view.IConcreteView;
 import application.view.ViewBridge;
 import application.view.element.TextInput;
 import application.view.element.interaction.Interaction;
 
-public class SubMenuResizeGlobal implements EditionSubMenu {
+public class SubMenuResizeGlobal extends ViewBridge implements EditionSubMenu {
     private int x, y, width, height;
-    private ViewBridge view;
-
     TextInput sizeInput;
 
 
     /**
      * Parameterized constructor.
-     * @param view Bridge to use for drawing.
+     * @param view Implementation to use for drawing.
      * @param x Top left x coords.
      * @param y Top left y coords.
      * @param width Width of the submenu.
      * @param height Height of the submenu.
      */
-    public SubMenuResizeGlobal(ViewBridge view, int x, int y, int width, int height) {
-        this.view = view;
+    public SubMenuResizeGlobal(IConcreteView view, int x, int y, int width, int height) {
+        super(view);
 
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
 
-        sizeInput = new TextInput(view, width/5, height / 8, (int) (width * 0.7), 18);
+        sizeInput = new TextInput(this, width/5, height / 8, (int) (width * 0.7), 18);
     }
 
 
@@ -37,9 +36,8 @@ public class SubMenuResizeGlobal implements EditionSubMenu {
         this.x = x;
         this.y = y;
 
-        view.drawRoundedRectShadow(x, y, width, height, 20, 2, Color.WHITE);
-
-        view.drawText("Size", x + 5, y + height/8, 30, Color.BLACK);
+        drawRoundedRectShadow(x, y, width, height, 20, 2, Color.WHITE);
+        drawText("Size", x + 5, y + height/8, 30, Color.BLACK);
 
         sizeInput.draw(x, y);
     }

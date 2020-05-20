@@ -1,10 +1,11 @@
 package application.view.menu;
 
 import application.utils.Color;
+import application.view.IConcreteView;
 import application.view.IDrawable;
 import application.view.ViewBridge;
 
-public class WhiteBoardMenu implements IDrawable {
+public class WhiteBoardMenu extends ViewBridge implements IDrawable {
     private static final String[] items = {
             "Group",
             "Ungroup",
@@ -15,19 +16,17 @@ public class WhiteBoardMenu implements IDrawable {
     private static final int width  = 60;
     private static final int height = 20;
 
-    private final ViewBridge view;
-
     private int x, y;
-    private int currentySelected;
+    private int currentlySelected;
 
 
     /**
      * Parameterized constructor.
-     * @param view Bridge to use for drawing.
+     * @param view Implementation to use for drawing.
      */
-    public WhiteBoardMenu(ViewBridge view) {
-        this.view = view;
-        currentySelected = -1;
+    public WhiteBoardMenu(IConcreteView view) {
+        super(view);
+        currentlySelected = -1;
     }
 
 
@@ -36,7 +35,7 @@ public class WhiteBoardMenu implements IDrawable {
         this.x = x;
         this.y = y;
 
-        view.drawRoundedRectShadow(x, y, width, items.length * height, 20, 3, Color.WHITE);
+        drawRoundedRectShadow(x, y, width, items.length * height, 20, 3, Color.WHITE);
         drawWithoutShadow(x, y);
     }
 
@@ -47,16 +46,16 @@ public class WhiteBoardMenu implements IDrawable {
      * @param y Top left y coords.
      */
     public void drawWithoutShadow(int x, int y) {
-        view.drawRoundedRect(x, y, width, items.length * height, 20, Color.WHITE);
+        drawRoundedRect(x, y, width, items.length * height, 20, Color.WHITE);
 
-        if (currentySelected != -1) {
-            view.drawRoundedRect(x, y + currentySelected * height, width, height, 20, new Color(156, 221, 255));
+        if (currentlySelected != -1) {
+            drawRoundedRect(x, y + currentlySelected * height, width, height, 20, new Color(156, 221, 255));
         }
         for (int i = 0; i < items.length; i++) {
-            if (i == currentySelected)
-                view.drawText(items[i], x + 2, (int) (y + (i + 0.8) * (height)), width, Color.WHITE);
+            if (i == currentlySelected)
+                drawText(items[i], x + 2, (int) (y + (i + 0.8) * (height)), width, Color.WHITE);
             else
-                view.drawText(items[i], x + 2, (int) (y + (i + 0.8) * (height)), width, Color.BLACK);
+                drawText(items[i], x + 2, (int) (y + (i + 0.8) * (height)), width, Color.BLACK);
         }
     }
 
@@ -65,9 +64,9 @@ public class WhiteBoardMenu implements IDrawable {
      * Set the currently selected subMenu.
      * @param id Index of the submenu.
      */
-    public void setCurrentySelected(int id) {
-        int old = currentySelected;
-        currentySelected = id;
+    public void setCurrentlySelected(int id) {
+        int old = currentlySelected;
+        currentlySelected = id;
 
         if (id != old)
             drawWithoutShadow(x, y);

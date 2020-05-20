@@ -11,7 +11,7 @@ import application.view.areas.WhiteBoardView;
 /**
  * Represent the main view of the application.
  */
-public class MainView {
+public class MainView extends ViewBridge {
     private ToolBarView     toolBar;
     private TopBarView      topBar;
     private WhiteBoardView  whiteBoard;
@@ -20,27 +20,28 @@ public class MainView {
     private int windowsHeight;
 
     private Model model;
-    private ViewBridge view;
 
+    private ViewBridge basicBridge;
 
     /**
      * Parameterized constructor.
      * @param model Model to use, containing data.
-     * @param viewBridge Bridge to use for the draw.
+     * @param concreteView Implementation to use for the draw.
      */
-    public MainView(Model model, ViewBridge viewBridge) {
+    public MainView(Model model, IConcreteView concreteView) {
+        super(concreteView);
         this.model = model;
-        view = viewBridge;
 
         windowsWidth  = 480;
         windowsHeight = 480;
 
         Layout.update(windowsWidth, windowsHeight);
 
-        toolBar    = new ToolBarView(view, model.getToolBar());
-        topBar     = new TopBarView(view);
-        whiteBoard = new WhiteBoardView(view, model.getWhiteBoard());
+        toolBar    = new ToolBarView(concreteView, model.getToolBar());
+        topBar     = new TopBarView(concreteView);
+        whiteBoard = new WhiteBoardView(concreteView, model.getWhiteBoard());
 
+        basicBridge = new ViewBridge(concreteView);
     }
 
 
@@ -50,7 +51,7 @@ public class MainView {
     public void update() {
         Layout.update(windowsWidth, windowsHeight);
 
-        view.drawRectangle(new Rectangle(0, 0, windowsWidth, windowsHeight, new Color(255, 255, 255, 1)));
+        basicBridge.drawRectangle(new Rectangle(0, 0, windowsWidth, windowsHeight, new Color(255, 255, 255, 1)));
 
         toolBar.update();
         topBar.update();
@@ -113,15 +114,6 @@ public class MainView {
      */
     public int getHeight() {
         return windowsHeight;
-    }
-
-
-    /**
-     * Return the current bridge to the drawer.
-     * @return Bridge to the drawer.
-     */
-    public ViewBridge getViewBridge() {
-        return view;
     }
 
 

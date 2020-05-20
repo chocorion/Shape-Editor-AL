@@ -8,7 +8,7 @@ import application.view.ViewBridge;
 /**
  * Represent a basic graphical button, with text inside.
  */
-public class TextButton implements IDrawable {
+public class Button implements IDrawable {
     private int x, y, width, height;
     private String txt;
     private boolean pushed;
@@ -24,7 +24,7 @@ public class TextButton implements IDrawable {
      * @param height height of the button.
      * @param txt Text to display in the button.
      */
-    public TextButton(ViewBridge view, int x, int y, int width, int height, String txt) {
+    public Button(ViewBridge view, int x, int y, int width, int height, String txt) {
         this.x = x;
         this.y = y;
         this.width = width;

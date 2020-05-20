@@ -1,6 +1,7 @@
 package application.view.menu;
 
 import application.utils.Color;
+import application.view.IConcreteView;
 import application.view.ViewBridge;
 import application.view.element.Slider;
 
@@ -8,9 +9,8 @@ import application.view.element.Slider;
 /**
  * Represent the color submenu of edition menu.
  */
-public class SubMenuColor implements EditionSubMenu {
+public class SubMenuColor extends ViewBridge implements EditionSubMenu {
     private int x, y, width, height;
-    private ViewBridge view;
 
     // Value of the button on the progress bars.
     private double Rvalue, Gvalue, Bvalue;
@@ -21,14 +21,14 @@ public class SubMenuColor implements EditionSubMenu {
 
     /**
      * Parameterized constructor.
-     * @param view Bridge to use for drawing.
+     * @param view Implementation to use for drawing.
      * @param x Top left x coords.
      * @param y Top left y coords.
      * @param width Width of the submenu.
      * @param height Height of the submenu.
      */
-    public SubMenuColor(ViewBridge view, int x, int y, int width, int height) {
-        this.view = view;
+    public SubMenuColor(IConcreteView view, int x, int y, int width, int height) {
+        super(view);
 
         this.x = x;
         this.y = y;
@@ -42,9 +42,9 @@ public class SubMenuColor implements EditionSubMenu {
         Bvalue = 0.5;
 
 
-        Rslider = new Slider(view, width/5, height / 8, (int) (width * 0.7), 2, 0.5, 8, 18);
-        Gslider = new Slider(view, width/5, 2 * height / 8, (int) (width * 0.7), 2, 0.5, 8, 18);
-        Bslider = new Slider(view, width/5, 3 * height / 8, (int) (width * 0.7), 2, 0.5, 8, 18);
+        Rslider = new Slider(this, width/5, height / 8, (int) (width * 0.7), 2, 0.5, 8, 18);
+        Gslider = new Slider(this, width/5, 2 * height / 8, (int) (width * 0.7), 2, 0.5, 8, 18);
+        Bslider = new Slider(this, width/5, 3 * height / 8, (int) (width * 0.7), 2, 0.5, 8, 18);
     }
 
 
@@ -65,11 +65,11 @@ public class SubMenuColor implements EditionSubMenu {
         this.x = x;
         this.y = y;
 
-        view.drawRoundedRectShadow(x, y, width, height, 20, 2, Color.WHITE);
+        drawRoundedRectShadow(x, y, width, height, 20, 2, Color.WHITE);
 
-        view.drawText("R", x + 5, y + height/8, 15, Color.BLACK);
-        view.drawText("G", x + 5, y + 2 * height/8, 15, Color.BLACK);
-        view.drawText("B", x + 5, y + 3 * height/8, 15, Color.BLACK);
+        drawText("R", x + 5, y + height/8, 15, Color.BLACK);
+        drawText("G", x + 5, y + 2 * height/8, 15, Color.BLACK);
+        drawText("B", x + 5, y + 3 * height/8, 15, Color.BLACK);
 
         Rslider.draw(x, y);
         Gslider.draw(x, y);
@@ -77,7 +77,7 @@ public class SubMenuColor implements EditionSubMenu {
 
         updateColor();
 
-        view.drawRoundedRectShadow(x + (int) (width/1.5), y + 5 * height/8, 50, 50, 50, 2, color);
+        drawRoundedRectShadow(x + (int) (width/1.5), y + 5 * height/8, 50, 50, 50, 2, color);
     }
 
 
@@ -154,6 +154,7 @@ public class SubMenuColor implements EditionSubMenu {
     public Color getColor() {
         return color;
     }
+
 
     @Override
     public String getName() {
