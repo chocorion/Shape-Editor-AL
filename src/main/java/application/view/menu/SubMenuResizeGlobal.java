@@ -36,8 +36,8 @@ public class SubMenuResizeGlobal extends ViewBridge implements EditionSubMenu {
         this.x = x;
         this.y = y;
 
-        drawRoundedRectShadow(x, y, width, height, 20, 2, Color.WHITE);
-        drawText("Size", x + 5, y + height/8, 30, Color.BLACK);
+        drawRoundedRectShadow(x, y, width, height, 20, 2, new Color(230,230,250));
+        drawText("Size", x + 5, y + height/5, 30, Color.BLACK);
 
         sizeInput.draw(x, y);
     }
@@ -84,6 +84,6 @@ public class SubMenuResizeGlobal extends ViewBridge implements EditionSubMenu {
 
     @Override
     public String getName() {
-        return "resize";
+        return "Resize";
     }
 }

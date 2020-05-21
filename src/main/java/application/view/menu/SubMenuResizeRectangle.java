@@ -36,10 +36,10 @@ public class SubMenuResizeRectangle extends ViewBridge implements EditionSubMenu
         this.x = x;
         this.y = y;
 
-        drawRoundedRectShadow(x, y, width, height, 20, 2, Color.WHITE);
+        drawRoundedRectShadow(x, y, width, height, 20, 2,new Color(230,230,250));
 
-        drawText("Width", x + 5, y + height/8, 30, Color.BLACK);
-        drawText("Height", x + 5, y + 2 * height/8, 30, Color.BLACK);
+        drawText("Width", x + 5, y + height/5, 30, Color.BLACK);
+        drawText("Height", x + 5, y + height/3, 30, Color.BLACK);
 
         widthInput.draw(x, y);
         heightInput.draw(x, y);
@@ -94,6 +94,6 @@ public class SubMenuResizeRectangle extends ViewBridge implements EditionSubMenu
 
     @Override
     public String getName() {
-        return "resize";
+        return "Resize";
     }
 }

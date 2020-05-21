@@ -1,7 +1,7 @@
 package application.view.areas;
 
 import application.model.shape.Rectangle;
-import application.view.MainView;
+import application.utils.Color;
 
 /**
  * Static class that contains the position of elements int the model.
@@ -42,6 +42,7 @@ public class Layout {
                 GAPS,
                 width - 2 * GAPS,
                 TOPBAR_HEIGHT - 2 * GAPS
+               //new Color(77, 104, 119)
         );
     }
 
@@ -56,6 +57,7 @@ public class Layout {
                 TOPBAR_HEIGHT + GAPS,
                 TOOLBAR_WIDTH - 2 * GAPS,
                 height - (TOPBAR_HEIGHT + 2 * GAPS)
+                //new Color(77, 104, 119)
         );
     }
 

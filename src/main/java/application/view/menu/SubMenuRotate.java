@@ -35,8 +35,8 @@ public class SubMenuRotate extends ViewBridge implements EditionSubMenu {
         this.x = x;
         this.y = y;
 
-        drawRoundedRectShadow(x, y, width, height, 20, 2, Color.WHITE);
-        drawText("Rotation", x + 5, y + height/8, 30, Color.BLACK);
+        drawRoundedRectShadow(x, y, width, height, 20, 2, new Color(230,230,250));
+        drawText("Rotation", x + 5, y + height/7, 35, Color.BLACK);
 
         slider.draw(x, y);
     }
@@ -84,6 +84,6 @@ public class SubMenuRotate extends ViewBridge implements EditionSubMenu {
 
     @Override
     public String getName() {
-        return "rotate";
+        return "Rotate";
     }
 }

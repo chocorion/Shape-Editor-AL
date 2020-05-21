@@ -65,11 +65,11 @@ public class SubMenuColor extends ViewBridge implements EditionSubMenu {
         this.x = x;
         this.y = y;
 
-        drawRoundedRectShadow(x, y, width, height, 20, 2, Color.WHITE);
+        drawRoundedRectShadow(x, y, width, height, 20, 2, new Color(230,230,250));
 
-        drawText("R", x + 5, y + height/8, 15, Color.BLACK);
-        drawText("G", x + 5, y + 2 * height/8, 15, Color.BLACK);
-        drawText("B", x + 5, y + 3 * height/8, 15, Color.BLACK);
+        drawText("R", x + 8, y + height/8, 15, Color.BLACK);
+        drawText("G", x + 8, y + 2 * height/8, 15, Color.BLACK);
+        drawText("B", x + 8, y + 3 * height/8, 15, Color.BLACK);
 
         Rslider.draw(x, y);
         Gslider.draw(x, y);
@@ -158,6 +158,6 @@ public class SubMenuColor extends ViewBridge implements EditionSubMenu {
 
     @Override
     public String getName() {
-        return "color";
+        return "Color";
     }
 }

@@ -35,8 +35,8 @@ public class SubMenuRound extends ViewBridge implements EditionSubMenu {
         this.x = x;
         this.y = y;
 
-        drawRoundedRectShadow(x, y, width, height, 20, 2, Color.WHITE);
-        drawText("Round", x + 5, y + height/8, 30, Color.BLACK);
+        drawRoundedRectShadow(x, y, width, height, 20, 2, new Color(230,230,250));
+        drawText("Round", x + 5, y + height/5, 35, Color.BLACK);
 
         sizeInput.draw(x, y);
     }
@@ -83,6 +83,6 @@ public class SubMenuRound extends ViewBridge implements EditionSubMenu {
 
     @Override
     public String getName() {
-        return "round";
+        return "Round";
     }
 }

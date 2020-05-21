@@ -106,6 +106,6 @@ public class SubMenuRotationState extends ControllerStateImp {
 
     @Override
     public String toString() {
-        return "submenu color";
+        return "submenu rotate";
     }
 }

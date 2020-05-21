@@ -36,8 +36,8 @@ public class SubMenuPolygon extends ViewBridge implements EditionSubMenu {
         this.x = x;
         this.y = y;
 
-        drawRoundedRectShadow(x, y, width, height, 20, 2, Color.WHITE);
-        drawText("Number of side", x + 5, y + height/8, 60, Color.BLACK);
+        drawRoundedRectShadow(x, y, width, height, 20, 2, new Color(230,230,250));
+        drawText("Number of sides", x + 5, y + height/5, 65, Color.BLACK);
 
         sizeInput.draw(x, y);
     }
@@ -84,6 +84,6 @@ public class SubMenuPolygon extends ViewBridge implements EditionSubMenu {
 
     @Override
     public String getName() {
-        return "numberSide";
+        return "Nb Sides";
     }
 }

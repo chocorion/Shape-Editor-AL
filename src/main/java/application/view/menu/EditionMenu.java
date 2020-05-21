@@ -175,7 +175,7 @@ public class EditionMenu extends ViewBridge implements IDrawable {
         this.x = x;
         this.y = y;
 
-        drawRoundedRectShadow(x, y, width, height, 12, 3, Color.WHITE);
+        drawRoundedRectShadow(x, y, width, height, 12, 3,new Color(77, 104, 119));
 
         for (Button button : buttons) {
             button.draw(this.x, this.y);

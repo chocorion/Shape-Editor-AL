@@ -57,16 +57,13 @@ public class TopBarView extends ViewBridge {
      * Draw the topBar.
      */
     public void draw() {
-        drawRectangle(area);
-
-        drawRectangle(
-                new Rectangle(
-                        area.getMinX() + Layout.BORDER,
-                        area.getMinY() + Layout.BORDER,
-                        area.getWidth() - 2 * Layout.BORDER,
-                        area.getHeight() - 2 * Layout.BORDER,
-                        Color.WHITE
-                )
+        drawRoundedRectShadow((int)area.getMinX(),
+                             (int)area.getMinY(),
+                       (int)area.getWidth()-2*Layout.BORDER,
+                      (int) area.getHeight()-2*Layout.BORDER,
+                     5,
+                    2*Layout.BORDER,
+                              new Color(77,104,119)
         );
 
         drawButtons();

@@ -187,11 +187,11 @@ public class EditionMenuState extends ControllerStateImp {
      */
     private void switchState() {
         switch (menu.getSelectedMenu().getName()) {
-            case "color":
+            case "Color":
                 subState = SubMenuColorState.getInstance();
                 break;
 
-            case "resize":
+            case "Resize":
                 if (menu.getSelectedMenu() instanceof SubMenuResizeRectangle)
                     subState = SubMenuResizeRectangleState.getInstance();
 
@@ -199,15 +199,15 @@ public class EditionMenuState extends ControllerStateImp {
                     subState = SubMenuResizeGlobalState.getInstance();
                 break;
 
-            case "rotate":
+            case "Rotate":
                 subState = SubMenuRotationState.getInstance();
                 break;
 
-            case "numberSide":
+            case "Nb Sides":
                 subState = SubMenuPolygonState.getInstance();
                 break;
 
-            case "round":
+            case "Round":
                 subState = SubMenuRoundState.getInstance();
                 break;
         }

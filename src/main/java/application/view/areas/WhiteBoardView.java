@@ -54,17 +54,18 @@ public class WhiteBoardView extends ViewBridge implements ModelObserver {
      * Draw the whiteboard.
      */
     public void draw() {
-        drawRectangle(area);
-
-        drawRectangle(
-                new Rectangle(
-                        area.getMinX() + Layout.BORDER,
-                        area.getMinY() + Layout.BORDER,
-                        area.getWidth() - 2 * Layout.BORDER,
-                        area.getHeight() - 2 * Layout.BORDER,
-                        Color.WHITE
-                )
+        area.setRoundValue(5);
+        drawRoundedRect(area);
+        Rectangle test = new Rectangle(
+                area.getMinX() + Layout.BORDER,
+                area.getMinY() + Layout.BORDER,
+                area.getWidth() - 2 * Layout.BORDER,
+                area.getHeight() - 2 * Layout.BORDER,
+                Color.WHITE
         );
+        test.setRoundValue(5);
+
+        drawRoundedRect(test);
 
         drawSelectedShapes(selectedShapes);
 

@@ -10,8 +10,11 @@ import application.view.ViewBridge;
  * Represent a basic graphical button, with text inside.
  */
 public class Button extends ViewBridge implements IDrawable {
-    private int x, y, width, height;
-    private String txt;
+    private final int x;
+    private final int y;
+    private final int width;
+    private final int height;
+    private final String txt;
     private boolean pushed;
 
     /**
@@ -38,15 +41,15 @@ public class Button extends ViewBridge implements IDrawable {
     @Override
     public void draw(int xOffset, int yOffset) {
         // Put in two separated functions
+        int test = (int) (width*0.9)/(txt.length() *2);
         if (!pushed) {
-            drawRoundedRectShadow(x + xOffset, y + yOffset, width, height, 20, 2, Color.WHITE);
-            drawText(txt, x + xOffset, y + yOffset + (int) (height * 0.6), (int) (width * 0.9), Color.BLACK);
+            drawRoundedRectShadow(x + xOffset, y + yOffset, width, height, 20, 2, new Color(185,197,213));
         }
 
         else {
             drawRoundedRectShadow(x + xOffset, y + yOffset, width, height, 20, 2, Color.LIGHT_GREY);
-            drawText(txt, x + xOffset, y + yOffset+ (int) (height * 0.6), (int) (width * 0.9), Color.BLACK);
         }
+        drawText(txt, x+ test + xOffset, y + yOffset + (int) (height * 0.6), (int) (width * 0.9), Color.BLACK);
     }
 
 

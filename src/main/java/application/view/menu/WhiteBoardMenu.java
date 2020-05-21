@@ -46,16 +46,16 @@ public class WhiteBoardMenu extends ViewBridge implements IDrawable {
      * @param y Top left y coords.
      */
     public void drawWithoutShadow(int x, int y) {
-        drawRoundedRect(x, y, width, items.length * height, 20, Color.WHITE);
+        drawRoundedRect(x, y, width, items.length * height, 20, new Color(230,230,250));
 
         if (currentlySelected != -1) {
-            drawRoundedRect(x, y + currentlySelected * height, width, height, 20, new Color(156, 221, 255));
+            drawRoundedRect(x, y + currentlySelected * height, width, height, 20, new Color(129, 180, 208));
         }
         for (int i = 0; i < items.length; i++) {
             if (i == currentlySelected)
-                drawText(items[i], x + 2, (int) (y + (i + 0.8) * (height)), width, Color.WHITE);
+                drawText(items[i], x + 3, (int) (y + (i + 0.8) * (height)), width, Color.WHITE);
             else
-                drawText(items[i], x + 2, (int) (y + (i + 0.8) * (height)), width, Color.BLACK);
+                drawText(items[i], x + 3, (int) (y + (i + 0.8) * (height)), width, Color.BLACK);
         }
     }
 
