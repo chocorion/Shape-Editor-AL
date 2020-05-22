@@ -17,8 +17,6 @@ public class Main {
     private static MainController controller;
 
     public static void main(String[] args) {
-        System.out.println("Hello world !");
-
         model = new Model();
         buildUi();
 
